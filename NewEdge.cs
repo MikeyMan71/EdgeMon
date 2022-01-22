@@ -93,7 +93,7 @@ namespace EdgeMon
             lb_pwr_house.Text = pwr_house.ToString() + " W";
             pwr_PV = I_DC_Power + Instantaneous_Power;
             if (pwr_PV < 0) pwr_PV = 0;
-            lb_pwr_PV.Text = pwr_PV.ToString() + " W";
+            lb_pwr_PV.Text = pwr_PV.ToString("N1") + " W";
             if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); }
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); }
 
