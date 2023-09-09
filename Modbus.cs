@@ -51,7 +51,7 @@ namespace EdgeMon
         string GetModbusString(int registers, int size)
         {
             int[] reg = ReadHoldingRegisters(registers, size);
-            return ConvertRegistersToString(reg, 0, size * 2);
+            return ConvertRegistersToString(reg, 0, size * 2).Trim('\0');
         }
 
         int GetModubusUint32(int registers)

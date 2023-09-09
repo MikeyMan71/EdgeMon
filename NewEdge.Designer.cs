@@ -75,6 +75,7 @@ namespace EdgeMon
             this.label3 = new System.Windows.Forms.Label();
             this.lb_total = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.lb_tot_prod = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
@@ -146,7 +147,6 @@ namespace EdgeMon
             this.house.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.house.TabIndex = 6;
             this.house.TabStop = false;
-            this.house.Click += new System.EventHandler(this.house_Click);
             // 
             // grid
             // 
@@ -227,7 +227,6 @@ namespace EdgeMon
             this.pic_house_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_house_to.TabIndex = 30;
             this.pic_house_to.TabStop = false;
-            this.pic_house_to.Click += new System.EventHandler(this.pictureBox8_Click);
             // 
             // pic_grid_to
             // 
@@ -539,11 +538,20 @@ namespace EdgeMon
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(608, 621);
+            this.label4.Location = new System.Drawing.Point(575, 621);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(117, 17);
+            this.label4.Size = new System.Drawing.Size(150, 17);
             this.label4.TabIndex = 74;
-            this.label4.Text = "(C) M. Aigle 2021";
+            this.label4.Text = "V2.0 (C) M. Aigle 2023";
+            // 
+            // lb_tot_prod
+            // 
+            this.lb_tot_prod.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lb_tot_prod.Location = new System.Drawing.Point(258, 384);
+            this.lb_tot_prod.Name = "lb_tot_prod";
+            this.lb_tot_prod.Size = new System.Drawing.Size(192, 15);
+            this.lb_tot_prod.TabIndex = 75;
+            this.lb_tot_prod.Text = "---";
             // 
             // NewEdge
             // 
@@ -551,6 +559,7 @@ namespace EdgeMon
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(737, 647);
+            this.Controls.Add(this.lb_tot_prod);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lb_total);
             this.Controls.Add(this.label3);
@@ -661,5 +670,6 @@ namespace EdgeMon
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lb_total;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox lb_tot_prod;
     }
 }

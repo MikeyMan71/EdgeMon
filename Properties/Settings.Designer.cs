@@ -40,5 +40,14 @@ namespace EdgeMon.Properties {
                 return ((int)(this["port"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool battery {
+            get {
+                return ((bool)(this["battery"]));
+            }
+        }
     }
 }
