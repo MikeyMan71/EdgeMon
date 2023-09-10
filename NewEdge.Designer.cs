@@ -76,6 +76,7 @@ namespace EdgeMon
             this.lb_total = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lb_tot_prod = new System.Windows.Forms.TextBox();
+            this.lb_error = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
@@ -407,8 +408,8 @@ namespace EdgeMon
             // lb_temp
             // 
             this.lb_temp.AutoSize = true;
-            this.lb_temp.BackColor = System.Drawing.Color.IndianRed;
-            this.lb_temp.Location = new System.Drawing.Point(335, 318);
+            this.lb_temp.BackColor = System.Drawing.Color.White;
+            this.lb_temp.Location = new System.Drawing.Point(333, 315);
             this.lb_temp.Name = "lb_temp";
             this.lb_temp.Size = new System.Drawing.Size(23, 17);
             this.lb_temp.TabIndex = 61;
@@ -474,7 +475,7 @@ namespace EdgeMon
             // 
             this.lb_pwr_house.AutoSize = true;
             this.lb_pwr_house.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_pwr_house.ForeColor = System.Drawing.Color.Orange;
+            this.lb_pwr_house.ForeColor = System.Drawing.Color.Black;
             this.lb_pwr_house.Location = new System.Drawing.Point(553, 332);
             this.lb_pwr_house.Name = "lb_pwr_house";
             this.lb_pwr_house.Size = new System.Drawing.Size(63, 20);
@@ -486,8 +487,8 @@ namespace EdgeMon
             // 
             this.lb_pwr_PV.AutoSize = true;
             this.lb_pwr_PV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_pwr_PV.ForeColor = System.Drawing.Color.Orange;
-            this.lb_pwr_PV.Location = new System.Drawing.Point(51, 211);
+            this.lb_pwr_PV.ForeColor = System.Drawing.Color.Black;
+            this.lb_pwr_PV.Location = new System.Drawing.Point(29, 206);
             this.lb_pwr_PV.Name = "lb_pwr_PV";
             this.lb_pwr_PV.Size = new System.Drawing.Size(63, 20);
             this.lb_pwr_PV.TabIndex = 69;
@@ -542,7 +543,7 @@ namespace EdgeMon
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 17);
             this.label4.TabIndex = 74;
-            this.label4.Text = "V2.0 (C) M. Aigle 2023";
+            this.label4.Text = "V2.1 (C) M. Aigle 2023";
             // 
             // lb_tot_prod
             // 
@@ -553,12 +554,24 @@ namespace EdgeMon
             this.lb_tot_prod.TabIndex = 75;
             this.lb_tot_prod.Text = "---";
             // 
+            // lb_error
+            // 
+            this.lb_error.AutoSize = true;
+            this.lb_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_error.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lb_error.Location = new System.Drawing.Point(333, 16);
+            this.lb_error.Name = "lb_error";
+            this.lb_error.Size = new System.Drawing.Size(24, 13);
+            this.lb_error.TabIndex = 76;
+            this.lb_error.Text = "OK";
+            // 
             // NewEdge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(737, 647);
+            this.Controls.Add(this.lb_error);
             this.Controls.Add(this.lb_tot_prod);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lb_total);
@@ -605,7 +618,7 @@ namespace EdgeMon
             this.Controls.Add(this.bat_SOE);
             this.Controls.Add(this.battery);
             this.Name = "NewEdge";
-            this.Text = "Form2";
+            this.Text = "Edgemon";
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).EndInit();
@@ -671,5 +684,6 @@ namespace EdgeMon
         private System.Windows.Forms.Label lb_total;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox lb_tot_prod;
+        private System.Windows.Forms.Label lb_error;
     }
 }

@@ -29,9 +29,8 @@ namespace EdgeMon
             catch (Exception)
             {
                 MessageBox.Show("No SE device found on address [" + Properties.Settings.Default.TCP + "] , Port [" + Properties.Settings.Default.port + "]");
-                Application.Exit();
+                Environment.Exit(0);
             }
-
             //Battery present?
             try
             {
@@ -49,7 +48,18 @@ namespace EdgeMon
             PV_on.Hide();
             PV_off.Hide();
 
-            statusgraph_static();
+            try
+            {
+                statusgraph_static();
+                lb_error.Text = "OK";
+                lb_error.ForeColor = Color.DarkGreen;
+            }
+            catch (Exception ex)
+            {
+                lb_error.Text = ex.Message;
+                lb_error.ForeColor = Color.DarkRed;
+            }
+         
             timer2.Enabled = true;
         }
 
@@ -78,6 +88,7 @@ namespace EdgeMon
                 tb_batManu.AppendText("\r\n" + mb.BatterySerialNr);
                 tb_chargepower.AppendText(mb.Max_Charge_Continues_Power.ToString());
                 tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
+                lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
             }
 
             lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
@@ -85,8 +96,8 @@ namespace EdgeMon
             lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
             lb_mtr_opt.Text = mb.MTR_C_Option;
             lb_mtr_ver.Text = mb.MTR_C_Version;
-            if (have_battery)
-                lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
+           
+                
 
             if (!have_battery)
             {
@@ -170,11 +181,25 @@ namespace EdgeMon
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
             lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f3") + " MWh\r\n";
+
+
+
         }
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            statusgraph_dyn();
+            try
+            {
+                statusgraph_dyn();
+                lb_error.Text = "OK";
+                lb_error.ForeColor = Color.DarkGreen;
+            }
+            catch (Exception ex)
+            {
+               lb_error.Text = ex.Message;
+               lb_error.ForeColor = Color.DarkRed;
+            }
+           
         }
 
 
