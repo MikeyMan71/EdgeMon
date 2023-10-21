@@ -1,0 +1,4 @@
+﻿V2.0: handle systems without battery
+V2.1: minor bugfix
+V2.2: handle proper display of uncut float data from certain batteries
+V2.3: handle variable refresh rates in properties (enter in ms)
