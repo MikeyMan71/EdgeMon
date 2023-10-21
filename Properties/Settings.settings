@@ -11,5 +11,14 @@
     <Setting Name="battery" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="refresh" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="saveBitmap" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\\tmp\\test.bmp</Value>
+    </Setting>
+    <Setting Name="BitmapOnly" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

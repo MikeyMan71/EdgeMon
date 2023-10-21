@@ -74,7 +74,7 @@ namespace EdgeMon
             this.tb_chargepower = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lb_total = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lb_about = new System.Windows.Forms.Label();
             this.lb_tot_prod = new System.Windows.Forms.TextBox();
             this.lb_error = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).BeginInit();
@@ -114,7 +114,7 @@ namespace EdgeMon
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(78, 720);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
@@ -322,7 +322,7 @@ namespace EdgeMon
             this.label11.AutoSize = true;
             this.label11.Location = new System.Drawing.Point(30, 528);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(41, 17);
+            this.label11.Size = new System.Drawing.Size(39, 16);
             this.label11.TabIndex = 59;
             this.label11.Text = "T_Av";
             // 
@@ -332,7 +332,7 @@ namespace EdgeMon
             this.lb_T_Av.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_T_Av.Location = new System.Drawing.Point(108, 522);
             this.lb_T_Av.Name = "lb_T_Av";
-            this.lb_T_Av.Size = new System.Drawing.Size(23, 17);
+            this.lb_T_Av.Size = new System.Drawing.Size(19, 16);
             this.lb_T_Av.TabIndex = 58;
             this.lb_T_Av.Text = "---";
             // 
@@ -341,7 +341,7 @@ namespace EdgeMon
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(30, 545);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 17);
+            this.label9.Size = new System.Drawing.Size(48, 16);
             this.label9.TabIndex = 57;
             this.label9.Text = "E_Max";
             // 
@@ -351,7 +351,7 @@ namespace EdgeMon
             this.lb_bat_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_bat_max.Location = new System.Drawing.Point(108, 542);
             this.lb_bat_max.Name = "lb_bat_max";
-            this.lb_bat_max.Size = new System.Drawing.Size(23, 17);
+            this.lb_bat_max.Size = new System.Drawing.Size(19, 16);
             this.lb_bat_max.TabIndex = 56;
             this.lb_bat_max.Text = "---";
             // 
@@ -360,7 +360,7 @@ namespace EdgeMon
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(30, 562);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 17);
+            this.label7.Size = new System.Drawing.Size(36, 16);
             this.label7.TabIndex = 55;
             this.label7.Text = "SOH";
             // 
@@ -370,7 +370,7 @@ namespace EdgeMon
             this.lb_SOH.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_SOH.Location = new System.Drawing.Point(108, 562);
             this.lb_SOH.Name = "lb_SOH";
-            this.lb_SOH.Size = new System.Drawing.Size(23, 17);
+            this.lb_SOH.Size = new System.Drawing.Size(19, 16);
             this.lb_SOH.TabIndex = 54;
             this.lb_SOH.Text = "---";
             // 
@@ -411,7 +411,7 @@ namespace EdgeMon
             this.lb_temp.BackColor = System.Drawing.Color.White;
             this.lb_temp.Location = new System.Drawing.Point(333, 315);
             this.lb_temp.Name = "lb_temp";
-            this.lb_temp.Size = new System.Drawing.Size(23, 17);
+            this.lb_temp.Size = new System.Drawing.Size(19, 16);
             this.lb_temp.TabIndex = 61;
             this.lb_temp.Text = "---";
             // 
@@ -431,7 +431,7 @@ namespace EdgeMon
             this.lb_mtr_sernr.AutoSize = true;
             this.lb_mtr_sernr.Location = new System.Drawing.Point(579, 189);
             this.lb_mtr_sernr.Name = "lb_mtr_sernr";
-            this.lb_mtr_sernr.Size = new System.Drawing.Size(23, 17);
+            this.lb_mtr_sernr.Size = new System.Drawing.Size(19, 16);
             this.lb_mtr_sernr.TabIndex = 67;
             this.lb_mtr_sernr.Text = "---";
             // 
@@ -440,7 +440,7 @@ namespace EdgeMon
             this.lb_mtr_opt.AutoSize = true;
             this.lb_mtr_opt.Location = new System.Drawing.Point(579, 172);
             this.lb_mtr_opt.Name = "lb_mtr_opt";
-            this.lb_mtr_opt.Size = new System.Drawing.Size(23, 17);
+            this.lb_mtr_opt.Size = new System.Drawing.Size(19, 16);
             this.lb_mtr_opt.TabIndex = 66;
             this.lb_mtr_opt.Text = "---";
             // 
@@ -449,7 +449,7 @@ namespace EdgeMon
             this.lb_mtr_ver.AutoSize = true;
             this.lb_mtr_ver.Location = new System.Drawing.Point(579, 151);
             this.lb_mtr_ver.Name = "lb_mtr_ver";
-            this.lb_mtr_ver.Size = new System.Drawing.Size(23, 17);
+            this.lb_mtr_ver.Size = new System.Drawing.Size(19, 16);
             this.lb_mtr_ver.TabIndex = 65;
             this.lb_mtr_ver.Text = "---";
             // 
@@ -458,7 +458,7 @@ namespace EdgeMon
             this.lb_mtr_model.AutoSize = true;
             this.lb_mtr_model.Location = new System.Drawing.Point(579, 130);
             this.lb_mtr_model.Name = "lb_mtr_model";
-            this.lb_mtr_model.Size = new System.Drawing.Size(23, 17);
+            this.lb_mtr_model.Size = new System.Drawing.Size(19, 16);
             this.lb_mtr_model.TabIndex = 64;
             this.lb_mtr_model.Text = "---";
             // 
@@ -467,7 +467,7 @@ namespace EdgeMon
             this.lbl_mtr_manu.AutoSize = true;
             this.lbl_mtr_manu.Location = new System.Drawing.Point(579, 113);
             this.lbl_mtr_manu.Name = "lbl_mtr_manu";
-            this.lbl_mtr_manu.Size = new System.Drawing.Size(23, 17);
+            this.lbl_mtr_manu.Size = new System.Drawing.Size(19, 16);
             this.lbl_mtr_manu.TabIndex = 63;
             this.lbl_mtr_manu.Text = "---";
             // 
@@ -522,7 +522,7 @@ namespace EdgeMon
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(30, 582);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 17);
+            this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 72;
             this.label3.Text = "Max/Peak";
             // 
@@ -532,18 +532,20 @@ namespace EdgeMon
             this.lb_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_total.Location = new System.Drawing.Point(30, 603);
             this.lb_total.Name = "lb_total";
-            this.lb_total.Size = new System.Drawing.Size(23, 17);
+            this.lb_total.Size = new System.Drawing.Size(19, 16);
             this.lb_total.TabIndex = 73;
             this.lb_total.Text = "---";
             // 
-            // label4
+            // lb_about
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(575, 621);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 17);
-            this.label4.TabIndex = 74;
-            this.label4.Text = "V2.1 (C) M. Aigle 2023";
+            this.lb_about.AutoSize = true;
+            this.lb_about.BackColor = System.Drawing.Color.LightGray;
+            this.lb_about.Location = new System.Drawing.Point(575, 621);
+            this.lb_about.Name = "lb_about";
+            this.lb_about.Size = new System.Drawing.Size(135, 16);
+            this.lb_about.TabIndex = 74;
+            this.lb_about.Text = "V2.3 (C) M. Aigle 2023";
+            this.lb_about.Click += new System.EventHandler(this.label4_Click);
             // 
             // lb_tot_prod
             // 
@@ -573,7 +575,7 @@ namespace EdgeMon
             this.ClientSize = new System.Drawing.Size(737, 647);
             this.Controls.Add(this.lb_error);
             this.Controls.Add(this.lb_tot_prod);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lb_about);
             this.Controls.Add(this.lb_total);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tb_chargepower);
@@ -682,7 +684,7 @@ namespace EdgeMon
         private System.Windows.Forms.TextBox tb_chargepower;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lb_total;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lb_about;
         private System.Windows.Forms.TextBox lb_tot_prod;
         private System.Windows.Forms.Label lb_error;
     }

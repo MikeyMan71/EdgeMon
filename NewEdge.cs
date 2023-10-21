@@ -2,35 +2,39 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using System.Reflection;
 
 namespace EdgeMon
 {
     public partial class NewEdge : Form
     {
+        bool connected = false;
         bool have_battery = false;
-        TcpModbus mb;
+        bool bmOnly = Properties.Settings.Default.BitmapOnly;
+            
+                
+            
+    TcpModbus mb;
+        Info infobox = new Info();
+   
         public NewEdge()
         {
             InitializeComponent();
             timer2.Enabled = false;
+            timer2.Interval = 2000;
+            lb_about.Text = infobox.AssemblyCopyright;
             mb = null;
-            try
-            {
-                mb = new TcpModbus(Properties.Settings.Default.TCP, Properties.Settings.Default.port);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("No SE device found on address [" + Properties.Settings.Default.TCP + "] , Port [" + Properties.Settings.Default.port + "]");
-                Environment.Exit(0);
-            }
+
+            do_update();
+            timer2.Enabled = true;
+            
+        }
+
+
+        private void init() { 
             //Battery present?
             try
             {
@@ -39,11 +43,8 @@ namespace EdgeMon
             }
             catch (Exception)
             {
-
+                have_battery=false;
             }
-
-
-
 
             PV_on.Hide();
             PV_off.Hide();
@@ -59,9 +60,26 @@ namespace EdgeMon
                 lb_error.Text = ex.Message;
                 lb_error.ForeColor = Color.DarkRed;
             }
-         
-            timer2.Enabled = true;
+            timer2.Interval = Properties.Settings.Default.refresh;
+
+
         }
+
+        private void ConnectToModbus()
+        {
+            if (mb == null)
+            {
+                mb = new TcpModbus(Properties.Settings.Default.TCP, Properties.Settings.Default.port);
+            }
+            else //try reconnect. may take awhile...
+            { 
+                mb.Disconnect();
+                Thread.Sleep(1000);
+                mb.Connect(Properties.Settings.Default.TCP, Properties.Settings.Default.port);
+            }
+        
+        }
+
 
         private void statusgraph_static()
         {
@@ -133,11 +151,11 @@ namespace EdgeMon
 
             if (have_battery)
             {
-                lb_SOH.Text = mb.SOH.ToString() + " %";
+                lb_SOH.Text = mb.SOH.ToString("#0.0") + " %";
                 bat_SOE.Value = (int)mb.SOE;
-                lb_SOE_TXT.Text = mb.SOE.ToString() + " %";
-                lb_bat_stat.Text = mb.Bat_Status.ToString();
-                lb_T_Av.Text = mb.Batt_Average_Temperature.ToString() + "°C";
+                lb_SOE_TXT.Text = mb.SOE.ToString("#0.0") + " %";
+                if (mb.Bat_Status != null) { lb_bat_stat.Text = mb.Bat_Status.ToString(); }
+                lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.0") + "°C";
                 lb_batt_pwr.Text = Instantaneous_Power.ToString() + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N3") + " A ";
             }
 
@@ -155,8 +173,10 @@ namespace EdgeMon
 
             //  lb_T_max.Text = mb.Batt_Max_Temperature.ToString();
             pwr_house = I_AC_Power - MTR_I_M_AC_Power;
-            lb_pwr_house.Text = pwr_house.ToString() + " W";
             pwr_PV = I_DC_Power + Instantaneous_Power;
+            if (I_DC_Power < I_AC_Power) { pwr_house = pwr_house - (I_AC_Power - I_DC_Power); } //inverter drawing power from grid
+            lb_pwr_house.Text = pwr_house.ToString() + " W";
+
             if (pwr_PV < 0) pwr_PV = 0;
             lb_pwr_PV.Text = pwr_PV.ToString("N1") + " W";
             if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); }
@@ -188,20 +208,76 @@ namespace EdgeMon
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            
+
+            if (bmOnly) {
+                SaveAsBitmap(this, Properties.Settings.Default.saveBitmap);
+                Environment.Exit(0);
+            }
+            do_update();
+        }
+
+        private void do_update()
+        {
+            if (connected == false)
+            {
+                try
+                {
+                    ConnectToModbus();
+                    connected = true;
+                    init();
+                }
+                catch (Exception ex)
+                {
+                    lb_error.Text = ex.Message;
+                    lb_error.ForeColor = Color.DarkRed;
+                    return;
+                }
+            }
+
+
             try
             {
                 statusgraph_dyn();
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
+            
+
             }
             catch (Exception ex)
             {
-               lb_error.Text = ex.Message;
-               lb_error.ForeColor = Color.DarkRed;
+                lb_error.Text = ex.Message;
+                lb_error.ForeColor = Color.DarkRed;
+                connected = false;
+                timer2.Interval = 2000;
+                mb.Disconnect();
+              
             }
-           
         }
 
+        private void SaveAsBitmap(Control control, string fileName)
+        {
+            try
+            {
+                Graphics g = control.CreateGraphics();
+                Bitmap bmp = new Bitmap(control.Width, control.Height);
+                control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
+                bmp.Save(fileName);
+                bmp.Dispose();
+            }
+            catch (Exception)
+            {
+            }
+       
+        }
+     
 
+        private void label4_Click(object sender, EventArgs e)
+        {
+           
+            infobox.Show();
+        }
+
+        
     }
 }
