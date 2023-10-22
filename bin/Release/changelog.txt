@@ -2,3 +2,5 @@
 V2.1: minor bugfix
 V2.2: handle proper display of uncut float data from certain batteries
 V2.3: handle variable refresh rates in properties (enter in ms)
+V2.4: Allow "oneshot", makes a screenshot and closes instantely. "MultishotIntervall n" screenshots each n-th refresh.
+A click on the main windows hides frame. 

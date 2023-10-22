@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3b5qHCuFXZIEfiucaUGdiPlErLthP55biKkE5XtZSIE=</dsig:DigestValue>
+        <dsig:DigestValue>dq4K2Gno5tazji1Tkjg7KtMP3LFFTCrb7Uhn+lmbqOE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -89,13 +89,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="changelog.txt" size="196">
+  <file name="changelog.txt" size="359">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>5vg3kTIbtcuJZRStv5T3qg6OgG/7Wy/v6jUH5GUPniw=</dsig:DigestValue>
+      <dsig:DigestValue>JZjv2Ta6YRIcXk5rJQo85BTVBX0EBRlSuF82BNfYJys=</dsig:DigestValue>
     </hash>
   </file>
   <file name="EdgeMon.exe.config" size="1653">

@@ -143,10 +143,10 @@ namespace EdgeMon
             // 
             this.bat_SOE.BackColor = System.Drawing.Color.IndianRed;
             this.bat_SOE.ForeColor = System.Drawing.Color.Red;
-            this.bat_SOE.Location = new System.Drawing.Point(63, 419);
+            this.bat_SOE.Location = new System.Drawing.Point(55, 419);
             this.bat_SOE.MarqueeAnimationSpeed = 10;
             this.bat_SOE.Name = "bat_SOE";
-            this.bat_SOE.Size = new System.Drawing.Size(161, 36);
+            this.bat_SOE.Size = new System.Drawing.Size(167, 36);
             this.bat_SOE.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.bat_SOE.TabIndex = 2;
             this.bat_SOE.UseWaitCursor = true;
@@ -496,7 +496,7 @@ namespace EdgeMon
             this.tb_chargepower.Location = new System.Drawing.Point(110, 581);
             this.tb_chargepower.Multiline = true;
             this.tb_chargepower.Name = "tb_chargepower";
-            this.tb_chargepower.Size = new System.Drawing.Size(165, 35);
+            this.tb_chargepower.Size = new System.Drawing.Size(165, 16);
             this.tb_chargepower.TabIndex = 71;
             this.tb_chargepower.Text = "---";
             // 
