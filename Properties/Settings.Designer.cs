@@ -61,7 +61,7 @@ namespace EdgeMon.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\test.bmp")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\EdgeMonShot.jpg")]
         public string saveBitmap {
             get {
                 return ((string)(this["saveBitmap"]));
@@ -71,9 +71,18 @@ namespace EdgeMon.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool BitmapOnly {
+        public bool OneShot {
             get {
-                return ((bool)(this["BitmapOnly"]));
+                return ((bool)(this["OneShot"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int MultiShotIntervall {
+            get {
+                return ((int)(this["MultiShotIntervall"]));
             }
         }
     }

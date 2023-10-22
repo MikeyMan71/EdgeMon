@@ -30,44 +30,42 @@ namespace EdgeMon
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bat_SOE = new System.Windows.Forms.ProgressBar();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.tb_batManu = new System.Windows.Forms.TextBox();
+            this.battery = new System.Windows.Forms.PictureBox();
+            this.Inverter_PIC = new System.Windows.Forms.PictureBox();
+            this.bat_SOE = new System.Windows.Forms.ProgressBar();
+            this.lb_temp = new System.Windows.Forms.Label();
+            this.house = new System.Windows.Forms.PictureBox();
             this.PV_on = new System.Windows.Forms.PictureBox();
             this.PV_off = new System.Windows.Forms.PictureBox();
-            this.house = new System.Windows.Forms.PictureBox();
             this.grid = new System.Windows.Forms.PictureBox();
-            this.battery = new System.Windows.Forms.PictureBox();
             this.pic_PV_from = new System.Windows.Forms.PictureBox();
             this.pic_grid_from = new System.Windows.Forms.PictureBox();
             this.pic_bat_from = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pic_bat_to = new System.Windows.Forms.PictureBox();
-            this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.pic_grid_to = new System.Windows.Forms.PictureBox();
-            this.MB_Pwr_3 = new System.Windows.Forms.TextBox();
             this.ImpExMeter = new System.Windows.Forms.TextBox();
+            this.MB_Pwr_3 = new System.Windows.Forms.TextBox();
             this.lb_dc_pwr = new System.Windows.Forms.Label();
             this.lb_ac_pwr = new System.Windows.Forms.Label();
             this.lb_status = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lb_update = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lb_T_Av = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lb_bat_max = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lb_SOH = new System.Windows.Forms.Label();
-            this.lb_SOE_TXT = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.lb_bat_stat = new System.Windows.Forms.Label();
-            this.tb_batManu = new System.Windows.Forms.TextBox();
-            this.lb_temp = new System.Windows.Forms.Label();
+            this.lb_SOE_TXT = new System.Windows.Forms.Label();
+            this.lb_SOH = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lb_bat_max = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lb_T_Av = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.lb_batt_pwr = new System.Windows.Forms.Label();
-            this.lb_mtr_sernr = new System.Windows.Forms.Label();
-            this.lb_mtr_opt = new System.Windows.Forms.Label();
-            this.lb_mtr_ver = new System.Windows.Forms.Label();
-            this.lb_mtr_model = new System.Windows.Forms.Label();
             this.lbl_mtr_manu = new System.Windows.Forms.Label();
+            this.lb_mtr_model = new System.Windows.Forms.Label();
+            this.lb_mtr_ver = new System.Windows.Forms.Label();
+            this.lb_mtr_opt = new System.Windows.Forms.Label();
+            this.lb_mtr_sernr = new System.Windows.Forms.Label();
             this.lb_pwr_house = new System.Windows.Forms.Label();
             this.lb_pwr_PV = new System.Windows.Forms.Label();
             this.tb_Inv = new System.Windows.Forms.TextBox();
@@ -77,32 +75,23 @@ namespace EdgeMon
             this.lb_about = new System.Windows.Forms.Label();
             this.lb_tot_prod = new System.Windows.Forms.TextBox();
             this.lb_error = new System.Windows.Forms.Label();
+            this.pic_house_to = new System.Windows.Forms.PictureBox();
+            this.pic_bat_to = new System.Windows.Forms.PictureBox();
+            this.mainpanel = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Inverter_PIC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_PV_from)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_grid_from)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bat_from)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_house_to)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_grid_to)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_house_to)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).BeginInit();
+            this.mainpanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // bat_SOE
-            // 
-            this.bat_SOE.BackColor = System.Drawing.Color.IndianRed;
-            this.bat_SOE.ForeColor = System.Drawing.Color.Red;
-            this.bat_SOE.Location = new System.Drawing.Point(74, 420);
-            this.bat_SOE.MarqueeAnimationSpeed = 10;
-            this.bat_SOE.Name = "bat_SOE";
-            this.bat_SOE.Size = new System.Drawing.Size(155, 45);
-            this.bat_SOE.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.bat_SOE.TabIndex = 2;
-            this.bat_SOE.UseWaitCursor = true;
-            this.bat_SOE.Value = 99;
             // 
             // timer2
             // 
@@ -118,11 +107,76 @@ namespace EdgeMon
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
+            // tb_batManu
+            // 
+            this.tb_batManu.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_batManu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
+            this.tb_batManu.Location = new System.Drawing.Point(201, 504);
+            this.tb_batManu.Multiline = true;
+            this.tb_batManu.Name = "tb_batManu";
+            this.tb_batManu.Size = new System.Drawing.Size(228, 138);
+            this.tb_batManu.TabIndex = 60;
+            this.tb_batManu.Text = "---";
+            // 
+            // battery
+            // 
+            this.battery.BackColor = System.Drawing.Color.White;
+            this.battery.Image = global::EdgeMon.Properties.Resources.battery;
+            this.battery.Location = new System.Drawing.Point(41, 412);
+            this.battery.Name = "battery";
+            this.battery.Size = new System.Drawing.Size(214, 50);
+            this.battery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.battery.TabIndex = 8;
+            this.battery.TabStop = false;
+            // 
+            // Inverter_PIC
+            // 
+            this.Inverter_PIC.Image = global::EdgeMon.Properties.Resources.SE11;
+            this.Inverter_PIC.Location = new System.Drawing.Point(240, 242);
+            this.Inverter_PIC.Name = "Inverter_PIC";
+            this.Inverter_PIC.Size = new System.Drawing.Size(209, 92);
+            this.Inverter_PIC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Inverter_PIC.TabIndex = 27;
+            this.Inverter_PIC.TabStop = false;
+            // 
+            // bat_SOE
+            // 
+            this.bat_SOE.BackColor = System.Drawing.Color.IndianRed;
+            this.bat_SOE.ForeColor = System.Drawing.Color.Red;
+            this.bat_SOE.Location = new System.Drawing.Point(63, 419);
+            this.bat_SOE.MarqueeAnimationSpeed = 10;
+            this.bat_SOE.Name = "bat_SOE";
+            this.bat_SOE.Size = new System.Drawing.Size(161, 36);
+            this.bat_SOE.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.bat_SOE.TabIndex = 2;
+            this.bat_SOE.UseWaitCursor = true;
+            this.bat_SOE.Value = 99;
+            // 
+            // lb_temp
+            // 
+            this.lb_temp.AutoSize = true;
+            this.lb_temp.BackColor = System.Drawing.Color.White;
+            this.lb_temp.Location = new System.Drawing.Point(312, 313);
+            this.lb_temp.Name = "lb_temp";
+            this.lb_temp.Size = new System.Drawing.Size(19, 16);
+            this.lb_temp.TabIndex = 61;
+            this.lb_temp.Text = "---";
+            // 
+            // house
+            // 
+            this.house.Image = global::EdgeMon.Properties.Resources.house;
+            this.house.Location = new System.Drawing.Point(469, 412);
+            this.house.Name = "house";
+            this.house.Size = new System.Drawing.Size(100, 99);
+            this.house.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.house.TabIndex = 6;
+            this.house.TabStop = false;
+            // 
             // PV_on
             // 
             this.PV_on.Image = global::EdgeMon.Properties.Resources.PV;
             this.PV_on.InitialImage = global::EdgeMon.Properties.Resources.PV;
-            this.PV_on.Location = new System.Drawing.Point(101, 55);
+            this.PV_on.Location = new System.Drawing.Point(100, 54);
             this.PV_on.Name = "PV_on";
             this.PV_on.Size = new System.Drawing.Size(100, 99);
             this.PV_on.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -132,47 +186,27 @@ namespace EdgeMon
             // PV_off
             // 
             this.PV_off.Image = global::EdgeMon.Properties.Resources.PV_off;
-            this.PV_off.Location = new System.Drawing.Point(101, 55);
+            this.PV_off.Location = new System.Drawing.Point(100, 54);
             this.PV_off.Name = "PV_off";
             this.PV_off.Size = new System.Drawing.Size(100, 99);
             this.PV_off.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PV_off.TabIndex = 5;
             this.PV_off.TabStop = false;
             // 
-            // house
-            // 
-            this.house.Image = global::EdgeMon.Properties.Resources.house;
-            this.house.Location = new System.Drawing.Point(473, 401);
-            this.house.Name = "house";
-            this.house.Size = new System.Drawing.Size(100, 99);
-            this.house.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.house.TabIndex = 6;
-            this.house.TabStop = false;
-            // 
             // grid
             // 
             this.grid.Image = global::EdgeMon.Properties.Resources.Grid;
-            this.grid.Location = new System.Drawing.Point(473, 55);
+            this.grid.Location = new System.Drawing.Point(472, 54);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(100, 99);
             this.grid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.grid.TabIndex = 7;
             this.grid.TabStop = false;
             // 
-            // battery
-            // 
-            this.battery.Image = global::EdgeMon.Properties.Resources.battery;
-            this.battery.Location = new System.Drawing.Point(56, 384);
-            this.battery.Name = "battery";
-            this.battery.Size = new System.Drawing.Size(214, 116);
-            this.battery.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.battery.TabIndex = 8;
-            this.battery.TabStop = false;
-            // 
             // pic_PV_from
             // 
             this.pic_PV_from.Image = global::EdgeMon.Properties.Resources.arrow41;
-            this.pic_PV_from.Location = new System.Drawing.Point(142, 151);
+            this.pic_PV_from.Location = new System.Drawing.Point(141, 150);
             this.pic_PV_from.Name = "pic_PV_from";
             this.pic_PV_from.Size = new System.Drawing.Size(100, 130);
             this.pic_PV_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -182,7 +216,7 @@ namespace EdgeMon
             // pic_grid_from
             // 
             this.pic_grid_from.Image = global::EdgeMon.Properties.Resources.arrow2;
-            this.pic_grid_from.Location = new System.Drawing.Point(447, 151);
+            this.pic_grid_from.Location = new System.Drawing.Point(446, 150);
             this.pic_grid_from.Name = "pic_grid_from";
             this.pic_grid_from.Size = new System.Drawing.Size(100, 129);
             this.pic_grid_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -192,64 +226,22 @@ namespace EdgeMon
             // pic_bat_from
             // 
             this.pic_bat_from.Image = global::EdgeMon.Properties.Resources.arrow1;
-            this.pic_bat_from.Location = new System.Drawing.Point(142, 298);
+            this.pic_bat_from.Location = new System.Drawing.Point(141, 297);
             this.pic_bat_from.Name = "pic_bat_from";
             this.pic_bat_from.Size = new System.Drawing.Size(100, 116);
             this.pic_bat_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_bat_from.TabIndex = 11;
             this.pic_bat_from.TabStop = false;
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::EdgeMon.Properties.Resources.SE11;
-            this.pictureBox5.Location = new System.Drawing.Point(241, 243);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(209, 92);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox5.TabIndex = 27;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pic_bat_to
-            // 
-            this.pic_bat_to.Image = global::EdgeMon.Properties.Resources.arrow1R;
-            this.pic_bat_to.Location = new System.Drawing.Point(142, 296);
-            this.pic_bat_to.Name = "pic_bat_to";
-            this.pic_bat_to.Size = new System.Drawing.Size(100, 116);
-            this.pic_bat_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_bat_to.TabIndex = 28;
-            this.pic_bat_to.TabStop = false;
-            // 
-            // pic_house_to
-            // 
-            this.pic_house_to.Image = global::EdgeMon.Properties.Resources.arrow3;
-            this.pic_house_to.Location = new System.Drawing.Point(447, 296);
-            this.pic_house_to.Name = "pic_house_to";
-            this.pic_house_to.Size = new System.Drawing.Size(100, 116);
-            this.pic_house_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pic_house_to.TabIndex = 30;
-            this.pic_house_to.TabStop = false;
-            // 
             // pic_grid_to
             // 
             this.pic_grid_to.Image = global::EdgeMon.Properties.Resources.arrow2R;
-            this.pic_grid_to.Location = new System.Drawing.Point(447, 151);
+            this.pic_grid_to.Location = new System.Drawing.Point(446, 150);
             this.pic_grid_to.Name = "pic_grid_to";
             this.pic_grid_to.Size = new System.Drawing.Size(100, 129);
             this.pic_grid_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_grid_to.TabIndex = 31;
             this.pic_grid_to.TabStop = false;
-            // 
-            // MB_Pwr_3
-            // 
-            this.MB_Pwr_3.BackColor = System.Drawing.Color.White;
-            this.MB_Pwr_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MB_Pwr_3.Font = new System.Drawing.Font("Britannic Bold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MB_Pwr_3.ForeColor = System.Drawing.Color.Black;
-            this.MB_Pwr_3.Location = new System.Drawing.Point(553, 247);
-            this.MB_Pwr_3.Name = "MB_Pwr_3";
-            this.MB_Pwr_3.Size = new System.Drawing.Size(154, 15);
-            this.MB_Pwr_3.TabIndex = 44;
-            this.MB_Pwr_3.Text = "---";
             // 
             // ImpExMeter
             // 
@@ -257,17 +249,29 @@ namespace EdgeMon
             this.ImpExMeter.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ImpExMeter.Font = new System.Drawing.Font("Britannic Bold", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ImpExMeter.ForeColor = System.Drawing.Color.Black;
-            this.ImpExMeter.Location = new System.Drawing.Point(553, 228);
+            this.ImpExMeter.Location = new System.Drawing.Point(552, 227);
             this.ImpExMeter.Name = "ImpExMeter";
             this.ImpExMeter.Size = new System.Drawing.Size(154, 19);
             this.ImpExMeter.TabIndex = 43;
             this.ImpExMeter.Text = "---";
             // 
+            // MB_Pwr_3
+            // 
+            this.MB_Pwr_3.BackColor = System.Drawing.Color.White;
+            this.MB_Pwr_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MB_Pwr_3.Font = new System.Drawing.Font("Britannic Bold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MB_Pwr_3.ForeColor = System.Drawing.Color.Black;
+            this.MB_Pwr_3.Location = new System.Drawing.Point(552, 246);
+            this.MB_Pwr_3.Name = "MB_Pwr_3";
+            this.MB_Pwr_3.Size = new System.Drawing.Size(154, 15);
+            this.MB_Pwr_3.TabIndex = 44;
+            this.MB_Pwr_3.Text = "---";
+            // 
             // lb_dc_pwr
             // 
             this.lb_dc_pwr.AutoSize = true;
             this.lb_dc_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_dc_pwr.Location = new System.Drawing.Point(248, 215);
+            this.lb_dc_pwr.Location = new System.Drawing.Point(247, 214);
             this.lb_dc_pwr.Name = "lb_dc_pwr";
             this.lb_dc_pwr.Size = new System.Drawing.Size(63, 20);
             this.lb_dc_pwr.TabIndex = 45;
@@ -278,7 +282,7 @@ namespace EdgeMon
             // 
             this.lb_ac_pwr.AutoSize = true;
             this.lb_ac_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_ac_pwr.Location = new System.Drawing.Point(387, 215);
+            this.lb_ac_pwr.Location = new System.Drawing.Point(386, 214);
             this.lb_ac_pwr.Name = "lb_ac_pwr";
             this.lb_ac_pwr.Size = new System.Drawing.Size(63, 20);
             this.lb_ac_pwr.TabIndex = 46;
@@ -291,192 +295,171 @@ namespace EdgeMon
             this.lb_status.BackColor = System.Drawing.Color.Red;
             this.lb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_status.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lb_status.Location = new System.Drawing.Point(299, 338);
+            this.lb_status.Location = new System.Drawing.Point(259, 337);
             this.lb_status.Name = "lb_status";
             this.lb_status.Size = new System.Drawing.Size(97, 31);
             this.lb_status.TabIndex = 47;
             this.lb_status.Text = "NONE";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(4, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 20);
-            this.label2.TabIndex = 49;
-            this.label2.Text = "Last Update";
-            // 
             // lb_update
             // 
             this.lb_update.AutoSize = true;
             this.lb_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_update.Location = new System.Drawing.Point(132, 9);
+            this.lb_update.Location = new System.Drawing.Point(131, 8);
             this.lb_update.Name = "lb_update";
             this.lb_update.Size = new System.Drawing.Size(63, 20);
             this.lb_update.TabIndex = 48;
             this.lb_update.Text = "000000";
             // 
-            // label11
+            // label2
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(30, 528);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(39, 16);
-            this.label11.TabIndex = 59;
-            this.label11.Text = "T_Av";
-            // 
-            // lb_T_Av
-            // 
-            this.lb_T_Av.AutoSize = true;
-            this.lb_T_Av.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_T_Av.Location = new System.Drawing.Point(108, 522);
-            this.lb_T_Av.Name = "lb_T_Av";
-            this.lb_T_Av.Size = new System.Drawing.Size(19, 16);
-            this.lb_T_Av.TabIndex = 58;
-            this.lb_T_Av.Text = "---";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(30, 545);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(48, 16);
-            this.label9.TabIndex = 57;
-            this.label9.Text = "E_Max";
-            // 
-            // lb_bat_max
-            // 
-            this.lb_bat_max.AutoSize = true;
-            this.lb_bat_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_bat_max.Location = new System.Drawing.Point(108, 542);
-            this.lb_bat_max.Name = "lb_bat_max";
-            this.lb_bat_max.Size = new System.Drawing.Size(19, 16);
-            this.lb_bat_max.TabIndex = 56;
-            this.lb_bat_max.Text = "---";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(30, 562);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 16);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "SOH";
-            // 
-            // lb_SOH
-            // 
-            this.lb_SOH.AutoSize = true;
-            this.lb_SOH.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_SOH.Location = new System.Drawing.Point(108, 562);
-            this.lb_SOH.Name = "lb_SOH";
-            this.lb_SOH.Size = new System.Drawing.Size(19, 16);
-            this.lb_SOH.TabIndex = 54;
-            this.lb_SOH.Text = "---";
-            // 
-            // lb_SOE_TXT
-            // 
-            this.lb_SOE_TXT.AutoSize = true;
-            this.lb_SOE_TXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_SOE_TXT.Location = new System.Drawing.Point(69, 480);
-            this.lb_SOE_TXT.Name = "lb_SOE_TXT";
-            this.lb_SOE_TXT.Size = new System.Drawing.Size(30, 20);
-            this.lb_SOE_TXT.TabIndex = 53;
-            this.lb_SOE_TXT.Text = "---";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(111, 20);
+            this.label2.TabIndex = 49;
+            this.label2.Text = "Last Update";
             // 
             // lb_bat_stat
             // 
             this.lb_bat_stat.AutoSize = true;
             this.lb_bat_stat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_bat_stat.Location = new System.Drawing.Point(248, 456);
+            this.lb_bat_stat.Location = new System.Drawing.Point(261, 442);
             this.lb_bat_stat.Name = "lb_bat_stat";
             this.lb_bat_stat.Size = new System.Drawing.Size(102, 20);
             this.lb_bat_stat.TabIndex = 52;
             this.lb_bat_stat.Text = "Bat_Status";
             // 
-            // tb_batManu
+            // lb_SOE_TXT
             // 
-            this.tb_batManu.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tb_batManu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.tb_batManu.Location = new System.Drawing.Point(202, 518);
-            this.tb_batManu.Multiline = true;
-            this.tb_batManu.Name = "tb_batManu";
-            this.tb_batManu.Size = new System.Drawing.Size(228, 138);
-            this.tb_batManu.TabIndex = 60;
-            this.tb_batManu.Text = "---";
+            this.lb_SOE_TXT.AutoSize = true;
+            this.lb_SOE_TXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_SOE_TXT.Location = new System.Drawing.Point(68, 479);
+            this.lb_SOE_TXT.Name = "lb_SOE_TXT";
+            this.lb_SOE_TXT.Size = new System.Drawing.Size(30, 20);
+            this.lb_SOE_TXT.TabIndex = 53;
+            this.lb_SOE_TXT.Text = "---";
             // 
-            // lb_temp
+            // lb_SOH
             // 
-            this.lb_temp.AutoSize = true;
-            this.lb_temp.BackColor = System.Drawing.Color.White;
-            this.lb_temp.Location = new System.Drawing.Point(333, 315);
-            this.lb_temp.Name = "lb_temp";
-            this.lb_temp.Size = new System.Drawing.Size(19, 16);
-            this.lb_temp.TabIndex = 61;
-            this.lb_temp.Text = "---";
+            this.lb_SOH.AutoSize = true;
+            this.lb_SOH.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_SOH.Location = new System.Drawing.Point(107, 561);
+            this.lb_SOH.Name = "lb_SOH";
+            this.lb_SOH.Size = new System.Drawing.Size(19, 16);
+            this.lb_SOH.TabIndex = 54;
+            this.lb_SOH.Text = "---";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(29, 561);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 16);
+            this.label7.TabIndex = 55;
+            this.label7.Text = "SOH";
+            // 
+            // lb_bat_max
+            // 
+            this.lb_bat_max.AutoSize = true;
+            this.lb_bat_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_bat_max.Location = new System.Drawing.Point(107, 541);
+            this.lb_bat_max.Name = "lb_bat_max";
+            this.lb_bat_max.Size = new System.Drawing.Size(19, 16);
+            this.lb_bat_max.TabIndex = 56;
+            this.lb_bat_max.Text = "---";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 544);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(48, 16);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "E_Max";
+            // 
+            // lb_T_Av
+            // 
+            this.lb_T_Av.AutoSize = true;
+            this.lb_T_Av.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_T_Av.Location = new System.Drawing.Point(107, 521);
+            this.lb_T_Av.Name = "lb_T_Av";
+            this.lb_T_Av.Size = new System.Drawing.Size(19, 16);
+            this.lb_T_Av.TabIndex = 58;
+            this.lb_T_Av.Text = "---";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(29, 527);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(39, 16);
+            this.label11.TabIndex = 59;
+            this.label11.Text = "T_Av";
             // 
             // lb_batt_pwr
             // 
             this.lb_batt_pwr.AutoSize = true;
             this.lb_batt_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_batt_pwr.Location = new System.Drawing.Point(52, 332);
+            this.lb_batt_pwr.Location = new System.Drawing.Point(51, 331);
             this.lb_batt_pwr.Name = "lb_batt_pwr";
             this.lb_batt_pwr.Size = new System.Drawing.Size(63, 20);
             this.lb_batt_pwr.TabIndex = 62;
             this.lb_batt_pwr.Text = "000000";
             this.lb_batt_pwr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // lb_mtr_sernr
+            // lbl_mtr_manu
             // 
-            this.lb_mtr_sernr.AutoSize = true;
-            this.lb_mtr_sernr.Location = new System.Drawing.Point(579, 189);
-            this.lb_mtr_sernr.Name = "lb_mtr_sernr";
-            this.lb_mtr_sernr.Size = new System.Drawing.Size(19, 16);
-            this.lb_mtr_sernr.TabIndex = 67;
-            this.lb_mtr_sernr.Text = "---";
-            // 
-            // lb_mtr_opt
-            // 
-            this.lb_mtr_opt.AutoSize = true;
-            this.lb_mtr_opt.Location = new System.Drawing.Point(579, 172);
-            this.lb_mtr_opt.Name = "lb_mtr_opt";
-            this.lb_mtr_opt.Size = new System.Drawing.Size(19, 16);
-            this.lb_mtr_opt.TabIndex = 66;
-            this.lb_mtr_opt.Text = "---";
-            // 
-            // lb_mtr_ver
-            // 
-            this.lb_mtr_ver.AutoSize = true;
-            this.lb_mtr_ver.Location = new System.Drawing.Point(579, 151);
-            this.lb_mtr_ver.Name = "lb_mtr_ver";
-            this.lb_mtr_ver.Size = new System.Drawing.Size(19, 16);
-            this.lb_mtr_ver.TabIndex = 65;
-            this.lb_mtr_ver.Text = "---";
+            this.lbl_mtr_manu.AutoSize = true;
+            this.lbl_mtr_manu.Location = new System.Drawing.Point(578, 112);
+            this.lbl_mtr_manu.Name = "lbl_mtr_manu";
+            this.lbl_mtr_manu.Size = new System.Drawing.Size(19, 16);
+            this.lbl_mtr_manu.TabIndex = 63;
+            this.lbl_mtr_manu.Text = "---";
             // 
             // lb_mtr_model
             // 
             this.lb_mtr_model.AutoSize = true;
-            this.lb_mtr_model.Location = new System.Drawing.Point(579, 130);
+            this.lb_mtr_model.Location = new System.Drawing.Point(578, 129);
             this.lb_mtr_model.Name = "lb_mtr_model";
             this.lb_mtr_model.Size = new System.Drawing.Size(19, 16);
             this.lb_mtr_model.TabIndex = 64;
             this.lb_mtr_model.Text = "---";
             // 
-            // lbl_mtr_manu
+            // lb_mtr_ver
             // 
-            this.lbl_mtr_manu.AutoSize = true;
-            this.lbl_mtr_manu.Location = new System.Drawing.Point(579, 113);
-            this.lbl_mtr_manu.Name = "lbl_mtr_manu";
-            this.lbl_mtr_manu.Size = new System.Drawing.Size(19, 16);
-            this.lbl_mtr_manu.TabIndex = 63;
-            this.lbl_mtr_manu.Text = "---";
+            this.lb_mtr_ver.AutoSize = true;
+            this.lb_mtr_ver.Location = new System.Drawing.Point(578, 150);
+            this.lb_mtr_ver.Name = "lb_mtr_ver";
+            this.lb_mtr_ver.Size = new System.Drawing.Size(19, 16);
+            this.lb_mtr_ver.TabIndex = 65;
+            this.lb_mtr_ver.Text = "---";
+            // 
+            // lb_mtr_opt
+            // 
+            this.lb_mtr_opt.AutoSize = true;
+            this.lb_mtr_opt.Location = new System.Drawing.Point(578, 171);
+            this.lb_mtr_opt.Name = "lb_mtr_opt";
+            this.lb_mtr_opt.Size = new System.Drawing.Size(19, 16);
+            this.lb_mtr_opt.TabIndex = 66;
+            this.lb_mtr_opt.Text = "---";
+            // 
+            // lb_mtr_sernr
+            // 
+            this.lb_mtr_sernr.AutoSize = true;
+            this.lb_mtr_sernr.Location = new System.Drawing.Point(578, 188);
+            this.lb_mtr_sernr.Name = "lb_mtr_sernr";
+            this.lb_mtr_sernr.Size = new System.Drawing.Size(19, 16);
+            this.lb_mtr_sernr.TabIndex = 67;
+            this.lb_mtr_sernr.Text = "---";
             // 
             // lb_pwr_house
             // 
             this.lb_pwr_house.AutoSize = true;
             this.lb_pwr_house.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_pwr_house.ForeColor = System.Drawing.Color.Black;
-            this.lb_pwr_house.Location = new System.Drawing.Point(553, 332);
+            this.lb_pwr_house.Location = new System.Drawing.Point(552, 331);
             this.lb_pwr_house.Name = "lb_pwr_house";
             this.lb_pwr_house.Size = new System.Drawing.Size(63, 20);
             this.lb_pwr_house.TabIndex = 68;
@@ -488,7 +471,7 @@ namespace EdgeMon
             this.lb_pwr_PV.AutoSize = true;
             this.lb_pwr_PV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_pwr_PV.ForeColor = System.Drawing.Color.Black;
-            this.lb_pwr_PV.Location = new System.Drawing.Point(29, 206);
+            this.lb_pwr_PV.Location = new System.Drawing.Point(28, 205);
             this.lb_pwr_PV.Name = "lb_pwr_PV";
             this.lb_pwr_PV.Size = new System.Drawing.Size(63, 20);
             this.lb_pwr_PV.TabIndex = 69;
@@ -499,7 +482,7 @@ namespace EdgeMon
             // 
             this.tb_Inv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_Inv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.tb_Inv.Location = new System.Drawing.Point(258, 127);
+            this.tb_Inv.Location = new System.Drawing.Point(257, 126);
             this.tb_Inv.Multiline = true;
             this.tb_Inv.Name = "tb_Inv";
             this.tb_Inv.Size = new System.Drawing.Size(172, 77);
@@ -510,7 +493,7 @@ namespace EdgeMon
             // 
             this.tb_chargepower.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_chargepower.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_chargepower.Location = new System.Drawing.Point(111, 582);
+            this.tb_chargepower.Location = new System.Drawing.Point(110, 581);
             this.tb_chargepower.Multiline = true;
             this.tb_chargepower.Name = "tb_chargepower";
             this.tb_chargepower.Size = new System.Drawing.Size(165, 35);
@@ -520,7 +503,7 @@ namespace EdgeMon
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 582);
+            this.label3.Location = new System.Drawing.Point(29, 581);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 72;
@@ -530,7 +513,7 @@ namespace EdgeMon
             // 
             this.lb_total.AutoSize = true;
             this.lb_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_total.Location = new System.Drawing.Point(30, 603);
+            this.lb_total.Location = new System.Drawing.Point(29, 602);
             this.lb_total.Name = "lb_total";
             this.lb_total.Size = new System.Drawing.Size(19, 16);
             this.lb_total.TabIndex = 73;
@@ -540,7 +523,7 @@ namespace EdgeMon
             // 
             this.lb_about.AutoSize = true;
             this.lb_about.BackColor = System.Drawing.Color.LightGray;
-            this.lb_about.Location = new System.Drawing.Point(575, 621);
+            this.lb_about.Location = new System.Drawing.Point(574, 620);
             this.lb_about.Name = "lb_about";
             this.lb_about.Size = new System.Drawing.Size(135, 16);
             this.lb_about.TabIndex = 74;
@@ -550,7 +533,7 @@ namespace EdgeMon
             // lb_tot_prod
             // 
             this.lb_tot_prod.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lb_tot_prod.Location = new System.Drawing.Point(258, 384);
+            this.lb_tot_prod.Location = new System.Drawing.Point(257, 383);
             this.lb_tot_prod.Name = "lb_tot_prod";
             this.lb_tot_prod.Size = new System.Drawing.Size(192, 15);
             this.lb_tot_prod.TabIndex = 75;
@@ -561,11 +544,85 @@ namespace EdgeMon
             this.lb_error.AutoSize = true;
             this.lb_error.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_error.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lb_error.Location = new System.Drawing.Point(333, 16);
+            this.lb_error.Location = new System.Drawing.Point(332, 15);
             this.lb_error.Name = "lb_error";
             this.lb_error.Size = new System.Drawing.Size(24, 13);
             this.lb_error.TabIndex = 76;
             this.lb_error.Text = "OK";
+            // 
+            // pic_house_to
+            // 
+            this.pic_house_to.Image = global::EdgeMon.Properties.Resources.arrow3;
+            this.pic_house_to.Location = new System.Drawing.Point(446, 295);
+            this.pic_house_to.Name = "pic_house_to";
+            this.pic_house_to.Size = new System.Drawing.Size(100, 116);
+            this.pic_house_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_house_to.TabIndex = 30;
+            this.pic_house_to.TabStop = false;
+            // 
+            // pic_bat_to
+            // 
+            this.pic_bat_to.Image = global::EdgeMon.Properties.Resources.arrow1R;
+            this.pic_bat_to.Location = new System.Drawing.Point(141, 295);
+            this.pic_bat_to.Name = "pic_bat_to";
+            this.pic_bat_to.Size = new System.Drawing.Size(100, 116);
+            this.pic_bat_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_bat_to.TabIndex = 28;
+            this.pic_bat_to.TabStop = false;
+            // 
+            // mainpanel
+            // 
+            this.mainpanel.BackColor = System.Drawing.Color.Transparent;
+            this.mainpanel.Controls.Add(this.tb_batManu);
+            this.mainpanel.Controls.Add(this.pic_bat_to);
+            this.mainpanel.Controls.Add(this.pic_house_to);
+            this.mainpanel.Controls.Add(this.lb_error);
+            this.mainpanel.Controls.Add(this.lb_tot_prod);
+            this.mainpanel.Controls.Add(this.lb_about);
+            this.mainpanel.Controls.Add(this.lb_total);
+            this.mainpanel.Controls.Add(this.label3);
+            this.mainpanel.Controls.Add(this.tb_chargepower);
+            this.mainpanel.Controls.Add(this.tb_Inv);
+            this.mainpanel.Controls.Add(this.lb_pwr_PV);
+            this.mainpanel.Controls.Add(this.lb_pwr_house);
+            this.mainpanel.Controls.Add(this.lb_mtr_sernr);
+            this.mainpanel.Controls.Add(this.lb_mtr_opt);
+            this.mainpanel.Controls.Add(this.lb_mtr_ver);
+            this.mainpanel.Controls.Add(this.lb_mtr_model);
+            this.mainpanel.Controls.Add(this.lbl_mtr_manu);
+            this.mainpanel.Controls.Add(this.lb_batt_pwr);
+            this.mainpanel.Controls.Add(this.label11);
+            this.mainpanel.Controls.Add(this.lb_T_Av);
+            this.mainpanel.Controls.Add(this.label9);
+            this.mainpanel.Controls.Add(this.lb_bat_max);
+            this.mainpanel.Controls.Add(this.label7);
+            this.mainpanel.Controls.Add(this.lb_SOH);
+            this.mainpanel.Controls.Add(this.lb_SOE_TXT);
+            this.mainpanel.Controls.Add(this.lb_bat_stat);
+            this.mainpanel.Controls.Add(this.label2);
+            this.mainpanel.Controls.Add(this.lb_update);
+            this.mainpanel.Controls.Add(this.lb_status);
+            this.mainpanel.Controls.Add(this.lb_ac_pwr);
+            this.mainpanel.Controls.Add(this.lb_dc_pwr);
+            this.mainpanel.Controls.Add(this.MB_Pwr_3);
+            this.mainpanel.Controls.Add(this.ImpExMeter);
+            this.mainpanel.Controls.Add(this.pic_grid_to);
+            this.mainpanel.Controls.Add(this.pic_bat_from);
+            this.mainpanel.Controls.Add(this.pic_grid_from);
+            this.mainpanel.Controls.Add(this.pic_PV_from);
+            this.mainpanel.Controls.Add(this.grid);
+            this.mainpanel.Controls.Add(this.PV_off);
+            this.mainpanel.Controls.Add(this.PV_on);
+            this.mainpanel.Controls.Add(this.house);
+            this.mainpanel.Controls.Add(this.lb_temp);
+            this.mainpanel.Controls.Add(this.bat_SOE);
+            this.mainpanel.Controls.Add(this.Inverter_PIC);
+            this.mainpanel.Controls.Add(this.battery);
+            this.mainpanel.Location = new System.Drawing.Point(1, 1);
+            this.mainpanel.Name = "mainpanel";
+            this.mainpanel.Size = new System.Drawing.Size(733, 645);
+            this.mainpanel.TabIndex = 77;
+            this.mainpanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
             // 
             // NewEdge
             // 
@@ -573,111 +630,69 @@ namespace EdgeMon
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(737, 647);
-            this.Controls.Add(this.lb_error);
-            this.Controls.Add(this.lb_tot_prod);
-            this.Controls.Add(this.lb_about);
-            this.Controls.Add(this.lb_total);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tb_chargepower);
-            this.Controls.Add(this.tb_Inv);
-            this.Controls.Add(this.lb_pwr_PV);
-            this.Controls.Add(this.lb_pwr_house);
-            this.Controls.Add(this.lb_mtr_sernr);
-            this.Controls.Add(this.lb_mtr_opt);
-            this.Controls.Add(this.lb_mtr_ver);
-            this.Controls.Add(this.lb_mtr_model);
-            this.Controls.Add(this.lbl_mtr_manu);
-            this.Controls.Add(this.lb_batt_pwr);
-            this.Controls.Add(this.lb_temp);
-            this.Controls.Add(this.tb_batManu);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.lb_T_Av);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.lb_bat_max);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.lb_SOH);
-            this.Controls.Add(this.lb_SOE_TXT);
-            this.Controls.Add(this.lb_bat_stat);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lb_update);
-            this.Controls.Add(this.lb_status);
-            this.Controls.Add(this.lb_ac_pwr);
-            this.Controls.Add(this.lb_dc_pwr);
-            this.Controls.Add(this.MB_Pwr_3);
-            this.Controls.Add(this.ImpExMeter);
-            this.Controls.Add(this.pic_grid_to);
-            this.Controls.Add(this.pic_house_to);
-            this.Controls.Add(this.pic_bat_to);
-            this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.pic_bat_from);
-            this.Controls.Add(this.pic_grid_from);
-            this.Controls.Add(this.pic_PV_from);
-            this.Controls.Add(this.grid);
-            this.Controls.Add(this.house);
-            this.Controls.Add(this.PV_off);
-            this.Controls.Add(this.PV_on);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.bat_SOE);
-            this.Controls.Add(this.battery);
+            this.Controls.Add(this.mainpanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "NewEdge";
             this.Text = "Edgemon";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
+            ((System.ComponentModel.ISupportInitialize)(this.battery)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Inverter_PIC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.house)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_on)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.house)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.battery)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_PV_from)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_grid_from)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bat_from)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_house_to)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_grid_to)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_house_to)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).EndInit();
+            this.mainpanel.ResumeLayout(false);
+            this.mainpanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ProgressBar bat_SOE;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_batManu;
+        private System.Windows.Forms.PictureBox battery;
+        private System.Windows.Forms.PictureBox Inverter_PIC;
+        private System.Windows.Forms.ProgressBar bat_SOE;
+        private System.Windows.Forms.Label lb_temp;
+        private System.Windows.Forms.PictureBox house;
         private System.Windows.Forms.PictureBox PV_on;
         private System.Windows.Forms.PictureBox PV_off;
-        private System.Windows.Forms.PictureBox house;
         private System.Windows.Forms.PictureBox grid;
-        private System.Windows.Forms.PictureBox battery;
         private System.Windows.Forms.PictureBox pic_PV_from;
         private System.Windows.Forms.PictureBox pic_grid_from;
         private System.Windows.Forms.PictureBox pic_bat_from;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pic_bat_to;
-        private System.Windows.Forms.PictureBox pic_house_to;
         private System.Windows.Forms.PictureBox pic_grid_to;
-        private System.Windows.Forms.TextBox MB_Pwr_3;
         private System.Windows.Forms.TextBox ImpExMeter;
+        private System.Windows.Forms.TextBox MB_Pwr_3;
         private System.Windows.Forms.Label lb_dc_pwr;
         private System.Windows.Forms.Label lb_ac_pwr;
         private System.Windows.Forms.Label lb_status;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lb_update;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label lb_T_Av;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label lb_bat_max;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lb_SOH;
-        private System.Windows.Forms.Label lb_SOE_TXT;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lb_bat_stat;
-        private System.Windows.Forms.TextBox tb_batManu;
-        private System.Windows.Forms.Label lb_temp;
+        private System.Windows.Forms.Label lb_SOE_TXT;
+        private System.Windows.Forms.Label lb_SOH;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lb_bat_max;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lb_T_Av;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lb_batt_pwr;
-        private System.Windows.Forms.Label lb_mtr_sernr;
-        private System.Windows.Forms.Label lb_mtr_opt;
-        private System.Windows.Forms.Label lb_mtr_ver;
-        private System.Windows.Forms.Label lb_mtr_model;
         private System.Windows.Forms.Label lbl_mtr_manu;
+        private System.Windows.Forms.Label lb_mtr_model;
+        private System.Windows.Forms.Label lb_mtr_ver;
+        private System.Windows.Forms.Label lb_mtr_opt;
+        private System.Windows.Forms.Label lb_mtr_sernr;
         private System.Windows.Forms.Label lb_pwr_house;
         private System.Windows.Forms.Label lb_pwr_PV;
         private System.Windows.Forms.TextBox tb_Inv;
@@ -687,5 +702,8 @@ namespace EdgeMon
         private System.Windows.Forms.Label lb_about;
         private System.Windows.Forms.TextBox lb_tot_prod;
         private System.Windows.Forms.Label lb_error;
+        private System.Windows.Forms.PictureBox pic_house_to;
+        private System.Windows.Forms.PictureBox pic_bat_to;
+        private System.Windows.Forms.Panel mainpanel;
     }
 }

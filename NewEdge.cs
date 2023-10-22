@@ -6,6 +6,10 @@ using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Forms.VisualStyles;
 
 namespace EdgeMon
 {
@@ -13,8 +17,9 @@ namespace EdgeMon
     {
         bool connected = false;
         bool have_battery = false;
-        bool bmOnly = Properties.Settings.Default.BitmapOnly;
-            
+        bool oneShot = Properties.Settings.Default.OneShot;
+        int shotcounter = Properties.Settings.Default.MultiShotIntervall;
+      
                 
             
     TcpModbus mb;
@@ -22,13 +27,16 @@ namespace EdgeMon
    
         public NewEdge()
         {
+            
             InitializeComponent();
+           
+
             timer2.Enabled = false;
-            timer2.Interval = 2000;
+            timer2.Interval = 10;
             lb_about.Text = infobox.AssemblyCopyright;
             mb = null;
 
-            do_update();
+            //do_update();
             timer2.Enabled = true;
             
         }
@@ -83,7 +91,8 @@ namespace EdgeMon
 
         private void statusgraph_static()
         {
-
+            
+            
 
 
             tb_Inv.Clear();
@@ -162,7 +171,7 @@ namespace EdgeMon
 
 
             lb_status.Text = mb.I_Status.ToString();
-            lb_update.Text = DateTime.Now.ToString();
+           
             lb_ac_pwr.Text = I_AC_Power.ToString() + " W";
             lb_dc_pwr.Text = I_DC_Power.ToString() + " W";
             lb_temp.Text = mb.I_Temp_Sink.ToString() + "°C";
@@ -209,12 +218,24 @@ namespace EdgeMon
         private void timer2_Tick(object sender, EventArgs e)
         {
             
-
-            if (bmOnly) {
-                SaveAsBitmap(this, Properties.Settings.Default.saveBitmap);
+            do_update();
+            lb_update.Text = DateTime.Now.ToString();
+            if (connected && oneShot)
+            {
+                ImpExMeter.BackColor = Color.White;
+                SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
                 Environment.Exit(0);
             }
-            do_update();
+            if (connected && shotcounter != 0)
+            {
+                shotcounter--;
+                if (shotcounter == 0) 
+                { shotcounter = Properties.Settings.Default.MultiShotIntervall;
+                    SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
+                }
+            }
+
+           
         }
 
         private void do_update()
@@ -241,7 +262,7 @@ namespace EdgeMon
                 statusgraph_dyn();
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
-            
+                timer2.Interval = Properties.Settings.Default.refresh;
 
             }
             catch (Exception ex)
@@ -253,22 +274,42 @@ namespace EdgeMon
                 mb.Disconnect();
               
             }
+
+
+           
         }
 
-        private void SaveAsBitmap(Control control, string fileName)
+        private void SaveAsBitmap(Panel form, string fileName)
         {
+          
+        
             try
             {
-                Graphics g = control.CreateGraphics();
-                Bitmap bmp = new Bitmap(control.Width, control.Height);
-                control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
-                bmp.Save(fileName);
+     
+                Graphics g = form.CreateGraphics();
+                Bitmap bmp = new Bitmap(form.Width, form.Height);
+                //reverse order of overlaying controls - this is due to a bug in DrwaToBitmap
+                lb_temp.SendToBack();
+               bat_SOE.SendToBack();
+
+                form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
+
+                //restore order
+               battery.SendToBack();
+               Inverter_PIC.SendToBack();
+           
+               
+                SaveImage(bmp, fileName);
                 bmp.Dispose();
             }
             catch (Exception)
             {
+                //restore order
+                battery.SendToBack();
+                Inverter_PIC.SendToBack();
+         
             }
-       
+            
         }
      
 
@@ -278,6 +319,44 @@ namespace EdgeMon
             infobox.Show();
         }
 
-        
+        // Save the file with the appropriate format.
+        public void SaveImage(Image image, string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    image.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    image.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    image.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    image.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    image.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    image.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "Unknown file extension " + extension);
+            }
+        }
+
+        private void NewEdge_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.FormBorderStyle == FormBorderStyle.None)
+                this.FormBorderStyle = FormBorderStyle.Sizable;
+            else
+               this.FormBorderStyle = FormBorderStyle.None;
+        }
     }
 }

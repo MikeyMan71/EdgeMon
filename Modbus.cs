@@ -15,8 +15,6 @@ namespace EdgeMon
         public TcpModbus(string IpAddress, int port ):base(IpAddress, port)
         {
             Connect();
-            
-
         }
 
 
