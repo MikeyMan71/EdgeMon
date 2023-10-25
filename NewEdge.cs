@@ -17,6 +17,7 @@ namespace EdgeMon
     {
         bool connected = false;
         bool have_battery = false;
+        bool retry_battery = false;
         bool oneShot = Properties.Settings.Default.OneShot;
         int shotcounter = Properties.Settings.Default.MultiShotIntervall;
       
@@ -42,18 +43,23 @@ namespace EdgeMon
         }
 
 
-        private void init() { 
+        private void init() {
             //Battery present?
+            if (Properties.Settings.Default.battery == false)
+            { have_battery = false; }
+            else
+            { 
             try
             {
-                if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery == true)
+                if (mb.BatterySerialNr.Length > 0)
                     have_battery = true;
             }
             catch (Exception)
             {
-                have_battery=false;
+                    retry_battery = true;
+                have_battery = false;
             }
-
+        }
             PV_on.Hide();
             PV_off.Hide();
 
@@ -256,6 +262,11 @@ namespace EdgeMon
                 }
             }
 
+            if (have_battery == false && retry_battery==true) //no battery found, but config says there should be one...
+            {
+                if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery==true) { have_battery = true; retry_battery = false; }
+            }
+
 
             try
             {
@@ -291,13 +302,15 @@ namespace EdgeMon
                 //reverse order of overlaying controls - this is due to a bug in DrwaToBitmap
                 lb_temp.SendToBack();
                bat_SOE.SendToBack();
+                lb_ac_pwr.SendToBack();
 
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
 
                 //restore order
                battery.SendToBack();
                Inverter_PIC.SendToBack();
-           
+                pic_grid_to.SendToBack();
+                pic_grid_from.SendToBack();
                
                 SaveImage(bmp, fileName);
                 bmp.Dispose();

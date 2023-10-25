@@ -143,10 +143,10 @@ namespace EdgeMon
             // 
             this.bat_SOE.BackColor = System.Drawing.Color.IndianRed;
             this.bat_SOE.ForeColor = System.Drawing.Color.Red;
-            this.bat_SOE.Location = new System.Drawing.Point(55, 419);
+            this.bat_SOE.Location = new System.Drawing.Point(52, 417);
             this.bat_SOE.MarqueeAnimationSpeed = 10;
             this.bat_SOE.Name = "bat_SOE";
-            this.bat_SOE.Size = new System.Drawing.Size(167, 36);
+            this.bat_SOE.Size = new System.Drawing.Size(179, 41);
             this.bat_SOE.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.bat_SOE.TabIndex = 2;
             this.bat_SOE.UseWaitCursor = true;
@@ -271,7 +271,7 @@ namespace EdgeMon
             // 
             this.lb_dc_pwr.AutoSize = true;
             this.lb_dc_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_dc_pwr.Location = new System.Drawing.Point(247, 214);
+            this.lb_dc_pwr.Location = new System.Drawing.Point(241, 215);
             this.lb_dc_pwr.Name = "lb_dc_pwr";
             this.lb_dc_pwr.Size = new System.Drawing.Size(63, 20);
             this.lb_dc_pwr.TabIndex = 45;
@@ -282,7 +282,7 @@ namespace EdgeMon
             // 
             this.lb_ac_pwr.AutoSize = true;
             this.lb_ac_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_ac_pwr.Location = new System.Drawing.Point(386, 214);
+            this.lb_ac_pwr.Location = new System.Drawing.Point(366, 215);
             this.lb_ac_pwr.Name = "lb_ac_pwr";
             this.lb_ac_pwr.Size = new System.Drawing.Size(63, 20);
             this.lb_ac_pwr.TabIndex = 46;
@@ -523,11 +523,11 @@ namespace EdgeMon
             // 
             this.lb_about.AutoSize = true;
             this.lb_about.BackColor = System.Drawing.Color.LightGray;
-            this.lb_about.Location = new System.Drawing.Point(574, 620);
+            this.lb_about.Location = new System.Drawing.Point(610, 621);
             this.lb_about.Name = "lb_about";
-            this.lb_about.Size = new System.Drawing.Size(135, 16);
+            this.lb_about.Size = new System.Drawing.Size(72, 16);
             this.lb_about.TabIndex = 74;
-            this.lb_about.Text = "V2.3 (C) M. Aigle 2023";
+            this.lb_about.Text = "(C) M.Aigle";
             this.lb_about.Click += new System.EventHandler(this.label4_Click);
             // 
             // lb_tot_prod
