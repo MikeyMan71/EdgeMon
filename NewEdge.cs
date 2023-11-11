@@ -177,7 +177,7 @@ namespace EdgeMon
 
 
             lb_status.Text = mb.I_Status.ToString();
-           
+
             lb_ac_pwr.Text = I_AC_Power.ToString() + " W";
             lb_dc_pwr.Text = I_DC_Power.ToString() + " W";
             lb_temp.Text = mb.I_Temp_Sink.ToString() + "°C";
@@ -192,17 +192,28 @@ namespace EdgeMon
             if (I_DC_Power < I_AC_Power) { pwr_house = pwr_house - (I_AC_Power - I_DC_Power); } //inverter drawing power from grid
             lb_pwr_house.Text = pwr_house.ToString() + " W";
 
+
+
+         
+
+
+
+
             if (pwr_PV < 0) pwr_PV = 0;
             lb_pwr_PV.Text = pwr_PV.ToString("N1") + " W";
-            if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); }
-            if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); }
+            if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); pic_PV_from.Show(); }
+            if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
+          
 
-            if (MTR_I_M_AC_Power < 0) { pic_grid_to.Hide(); pic_grid_from.Show(); }
+            if (MTR_I_M_AC_Power < 0) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
-            if (MTR_I_M_AC_Power > 0) { pic_grid_to.Show(); pic_grid_from.Hide(); }
+            if (MTR_I_M_AC_Power > 0) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
-            { pic_grid_to.Hide(); pic_grid_from.Hide(); }
-
+            { pic_grid_to.Hide(); pic_grid_from.Hide(); 
+                
+                pic_house_to.Image = Properties.Resources.arrow3_GREEN;
+            }
+            if (pwr_house == 0) { pic_house_to.Hide(); } else { pic_house_to.Show(); }
             if (have_battery)
             {
                 if (Instantaneous_Power < 0) { pic_bat_to.Hide(); pic_bat_from.Show(); }

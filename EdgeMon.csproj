@@ -167,7 +167,7 @@
     <None Include="Resources\arrow2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrow3.png" />
+    <None Include="Resources\arrow3_GREEN.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\arrow4.png" />
@@ -197,6 +197,8 @@
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\arrow3.png" />
+    <Content Include="Resources\Image2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="161208">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="169912">
       <assemblyIdentity name="EdgeMon" version="2.4.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jQgntQoxg50ooFZ1gQ3Ac5MHHqaBZPmj1n4UEG1eqFQ=</dsig:DigestValue>
+        <dsig:DigestValue>zssWd4DGcoJ428gqnqhFyylTGwh4N1gLlaiRwTof72c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -105,6 +105,24 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>yMeQrwJnL/ir0z5BwHN0rD9nL48g2h/jVwT8EojmbpY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\arrow3.png" size="4468">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>nz2CB1f6uhCWIh4glW32gx/46DcPjnmr+dCXb0ceLno=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\Image2.png" size="9757">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>uRuiGS7og4Uhno9eXt5VfEZkpnGFpuf36kxUam5cu1Y=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
