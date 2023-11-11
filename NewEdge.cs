@@ -34,7 +34,7 @@ namespace EdgeMon
 
             timer2.Enabled = false;
             timer2.Interval = 10;
-            lb_about.Text = infobox.AssemblyCopyright;
+            lb_about.Text = infobox.AssemblyCopyright +" V."+ infobox.AssemblyVersion;
             mb = null;
 
             //do_update();
@@ -223,25 +223,34 @@ namespace EdgeMon
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
-            do_update();
-            lb_update.Text = DateTime.Now.ToString();
-            if (connected && oneShot)
+            try
             {
-                ImpExMeter.BackColor = Color.White;
-                SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
-                Environment.Exit(0);
-            }
-            if (connected && shotcounter != 0)
-            {
-                shotcounter--;
-                if (shotcounter == 0) 
-                { shotcounter = Properties.Settings.Default.MultiShotIntervall;
+
+
+                do_update();
+                lb_update.Text = DateTime.Now.ToString();
+                if (connected && oneShot)
+                {
+                    ImpExMeter.BackColor = Color.White;
                     SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
+                    Environment.Exit(0);
+                }
+                if (connected && shotcounter != 0)
+                {
+                    shotcounter--;
+                    if (shotcounter == 0)
+                    {
+                        shotcounter = Properties.Settings.Default.MultiShotIntervall;
+                        SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                lb_error.Text = ex.Message;
+                lb_error.ForeColor = Color.DarkRed;
+            }
 
-           
         }
 
         private void do_update()
@@ -262,14 +271,15 @@ namespace EdgeMon
                 }
             }
 
-            if (have_battery == false && retry_battery==true) //no battery found, but config says there should be one...
-            {
-                if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery==true) { have_battery = true; retry_battery = false; }
-            }
-
-
+        
             try
             {
+                if (have_battery == false && retry_battery == true) //no battery found, but config says there should be one...
+                {
+                    if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery == true) { have_battery = true; retry_battery = false; }
+                }
+
+
                 statusgraph_dyn();
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;

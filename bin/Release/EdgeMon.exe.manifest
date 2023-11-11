@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="EdgeMon.exe" version="2.3.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="EdgeMon" version="2.4.1.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="EdgeMon" version="2.4.2.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="EdgeMon.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="160696">
-      <assemblyIdentity name="EdgeMon" version="2.4.1.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="161208">
+      <assemblyIdentity name="EdgeMon" version="2.4.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iPxcp+YmCKF6IlC/swNztTto9yqGGLBnmXOc54XxGgc=</dsig:DigestValue>
+        <dsig:DigestValue>jQgntQoxg50ooFZ1gQ3Ac5MHHqaBZPmj1n4UEG1eqFQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -98,13 +98,13 @@
       <dsig:DigestValue>JZjv2Ta6YRIcXk5rJQo85BTVBX0EBRlSuF82BNfYJys=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="EdgeMon.exe.config" size="1654">
+  <file name="EdgeMon.exe.config" size="1653">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SMt0O0HPf6+fdY6QwAgqGhtcBjV7comMONi8JqAbaZ8=</dsig:DigestValue>
+      <dsig:DigestValue>yMeQrwJnL/ir0z5BwHN0rD9nL48g2h/jVwT8EojmbpY=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

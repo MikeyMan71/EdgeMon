@@ -523,11 +523,11 @@ namespace EdgeMon
             // 
             this.lb_about.AutoSize = true;
             this.lb_about.BackColor = System.Drawing.Color.LightGray;
-            this.lb_about.Location = new System.Drawing.Point(610, 621);
+            this.lb_about.Location = new System.Drawing.Point(523, 621);
             this.lb_about.Name = "lb_about";
-            this.lb_about.Size = new System.Drawing.Size(72, 16);
+            this.lb_about.Size = new System.Drawing.Size(183, 16);
             this.lb_about.TabIndex = 74;
-            this.lb_about.Text = "(C) M.Aigle";
+            this.lb_about.Text = "(C) M.Aigle 2023 V.00.00.00.00";
             this.lb_about.Click += new System.EventHandler(this.label4_Click);
             // 
             // lb_tot_prod
