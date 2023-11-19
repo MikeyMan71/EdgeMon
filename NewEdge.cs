@@ -17,7 +17,7 @@ namespace EdgeMon
     {
         bool connected = false;
         bool have_battery = false;
-        bool retry_battery = false;
+        //bool retry_battery = false;
         bool oneShot = Properties.Settings.Default.OneShot;
         int shotcounter = Properties.Settings.Default.MultiShotIntervall;
       
@@ -44,28 +44,49 @@ namespace EdgeMon
 
 
         private void init() {
-            //Battery present?
-            if (Properties.Settings.Default.battery == false)
-            { have_battery = false; }
+
+            if (Properties.Settings.Default.battery_autodetect == true)
+            {
+                try
+                {
+                    if (mb.BatterySerialNr.Length > 0)
+                        have_battery = true;
+                }
+                catch (Exception)
+                {
+                    have_battery = false;
+                }
+            }
             else
-            { 
-            try
             {
-                if (mb.BatterySerialNr.Length > 0)
-                    have_battery = true;
+                have_battery = Properties.Settings.Default.battery;
             }
-            catch (Exception)
-            {
-                    retry_battery = true;
-                have_battery = false;
-            }
-        }
+        //    //Battery present?
+        //    if (Properties.Settings.Default.battery == false)
+        //    { have_battery = false; }
+        //    else
+        //    { 
+        //    try //should have battery
+        //    {
+        //        if (mb.BatterySerialNr.Length > 0)
+        //            have_battery = true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        retry_battery = true; //should have battery due to config, but did not find any. Retry again later. 
+        //        have_battery = false; 
+        //    }
+        //}
             PV_on.Hide();
             PV_off.Hide();
 
             try
             {
+
+                //STATIC GRAPH
                 statusgraph_static();
+                //
+                
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
             }
@@ -94,11 +115,11 @@ namespace EdgeMon
         
         }
 
-
+        /// <summary>
+        /// Static setup of graph
+        /// </summary>
         private void statusgraph_static()
         {
-            
-            
 
 
             tb_Inv.Clear();
@@ -109,10 +130,15 @@ namespace EdgeMon
             tb_Inv.AppendText("\r\nSunspec:" + mb.C_SunSpec_DID);
             tb_Inv.AppendText("\r\nCPU:" + mb.C_Version);
 
-
+            lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
+            lb_mtr_model.Text = mb.MTR_C_Model;
+            lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
+            lb_mtr_opt.Text = mb.MTR_C_Option;
+            lb_mtr_ver.Text = mb.MTR_C_Version;
 
             tb_batManu.Clear();
             tb_chargepower.Clear();
+
             if (have_battery)
             {
                 tb_batManu.AppendText(mb.BatteryManufacturerName);
@@ -123,16 +149,7 @@ namespace EdgeMon
                 tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
                 lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
             }
-
-            lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
-            lb_mtr_model.Text = mb.MTR_C_Model;
-            lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
-            lb_mtr_opt.Text = mb.MTR_C_Option;
-            lb_mtr_ver.Text = mb.MTR_C_Version;
-           
-                
-
-            if (!have_battery)
+            else
             {
                 bat_SOE.Hide();
                 pic_bat_from.Hide();
@@ -156,6 +173,10 @@ namespace EdgeMon
                 lb_total.Hide();
             }
         }
+
+
+
+
         private void statusgraph_dyn()
         {
             double pwr_house, pwr_PV;
@@ -166,11 +187,11 @@ namespace EdgeMon
 
             if (have_battery)
             {
-                lb_SOH.Text = mb.SOH.ToString("#0.0") + " %";
+                lb_SOH.Text = mb.SOH.ToString("#0.00") + " %";
                 bat_SOE.Value = (int)mb.SOE;
-                lb_SOE_TXT.Text = mb.SOE.ToString("#0.0") + " %";
+                lb_SOE_TXT.Text = mb.SOE.ToString("#0.00") + " %";
                 if (mb.Bat_Status != null) { lb_bat_stat.Text = mb.Bat_Status.ToString(); }
-                lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.0") + "°C";
+                lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.00") + "°C";
                 lb_batt_pwr.Text = Instantaneous_Power.ToString() + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N3") + " A ";
             }
 
@@ -178,19 +199,19 @@ namespace EdgeMon
 
             lb_status.Text = mb.I_Status.ToString();
 
-            lb_ac_pwr.Text = I_AC_Power.ToString() + " W";
-            lb_dc_pwr.Text = I_DC_Power.ToString() + " W";
-            lb_temp.Text = mb.I_Temp_Sink.ToString() + "°C";
-            ImpExMeter.Text = MTR_I_M_AC_Power.ToString() + " W";
+            lb_ac_pwr.Text = I_AC_Power.ToString("N2") + " W";
+            lb_dc_pwr.Text = I_DC_Power.ToString("N2") + " W";
+            lb_temp.Text = mb.I_Temp_Sink.ToString("N2") + "°C";
+            ImpExMeter.Text = MTR_I_M_AC_Power.ToString("N2") + " W";
 
 
-            MB_Pwr_3.Text = mb.MTR_I_M_AC_Power_A.ToString() + " // " + mb.MTR_I_M_AC_Power_B.ToString() + " // " + mb.MTR_I_M_AC_Power_C.ToString();
+            MB_Pwr_3.Text = mb.MTR_I_M_AC_Power_A.ToString()+" W" + " // " + mb.MTR_I_M_AC_Power_B.ToString()+" W" + " // " + mb.MTR_I_M_AC_Power_C.ToString()+" W";
 
             //  lb_T_max.Text = mb.Batt_Max_Temperature.ToString();
             pwr_house = I_AC_Power - MTR_I_M_AC_Power;
             pwr_PV = I_DC_Power + Instantaneous_Power;
             if (I_DC_Power < I_AC_Power) { pwr_house = pwr_house - (I_AC_Power - I_DC_Power); } //inverter drawing power from grid
-            lb_pwr_house.Text = pwr_house.ToString() + " W";
+            lb_pwr_house.Text = pwr_house.ToString("N2") + " W";
 
 
 
@@ -200,7 +221,7 @@ namespace EdgeMon
 
 
             if (pwr_PV < 0) pwr_PV = 0;
-            lb_pwr_PV.Text = pwr_PV.ToString("N1") + " W";
+            lb_pwr_PV.Text = pwr_PV.ToString("N2") + " W";
             if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); pic_PV_from.Show(); }
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
           
@@ -232,13 +253,30 @@ namespace EdgeMon
 
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void MainTimer_tick(object sender, EventArgs e)
         {
             try
             {
+                if (connected == false)
+                {
+                    try
+                    {
+                        ConnectToModbus();
+                        connected = true;
+                        init();
+                    }
+                    catch (Exception ex)
+                    {
+                        lb_error.Text = ex.Message;
+                        lb_error.ForeColor = Color.DarkRed;
+                        return;
+                    }
+                }
 
-
+                //Main Update processes
                 do_update();
+                //
+
                 lb_update.Text = DateTime.Now.ToString();
                 if (connected && oneShot)
                 {
@@ -266,32 +304,18 @@ namespace EdgeMon
 
         private void do_update()
         {
-            if (connected == false)
-            {
-                try
-                {
-                    ConnectToModbus();
-                    connected = true;
-                    init();
-                }
-                catch (Exception ex)
-                {
-                    lb_error.Text = ex.Message;
-                    lb_error.ForeColor = Color.DarkRed;
-                    return;
-                }
-            }
-
-        
+                   
             try
             {
-                if (have_battery == false && retry_battery == true) //no battery found, but config says there should be one...
-                {
-                    if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery == true) { have_battery = true; retry_battery = false; }
-                }
+                //if (have_battery == false && retry_battery == true) //no battery found, but config says there should be one...
+                //{
+                //    if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery == true) { have_battery = true; retry_battery = false; }
+                //}
 
-
+                //Update dynamic values
                 statusgraph_dyn();
+                //
+
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
                 timer2.Interval = Properties.Settings.Default.refresh;
@@ -306,15 +330,11 @@ namespace EdgeMon
                 mb.Disconnect();
               
             }
-
-
-           
         }
 
         private void SaveAsBitmap(Panel form, string fileName)
         {
           
-        
             try
             {
      
