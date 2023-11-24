@@ -18,7 +18,7 @@
       <Value Profile="(Default)">C:\\tmp\\EdgeMonShot.jpg</Value>
     </Setting>
     <Setting Name="OneShot" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MultiShotIntervall" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">0</Value>
