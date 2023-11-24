@@ -192,7 +192,7 @@ namespace EdgeMon
                 lb_SOE_TXT.Text = mb.SOE.ToString("#0.00") + " %";
                 if (mb.Bat_Status != null) { lb_bat_stat.Text = mb.Bat_Status.ToString(); }
                 lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.00") + "°C";
-                lb_batt_pwr.Text = Instantaneous_Power.ToString() + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N3") + " A ";
+                lb_batt_pwr.Text = Instantaneous_Power.ToString("N2") + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N3") + " A ";
             }
 
 

@@ -485,7 +485,7 @@ namespace EdgeMon
             this.tb_chargepower.Location = new System.Drawing.Point(104, 558);
             this.tb_chargepower.Multiline = true;
             this.tb_chargepower.Name = "tb_chargepower";
-            this.tb_chargepower.Size = new System.Drawing.Size(165, 16);
+            this.tb_chargepower.Size = new System.Drawing.Size(90, 16);
             this.tb_chargepower.TabIndex = 71;
             this.tb_chargepower.Text = "---";
             // 
@@ -608,7 +608,7 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.battery);
             this.mainpanel.Location = new System.Drawing.Point(1, 1);
             this.mainpanel.Name = "mainpanel";
-            this.mainpanel.Size = new System.Drawing.Size(745, 632);
+            this.mainpanel.Size = new System.Drawing.Size(743, 632);
             this.mainpanel.TabIndex = 77;
             this.mainpanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
             // 

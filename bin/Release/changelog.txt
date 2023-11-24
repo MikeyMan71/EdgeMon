@@ -5,3 +5,4 @@ V2.3: handle variable refresh rates in properties (enter in ms)
 V2.4: Allow "oneshot", makes a screenshot and closes instantely. "MultishotIntervall n" screenshots each n-th refresh.
 A click on the main windows hides frame. 
 V2.5: Use red and green colors for : green: saves money, red: costs money. Bugfixes. Hide arrow if Solar PV is off. 
+V2.5.1: Always use 2 digits in number display. New parameter "autodetect_battery". If true, overrides battery setting and tries to auto_detect.
