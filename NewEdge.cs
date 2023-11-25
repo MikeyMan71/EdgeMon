@@ -192,7 +192,7 @@ namespace EdgeMon
                 lb_SOE_TXT.Text = mb.SOE.ToString("#0.00") + " %";
                 if (mb.Bat_Status != null) { lb_bat_stat.Text = mb.Bat_Status.ToString(); }
                 lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.00") + "°C";
-                lb_batt_pwr.Text = Instantaneous_Power.ToString("N2") + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N3") + " A ";
+                lb_batt_pwr.Text = Instantaneous_Power.ToString("N2") + " W \n\r" + mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString("N2") + " A ";
             }
 
 
@@ -247,7 +247,7 @@ namespace EdgeMon
             }
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
-            lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f3") + " MWh\r\n";
+            lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
 
 
 
