@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="EdgeMon.exe" version="2.3.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="EdgeMon" version="2.5.1.1" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="EdgeMon" version="2.5.1.2" language="neutral" processorArchitecture="msil" />
     <commandLine file="EdgeMon.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -55,13 +55,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="169400">
-      <assemblyIdentity name="EdgeMon" version="2.5.1.1" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="EdgeMon" version="2.5.1.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4bXZcv2NkjhmcVg+AsRjvbi4Gmf1BMZ9a9L3nG1M8qY=</dsig:DigestValue>
+        <dsig:DigestValue>AkhFYSP4+AikSjMGaGkb4xdRfNviPFoBqwc6ibwBUJM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
