@@ -262,7 +262,7 @@ namespace EdgeMon
             this.MB_Pwr_3.ForeColor = System.Drawing.Color.Black;
             this.MB_Pwr_3.Location = new System.Drawing.Point(546, 223);
             this.MB_Pwr_3.Name = "MB_Pwr_3";
-            this.MB_Pwr_3.Size = new System.Drawing.Size(154, 15);
+            this.MB_Pwr_3.Size = new System.Drawing.Size(194, 15);
             this.MB_Pwr_3.TabIndex = 44;
             this.MB_Pwr_3.Text = "---";
             // 
