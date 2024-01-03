@@ -184,7 +184,11 @@ namespace EdgeMon
             double I_DC_Power = mb.I_DC_Power;
             double MTR_I_M_AC_Power = mb.MTR_I_M_AC_Power;
             double Instantaneous_Power = mb.Instantaneous_Power;
+            bool greenpower = true;
 
+            
+            
+            
             if (have_battery)
             {
                 lb_SOH.Text = mb.SOH.ToString("#0.00") + " %";
@@ -214,9 +218,9 @@ namespace EdgeMon
             lb_pwr_house.Text = pwr_house.ToString("N2") + " W";
 
 
-
+           
          
-
+           
 
 
 
@@ -226,9 +230,9 @@ namespace EdgeMon
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
           
 
-            if (MTR_I_M_AC_Power < 0) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
+            if (MTR_I_M_AC_Power < -10) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
-            if (MTR_I_M_AC_Power > 0) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
+            if (MTR_I_M_AC_Power > 10) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
             { pic_grid_to.Hide(); pic_grid_from.Hide(); 
                 
