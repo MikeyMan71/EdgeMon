@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="EdgeMon.exe" version="2.3.0.0" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="EdgeMon" version="2.5.1.3" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="EdgeMon" version="2.5.2.0" language="neutral" processorArchitecture="msil" />
     <commandLine file="EdgeMon.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -55,13 +55,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EdgeMon.exe" size="169400">
-      <assemblyIdentity name="EdgeMon" version="2.5.1.3" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="EdgeMon" version="2.5.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Vmh1qBWNMvPAkAIAKk8d9JXvRZ9ov53N3HJW0nL9c00=</dsig:DigestValue>
+        <dsig:DigestValue>YK4wHUSHBzIN51TitbFC3DdmcxAbiktWVv9zdFaKrBs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -89,13 +89,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="changelog.txt" size="622">
+  <file name="changelog.txt" size="676">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>BxoRhVU2kUk5MKjVwP0sJOOcluZcGNfEZcZFYStRMyQ=</dsig:DigestValue>
+      <dsig:DigestValue>VtqGk8ByxUncAP+N3/cmBLc61620n09pLRK+YGhXT3Y=</dsig:DigestValue>
     </hash>
   </file>
   <file name="EdgeMon.exe.config" size="1784">
