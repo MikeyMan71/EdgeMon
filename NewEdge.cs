@@ -184,7 +184,7 @@ namespace EdgeMon
             double I_DC_Power = mb.I_DC_Power;
             double MTR_I_M_AC_Power = mb.MTR_I_M_AC_Power;
             double Instantaneous_Power = mb.Instantaneous_Power;
-            bool greenpower = true;
+            
 
             
             
