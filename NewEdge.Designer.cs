@@ -224,7 +224,7 @@ namespace EdgeMon
             // 
             // pic_bat_from
             // 
-            this.pic_bat_from.Image = global::EdgeMon.Properties.Resources.arrow1;
+            this.pic_bat_from.Image = global::EdgeMon.Properties.Resources.arrow411;
             this.pic_bat_from.Location = new System.Drawing.Point(135, 274);
             this.pic_bat_from.Name = "pic_bat_from";
             this.pic_bat_from.Size = new System.Drawing.Size(100, 116);

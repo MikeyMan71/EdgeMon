@@ -94,5 +94,14 @@ namespace EdgeMon.Properties {
                 return ((bool)(this["battery_autodetect"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int gridflow_threshold {
+            get {
+                return ((int)(this["gridflow_threshold"]));
+            }
+        }
     }
 }

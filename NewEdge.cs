@@ -230,9 +230,9 @@ namespace EdgeMon
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
           
 
-            if (MTR_I_M_AC_Power < -10) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
+            if (MTR_I_M_AC_Power < -Properties.Settings.Default.gridflow_threshold) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
-            if (MTR_I_M_AC_Power > 10) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
+            if (MTR_I_M_AC_Power > Properties.Settings.Default.gridflow_threshold) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
             { pic_grid_to.Hide(); pic_grid_from.Hide(); 
                 
