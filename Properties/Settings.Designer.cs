@@ -97,7 +97,7 @@ namespace EdgeMon.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int gridflow_threshold {
             get {
                 return ((int)(this["gridflow_threshold"]));
