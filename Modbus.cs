@@ -158,6 +158,10 @@ namespace EdgeMon
         public double I_AC_CurrentA { get { return GetModbusScaledShort(40072, 3); } }
         public double I_AC_CurrentB { get { return GetModbusScaledShort(40073, 2); } }
         public double I_AC_CurrentC { get { return GetModbusScaledShort(40074, 1); } }
+        public double I_AC_VoltageAB { get { return GetModbusScaledShort(40076, 6); } }
+        public double I_AC_VoltageBC { get { return GetModbusScaledShort(40077, 5); } }
+        public double I_AC_VoltageCA { get { return GetModbusScaledShort(40078, 4); } }
+
         public double I_AC_Power { get { return GetModbusScaledShort(40083, 1); } }
         public double I_AC_Frequency { get { return GetModbusScaledShort(40085, 1); } }
         public double I_AC_VA { get { return GetModbusScaledShort(40087, 1); } }
@@ -182,14 +186,6 @@ namespace EdgeMon
         public double MTR_I_M_AC_Power_A { get { return GetModbusScaledShort(40207, 3); } }
         public double MTR_I_M_AC_Power_B { get { return GetModbusScaledShort(40208, 2); } }
         public double MTR_I_M_AC_Power_C { get { return GetModbusScaledShort(40209, 1); } }
-
-
-
-
-
-
-
-
 
 
         public double Instantaneous_Power { get { return GetModbusFloat32(0xE174); } }

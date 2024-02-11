@@ -30,6 +30,7 @@ namespace EdgeMon
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewEdge));
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.tb_batManu = new System.Windows.Forms.TextBox();
@@ -77,6 +78,8 @@ namespace EdgeMon
             this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.pic_bat_to = new System.Windows.Forms.PictureBox();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.AC_VOLTAGE_3 = new System.Windows.Forms.TextBox();
+            this.AC_CURRENT_3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Inverter_PIC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
@@ -562,6 +565,8 @@ namespace EdgeMon
             // mainpanel
             // 
             this.mainpanel.BackColor = System.Drawing.Color.Transparent;
+            this.mainpanel.Controls.Add(this.AC_VOLTAGE_3);
+            this.mainpanel.Controls.Add(this.AC_CURRENT_3);
             this.mainpanel.Controls.Add(this.tb_batManu);
             this.mainpanel.Controls.Add(this.pic_bat_to);
             this.mainpanel.Controls.Add(this.pic_house_to);
@@ -612,6 +617,30 @@ namespace EdgeMon
             this.mainpanel.TabIndex = 77;
             this.mainpanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
             // 
+            // AC_VOLTAGE_3
+            // 
+            this.AC_VOLTAGE_3.BackColor = System.Drawing.Color.White;
+            this.AC_VOLTAGE_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AC_VOLTAGE_3.Font = new System.Drawing.Font("Britannic Bold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AC_VOLTAGE_3.ForeColor = System.Drawing.Color.Black;
+            this.AC_VOLTAGE_3.Location = new System.Drawing.Point(550, 351);
+            this.AC_VOLTAGE_3.Name = "AC_VOLTAGE_3";
+            this.AC_VOLTAGE_3.Size = new System.Drawing.Size(182, 15);
+            this.AC_VOLTAGE_3.TabIndex = 78;
+            this.AC_VOLTAGE_3.Text = "---";
+            // 
+            // AC_CURRENT_3
+            // 
+            this.AC_CURRENT_3.BackColor = System.Drawing.Color.White;
+            this.AC_CURRENT_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AC_CURRENT_3.Font = new System.Drawing.Font("Britannic Bold", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AC_CURRENT_3.ForeColor = System.Drawing.Color.Black;
+            this.AC_CURRENT_3.Location = new System.Drawing.Point(550, 330);
+            this.AC_CURRENT_3.Name = "AC_CURRENT_3";
+            this.AC_CURRENT_3.Size = new System.Drawing.Size(181, 15);
+            this.AC_CURRENT_3.TabIndex = 77;
+            this.AC_CURRENT_3.Text = "---";
+            // 
             // NewEdge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -621,6 +650,7 @@ namespace EdgeMon
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mainpanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NewEdge";
             this.Text = "Edgemon";
@@ -692,5 +722,7 @@ namespace EdgeMon
         private System.Windows.Forms.PictureBox pic_house_to;
         private System.Windows.Forms.PictureBox pic_bat_to;
         private System.Windows.Forms.Panel mainpanel;
+        private System.Windows.Forms.TextBox AC_VOLTAGE_3;
+        private System.Windows.Forms.TextBox AC_CURRENT_3;
     }
 }
