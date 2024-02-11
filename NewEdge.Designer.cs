@@ -627,7 +627,6 @@ namespace EdgeMon
             this.AC_VOLTAGE_3.Name = "AC_VOLTAGE_3";
             this.AC_VOLTAGE_3.Size = new System.Drawing.Size(182, 15);
             this.AC_VOLTAGE_3.TabIndex = 78;
-            this.AC_VOLTAGE_3.Text = "---";
             // 
             // AC_CURRENT_3
             // 
@@ -639,7 +638,6 @@ namespace EdgeMon
             this.AC_CURRENT_3.Name = "AC_CURRENT_3";
             this.AC_CURRENT_3.Size = new System.Drawing.Size(181, 15);
             this.AC_CURRENT_3.TabIndex = 77;
-            this.AC_CURRENT_3.Text = "---";
             // 
             // NewEdge
             // 

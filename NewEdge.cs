@@ -232,8 +232,8 @@ namespace EdgeMon
             lb_pwr_house.Text = pwr_house.ToString("N2") + " W";
 
 
-            AC_CURRENT_3.Text = mb.I_AC_CurrentA.ToString() + " // " + mb.I_AC_CurrentB.ToString() + " // " + mb.I_AC_CurrentC.ToString();
-            AC_VOLTAGE_3.Text = mb.I_AC_VoltageAB.ToString() + " // " + mb.I_AC_VoltageBC.ToString() + " // " + mb.I_AC_VoltageCA.ToString();
+           // AC_CURRENT_3.Text = mb.I_AC_CurrentA.ToString() + " // " + mb.I_AC_CurrentB.ToString() + " // " + mb.I_AC_CurrentC.ToString();
+           // AC_VOLTAGE_3.Text = mb.I_AC_VoltageAB.ToString() + " // " + mb.I_AC_VoltageBC.ToString() + " // " + mb.I_AC_VoltageCA.ToString();
          
            
 

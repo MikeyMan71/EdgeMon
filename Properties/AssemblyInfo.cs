@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EdgeMon")]
 [assembly: AssemblyDescription("https://edgemon.jimdosite.com/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("BuffalloSoft")]
+[assembly: AssemblyCompany("BuffaloSoft")]
 [assembly: AssemblyProduct("EdgeMon")]
 [assembly: AssemblyCopyright("© M. Aigle")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.5.8.1")]
-[assembly: AssemblyFileVersion("2.5.8.1")]
+[assembly: AssemblyVersion("2.5.8.2")]
+[assembly: AssemblyFileVersion("2.5.8.2")]
