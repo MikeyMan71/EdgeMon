@@ -41,8 +41,7 @@ namespace EdgeMon
             mb = null;
 
             //do_update();
-            timer2.Enabled = true;
-
+            
             if (File.Exists("UsePrivateSettings")) UsePrivateSettings = true;    
             // Copy user settings from previous application version if necessary
             if (UsePrivateSettings && Properties.Settings.Default.UpdateSettings)
@@ -52,8 +51,8 @@ namespace EdgeMon
                 Properties.Settings.Default.UpdateSettings = false;
                 Properties.Settings.Default.Save();
             }
-            
 
+            timer2.Enabled = true;
         }
 
 
@@ -363,6 +362,8 @@ namespace EdgeMon
                 lb_temp.SendToBack();
                bat_SOE.SendToBack();
                 lb_ac_pwr.SendToBack();
+                pic_bat_from.SendToBack();
+                pic_bat_to.SendToBack();
 
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
 
@@ -371,7 +372,8 @@ namespace EdgeMon
                Inverter_PIC.SendToBack();
                 pic_grid_to.SendToBack();
                 pic_grid_from.SendToBack();
-               
+                lb_batt_pwr.SendToBack();
+
                 SaveImage(bmp, fileName);
                 bmp.Dispose();
             }
