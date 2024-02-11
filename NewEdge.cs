@@ -15,12 +15,14 @@ namespace EdgeMon
 {
     public partial class NewEdge : Form
     {
+        public static bool UsePrivateSettings = false;
         bool connected = false;
         bool have_battery = false;
         //bool retry_battery = false;
         bool oneShot = Properties.Settings.Default.OneShot;
         int shotcounter = Properties.Settings.Default.MultiShotIntervall;
       
+        
                 
             
     TcpModbus mb;
@@ -29,8 +31,9 @@ namespace EdgeMon
         public NewEdge()
         {
             
+
             InitializeComponent();
-           
+              
 
             timer2.Enabled = false;
             timer2.Interval = 10;
@@ -39,7 +42,18 @@ namespace EdgeMon
 
             //do_update();
             timer2.Enabled = true;
+
+            if (File.Exists("UsePrivateSettings")) UsePrivateSettings = true;    
+            // Copy user settings from previous application version if necessary
+            if (UsePrivateSettings && Properties.Settings.Default.UpdateSettings)
+            {
+                MessageBox.Show("Upgrading to "+ String.Format("Version {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+            }
             
+
         }
 
 

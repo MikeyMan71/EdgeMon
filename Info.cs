@@ -18,11 +18,18 @@ namespace EdgeMon
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
+            this.labelCompanyName.Text = AssemblyCompany + Properties.Settings.Default.gridflow_threshold.ToString();
             this.textBoxDescription.Text = AssemblyDescription;
+           
+
+        
+        
         }
 
         #region Assemblyattributaccessoren
+
+
+
 
         public string AssemblyTitle
         {
@@ -106,6 +113,37 @@ namespace EdgeMon
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Reset all settings to application default?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+    if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
+            else if (dr == DialogResult.OK)
+            {
+
+                Properties.Settings.Default.Reset();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+
+            }
+
+
+
+        }
+
+        private void okButton_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void Info_Shown(object sender, EventArgs e)
+        {
+            if (NewEdge.UsePrivateSettings) resetbutton.Show(); else resetbutton.Hide();
         }
     }
 }
