@@ -11,19 +11,23 @@ namespace EdgeMon
 {
     partial class Info : Form
     {
-        public Info()
+        bool changed = false;
+
+       public EdgemonConfig conf { get; set; }
+
+
+        public  Info()
         {
             InitializeComponent();
             this.Text = String.Format("Info über {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany + Properties.Settings.Default.gridflow_threshold.ToString();
+            this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
+            this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
-           
+        
 
-        
-        
+
         }
 
         #region Assemblyattributaccessoren
@@ -125,25 +129,34 @@ namespace EdgeMon
             }
             else if (dr == DialogResult.OK)
             {
-
-                Properties.Settings.Default.Reset();
-                Properties.Settings.Default.UpdateSettings = false;
-                Properties.Settings.Default.Save();
-
+                conf.Remove();
+                conf.GetAllConfigData();
+                changed = true;
             }
 
 
 
         }
 
+
         private void okButton_Click_1(object sender, EventArgs e)
         {
+            if (changed) Application.Restart();
             this.Hide();
+            
         }
 
         private void Info_Shown(object sender, EventArgs e)
         {
-            if (NewEdge.UsePrivateSettings) resetbutton.Show(); else resetbutton.Hide();
+            if (conf.local_config) { this.resetbutton.Visible = true; this.EditButton.Visible = true; }
+            else { this.resetbutton.Visible = false; this.EditButton.Visible = false; }
+            //if (NewEdge.UsePrivateSettings) resetbutton.Show(); else resetbutton.Hide();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            conf.EditINI();
+            changed = true;
         }
     }
 }

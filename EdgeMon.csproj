@@ -94,12 +94,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EdgemonConfig.cs" />
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Info.Designer.cs">
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="MAMconfig.cs" />
     <Compile Include="NewEdge.cs">
       <SubType>Form</SubType>
     </Compile>

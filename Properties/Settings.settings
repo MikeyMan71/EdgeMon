@@ -2,35 +2,32 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EdgeMon.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="TCP" Type="System.String" Scope="User">
+    <Setting Name="TCP" Type="System.String" Scope="Application">
       <Value Profile="(Default)">solaredge</Value>
     </Setting>
-    <Setting Name="port" Type="System.Int32" Scope="User">
+    <Setting Name="port" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">1502</Value>
     </Setting>
-    <Setting Name="battery" Type="System.Boolean" Scope="User">
+    <Setting Name="battery" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="refresh" Type="System.Int32" Scope="User">
+    <Setting Name="refresh" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="saveBitmap" Type="System.String" Scope="User">
+    <Setting Name="saveBitmap" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\\tmp\\EdgeMonShot.jpg</Value>
     </Setting>
-    <Setting Name="OneShot" Type="System.Boolean" Scope="User">
+    <Setting Name="OneShot" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="MultiShotIntervall" Type="System.Int32" Scope="User">
+    <Setting Name="MultiShotIntervall" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="battery_autodetect" Type="System.Boolean" Scope="User">
+    <Setting Name="battery_autodetect" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="gridflow_threshold" Type="System.Int32" Scope="User">
+    <Setting Name="gridflow_threshold" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10</Value>
-    </Setting>
-    <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

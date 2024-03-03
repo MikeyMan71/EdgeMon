@@ -8,49 +8,57 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows.Forms.VisualStyles;
+
+using MAMconfig;
 
 namespace EdgeMon
 {
     public partial class NewEdge : Form
     {
-        public static bool UsePrivateSettings = false;
+       // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
+        EdgemonConfig pm = new EdgemonConfig();
+
+    //    public static bool UsePrivateSettings = false;
         bool connected = false;
         bool have_battery = false;
         //bool retry_battery = false;
-        bool oneShot = Properties.Settings.Default.OneShot;
-        int shotcounter = Properties.Settings.Default.MultiShotIntervall;
-      
+
+
+
+       // bool OneShot;// = Properties.Settings.Default.OneShot;
+       int MultiShotIntervall;
+       
         
-                
-            
-    TcpModbus mb;
+
+        TcpModbus mb;
         Info infobox = new Info();
-   
+
         public NewEdge()
         {
-            
+
 
             InitializeComponent();
-              
+           
+      
+            MultiShotIntervall = pm.MultiShotIntervall;
+            
 
             timer2.Enabled = false;
             timer2.Interval = 10;
-            lb_about.Text = infobox.AssemblyCopyright +" V."+ infobox.AssemblyVersion;
+            lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
             mb = null;
 
             //do_update();
-            
-            if (File.Exists("UsePrivateSettings")) UsePrivateSettings = true;    
-            // Copy user settings from previous application version if necessary
-            if (UsePrivateSettings && Properties.Settings.Default.UpdateSettings)
-            {
-                MessageBox.Show("Upgrading to "+ String.Format("Version {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpdateSettings = false;
-                Properties.Settings.Default.Save();
-            }
+
+            //if (File.Exists("UsePrivateSettings")) UsePrivateSettings = true;
+            //// Copy user settings from previous application version if necessary
+            //if (UsePrivateSettings && Properties.Settings.Default.UpdateSettings)
+            //{
+            //    MessageBox.Show("Upgrading to " + String.Format("Version {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+            //    Properties.Settings.Default.Upgrade();
+            //    Properties.Settings.Default.UpdateSettings = false;
+            //    Properties.Settings.Default.Save();
+            //}
 
             timer2.Enabled = true;
         }
@@ -58,7 +66,7 @@ namespace EdgeMon
 
         private void init() {
 
-            if (Properties.Settings.Default.battery_autodetect == true)
+            if (pm.battery_autodetect == true)
             {
                 try
                 {
@@ -72,24 +80,9 @@ namespace EdgeMon
             }
             else
             {
-                have_battery = Properties.Settings.Default.battery;
+                have_battery = pm.battery;
             }
-        //    //Battery present?
-        //    if (Properties.Settings.Default.battery == false)
-        //    { have_battery = false; }
-        //    else
-        //    { 
-        //    try //should have battery
-        //    {
-        //        if (mb.BatterySerialNr.Length > 0)
-        //            have_battery = true;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        retry_battery = true; //should have battery due to config, but did not find any. Retry again later. 
-        //        have_battery = false; 
-        //    }
-        //}
+   
             PV_on.Hide();
             PV_off.Hide();
 
@@ -99,7 +92,7 @@ namespace EdgeMon
                 //STATIC GRAPH
                 statusgraph_static();
                 //
-                
+
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
             }
@@ -108,22 +101,58 @@ namespace EdgeMon
                 lb_error.Text = ex.Message;
                 lb_error.ForeColor = Color.DarkRed;
             }
-            timer2.Interval = Properties.Settings.Default.refresh;
+            timer2.Interval = pm.refresh;
 
 
         }
+
+        /// <summary>
+        /// Handle all config data form ini files
+        /// </summary>
+        //public void GetAllConfigData()
+        //{
+
+        //    pm.TCP = Properties.Settings.Default.TCP;
+        //    pm.port = Properties.Settings.Default.port; ;
+        //    pm.battery = Properties.Settings.Default.battery;
+        //    pm.refresh = Properties.Settings.Default.refresh;
+        //    pm.saveBitmap = Properties.Settings.Default.saveBitmap;
+        //    pm.OneShot = Properties.Settings.Default.OneShot;
+        //    pm.MultiShotIntervall = Properties.Settings.Default.MultiShotIntervall;
+        //    pm.battery_autodetect = Properties.Settings.Default.battery_autodetect;
+        //    pm.gridflow_threshold = Properties.Settings.Default.gridflow_threshold;
+          
+
+            
+        //    pm.TCP = edgeconfig.Get("TCP", pm.TCP);
+        //    pm.port= edgeconfig.Get("port", pm.port);
+        //    pm.battery = edgeconfig.Get("battery", pm.battery);
+        //    pm.refresh = edgeconfig.Get("refresh", pm.refresh);
+        //    pm.saveBitmap=edgeconfig.Get("saveBitmap", pm.saveBitmap);
+        //    pm.OneShot =edgeconfig.Get("OneShot", pm.OneShot);
+        //    pm.MultiShotIntervall=edgeconfig.Get("MultiShotIntervall", pm.MultiShotIntervall);
+        //    pm.battery_autodetect =edgeconfig.Get("battery_autodetect", pm.battery_autodetect);
+        //    pm.gridflow_threshold=edgeconfig.Get("gridflow_threshold", pm.gridflow_threshold);
+            
+            
+        //    edgeconfig.WriteINI();
+
+        //    MessageBox.Show(pm.gridflow_threshold.ToString());
+
+        //}
+
 
         private void ConnectToModbus()
         {
             if (mb == null)
             {
-                mb = new TcpModbus(Properties.Settings.Default.TCP, Properties.Settings.Default.port);
+                mb = new TcpModbus(pm.TCP, pm.port);
             }
             else //try reconnect. may take awhile...
             { 
                 mb.Disconnect();
                 Thread.Sleep(1000);
-                mb.Connect(Properties.Settings.Default.TCP, Properties.Settings.Default.port);
+                mb.Connect(pm.TCP, pm.port);
             }
         
         }
@@ -231,8 +260,8 @@ namespace EdgeMon
             lb_pwr_house.Text = pwr_house.ToString("N2") + " W";
 
 
-           // AC_CURRENT_3.Text = mb.I_AC_CurrentA.ToString() + " // " + mb.I_AC_CurrentB.ToString() + " // " + mb.I_AC_CurrentC.ToString();
-           // AC_VOLTAGE_3.Text = mb.I_AC_VoltageAB.ToString() + " // " + mb.I_AC_VoltageBC.ToString() + " // " + mb.I_AC_VoltageCA.ToString();
+            //AC_CURRENT_3.Text = mb.I_AC_CurrentA.ToString() + " // " + mb.I_AC_CurrentB.ToString() + " // " + mb.I_AC_CurrentC.ToString();
+            //AC_VOLTAGE_3.Text = (mb.I_AC_CurrentA*240).ToString() + " // " + (mb.I_AC_CurrentB * 240).ToString() + " // " + (mb.I_AC_CurrentC * 240).ToString();
          
            
 
@@ -244,9 +273,9 @@ namespace EdgeMon
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
           
 
-            if (MTR_I_M_AC_Power < -Properties.Settings.Default.gridflow_threshold) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
+            if (MTR_I_M_AC_Power < -pm.gridflow_threshold) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
-            if (MTR_I_M_AC_Power > Properties.Settings.Default.gridflow_threshold) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
+            if (MTR_I_M_AC_Power > pm.gridflow_threshold) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
             { pic_grid_to.Hide(); pic_grid_from.Hide(); 
                 
@@ -296,19 +325,19 @@ namespace EdgeMon
                 //
 
                 lb_update.Text = DateTime.Now.ToString();
-                if (connected && oneShot)
+                if (connected && pm.OneShot)
                 {
                     ImpExMeter.BackColor = Color.White;
-                    SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
+                    SaveAsBitmap(this.mainpanel, pm.saveBitmap);
                     Environment.Exit(0);
                 }
-                if (connected && shotcounter != 0)
+                if (connected && MultiShotIntervall != 0)
                 {
-                    shotcounter--;
-                    if (shotcounter == 0)
+                    MultiShotIntervall--;
+                    if (MultiShotIntervall == 0)
                     {
-                        shotcounter = Properties.Settings.Default.MultiShotIntervall;
-                        SaveAsBitmap(this.mainpanel, Properties.Settings.Default.saveBitmap);
+                        MultiShotIntervall = pm.MultiShotIntervall;
+                        SaveAsBitmap(this.mainpanel, pm.saveBitmap);
                     }
                 }
             }
@@ -336,7 +365,7 @@ namespace EdgeMon
 
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
-                timer2.Interval = Properties.Settings.Default.refresh;
+                timer2.Interval = pm.refresh;
 
             }
             catch (Exception ex)
@@ -390,8 +419,11 @@ namespace EdgeMon
 
         private void label4_Click(object sender, EventArgs e)
         {
-           
-            infobox.Show();
+
+            infobox.conf = this.pm;
+            infobox.ShowDialog();
+            this.pm = infobox.conf;
+
         }
 
         // Save the file with the appropriate format.
