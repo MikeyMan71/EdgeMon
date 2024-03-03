@@ -15,8 +15,8 @@ namespace EdgeMon
 {
     public partial class NewEdge : Form
     {
-       // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
-        EdgemonConfig pm = new EdgemonConfig();
+        // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
+        EdgemonConfig pm;
 
     //    public static bool UsePrivateSettings = false;
         bool connected = false;
@@ -35,7 +35,7 @@ namespace EdgeMon
 
         public NewEdge()
         {
-
+            pm = new EdgemonConfig();
 
             InitializeComponent();
            
