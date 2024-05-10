@@ -21,6 +21,7 @@ namespace EdgeMon
     //    public static bool UsePrivateSettings = false;
         bool connected = false;
         bool have_battery = false;
+        bool firstrun = false;
         //bool retry_battery = false;
 
 
@@ -35,11 +36,14 @@ namespace EdgeMon
 
         public NewEdge()
         {
-            pm = new EdgemonConfig();
+
+            pm = new EdgemonConfig(infobox.AssemblyVersion);
 
             InitializeComponent();
-           
-      
+            
+            if (pm.TCP == "INVERTER") firstrun=true;
+         
+
             MultiShotIntervall = pm.MultiShotIntervall;
             
 
@@ -48,29 +52,24 @@ namespace EdgeMon
             lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
             mb = null;
 
-            //do_update();
-
-            //if (File.Exists("UsePrivateSettings")) UsePrivateSettings = true;
-            //// Copy user settings from previous application version if necessary
-            //if (UsePrivateSettings && Properties.Settings.Default.UpdateSettings)
-            //{
-            //    MessageBox.Show("Upgrading to " + String.Format("Version {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
-            //    Properties.Settings.Default.Upgrade();
-            //    Properties.Settings.Default.UpdateSettings = false;
-            //    Properties.Settings.Default.Save();
-            //}
-
-            timer2.Enabled = true;
+  
+          
+                timer2.Enabled = true;
+            
+            
         }
 
 
         private void init() {
 
+        
+
+
             if (pm.battery_autodetect == true)
             {
                 try
                 {
-                    if (mb.BatterySerialNr.Length > 0)
+                    if (mb.BatteryModelName.Length > 0 && mb.BatteryModelName != "NONE")
                         have_battery = true;
                 }
                 catch (Exception)
@@ -100,6 +99,8 @@ namespace EdgeMon
             {
                 lb_error.Text = ex.Message;
                 lb_error.ForeColor = Color.DarkRed;
+                optionalScreenshot(true);
+
             }
             timer2.Interval = pm.refresh;
 
@@ -304,6 +305,22 @@ namespace EdgeMon
         {
             try
             {
+                if (firstrun) 
+                {
+                    this.Hide();
+                    timer2.Enabled = false;
+                    Application.DoEvents();
+             
+                    MessageBox.Show("You seem to use Edegemon for the first time." + "\n" + "Please configure your inverter settings");
+                    if (pm.local_config)
+                    {
+                        infobox.conf = this.pm;
+                        infobox.conf.EditINI();
+                        this.pm = infobox.conf;
+                    }
+                    Application.Exit();
+                }
+
                 if (connected == false)
                 {
                     try
@@ -316,6 +333,7 @@ namespace EdgeMon
                     {
                         lb_error.Text = ex.Message;
                         lb_error.ForeColor = Color.DarkRed;
+                        optionalScreenshot(true);
                         return;
                     }
                 }
@@ -331,23 +349,35 @@ namespace EdgeMon
                     SaveAsBitmap(this.mainpanel, pm.saveBitmap);
                     Environment.Exit(0);
                 }
-                if (connected && MultiShotIntervall != 0)
-                {
-                    MultiShotIntervall--;
-                    if (MultiShotIntervall == 0)
-                    {
-                        MultiShotIntervall = pm.MultiShotIntervall;
-                        SaveAsBitmap(this.mainpanel, pm.saveBitmap);
-                    }
-                }
+
+                optionalScreenshot();
+
             }
             catch (Exception ex)
             {
                 lb_error.Text = ex.Message;
                 lb_error.ForeColor = Color.DarkRed;
+                optionalScreenshot(true);
             }
 
         }
+
+        private void optionalScreenshot(bool err=false)
+        {
+            if ((connected || err) && MultiShotIntervall != 0)
+            {
+                MultiShotIntervall--;
+                if (MultiShotIntervall == 0)
+                {
+                    MultiShotIntervall = pm.MultiShotIntervall;
+                    SaveAsBitmap(this.mainpanel, pm.saveBitmap);
+                }
+            }
+        }
+
+
+
+
 
         private void do_update()
         {
@@ -375,7 +405,7 @@ namespace EdgeMon
                 connected = false;
                 timer2.Interval = 2000;
                 mb.Disconnect();
-              
+                optionalScreenshot(true);
             }
         }
 

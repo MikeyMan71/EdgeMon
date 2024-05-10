@@ -26,7 +26,7 @@ namespace EdgeMon
         public int gridflow_threshold { get; set; }
         public bool local_config { get; set; } = false;
 
-        public EdgemonConfig() : base("Edgemon")
+        public EdgemonConfig(string ver) : base("Edgemon", ver)
         {
             local_config = File.Exists("UsePrivateSettings"); 
             GetAllConfigData();
