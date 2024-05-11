@@ -72,12 +72,12 @@ namespace EdgeMon
             this.tb_chargepower = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lb_total = new System.Windows.Forms.Label();
-            this.lb_about = new System.Windows.Forms.Label();
             this.lb_tot_prod = new System.Windows.Forms.TextBox();
             this.lb_error = new System.Windows.Forms.Label();
             this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.pic_bat_to = new System.Windows.Forms.PictureBox();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.lb_set = new System.Windows.Forms.PictureBox();
             this.AC_VOLTAGE_3 = new System.Windows.Forms.TextBox();
             this.AC_CURRENT_3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
@@ -93,6 +93,7 @@ namespace EdgeMon
             ((System.ComponentModel.ISupportInitialize)(this.pic_house_to)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).BeginInit();
             this.mainpanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lb_set)).BeginInit();
             this.SuspendLayout();
             // 
             // timer2
@@ -511,17 +512,6 @@ namespace EdgeMon
             this.lb_total.TabIndex = 73;
             this.lb_total.Text = "---";
             // 
-            // lb_about
-            // 
-            this.lb_about.AutoSize = true;
-            this.lb_about.BackColor = System.Drawing.Color.LightGray;
-            this.lb_about.Location = new System.Drawing.Point(439, 568);
-            this.lb_about.Name = "lb_about";
-            this.lb_about.Size = new System.Drawing.Size(152, 16);
-            this.lb_about.TabIndex = 74;
-            this.lb_about.Text = "(C) M.Aigle V.00.00.00.00";
-            this.lb_about.Click += new System.EventHandler(this.label4_Click);
-            // 
             // lb_tot_prod
             // 
             this.lb_tot_prod.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -565,6 +555,7 @@ namespace EdgeMon
             // mainpanel
             // 
             this.mainpanel.BackColor = System.Drawing.Color.Transparent;
+            this.mainpanel.Controls.Add(this.lb_set);
             this.mainpanel.Controls.Add(this.lb_batt_pwr);
             this.mainpanel.Controls.Add(this.AC_VOLTAGE_3);
             this.mainpanel.Controls.Add(this.AC_CURRENT_3);
@@ -572,7 +563,6 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.pic_house_to);
             this.mainpanel.Controls.Add(this.lb_error);
             this.mainpanel.Controls.Add(this.lb_tot_prod);
-            this.mainpanel.Controls.Add(this.lb_about);
             this.mainpanel.Controls.Add(this.lb_total);
             this.mainpanel.Controls.Add(this.label3);
             this.mainpanel.Controls.Add(this.tb_chargepower);
@@ -616,6 +606,17 @@ namespace EdgeMon
             this.mainpanel.Size = new System.Drawing.Size(743, 632);
             this.mainpanel.TabIndex = 77;
             this.mainpanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
+            // 
+            // lb_set
+            // 
+            this.lb_set.Image = global::EdgeMon.Properties.Resources.set;
+            this.lb_set.Location = new System.Drawing.Point(673, 13);
+            this.lb_set.Name = "lb_set";
+            this.lb_set.Size = new System.Drawing.Size(27, 26);
+            this.lb_set.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.lb_set.TabIndex = 79;
+            this.lb_set.TabStop = false;
+            this.lb_set.Click += new System.EventHandler(this.lb_set_Click);
             // 
             // AC_VOLTAGE_3
             // 
@@ -667,6 +668,7 @@ namespace EdgeMon
             ((System.ComponentModel.ISupportInitialize)(this.pic_bat_to)).EndInit();
             this.mainpanel.ResumeLayout(false);
             this.mainpanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lb_set)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -714,7 +716,6 @@ namespace EdgeMon
         private System.Windows.Forms.TextBox tb_chargepower;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lb_total;
-        private System.Windows.Forms.Label lb_about;
         private System.Windows.Forms.TextBox lb_tot_prod;
         private System.Windows.Forms.Label lb_error;
         private System.Windows.Forms.PictureBox pic_house_to;
@@ -722,5 +723,6 @@ namespace EdgeMon
         private System.Windows.Forms.Panel mainpanel;
         private System.Windows.Forms.TextBox AC_VOLTAGE_3;
         private System.Windows.Forms.TextBox AC_CURRENT_3;
+        private System.Windows.Forms.PictureBox lb_set;
     }
 }

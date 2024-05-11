@@ -49,7 +49,7 @@ namespace EdgeMon
 
             timer2.Enabled = false;
             timer2.Interval = 10;
-            lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
+           // lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
             mb = null;
 
   
@@ -494,6 +494,13 @@ namespace EdgeMon
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             else
                this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void lb_set_Click(object sender, EventArgs e)
+        {
+            infobox.conf = this.pm;
+            infobox.ShowDialog();
+            this.pm = infobox.conf;
         }
     }
 }

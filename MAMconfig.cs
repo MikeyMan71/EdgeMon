@@ -34,10 +34,10 @@ namespace MAMconfig
         private static Dictionary<string, string> IniListe = new Dictionary<string, string>();
         private static int CommentNumber = 0;
 
-        /*
-         * ShowListe(void)
-         * nur zum Debuggen: gibt Liste aller Einträge mit Werten auf der Konsole aus
-         */
+        /// <summary>
+        /// zeigt alle Einträge der Liste auf der Console
+        /// NUR ZUM DEBUGGEN!!!
+        /// </summary>
         public void ShowListe()
         {
 
@@ -46,13 +46,12 @@ namespace MAMconfig
                     Console.WriteLine("{0} = {1}", s.Key, s.Value);
             }
         }
-        /*
-         * readIniFile(string)
-         * erwartet vollständigen Pfad+Dateinamen
-         * Versucht Datei einzulesen und Array zu befüllen
-         * Liest nur Zeilen im Format "key = value" (Leerzeichen usw fliegen raus, Kommentarzeilen auch)
-         * liefert zurück, ob Einlesen erfolgreich war (die Datei ist hinterher wieder geschlossen)
-         */
+        /// <summary>
+        /// Liest angegebene Datei ein.
+        /// Übernimmt nur Kommentarzeilen und Zeilen im Format "Key = Value"
+        /// </summary>
+        /// <param name="Dateiname"></param>
+        /// <returns>ob das Einlesen erfolgreich war</returns>
         private bool ReadIniFile(string Dateiname)
         {
             try
@@ -112,6 +111,10 @@ namespace MAMconfig
          * AddComment()
          * Fügt dem Array eine Kommentarzeile hinzu, erhöht den globalen Zähler
          */
+        /// <summary>
+        /// Fügt dem Array eine Kommentarzeile hinzu, erhöht den globalen Zähler
+        /// </summary>
+        /// <param name="comment"> der Kommentar (für mehrzeilige Kommentare im String "\r\n#" verwenden)</param>
         public void AddComment(string comment)
         {
             string key = "#" + CommentNumber.ToString();
@@ -132,6 +135,13 @@ namespace MAMconfig
          * Erfordert APPNAME
          * optional Version und Dateiname
          */
+        /// <summary>
+        /// Konstruktor erzeugt INI Objekt und versucht die Datei einzulesen
+        /// 
+        /// </summary>
+        /// <param name="Appname">Name der Anwendung (Unterverzeichnis von APPDATA)</param>
+        /// <param name="version">beliebig, wird nur auf Unterschiede getestet</param>
+        /// <param name="File">Dateiname (ohne Suffix, der ist fest .INI)</param>
         public Config(string Appname,
                       string version = "1.0",
                       string File = "config")
@@ -167,6 +177,11 @@ namespace MAMconfig
         }
 
         /* Erzwungenes Schreiben der INI Datei */
+        /// <summary>
+        /// schreibt die aktuellen Kommentare und Einstellungen in die INI Datei
+        /// setzt das Geändert Flag zurück.
+        /// Wird bei Programmende bei Bedarf aufgerufen, kann aber auch jederzeit manuell ausgelöst werden.
+        /// </summary>
         public void WriteINI()
         {
             using (var fs = new FileStream(Pfad, FileMode.Create, FileAccess.Write))
@@ -187,10 +202,9 @@ namespace MAMconfig
             }
             Geaendert = false;  
         }
-
-        /* 
-         * Destruktor: Schreibt INI Datei, wenn neue Keys (Kommentare zählen nicht) hinzugefügt wurden (update)
-         */
+        /// <summary>
+        /// Destruktor: schreibt, wenn Änderungen anstehen, die INI Datei 
+        /// </summary>
         ~Config()
         {
             //Console.Write("Destruktor aufgerufen");
@@ -202,18 +216,23 @@ namespace MAMconfig
             //Console.ReadLine();
         }
 
-        /* GetPath()
-         * Liefert vollständigen Dateinamen der INI Datei (mit Pfad)
-         */
+        /// <summary>
+        /// liefert Dateiname der verwendeten INI Datei
+        /// </summary>
+        /// <returns>vollständer Pfad und Dateiname der INI Datei</returns>
         public string GetPath()
         { 
-            return Pfad; 
+            return Pfad;
         }
 
-        /*
-         * GetString () liefert String Eintrag zu einem Key
-         * Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist (update) und markiert zum Neuschreiben bei Programmende
-         */
+        /// <summary>
+        /// liefert Wert zu einem Key als String
+        /// Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist(update) und markiert zum Neuschreiben bei Programmende
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultvalue"></param>
+        /// <param name="comment">optionaler Kommentar, der vor dem Key eingefügt werden soll</param>
+        /// <returns>Wert des gesuchten Keys<returns>
         public string Get(string key,
                           string defaultvalue,
                           string comment = "")
@@ -249,10 +268,14 @@ namespace MAMconfig
             }
             return value;
         }
-        /*
-         * GetNumber() dasselbe wie GetValue nur liefert es eine Zahl zurück
-         * ACHTUNG! Kann eine Ausnahme erzeugen, wenn der Key keine Ziffern enthält!!!
-         */
+        /// <summary>
+        /// liefert Wert zu einem Key als Zahl
+        /// Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist(update) und markiert zum Neuschreiben bei Programmende
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="comment"></param>
+        /// <returns>INT Repräsentation des Wertes</returns>
         public int Get(string key,
                        int defaultValue,
                        string comment = "")
@@ -266,18 +289,33 @@ namespace MAMconfig
 
             return value;
         }
-        
+        /// <summary>
+        /// liefert Wert zu einem Key als logischen Wert
+        /// Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist(update) und markiert zum Neuschreiben bei Programmende
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="comment"></param>
+        /// <returns>logischen Wert des Keys</returns>
         public bool Get(string key,
                         bool defaultValue,
                         string comment = "")
         {
-            return bool.Parse(Get(key, defaultValue.ToString(), comment));
+            bool value;
+            try
+            {
+                value = bool.Parse(Get(key, defaultValue.ToString(), comment));
+            }
+            catch { value = defaultValue; }
+            return value; 
         }
 
-        /*
-         * Set()
-         * Seltener benötigt, aber vielleicht braucht es ja mal jemand hier und da
-         */
+        /// <summary>
+        /// setzt einen Key auf einen Wert (string)
+        /// Wenn noch nicht vorhanden, wird der Key erzeugt und am Ende des Arrays angehängt
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Set (string key,
                          string value)
         {
@@ -293,43 +331,61 @@ namespace MAMconfig
            Geaendert = true;  
 
         }
+        /// <summary>
+        /// setzt einen Key auf einen Wert (Zahl)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Set (string key,
                          int value)
         {
             Set (key,value.ToString());
         }
-
+        /// <summary>
+        /// setzt einen Key auf einen Wert (logische Werte)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public void Set (string key,
                          bool value)
         {
             Set (key,value.ToString());
         }
 
-        /*
-         * Remove()
-         * einen Key löschen (auch wenn er gar nicht da ist)
-         */
-        public void Remove(string key) => IniListe.Remove(key.ToLower());
-
-        /// <summary>
-        /// alle keys löschen
-        /// </summary>
-        public void Remove()
+       /// <summary>
+       /// Einen oder alle Keys der Liste löschen
+       /// </summary>
+       /// <param name="key"></param>
+        public void Remove(string key="")
         {
-            IniListe.Clear();
+            Geaendert = true; // egal was passiert, muss später neu geschrieben werden
+
+            // auf besonderem Wunsch eines einzelnen Herrens :-)))
+            // Der einzelne Herr dankt ;-)
+            if (string.IsNullOrEmpty(key))
+            {
+                IniListe.Clear();
+            }
+            else
+            {
+                IniListe.Remove(key.ToLower());
+            }
         }
 
-
-        /*
-         * EditINI()
-         * Ruft einfach einen Editor auf um die Textdatei bearbeiten zu können
-         */
+        /// <summary>
+        /// Startet notepad.exe mit der INI Datei
+        /// Stehen Änderungen an, so werden sie vorher in die INI geschrieben
+        /// </summary>
         public void EditINI()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo("notepad.exe");
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
 
             startInfo.Arguments = Pfad;
+            // wenn Änderungen anstehen, erstmal wegschreiben, damit der Benutzer den aktuellen Stand zu Gesicht
+            // bekommt. MAM 03.03.2024
+            if (Geaendert) { WriteINI(); }
+
             Process.Start(startInfo);
         }
     }

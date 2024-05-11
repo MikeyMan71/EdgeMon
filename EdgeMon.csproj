@@ -212,6 +212,10 @@
     </Content>
     <Content Include="Edgemon.ico" />
     <Content Include="Resources\arrow3.png" />
+    <Content Include="Resources\set.png" />
+    <None Include="Resources\set1.png" />
+    <None Include="Resources\settings.svg" />
+    <None Include="Resources\symbols.ico" />
     <None Include="Resources\arrow41.png" />
     <Content Include="Resources\Image2.png" />
   </ItemGroup>
