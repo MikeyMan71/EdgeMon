@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,7 +26,7 @@ namespace EdgeMon
             this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
             this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
-        
+            
 
 
         }
@@ -52,11 +53,11 @@ namespace EdgeMon
             }
         }
 
-        public string AssemblyVersion
+        public Version AssemblyVersion
         {
             get
             {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                return Assembly.GetExecutingAssembly().GetName().Version;
             }
         }
 
@@ -114,23 +115,153 @@ namespace EdgeMon
 
         #endregion
 
-        private void okButton_Click(object sender, EventArgs e)
+        //private void okButton_Click(object sender, EventArgs e)
+        //{
+        //    if (changed)
+        //    {
+        //        conf.SetAllConfigData();
+        //        conf.WriteINI();
+        //        Application.Restart();
+        //    }
+        //    this.Hide();
+
+        //    this.Close();
+        //}
+
+   
+
+
+
+        private void Info_Shown(object sender, EventArgs e)
         {
+           
+            FillGrid();
+
+        }
+
+     
+
+        /// <summary>
+        /// GRID SETTINGS
+        /// </summary>
+        public void FillGrid()
+        {
+            ConfigGrid.Columns.Clear();
+            ConfigGrid.Rows.Clear();
+            ConfigGrid.Columns.Add("Setting", "Setting");
+            ConfigGrid.Columns.Add("Value", "Value");
+
+            ConfigGrid.Rows.Add("TCP", conf.TCP);
+            ConfigGrid.Rows.Add("Port", conf.port);
+            ConfigGrid.Rows.Add("Battery", conf.battery);
+            ConfigGrid.Rows.Add("Refresh", conf.refresh);
+            ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
+            ConfigGrid.Rows.Add("OneShot", conf.OneShot);
+            ConfigGrid.Rows.Add("MultiShotIntervall", conf.MultiShotIntervall);
+            ConfigGrid.Rows.Add("battery_autodetect", conf.battery_autodetect);
+            ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
+            ConfigGrid.Rows.Add("showDetails", conf.showDetails);
+            ConfigGrid.Rows.Add("Darkmode", conf.Darkmode);
+            ConfigGrid.Rows.Add("checkUpdates", conf.checkUpdates);
+
+        }
+
+        private void bt_accept_Click(object sender, EventArgs e)
+        {
+            int res;
+            bool res_bool;
+            bool error = false;
+
+            if (changed)
+            {
+
+                foreach (DataGridViewRow row in ConfigGrid.Rows) { row.Cells[1].ErrorText = ""; }
+
+
+                conf.TCP = ConfigGrid.Rows[0].Cells[1].Value.ToString();
+
+                if (int.TryParse(ConfigGrid.Rows[1].Cells[1].Value.ToString(), out res))
+                { conf.port = res; }
+                else { ConfigGrid.Rows[1].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (bool.TryParse(ConfigGrid.Rows[2].Cells[1].Value.ToString(), out res_bool))
+                { conf.battery = res_bool; }
+                else { ConfigGrid.Rows[2].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (int.TryParse(ConfigGrid.Rows[3].Cells[1].Value.ToString(), out res))
+                { conf.refresh = res; }
+                else { ConfigGrid.Rows[3].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                conf.saveBitmap = ConfigGrid.Rows[4].Cells[1].Value.ToString();
+
+                if (bool.TryParse(ConfigGrid.Rows[5].Cells[1].Value.ToString(), out res_bool))
+                { conf.OneShot = res_bool; }
+                else { ConfigGrid.Rows[5].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (int.TryParse(ConfigGrid.Rows[6].Cells[1].Value.ToString(), out res))
+                { conf.MultiShotIntervall = res; }
+                else { ConfigGrid.Rows[6].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (bool.TryParse(ConfigGrid.Rows[7].Cells[1].Value.ToString(), out res_bool))
+                { conf.battery_autodetect = res_bool; }
+                else { ConfigGrid.Rows[7].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (int.TryParse(ConfigGrid.Rows[8].Cells[1].Value.ToString(), out res))
+                { conf.gridflow_threshold = res; }
+                else { ConfigGrid.Rows[8].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+
+                if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
+                { conf.showDetails = res_bool; }
+                else { ConfigGrid.Rows[ 9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (bool.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res_bool))
+                { conf.Darkmode = res_bool; }
+                else { ConfigGrid.Rows[10].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (bool.TryParse(ConfigGrid.Rows[11].Cells[1].Value.ToString(), out res_bool))
+                { conf.checkUpdates = res_bool; }
+                else { ConfigGrid.Rows[11].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+
+                //if (!error) changed = true;
+
+                //  this.DialogResult = DialogResult.OK;
+                // this.Close();
+
+                if (!error)
+                {
+                    conf.SetAllConfigData();
+                    conf.WriteINI();
+                    Application.Restart();
+                }
+               
+            }
             this.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void bt_cancel_Click(object sender, EventArgs e)
+        {
+
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+
+        private void resetbutton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Reset all settings to application default?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-    if (dr == DialogResult.Cancel)
+            if (dr == DialogResult.Cancel)
             {
                 return;
             }
             else if (dr == DialogResult.OK)
             {
+                // conf.Remove();
+                // conf.GetAllConfigData();
                 conf.Remove();
-                conf.GetAllConfigData();
+                conf.GetConfigFromXML();
+                FillGrid();
                 changed = true;
             }
 
@@ -138,25 +269,31 @@ namespace EdgeMon
 
         }
 
-
-        private void okButton_Click_1(object sender, EventArgs e)
+        private void ConfigGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (changed) Application.Restart();
-            this.Hide();
-            
+           
         }
 
-        private void Info_Shown(object sender, EventArgs e)
+        private void ConfigGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (conf.local_config) { this.resetbutton.Visible = true; this.EditButton.Visible = true; }
-            else { this.resetbutton.Visible = false; this.EditButton.Visible = false; }
-            //if (NewEdge.UsePrivateSettings) resetbutton.Show(); else resetbutton.Hide();
-        }
-
-        private void EditButton_Click(object sender, EventArgs e)
-        {
-            conf.EditINI();
+            bt_accept.Text = "ACCEPT+CLOSE";
             changed = true;
         }
+
+        private void labelVersion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+
+
+
+
+
+
+
+
 }
+

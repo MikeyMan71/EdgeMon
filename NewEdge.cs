@@ -8,8 +8,10 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Drawing.Imaging;
 using System.IO;
-
 using MAMconfig;
+using System.Net;
+using System.Text;
+using WindowsInstaller;
 
 namespace EdgeMon
 {
@@ -18,52 +20,83 @@ namespace EdgeMon
         // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
         EdgemonConfig pm;
 
-    //    public static bool UsePrivateSettings = false;
+        //    public static bool UsePrivateSettings = false;
         bool connected = false;
         bool have_battery = false;
         bool firstrun = false;
         //bool retry_battery = false;
+        bool showstatic = true;
 
 
+        // bool OneShot;// = Properties.Settings.Default.OneShot;
+        int MultiShotIntervall;
 
-       // bool OneShot;// = Properties.Settings.Default.OneShot;
-       int MultiShotIntervall;
-       
-        
+
 
         TcpModbus mb;
         Info infobox = new Info();
 
         public NewEdge()
         {
+           
 
-            pm = new EdgemonConfig(infobox.AssemblyVersion);
+
+
+            pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
 
             InitializeComponent();
-            
-            if (pm.TCP == "INVERTER") firstrun=true;
-         
+
+            if (pm.TCP == "INVERTER") firstrun = true;
+
 
             MultiShotIntervall = pm.MultiShotIntervall;
-            
+
 
             timer2.Enabled = false;
             timer2.Interval = 10;
-           // lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
+            // lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
             mb = null;
 
-  
-          
-                timer2.Enabled = true;
-            
-            
+
+
+            timer2.Enabled = true;
+
+
         }
 
+        private bool checkForUpdate()
+        {
+            bool res = false;
+            try
+            {
+                
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("https://edgemon.helioho.st/version");
+                StreamReader reader = new StreamReader(stream);
+                String content = reader.ReadToEnd();
+                Version Ver_running = infobox.AssemblyVersion;
+                Version Ver_server = new Version(content);
+                if (Ver_server.CompareTo(Ver_running) >0)
+                {
+                    
+
+                    res = true;
+                }
+
+
+                return res;
+            }
+            catch
+            {
+                return res;
+            } 
+
+        }
 
         private void init() {
 
-        
 
+            lb_upd.Visible = checkForUpdate();
 
             if (pm.battery_autodetect == true)
             {
@@ -97,10 +130,13 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                lb_error.Text = ex.Message;
-                lb_error.ForeColor = Color.DarkRed;
-                optionalScreenshot(true);
-
+                if (ex.Message.Contains("Array")) { }
+                else
+                {
+                    lb_error.Text = ex.Message;
+                    lb_error.ForeColor = Color.DarkRed;
+                    optionalScreenshot(true);
+                }
             }
             timer2.Interval = pm.refresh;
 
@@ -163,34 +199,81 @@ namespace EdgeMon
         /// </summary>
         private void statusgraph_static()
         {
-
+           
 
             tb_Inv.Clear();
 
-            tb_Inv.AppendText(mb.MTR_C_Manufacturer);
-            tb_Inv.AppendText("\r\n" + mb.C_Model);
-            tb_Inv.AppendText("\r\n" + mb.C_SerialNumber);
-            tb_Inv.AppendText("\r\nSunspec:" + mb.C_SunSpec_DID);
-            tb_Inv.AppendText("\r\nCPU:" + mb.C_Version);
+            if (showstatic)
+            {
+                lb_version_copyright.Text = "V "+infobox.AssemblyVersion.ToString()+" "+infobox.AssemblyCopyright.ToString();
 
-            lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
-            lb_mtr_model.Text = mb.MTR_C_Model;
-            lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
-            lb_mtr_opt.Text = mb.MTR_C_Option;
-            lb_mtr_ver.Text = mb.MTR_C_Version;
+                lbl_mtr_manu.Show();
+                lb_mtr_model.Show();
+                lb_mtr_sernr.Show();
+                lb_mtr_opt.Show();
+                lb_mtr_ver.Show();
+
+                tb_Inv.AppendText(mb.MTR_C_Manufacturer);
+                tb_Inv.AppendText("\r\n" + mb.C_Model);
+                tb_Inv.AppendText("\r\n" + mb.C_SerialNumber);
+                tb_Inv.AppendText("\r\nSunspec:" + mb.C_SunSpec_DID);
+                tb_Inv.AppendText("\r\nCPU:" + mb.C_Version);
+
+                lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
+                lb_mtr_model.Text = mb.MTR_C_Model;
+                lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
+                lb_mtr_opt.Text = mb.MTR_C_Option;
+                lb_mtr_ver.Text = mb.MTR_C_Version;
+            }
+            else
+            {
+                lbl_mtr_manu.Hide();
+                lb_mtr_model.Hide();
+                lb_mtr_sernr.Hide();
+                lb_mtr_opt.Hide();
+                lb_mtr_ver.Hide();
+
+            }
 
             tb_batManu.Clear();
             tb_chargepower.Clear();
 
             if (have_battery)
             {
-                tb_batManu.AppendText(mb.BatteryManufacturerName);
-                tb_batManu.AppendText("\r\n" + mb.BatteryModelName);
-                tb_batManu.AppendText("\r\n" + mb.BatteryFirmware);
-                tb_batManu.AppendText("\r\n" + mb.BatterySerialNr);
-                tb_chargepower.AppendText(mb.Max_Charge_Continues_Power.ToString());
-                tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
-                lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
+                if (showstatic)
+                {
+                    tb_batManu.Show();
+                    tb_batManu.Show();
+                    tb_batManu.Show();
+                    tb_batManu.Show();
+                    tb_chargepower.Show();
+                    tb_chargepower.Show();
+                    lb_bat_max.Show();
+                    label9.Show();
+                    label3.Show();
+
+                    tb_batManu.AppendText(mb.BatteryManufacturerName);
+                    tb_batManu.AppendText("\r\n" + mb.BatteryModelName);
+                    tb_batManu.AppendText("\r\n" + mb.BatteryFirmware);
+                    tb_batManu.AppendText("\r\n" + mb.BatterySerialNr);
+                    tb_chargepower.AppendText(mb.Max_Charge_Continues_Power.ToString());
+                    tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
+                    lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
+                }
+                else
+                {
+                    tb_batManu.Hide();
+                    tb_batManu.Hide();
+                    tb_batManu.Hide();
+                    tb_batManu.Hide();
+                    tb_chargepower.Hide();
+                    tb_chargepower.Hide();
+                    lb_bat_max.Hide();
+                    label9.Hide();
+                    label3.Hide();
+                }
+
+
             }
             else
             {
@@ -303,20 +386,25 @@ namespace EdgeMon
 
         private void MainTimer_tick(object sender, EventArgs e)
         {
+
+
             try
             {
-                if (firstrun) 
+
+                if (firstrun)
                 {
                     this.Hide();
                     timer2.Enabled = false;
                     Application.DoEvents();
-             
+
                     MessageBox.Show("You seem to use Edegemon for the first time." + "\n" + "Please configure your inverter settings");
-                    if (pm.local_config)
+                   // if (pm.local_config)
                     {
-                        infobox.conf = this.pm;
-                        infobox.conf.EditINI();
-                        this.pm = infobox.conf;
+                        DoConfig();
+                        //infobox.conf = this.pm;
+                        //infobox.conf.EditINI();
+                        //this.pm = infobox.conf;
+
                     }
                     Application.Exit();
                 }
@@ -325,6 +413,7 @@ namespace EdgeMon
                 {
                     try
                     {
+                        Application.DoEvents();
                         ConnectToModbus();
                         connected = true;
                         init();
@@ -339,6 +428,7 @@ namespace EdgeMon
                 }
 
                 //Main Update processes
+
                 do_update();
                 //
 
@@ -355,9 +445,13 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                lb_error.Text = ex.Message;
-                lb_error.ForeColor = Color.DarkRed;
-                optionalScreenshot(true);
+                if (ex.Message.Contains("Array")) { }
+                else
+                {
+                    lb_error.Text = ex.Message;
+                    lb_error.ForeColor = Color.DarkRed;
+                    optionalScreenshot(true);
+                }
             }
 
         }
@@ -382,17 +476,12 @@ namespace EdgeMon
         private void do_update()
         {
                    
-            try
+          try
             {
-                //if (have_battery == false && retry_battery == true) //no battery found, but config says there should be one...
-                //{
-                //    if (mb.BatterySerialNr.Length > 0 && Properties.Settings.Default.battery == true) { have_battery = true; retry_battery = false; }
-                //}
+         
 
                 //Update dynamic values
                 statusgraph_dyn();
-                //
-
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
                 timer2.Interval = pm.refresh;
@@ -400,12 +489,19 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                lb_error.Text = ex.Message;
-                lb_error.ForeColor = Color.DarkRed;
+                if (ex.Message.Contains("Array")) { }
+                else
+                {
+                    lb_error.Text = ex.Message;
+                    lb_error.ForeColor = Color.Blue;
+                  
+                }
                 connected = false;
                 timer2.Interval = 2000;
                 mb.Disconnect();
                 optionalScreenshot(true);
+
+
             }
         }
 
@@ -423,18 +519,23 @@ namespace EdgeMon
                 lb_ac_pwr.SendToBack();
                 pic_bat_from.SendToBack();
                 pic_bat_to.SendToBack();
-
+                lb_status.SendToBack();
+                lb_OptionMenu.Hide();
+                lb_version_copyright.Show();
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
-
+                lb_version_copyright.Hide();
+                lb_OptionMenu.Show();
                 //restore order
-               battery.SendToBack();
+                battery.SendToBack();
                Inverter_PIC.SendToBack();
                 pic_grid_to.SendToBack();
                 pic_grid_from.SendToBack();
                 lb_batt_pwr.SendToBack();
 
+
                 SaveImage(bmp, fileName);
                 bmp.Dispose();
+              
             }
             catch (Exception)
             {
@@ -498,9 +599,161 @@ namespace EdgeMon
 
         private void lb_set_Click(object sender, EventArgs e)
         {
+          
+        }
+
+        private void Inverter_PIC_Click(object sender, EventArgs e)
+        {
+        
+
+
+
+
+
+
+        }
+
+        private void lb_OptionMenu_Click(object sender, EventArgs e)
+        {
+            
+
+            
+        
+        
+        
+        }
+
+        private void effect_details()
+        {
+            showstatic = !showstatic;
+            this.statusgraph_static();
+        }
+
+        private void effect_darkmode()
+        {
+            //Darkmode
+            if (this.mainpanel.BackColor == Color.Transparent)
+            {
+                foreach (Control ctrl in this.mainpanel.Controls)
+                {
+                    if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
+                    if (ctrl is Label)
+                    {
+                        ((Label)ctrl).ForeColor = Color.White;
+                    }
+                    if (ctrl is TextBox)
+                    {
+                        ((TextBox)ctrl).ForeColor = Color.White;
+                        ((TextBox)ctrl).BackColor = Color.Black;
+                    }
+                    this.mainpanel.BackColor = Color.Black;
+                }
+            }
+            else
+            {
+                foreach (Control ctrl in this.mainpanel.Controls)
+                {
+                    if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
+                    if (ctrl is Label)
+                    {
+                        ((Label)ctrl).ForeColor = Color.Black;
+
+                    }
+                    if (ctrl is TextBox)
+                    {
+                        ((TextBox)ctrl).ForeColor = Color.Black;
+                        ((TextBox)ctrl).BackColor = Color.White;
+                    }
+                    this.mainpanel.BackColor = Color.Transparent;
+                }
+            }
+        }
+        
+
+
+
+
+        private void lb_OptionMenu_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                var relativeClickedPosition = e.Location;
+                var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
+                BurgerMenuStrip.Show(screenClickedPosition);
+
+                //BurgerMenuStrip.Visible = false;
+
+
+            }
+        }
+
+        private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DoConfig()
+        {
+            timer2.Stop();
             infobox.conf = this.pm;
             infobox.ShowDialog();
             this.pm = infobox.conf;
+            timer2.Start();
+        }
+
+        private void BurgerMenuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+            if (e.ClickedItem.Text != "")
+            {
+                if (e.ClickedItem.Text == "Configuration")
+                {
+                   DoConfig();  
+
+                }
+
+
+                if (e.ClickedItem.Text == "Details")
+                {
+                    effect_details();
+                    ((ToolStripMenuItem)(e.ClickedItem)).Checked = !((ToolStripMenuItem)(e.ClickedItem)).Checked;
+                }
+                if (e.ClickedItem.Text== "Darkmode")
+                {
+                    effect_darkmode();
+                    ((ToolStripMenuItem)(e.ClickedItem)).Checked = !((ToolStripMenuItem)(e.ClickedItem)).Checked;
+                    
+                }
+                if (e.ClickedItem.Text == "Screenshot")
+                {
+                    try { SaveAsBitmap(this.mainpanel, pm.saveBitmap); }
+                    catch { }
+                    MessageBox.Show("Screenshot saved in " + pm.saveBitmap);
+                }
+            }
+        }
+
+        private void NewEdge_Move(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void NewEdge_ResizeEnd(object sender, EventArgs e)
+        {
+            timer2.Start();
+        }
+
+        private void NewEdge_ResizeBegin(object sender, EventArgs e)
+        {
+            timer2.Stop();
+        }
+
+      
+
+        private void lb_upd_MouseEnter(object sender, EventArgs e)
+        {
+         
+          //  tt.SetToolTip(lb_upd, "UPDATE AVAILABLE");
         }
     }
 }

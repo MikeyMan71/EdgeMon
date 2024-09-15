@@ -1,9 +1,10 @@
-
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Microsoft.Win32;
 /*
  * MAMconfig (c) MAM 2024, can be used freely in any project, unless it is commercial.
  * 
@@ -22,25 +23,28 @@ using System.Linq;
  *  auf seinen Bedarf anpassen.
  *  Hat ein Parameter einen illegalen Wert (Leerstring, oder bei Zahlen keine Ziffer), so wird er auf Default zurückgesetzt.
  *  Tritt ein Parameter in der Datei mehr als einmal auf, so gilt die erste Zeile, alle anderen werden gelöscht.
+ *  
+ *  Versionen:
+ *  1.0: intitiale Veröffentlichung
+ *  1.1: Kommentare für Funktionsparameter/Manual eingefügt. Potentielle Race Condition im Destruktor entfernt. Remove(<NoParameter>) löscht
+ *       nun die komplette Liste mit Clear(). Aufruf des Editors erzwingt Neuschreiben der INI Datei.
+ *  1.2: FindNotepad() hinzugefügt, da Notepad.exe ab W112024H2 nicht mehr im Systemverzeichnis ist, sondern als App ohne PATH Eintrag
  */
-
 namespace MAMconfig
 {
     public class Config
     {
         private string Pfad { get; } = "DummyApp";
-        public string Version { get; } = "1.0";
+        public string Version { get; } = "1.1";
         public bool Geaendert { get; set; } = false;
         private static Dictionary<string, string> IniListe = new Dictionary<string, string>();
         private static int CommentNumber = 0;
-
         /// <summary>
         /// zeigt alle Einträge der Liste auf der Console
         /// NUR ZUM DEBUGGEN!!!
         /// </summary>
         public void ShowListe()
         {
-
             foreach (KeyValuePair<string, string> s in IniListe)
             {
                     Console.WriteLine("{0} = {1}", s.Key, s.Value);
@@ -66,7 +70,6 @@ namespace MAMconfig
                             List<string> lines = setupFile.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
                             string property = string.Empty;
                            
-
                             foreach (string line in lines)
                             {
                                 if (line.TrimStart().StartsWith("#") || line.TrimStart().StartsWith(";"))
@@ -80,7 +83,6 @@ namespace MAMconfig
                                     try
                                     {
                                         IniListe.Add(elements[0].Trim().ToLower(), elements[1].Trim());
-
                                     }
                                     catch (System.ArgumentException e)
                                     {
@@ -106,7 +108,6 @@ namespace MAMconfig
                 return false;
             }
         }
-
         /*
          * AddComment()
          * Fügt dem Array eine Kommentarzeile hinzu, erhöht den globalen Zähler
@@ -129,7 +130,6 @@ namespace MAMconfig
             }
             
         }
-
         /*
          * Konstruktor
          * Erfordert APPNAME
@@ -148,7 +148,6 @@ namespace MAMconfig
         {
             string APPDATA = Environment.GetEnvironmentVariable("APPDATA");
             Pfad = APPDATA + "\\" + Appname;
-
             /* Wenn Appdata\Programmname noch nicht da ist, den Ordner anlegen */
             if (!Directory.Exists(Pfad)) 
             {
@@ -175,7 +174,6 @@ namespace MAMconfig
             }
             //Console.WriteLine("Version:" + IniListe["version"]);
         }
-
         /* Erzwungenes Schreiben der INI Datei */
         /// <summary>
         /// schreibt die aktuellen Kommentare und Einstellungen in die INI Datei
@@ -195,7 +193,6 @@ namespace MAMconfig
                             wr.WriteLine("{0}", s.Value);
                         }
                         else { wr.WriteLine("{0} = {1}", s.Key.ToLower(), s.Value); }
-
                     }
                     //Console.WriteLine("INI Datei neu geschrieben");
                 }
@@ -215,7 +212,6 @@ namespace MAMconfig
             }
             //Console.ReadLine();
         }
-
         /// <summary>
         /// liefert Dateiname der verwendeten INI Datei
         /// </summary>
@@ -224,7 +220,6 @@ namespace MAMconfig
         { 
             return Pfad;
         }
-
         /// <summary>
         /// liefert Wert zu einem Key als String
         /// Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist(update) und markiert zum Neuschreiben bei Programmende
@@ -239,7 +234,6 @@ namespace MAMconfig
         { 
             string value;
             key = key.ToLower();
-
             try
             {
                 value = IniListe[key];
@@ -256,7 +250,6 @@ namespace MAMconfig
             catch (KeyNotFoundException)
             {
                 // nicht da, also neu eintragen
-
                 // haben wir einen Kommentar? dann davor einfügen?
                 if (!string.IsNullOrEmpty(comment))
                 {
@@ -286,7 +279,6 @@ namespace MAMconfig
                 value = Int32.Parse(Get(key, defaultValue.ToString(), comment));
             }
             catch {  value = defaultValue; }
-
             return value;
         }
         /// <summary>
@@ -309,7 +301,6 @@ namespace MAMconfig
             catch { value = defaultValue; }
             return value; 
         }
-
         /// <summary>
         /// setzt einen Key auf einen Wert (string)
         /// Wenn noch nicht vorhanden, wird der Key erzeugt und am Ende des Arrays angehängt
@@ -329,7 +320,6 @@ namespace MAMconfig
             }
             // merken, dass wir was neu schreiben müssen
            Geaendert = true;  
-
         }
         /// <summary>
         /// setzt einen Key auf einen Wert (Zahl)
@@ -351,7 +341,6 @@ namespace MAMconfig
         {
             Set (key,value.ToString());
         }
-
        /// <summary>
        /// Einen oder alle Keys der Liste löschen
        /// </summary>
@@ -359,9 +348,7 @@ namespace MAMconfig
         public void Remove(string key="")
         {
             Geaendert = true; // egal was passiert, muss später neu geschrieben werden
-
             // auf besonderem Wunsch eines einzelnen Herrens :-)))
-            // Der einzelne Herr dankt ;-)
             if (string.IsNullOrEmpty(key))
             {
                 IniListe.Clear();
@@ -371,23 +358,36 @@ namespace MAMconfig
                 IniListe.Remove(key.ToLower());
             }
         }
-
         /// <summary>
         /// Startet notepad.exe mit der INI Datei
         /// Stehen Änderungen an, so werden sie vorher in die INI geschrieben
         /// </summary>
         public void EditINI()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("notepad.exe");
+            ProcessStartInfo startInfo = new ProcessStartInfo(FindNotepad());
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
-
             startInfo.Arguments = Pfad;
             // wenn Änderungen anstehen, erstmal wegschreiben, damit der Benutzer den aktuellen Stand zu Gesicht
             // bekommt. MAM 03.03.2024
             if (Geaendert) { WriteINI(); }
-
             Process.Start(startInfo);
         }
+        /// <summary>
+        /// Sucht auf neueren Computern die App "notepad.exe", die nun nicht mehr im Systemverzeichnis und somit im Pfad erreichbar ist
+        /// </summary>
+        /// <returns>Vollen Pfad des neuen Notepad.exe oder, auf alten Maschinen, einfach "notepad.exe"</returns>
+        /// 
+        // Böööhse Puuhben bei Microsoft! Nach nur 40 Jahren löschen sie einfach den Editor notepad.exe und packen stattdessen
+        // eine zwielichtige App in einen mystischen Pfad, der nicht in PATH eingetragen ist. 
+        // da müssen wir uns die Kommandozeile selber zusammenbasteln, statt es der Shell zu überlassen
+        // "C:\Program Files\WindowsApps\Microsoft.WindowsNotepad_11.2407.8.0_x64__8wekyb3d8bbwe\Notepad\Notepad.exe"
+        // HKEY_CLASSES_ROOT\AppX1b0e9ytcwx0wcmvkdey0h6af04t1ta3z\Shell\open\command
+        // MAM 15.09.2024
+        public string FindNotepad()
+        {
+            string X;
+            X=(string)Registry.GetValue("HKEY_CLASSES_ROOT\\AppX1b0e9ytcwx0wcmvkdey0h6af04t1ta3z\\Shell\\open\\command", "", "notepad.exe");
+            return X;
+        }
     }
-
 }
