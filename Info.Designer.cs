@@ -178,6 +178,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Info";
             this.Shown += new System.EventHandler(this.Info_Shown);
+            this.VisibleChanged += new System.EventHandler(this.Info_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

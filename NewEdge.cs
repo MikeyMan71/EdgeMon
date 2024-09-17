@@ -38,18 +38,19 @@ namespace EdgeMon
 
         public NewEdge()
         {
-           
+            
 
 
 
             pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
 
             InitializeComponent();
-
+            
             if (pm.TCP == "INVERTER") firstrun = true;
 
 
             MultiShotIntervall = pm.MultiShotIntervall;
+            
 
 
             timer2.Enabled = false;
@@ -58,7 +59,7 @@ namespace EdgeMon
             mb = null;
 
 
-
+            Thread.Sleep(1000);
             timer2.Enabled = true;
 
 
@@ -66,36 +67,39 @@ namespace EdgeMon
 
         private bool checkForUpdate()
         {
-            bool res = false;
-            try
+            if (pm.checkUpdates)
             {
-                
-                WebClient client = new WebClient();
-                Stream stream = client.OpenRead("https://edgemon.helioho.st/version");
-                StreamReader reader = new StreamReader(stream);
-                String content = reader.ReadToEnd();
-                Version Ver_running = infobox.AssemblyVersion;
-                Version Ver_server = new Version(content);
-                if (Ver_server.CompareTo(Ver_running) >0)
+                bool res = false;
+                try
                 {
-                    
 
-                    res = true;
+                    WebClient client = new WebClient();
+                    Stream stream = client.OpenRead("https://edgemon.helioho.st/version");
+                    StreamReader reader = new StreamReader(stream);
+                    String content = reader.ReadToEnd();
+                    Version Ver_running = infobox.AssemblyVersion;
+                    Version Ver_server = new Version(content);
+                    if (Ver_server.CompareTo(Ver_running) > 0)
+                    {
+
+
+                        res = true;
+                    }
+
+
+                    return res;
                 }
-
-
-                return res;
+                catch
+                {
+                    return res;
+                }
             }
-            catch
-            {
-                return res;
-            } 
-
+            return false;
         }
 
         private void init() {
 
-
+            showstatic = pm.showDetails;
             lb_upd.Visible = checkForUpdate();
 
             if (pm.battery_autodetect == true)
@@ -130,7 +134,7 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Array")) { }
+                if (ex is IndexOutOfRangeException) { }
                 else
                 {
                     lb_error.Text = ex.Message;
@@ -139,6 +143,11 @@ namespace EdgeMon
                 }
             }
             timer2.Interval = pm.refresh;
+
+            if (pm.Darkmode) effect_darkmode();
+            ((ToolStripMenuItem)(BurgerMenuStrip.Items[2])).Checked = pm.Darkmode;
+            ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
+            
 
 
         }
@@ -243,10 +252,6 @@ namespace EdgeMon
                 if (showstatic)
                 {
                     tb_batManu.Show();
-                    tb_batManu.Show();
-                    tb_batManu.Show();
-                    tb_batManu.Show();
-                    tb_chargepower.Show();
                     tb_chargepower.Show();
                     lb_bat_max.Show();
                     label9.Show();
@@ -263,10 +268,6 @@ namespace EdgeMon
                 else
                 {
                     tb_batManu.Hide();
-                    tb_batManu.Hide();
-                    tb_batManu.Hide();
-                    tb_batManu.Hide();
-                    tb_chargepower.Hide();
                     tb_chargepower.Hide();
                     lb_bat_max.Hide();
                     label9.Hide();
@@ -445,7 +446,7 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Array")) { }
+                if (ex is IndexOutOfRangeException) { }
                 else
                 {
                     lb_error.Text = ex.Message;
@@ -489,12 +490,14 @@ namespace EdgeMon
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Array")) { }
+                if (ex is IndexOutOfRangeException) { }
                 else
                 {
+
+
                     lb_error.Text = ex.Message;
                     lb_error.ForeColor = Color.Blue;
-                  
+
                 }
                 connected = false;
                 timer2.Interval = 2000;

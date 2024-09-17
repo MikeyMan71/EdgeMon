@@ -233,7 +233,8 @@ namespace EdgeMon
                 {
                     conf.SetAllConfigData();
                     conf.WriteINI();
-                    Application.Restart();
+                  
+                   Application.Restart();
                 }
                
             }
@@ -283,6 +284,11 @@ namespace EdgeMon
         private void labelVersion_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Info_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible) {this.TopMost = true;}  else {this.TopMost = false;}
         }
     }
 

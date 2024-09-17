@@ -77,6 +77,7 @@ namespace EdgeMon
             this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.pic_bat_to = new System.Windows.Forms.PictureBox();
             this.mainpanel = new System.Windows.Forms.Panel();
+            this.lb_version_copyright = new System.Windows.Forms.Label();
             this.lb_upd = new System.Windows.Forms.PictureBox();
             this.lb_OptionMenu = new System.Windows.Forms.PictureBox();
             this.AC_VOLTAGE_3 = new System.Windows.Forms.TextBox();
@@ -87,7 +88,6 @@ namespace EdgeMon
             this.detailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tt = new System.Windows.Forms.ToolTip(this.components);
-            this.lb_version_copyright = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Inverter_PIC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
@@ -568,6 +568,7 @@ namespace EdgeMon
             // 
             // mainpanel
             // 
+            this.mainpanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mainpanel.BackColor = System.Drawing.Color.Transparent;
             this.mainpanel.Controls.Add(this.lb_version_copyright);
             this.mainpanel.Controls.Add(this.lb_upd);
@@ -623,6 +624,16 @@ namespace EdgeMon
             this.mainpanel.TabIndex = 77;
             this.mainpanel.Tag = "FIXEDCOLOR";
             this.mainpanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
+            // 
+            // lb_version_copyright
+            // 
+            this.lb_version_copyright.AutoSize = true;
+            this.lb_version_copyright.Location = new System.Drawing.Point(525, 608);
+            this.lb_version_copyright.Name = "lb_version_copyright";
+            this.lb_version_copyright.Size = new System.Drawing.Size(131, 16);
+            this.lb_version_copyright.TabIndex = 81;
+            this.lb_version_copyright.Text = "VERSION_Copyright";
+            this.lb_version_copyright.Visible = false;
             // 
             // lb_upd
             // 
@@ -722,16 +733,6 @@ namespace EdgeMon
             this.tt.UseAnimation = false;
             this.tt.UseFading = false;
             // 
-            // lb_version_copyright
-            // 
-            this.lb_version_copyright.AutoSize = true;
-            this.lb_version_copyright.Location = new System.Drawing.Point(525, 608);
-            this.lb_version_copyright.Name = "lb_version_copyright";
-            this.lb_version_copyright.Size = new System.Drawing.Size(131, 16);
-            this.lb_version_copyright.TabIndex = 81;
-            this.lb_version_copyright.Text = "VERSION_Copyright";
-            this.lb_version_copyright.Visible = false;
-            // 
             // NewEdge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -740,11 +741,11 @@ namespace EdgeMon
             this.ClientSize = new System.Drawing.Size(745, 634);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.mainpanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "NewEdge";
             this.Text = "Edgemon";
+            this.TopMost = true;
             this.ResizeBegin += new System.EventHandler(this.NewEdge_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.NewEdge_ResizeEnd);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NewEdge_MouseClick);
