@@ -59,6 +59,7 @@
             this.ConfigGrid.TabIndex = 28;
             this.ConfigGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ConfigGrid_CellValidating);
             this.ConfigGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellValueChanged);
+            this.ConfigGrid.CurrentCellDirtyStateChanged += new System.EventHandler(this.ConfigGrid_CurrentCellDirtyStateChanged);
             // 
             // resetbutton
             // 

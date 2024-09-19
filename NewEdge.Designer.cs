@@ -569,7 +569,7 @@ namespace EdgeMon
             // mainpanel
             // 
             this.mainpanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.mainpanel.BackColor = System.Drawing.Color.Transparent;
+            this.mainpanel.BackColor = System.Drawing.Color.White;
             this.mainpanel.Controls.Add(this.lb_version_copyright);
             this.mainpanel.Controls.Add(this.lb_upd);
             this.mainpanel.Controls.Add(this.lb_OptionMenu);
@@ -696,8 +696,9 @@ namespace EdgeMon
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(170, 108);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(211, 136);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
+            this.BurgerMenuStrip.VisibleChanged += new System.EventHandler(this.BurgerMenuStrip_VisibleChanged);
             // 
             // toolStripMenuItem1
             // 

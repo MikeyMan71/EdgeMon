@@ -25,7 +25,7 @@ namespace EdgeMon
         bool have_battery = false;
         bool firstrun = false;
         //bool retry_battery = false;
-        bool showstatic = true;
+        int detail_level = 1;
 
 
         // bool OneShot;// = Properties.Settings.Default.OneShot;
@@ -99,7 +99,7 @@ namespace EdgeMon
 
         private void init() {
 
-            showstatic = pm.showDetails;
+            if (pm.showDetails) { detail_level = 1; } else { detail_level = 0; }
             lb_upd.Visible = checkForUpdate();
 
             if (pm.battery_autodetect == true)
@@ -211,10 +211,10 @@ namespace EdgeMon
            
 
             tb_Inv.Clear();
+            lb_version_copyright.Text = "V " + infobox.AssemblyVersion.ToString() + " " + infobox.AssemblyCopyright.ToString();
 
-            if (showstatic)
+            if (detail_level>0)
             {
-                lb_version_copyright.Text = "V "+infobox.AssemblyVersion.ToString()+" "+infobox.AssemblyCopyright.ToString();
 
                 lbl_mtr_manu.Show();
                 lb_mtr_model.Show();
@@ -249,7 +249,7 @@ namespace EdgeMon
 
             if (have_battery)
             {
-                if (showstatic)
+                if (detail_level> 0 )
                 {
                     tb_batManu.Show();
                     tb_chargepower.Show();
@@ -379,8 +379,11 @@ namespace EdgeMon
             }
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
-            lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
 
+            //if (detail_level > 0)
+            {
+                lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
+            }
 
 
         }
@@ -628,14 +631,17 @@ namespace EdgeMon
 
         private void effect_details()
         {
-            showstatic = !showstatic;
+            if (detail_level == 0) detail_level = 1;
+            if (detail_level == 1) detail_level = 0;
+            
             this.statusgraph_static();
         }
 
         private void effect_darkmode()
         {
+            
             //Darkmode
-            if (this.mainpanel.BackColor == Color.Transparent)
+            if (this.mainpanel.BackColor == Color.White)
             {
                 foreach (Control ctrl in this.mainpanel.Controls)
                 {
@@ -650,6 +656,11 @@ namespace EdgeMon
                         ((TextBox)ctrl).BackColor = Color.Black;
                     }
                     this.mainpanel.BackColor = Color.Black;
+                    //Dirty bug workaround, I have no Idea why I need this... 
+                    ImpExMeter.BackColor = Color.Black;
+                    ImpExMeter.ForeColor = Color.White;
+                    MB_Pwr_3.BackColor = Color.Black;
+                    MB_Pwr_3.ForeColor = Color.White;
                 }
             }
             else
@@ -667,9 +678,14 @@ namespace EdgeMon
                         ((TextBox)ctrl).ForeColor = Color.Black;
                         ((TextBox)ctrl).BackColor = Color.White;
                     }
-                    this.mainpanel.BackColor = Color.Transparent;
+                    this.mainpanel.BackColor = Color.White;
+                    ImpExMeter.BackColor = Color.White;
+                    ImpExMeter.ForeColor = Color.Black;
+                    MB_Pwr_3.BackColor = Color.White;
+                    MB_Pwr_3.ForeColor = Color.Black;
                 }
             }
+           
         }
         
 
@@ -683,9 +699,8 @@ namespace EdgeMon
                 var relativeClickedPosition = e.Location;
                 var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
                 BurgerMenuStrip.Show(screenClickedPosition);
-
+               
                 //BurgerMenuStrip.Visible = false;
-
 
             }
         }
@@ -757,6 +772,11 @@ namespace EdgeMon
         {
          
           //  tt.SetToolTip(lb_upd, "UPDATE AVAILABLE");
+        }
+
+        private void BurgerMenuStrip_VisibleChanged(object sender, EventArgs e)
+        {
+            if(!BurgerMenuStrip.Visible) {timer2.Start();} else {timer2.Stop();}
         }
     }
 }

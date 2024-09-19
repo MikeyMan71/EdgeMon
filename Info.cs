@@ -146,6 +146,22 @@ namespace EdgeMon
         /// </summary>
         public void FillGrid()
         {
+            DataGridViewCheckBoxCell cbc_Battery = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell cbc_OneShot = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell cbc_battery_autodetect = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell cbc_Darkmode = new DataGridViewCheckBoxCell();
+            DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
+
+            cbc_Battery.Value = conf.battery;
+            cbc_OneShot.Value = conf.OneShot;
+            cbc_battery_autodetect.Value = conf.battery_autodetect;
+            cbc_showDetails.Value = conf.showDetails;
+            cbc_Darkmode.Value = conf.Darkmode;
+            cbc_checkUpdates.Value = conf.checkUpdates;
+
+
+
             ConfigGrid.Columns.Clear();
             ConfigGrid.Rows.Clear();
             ConfigGrid.Columns.Add("Setting", "Setting");
@@ -153,16 +169,22 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("TCP", conf.TCP);
             ConfigGrid.Rows.Add("Port", conf.port);
-            ConfigGrid.Rows.Add("Battery", conf.battery);
+
+            ConfigGrid.Rows.Add("Battery");
+            ConfigGrid.Rows[2].Cells[1] = cbc_Battery;
             ConfigGrid.Rows.Add("Refresh", conf.refresh);
             ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
             ConfigGrid.Rows.Add("OneShot", conf.OneShot);
             ConfigGrid.Rows.Add("MultiShotIntervall", conf.MultiShotIntervall);
-            ConfigGrid.Rows.Add("battery_autodetect", conf.battery_autodetect);
+            ConfigGrid.Rows.Add("battery_autodetect");
+            ConfigGrid.Rows[7].Cells[1] = cbc_battery_autodetect;
             ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
-            ConfigGrid.Rows.Add("showDetails", conf.showDetails);
-            ConfigGrid.Rows.Add("Darkmode", conf.Darkmode);
-            ConfigGrid.Rows.Add("checkUpdates", conf.checkUpdates);
+            ConfigGrid.Rows.Add("showDetails");
+            ConfigGrid.Rows[9].Cells[1] = cbc_showDetails;
+            ConfigGrid.Rows.Add("Darkmode");
+            ConfigGrid.Rows[10].Cells[1] = cbc_Darkmode;
+            ConfigGrid.Rows.Add("checkUpdates");
+            ConfigGrid.Rows[11].Cells[1] = cbc_checkUpdates;
 
         }
 
@@ -243,7 +265,8 @@ namespace EdgeMon
 
         private void bt_cancel_Click(object sender, EventArgs e)
         {
-
+            this.changed = false;
+            bt_accept.Text = "CLOSE";
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -272,6 +295,7 @@ namespace EdgeMon
 
         private void ConfigGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
+            
            
         }
 
@@ -289,6 +313,15 @@ namespace EdgeMon
         private void Info_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible) {this.TopMost = true;}  else {this.TopMost = false;}
+        }
+
+        private void ConfigGrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            
+            
+                bt_accept.Text = "ACCEPT+CLOSE";
+                changed = true;
+            
         }
     }
 
