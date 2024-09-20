@@ -168,23 +168,35 @@ namespace EdgeMon
             ConfigGrid.Columns.Add("Value", "Value");
 
             ConfigGrid.Rows.Add("TCP", conf.TCP);
+
             ConfigGrid.Rows.Add("Port", conf.port);
 
             ConfigGrid.Rows.Add("Battery");
             ConfigGrid.Rows[2].Cells[1] = cbc_Battery;
+
             ConfigGrid.Rows.Add("Refresh", conf.refresh);
+
             ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
+
             ConfigGrid.Rows.Add("OneShot", conf.OneShot);
+
             ConfigGrid.Rows.Add("MultiShotIntervall", conf.MultiShotIntervall);
+
             ConfigGrid.Rows.Add("battery_autodetect");
             ConfigGrid.Rows[7].Cells[1] = cbc_battery_autodetect;
+
             ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
+
             ConfigGrid.Rows.Add("showDetails");
             ConfigGrid.Rows[9].Cells[1] = cbc_showDetails;
+
+            ConfigGrid.Rows.Add("detailLeveel",conf.DetailLevel);
+
             ConfigGrid.Rows.Add("Darkmode");
-            ConfigGrid.Rows[10].Cells[1] = cbc_Darkmode;
+            ConfigGrid.Rows[11].Cells[1] = cbc_Darkmode;
+
             ConfigGrid.Rows.Add("checkUpdates");
-            ConfigGrid.Rows[11].Cells[1] = cbc_checkUpdates;
+            ConfigGrid.Rows[12].Cells[1] = cbc_checkUpdates;
 
         }
 
@@ -237,13 +249,17 @@ namespace EdgeMon
                 { conf.showDetails = res_bool; }
                 else { ConfigGrid.Rows[ 9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (bool.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res_bool))
-                { conf.Darkmode = res_bool; }
+                if (int.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res))
+                { conf.DetailLevel = res; }
                 else { ConfigGrid.Rows[10].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (bool.TryParse(ConfigGrid.Rows[11].Cells[1].Value.ToString(), out res_bool))
-                { conf.checkUpdates = res_bool; }
+                { conf.Darkmode = res_bool; }
                 else { ConfigGrid.Rows[11].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (bool.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString(), out res_bool))
+                { conf.checkUpdates = res_bool; }
+                else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
 
                 //if (!error) changed = true;

@@ -29,6 +29,7 @@ namespace EdgeMon
         public bool Darkmode { get; set; }
         public bool checkUpdates { get; set; }
 
+        public int DetailLevel { get; set; }
 
 
         public EdgemonConfig(string ver) : base("Edgemon", ver)
@@ -51,6 +52,7 @@ namespace EdgeMon
             this.battery_autodetect = Properties.Settings.Default.battery_autodetect;
             this.gridflow_threshold = Properties.Settings.Default.gridflow_threshold;
             this.showDetails = Properties.Settings.Default.showDetails;
+            this.DetailLevel = Properties.Settings.Default.detailLevel;
             this.Darkmode = Properties.Settings.Default.Darkmode;
             this.checkUpdates = Properties.Settings.Default.checkUpdates;
 
@@ -68,6 +70,7 @@ namespace EdgeMon
             Set("battery_autodetect", this.battery_autodetect);
             Set("gridflow_threshold", this.gridflow_threshold);
             Set("showDetails", this.showDetails);
+            Set("DetailLevel", this.DetailLevel);
             Set("Darkmode", this.Darkmode);
             Set("checkUpdates", this.checkUpdates);
 
@@ -96,7 +99,7 @@ namespace EdgeMon
                 this.showDetails = Get("showDetails",this.showDetails);
                 this.Darkmode = Get("Darkmode", this.Darkmode);
                 this.checkUpdates = Get("checkUpdates", this.checkUpdates);
-
+                this.DetailLevel = Get("DetailLevel", this.DetailLevel);
                 WriteINI();
             }
         }

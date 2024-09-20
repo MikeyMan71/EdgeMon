@@ -25,8 +25,8 @@ namespace EdgeMon
         bool have_battery = false;
         bool firstrun = false;
         //bool retry_battery = false;
-        int detail_level = 1;
-
+        int detail_level = 2;
+        bool show_details = true;
 
         // bool OneShot;// = Properties.Settings.Default.OneShot;
         int MultiShotIntervall;
@@ -41,16 +41,17 @@ namespace EdgeMon
             
 
 
-
+            
             pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
 
             InitializeComponent();
-            
+            this.Text += " "+infobox.AssemblyVersion.ToString();
             if (pm.TCP == "INVERTER") firstrun = true;
 
 
             MultiShotIntervall = pm.MultiShotIntervall;
-            
+            show_details = pm.showDetails;
+            detail_level = pm.DetailLevel;
 
 
             timer2.Enabled = false;
@@ -99,7 +100,7 @@ namespace EdgeMon
 
         private void init() {
 
-            if (pm.showDetails) { detail_level = 1; } else { detail_level = 0; }
+           
             lb_upd.Visible = checkForUpdate();
 
             if (pm.battery_autodetect == true)
@@ -213,7 +214,7 @@ namespace EdgeMon
             tb_Inv.Clear();
             lb_version_copyright.Text = "V " + infobox.AssemblyVersion.ToString() + " " + infobox.AssemblyCopyright.ToString();
 
-            if (detail_level>0)
+            if (show_details && detail_level > 1)
             {
 
                 lbl_mtr_manu.Show();
@@ -249,22 +250,36 @@ namespace EdgeMon
 
             if (have_battery)
             {
-                if (detail_level> 0 )
+                if (show_details)
                 {
-                    tb_batManu.Show();
-                    tb_chargepower.Show();
-                    lb_bat_max.Show();
-                    label9.Show();
-                    label3.Show();
+                    if (detail_level > 0)
+                    {
+                        label_SOH.Show();
+                        tb_chargepower.Hide();
+                        lb_bat_max.Hide();
+                        label9.Hide();
+                        label3.Hide();
+                    }
+                    if (detail_level > 1)
+                    {
+                        tb_batManu.Show();
+                        tb_chargepower.Show();
+                        lb_bat_max.Show();
+                        label9.Show();
+                        label3.Show();
 
-                    tb_batManu.AppendText(mb.BatteryManufacturerName);
-                    tb_batManu.AppendText("\r\n" + mb.BatteryModelName);
-                    tb_batManu.AppendText("\r\n" + mb.BatteryFirmware);
-                    tb_batManu.AppendText("\r\n" + mb.BatterySerialNr);
-                    tb_chargepower.AppendText(mb.Max_Charge_Continues_Power.ToString());
-                    tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
-                    lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
+                        tb_batManu.AppendText(mb.BatteryManufacturerName);
+                        tb_batManu.AppendText("\r\n" + mb.BatteryModelName);
+                        tb_batManu.AppendText("\r\n" + mb.BatteryFirmware);
+                        tb_batManu.AppendText("\r\n" + mb.BatterySerialNr);
+                        tb_chargepower.AppendText(mb.Max_Charge_Continues_Power.ToString());
+                        tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
+                        lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
+                    }
+                    
                 }
+
+
                 else
                 {
                     tb_batManu.Hide();
@@ -272,12 +287,15 @@ namespace EdgeMon
                     lb_bat_max.Hide();
                     label9.Hide();
                     label3.Hide();
-                }
+                    label_SOH.Hide();
 
+                }
+             
 
             }
             else
             {
+                label_SOH.Hide();
                 bat_SOE.Hide();
                 pic_bat_from.Hide();
                 pic_bat_to.Hide();
@@ -293,7 +311,7 @@ namespace EdgeMon
                 lb_bat_stat.Text = "";
                 lb_T_Av.Text = "";
                 lb_batt_pwr.Text = "";
-                label7.Hide();
+                label_SOH.Hide();
                 label9.Hide();
                 label11.Hide();
                 label3.Hide();
@@ -318,8 +336,17 @@ namespace EdgeMon
             
             if (have_battery)
             {
-                lb_SOH.Text = mb.SOH.ToString("#0.00") + " %";
-                bat_SOE.Value = (int)mb.SOE;
+                if (show_details && detail_level > 0)
+                {
+                    
+
+                    lb_SOH.Text = mb.SOH.ToString("#0.00") + " %";
+                }
+                else {
+                   
+
+                    lb_SOH.Text = ""; }
+                    bat_SOE.Value = (int)mb.SOE;
                 lb_SOE_TXT.Text = mb.SOE.ToString("#0.00") + " %";
                 if (mb.Bat_Status != null) { lb_bat_stat.Text = mb.Bat_Status.ToString(); }
                 lb_T_Av.Text = mb.Batt_Average_Temperature.ToString("#0.00") + "°C";
@@ -335,8 +362,11 @@ namespace EdgeMon
             lb_temp.Text = mb.I_Temp_Sink.ToString("N2") + "°C";
             ImpExMeter.Text = MTR_I_M_AC_Power.ToString("N2") + " W";
 
-
-            MB_Pwr_3.Text = mb.MTR_I_M_AC_Power_A.ToString()+" W" + " // " + mb.MTR_I_M_AC_Power_B.ToString()+" W" + " // " + mb.MTR_I_M_AC_Power_C.ToString()+" W";
+            if (show_details && detail_level > 0)
+            {
+                MB_Pwr_3.Text = mb.MTR_I_M_AC_Power_A.ToString() + " W" + " // " + mb.MTR_I_M_AC_Power_B.ToString() + " W" + " // " + mb.MTR_I_M_AC_Power_C.ToString() + " W";
+            }
+            else { MB_Pwr_3.Text = ""; }
 
             //  lb_T_max.Text = mb.Batt_Max_Temperature.ToString();
             pwr_house = I_AC_Power - MTR_I_M_AC_Power;
@@ -375,15 +405,21 @@ namespace EdgeMon
                 else
                 { pic_bat_to.Hide(); pic_bat_from.Hide(); }
 
-                lb_total.Text = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
+                if (show_details && detail_level > 0)
+                {
+                    lb_total.Text = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
+                }
+                else { lb_total.Text = ""; }
             }
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
 
-            //if (detail_level > 0)
+            if (show_details && detail_level > 0)
             {
                 lb_tot_prod.Text = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
             }
+            else
+            { lb_tot_prod.Text = ""; }
 
 
         }
@@ -631,9 +667,8 @@ namespace EdgeMon
 
         private void effect_details()
         {
-            if (detail_level == 0) detail_level = 1;
-            if (detail_level == 1) detail_level = 0;
-            
+           
+            show_details = !show_details;
             this.statusgraph_static();
         }
 
@@ -777,6 +812,11 @@ namespace EdgeMon
         private void BurgerMenuStrip_VisibleChanged(object sender, EventArgs e)
         {
             if(!BurgerMenuStrip.Visible) {timer2.Start();} else {timer2.Stop();}
+        }
+
+        private void BurgerMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

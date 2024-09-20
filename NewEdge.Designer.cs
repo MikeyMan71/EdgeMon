@@ -55,7 +55,7 @@ namespace EdgeMon
             this.lb_bat_stat = new System.Windows.Forms.Label();
             this.lb_SOE_TXT = new System.Windows.Forms.Label();
             this.lb_SOH = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.label_SOH = new System.Windows.Forms.Label();
             this.lb_bat_max = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.lb_T_Av = new System.Windows.Forms.Label();
@@ -124,7 +124,7 @@ namespace EdgeMon
             // 
             this.tb_batManu.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_batManu.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.tb_batManu.Location = new System.Drawing.Point(195, 498);
+            this.tb_batManu.Location = new System.Drawing.Point(195, 474);
             this.tb_batManu.Multiline = true;
             this.tb_batManu.Name = "tb_batManu";
             this.tb_batManu.Size = new System.Drawing.Size(228, 114);
@@ -352,26 +352,26 @@ namespace EdgeMon
             // 
             this.lb_SOH.AutoSize = true;
             this.lb_SOH.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_SOH.Location = new System.Drawing.Point(101, 520);
+            this.lb_SOH.Location = new System.Drawing.Point(101, 496);
             this.lb_SOH.Name = "lb_SOH";
             this.lb_SOH.Size = new System.Drawing.Size(19, 16);
             this.lb_SOH.TabIndex = 54;
             this.lb_SOH.Text = "---";
             // 
-            // label7
+            // label_SOH
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 520);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 16);
-            this.label7.TabIndex = 55;
-            this.label7.Text = "SOH";
+            this.label_SOH.AutoSize = true;
+            this.label_SOH.Location = new System.Drawing.Point(23, 496);
+            this.label_SOH.Name = "label_SOH";
+            this.label_SOH.Size = new System.Drawing.Size(36, 16);
+            this.label_SOH.TabIndex = 55;
+            this.label_SOH.Text = "SOH";
             // 
             // lb_bat_max
             // 
             this.lb_bat_max.AutoSize = true;
             this.lb_bat_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_bat_max.Location = new System.Drawing.Point(101, 536);
+            this.lb_bat_max.Location = new System.Drawing.Point(101, 512);
             this.lb_bat_max.Name = "lb_bat_max";
             this.lb_bat_max.Size = new System.Drawing.Size(19, 16);
             this.lb_bat_max.TabIndex = 56;
@@ -380,7 +380,7 @@ namespace EdgeMon
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(23, 536);
+            this.label9.Location = new System.Drawing.Point(23, 512);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(48, 16);
             this.label9.TabIndex = 57;
@@ -389,8 +389,9 @@ namespace EdgeMon
             // lb_T_Av
             // 
             this.lb_T_Av.AutoSize = true;
+            this.lb_T_Av.BackColor = System.Drawing.Color.White;
             this.lb_T_Av.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_T_Av.Location = new System.Drawing.Point(101, 504);
+            this.lb_T_Av.Location = new System.Drawing.Point(101, 480);
             this.lb_T_Av.Name = "lb_T_Av";
             this.lb_T_Av.Size = new System.Drawing.Size(19, 16);
             this.lb_T_Av.TabIndex = 58;
@@ -399,7 +400,7 @@ namespace EdgeMon
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(23, 504);
+            this.label11.Location = new System.Drawing.Point(23, 480);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(39, 16);
             this.label11.TabIndex = 59;
@@ -500,7 +501,7 @@ namespace EdgeMon
             // 
             this.tb_chargepower.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_chargepower.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_chargepower.Location = new System.Drawing.Point(104, 558);
+            this.tb_chargepower.Location = new System.Drawing.Point(104, 534);
             this.tb_chargepower.Multiline = true;
             this.tb_chargepower.Name = "tb_chargepower";
             this.tb_chargepower.Size = new System.Drawing.Size(90, 16);
@@ -510,7 +511,7 @@ namespace EdgeMon
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 558);
+            this.label3.Location = new System.Drawing.Point(23, 534);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(68, 16);
             this.label3.TabIndex = 72;
@@ -520,7 +521,7 @@ namespace EdgeMon
             // 
             this.lb_total.AutoSize = true;
             this.lb_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_total.Location = new System.Drawing.Point(23, 579);
+            this.lb_total.Location = new System.Drawing.Point(23, 555);
             this.lb_total.Name = "lb_total";
             this.lb_total.Size = new System.Drawing.Size(19, 16);
             this.lb_total.TabIndex = 73;
@@ -595,7 +596,7 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.lb_T_Av);
             this.mainpanel.Controls.Add(this.label9);
             this.mainpanel.Controls.Add(this.lb_bat_max);
-            this.mainpanel.Controls.Add(this.label7);
+            this.mainpanel.Controls.Add(this.label_SOH);
             this.mainpanel.Controls.Add(this.lb_SOH);
             this.mainpanel.Controls.Add(this.lb_SOE_TXT);
             this.mainpanel.Controls.Add(this.lb_bat_stat);
@@ -696,7 +697,8 @@ namespace EdgeMon
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(211, 136);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(170, 108);
+            this.BurgerMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.BurgerMenuStrip_Opening);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
             this.BurgerMenuStrip.VisibleChanged += new System.EventHandler(this.BurgerMenuStrip_VisibleChanged);
             // 
@@ -798,7 +800,7 @@ namespace EdgeMon
         private System.Windows.Forms.Label lb_bat_stat;
         private System.Windows.Forms.Label lb_SOE_TXT;
         private System.Windows.Forms.Label lb_SOH;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label_SOH;
         private System.Windows.Forms.Label lb_bat_max;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lb_T_Av;

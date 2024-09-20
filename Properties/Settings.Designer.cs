@@ -130,5 +130,14 @@ namespace EdgeMon.Properties {
                 return ((bool)(this["checkUpdates"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int detailLevel {
+            get {
+                return ((int)(this["detailLevel"]));
+            }
+        }
     }
 }
