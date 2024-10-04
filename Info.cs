@@ -152,6 +152,13 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_Darkmode = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
+             DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
+            combobc_DetailLevel.Items.Add(0);
+            combobc_DetailLevel.Items.Add(1);
+            combobc_DetailLevel.Items.Add(2);
+            combobc_DetailLevel.ValueType = typeof(int);
+
+
 
             cbc_Battery.Value = conf.battery;
             cbc_OneShot.Value = conf.OneShot;
@@ -159,6 +166,8 @@ namespace EdgeMon
             cbc_showDetails.Value = conf.showDetails;
             cbc_Darkmode.Value = conf.Darkmode;
             cbc_checkUpdates.Value = conf.checkUpdates;
+            combobc_DetailLevel.Value = conf.DetailLevel;
+            
 
 
 
@@ -179,6 +188,7 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
 
             ConfigGrid.Rows.Add("OneShot", conf.OneShot);
+            ConfigGrid.Rows[5].Cells[1] = cbc_OneShot;
 
             ConfigGrid.Rows.Add("MultiShotIntervall", conf.MultiShotIntervall);
 
@@ -190,7 +200,8 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("showDetails");
             ConfigGrid.Rows[9].Cells[1] = cbc_showDetails;
 
-            ConfigGrid.Rows.Add("detailLeveel",conf.DetailLevel);
+            ConfigGrid.Rows.Add("DetailLevel",conf.DetailLevel);
+            ConfigGrid.Rows[10].Cells[1] = combobc_DetailLevel;
 
             ConfigGrid.Rows.Add("Darkmode");
             ConfigGrid.Rows[11].Cells[1] = cbc_Darkmode;
@@ -311,7 +322,6 @@ namespace EdgeMon
 
         private void ConfigGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            
            
         }
 
@@ -338,6 +348,11 @@ namespace EdgeMon
                 bt_accept.Text = "ACCEPT+CLOSE";
                 changed = true;
             
+        }
+
+        private void ConfigGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("Error in Row" + e.RowIndex);
         }
     }
 

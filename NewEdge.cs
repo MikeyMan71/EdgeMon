@@ -306,7 +306,7 @@ namespace EdgeMon
                 lb_batt_pwr.Hide();
                 lb_bat_stat.Hide();
                 lb_SOH.Hide();
-                bat_SOE.Hide();
+              //  bat_SOE.Hide();
                 lb_SOE_TXT.Text = "";
                 lb_bat_stat.Text = "";
                 lb_T_Av.Text = "";
@@ -674,7 +674,7 @@ namespace EdgeMon
 
         private void effect_darkmode()
         {
-            
+
             //Darkmode
             if (this.mainpanel.BackColor == Color.White)
             {
@@ -690,13 +690,18 @@ namespace EdgeMon
                         ((TextBox)ctrl).ForeColor = Color.White;
                         ((TextBox)ctrl).BackColor = Color.Black;
                     }
-                    this.mainpanel.BackColor = Color.Black;
-                    //Dirty bug workaround, I have no Idea why I need this... 
-                    ImpExMeter.BackColor = Color.Black;
-                    ImpExMeter.ForeColor = Color.White;
-                    MB_Pwr_3.BackColor = Color.Black;
-                    MB_Pwr_3.ForeColor = Color.White;
                 }
+                this.mainpanel.BackColor = Color.Black;
+                //Dirty bug workaround, I have no Idea why I need this... 
+                ImpExMeter.BackColor = Color.Black;
+                ImpExMeter.ForeColor = Color.White;
+                MB_Pwr_3.BackColor = Color.Black;
+                MB_Pwr_3.ForeColor = Color.White;
+                grid.Image = Transform(grid.Image);
+                PV_off.Image = Transform(PV_off.Image);
+                battery.Image = Transform(battery.Image);
+                lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
+                lb_upd.Image = Transform(lb_upd.Image);
             }
             else
             {
@@ -713,18 +718,71 @@ namespace EdgeMon
                         ((TextBox)ctrl).ForeColor = Color.Black;
                         ((TextBox)ctrl).BackColor = Color.White;
                     }
-                    this.mainpanel.BackColor = Color.White;
-                    ImpExMeter.BackColor = Color.White;
-                    ImpExMeter.ForeColor = Color.Black;
-                    MB_Pwr_3.BackColor = Color.White;
-                    MB_Pwr_3.ForeColor = Color.Black;
                 }
+                this.mainpanel.BackColor = Color.White;
+                ImpExMeter.BackColor = Color.White;
+                ImpExMeter.ForeColor = Color.Black;
+                MB_Pwr_3.BackColor = Color.White;
+                MB_Pwr_3.ForeColor = Color.Black;
+                grid.Image = Transform(grid.Image);
+                PV_off.Image = Transform(PV_off.Image);
+                battery.Image = Transform(battery.Image);
+                lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
+                lb_upd.Image = Transform(lb_upd.Image);
             }
            
         }
-        
 
 
+
+
+        public Image Transform(Image source)
+        {
+
+            Bitmap pic = new Bitmap(source);
+            for (int y = 0; (y <= (pic.Height - 1)); y++)
+            {
+                for (int x = 0; (x <= (pic.Width - 1)); x++)
+                {
+                    Color inv = pic.GetPixel(x, y);
+                    inv = Color.FromArgb(inv.A, (255 - inv.R), (255 - inv.G), (255 - inv.B));
+                    pic.SetPixel(x, y, inv);
+                }
+            }
+            //source = pic;
+            return pic;
+            
+           // //create a blank bitmap the same size as original
+           // Bitmap newBitmap = new Bitmap(source.Width, source.Height);
+
+           // //get a graphics object from the new image
+           // Graphics g = Graphics.FromImage(newBitmap);
+
+           // // create the negative color matrix
+           // ColorMatrix colorMatrix = new ColorMatrix();
+           //  colorMatrix.Matrix00 = colorMatrix.Matrix11 = colorMatrix.Matrix22 = -1f;
+           //  colorMatrix.Matrix33 = colorMatrix.Matrix44 = 1f;
+           //// colorMatrix.Matrix00 = -1;
+           //// colorMatrix.Matrix11 = 1;
+           //// colorMatrix.Matrix22 = 1;
+           //// colorMatrix.Matrix33 = 1;
+           //// colorMatrix.Matrix44 = 1;
+
+
+
+           // // create some image attributes
+           // ImageAttributes attributes = new ImageAttributes();
+
+           // attributes.SetColorMatrix(colorMatrix);
+
+           // g.DrawImage(source, new Rectangle(0, 0, source.Width, source.Height),
+           //             0, 0, source.Width, source.Height, GraphicsUnit.Pixel, attributes);
+
+           // //dispose the Graphics object
+           // g.Dispose();
+
+           // return newBitmap;
+        }
 
 
         private void lb_OptionMenu_MouseDown(object sender, MouseEventArgs e)
@@ -815,6 +873,11 @@ namespace EdgeMon
         }
 
         private void BurgerMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void lb_pwr_PV_Click(object sender, EventArgs e)
         {
 
         }

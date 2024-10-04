@@ -193,6 +193,16 @@ namespace EdgeMon.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap charging_icon {
+            get {
+                object obj = ResourceManager.GetObject("charging-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Grid {
             get {
                 object obj = ResourceManager.GetObject("Grid", resourceCulture);
@@ -203,9 +213,49 @@ namespace EdgeMon.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Grid_ {
+            get {
+                object obj = ResourceManager.GetObject("Grid_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Grid1 {
+            get {
+                object obj = ResourceManager.GetObject("Grid1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap house {
             get {
                 object obj = ResourceManager.GetObject("house", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap house_color_icon {
+            get {
+                object obj = ResourceManager.GetObject("house-color-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap house1 {
+            get {
+                object obj = ResourceManager.GetObject("house1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -266,6 +316,26 @@ namespace EdgeMon.Properties {
         internal static System.Drawing.Bitmap set {
             get {
                 object obj = ResourceManager.GetObject("set", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap solar_energy_icon__1_ {
+            get {
+                object obj = ResourceManager.GetObject("solar-energy-icon (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap solar_house {
+            get {
+                object obj = ResourceManager.GetObject("solar-house", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
