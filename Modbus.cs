@@ -153,7 +153,9 @@ namespace EdgeMon
         public string C_Version { get { return GetModbusString(40044, 8); } }
         public string C_SerialNumber { get { return GetModbusString(40052, 16); } }
         public int C_SunSpec_DID { get { return GetModubusUint16(40069); } }
-        
+
+        public int C_Device_Address { get { return GetModubusUint16(40068); } }
+
         public double I_AC_Current { get { return GetModbusScaledShort(40071, 4);  }  }
         public double I_AC_CurrentA { get { return GetModbusScaledShort(40072, 3); } }
         public double I_AC_CurrentB { get { return GetModbusScaledShort(40073, 2); } }

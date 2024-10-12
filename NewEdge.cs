@@ -12,6 +12,7 @@ using MAMconfig;
 using System.Net;
 using System.Text;
 using WindowsInstaller;
+using System.Security.Policy;
 
 namespace EdgeMon
 {
@@ -101,7 +102,9 @@ namespace EdgeMon
         private void init() {
 
            
-            lb_upd.Visible = checkForUpdate();
+          lb_upd.Visible = checkForUpdate();
+          
+
 
             if (pm.battery_autodetect == true)
             {
@@ -228,7 +231,7 @@ namespace EdgeMon
                 tb_Inv.AppendText("\r\n" + mb.C_SerialNumber);
                 tb_Inv.AppendText("\r\nSunspec:" + mb.C_SunSpec_DID);
                 tb_Inv.AppendText("\r\nCPU:" + mb.C_Version);
-
+                tb_Inv.AppendText("\r\nBUS_ID:" + mb.C_Device_Address);
                 lbl_mtr_manu.Text = mb.MTR_C_Manufacturer;
                 lb_mtr_model.Text = mb.MTR_C_Model;
                 lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
@@ -562,11 +565,11 @@ namespace EdgeMon
                 pic_bat_from.SendToBack();
                 pic_bat_to.SendToBack();
                 lb_status.SendToBack();
-                lb_OptionMenu.Hide();
                 lb_version_copyright.Show();
+                lb_OptionMenu.Hide();
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
-                lb_version_copyright.Hide();
                 lb_OptionMenu.Show();
+                lb_version_copyright.Hide();  
                 //restore order
                 battery.SendToBack();
                Inverter_PIC.SendToBack();
@@ -655,15 +658,7 @@ namespace EdgeMon
 
         }
 
-        private void lb_OptionMenu_Click(object sender, EventArgs e)
-        {
-            
-
-            
-        
-        
-        
-        }
+      
 
         private void effect_details()
         {
@@ -878,6 +873,16 @@ namespace EdgeMon
         }
 
         private void lb_pwr_PV_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_upd_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st");
+        }
+
+        private void PV_off_Click(object sender, EventArgs e)
         {
 
         }

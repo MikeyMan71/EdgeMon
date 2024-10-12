@@ -24,10 +24,11 @@ namespace EdgeMon
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
-            this.labelCompanyName.Text = AssemblyCompany;
+          //  this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
-            
-
+            this.textBoxDescription.Text += "\n\nEasyModbus Client Library Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.textBoxDescription.Text += "\nCopyright (c) Stefan Rossmann Engineering Solutions";
+            this.textBoxDescription.Text += "\nIcons by www.reshot.com";
 
         }
 

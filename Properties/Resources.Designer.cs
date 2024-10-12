@@ -243,12 +243,12 @@ namespace EdgeMon.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap house_color_icon {
-            get {
-                object obj = ResourceManager.GetObject("house-color-icon", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+        //internal static System.Drawing.Bitmap house_color_icon {
+        //    get {
+        //        object obj = ResourceManager.GetObject("house-color-icon", resourceCulture);
+        //        return ((System.Drawing.Bitmap)(obj));
+        //    }
+        //}
         
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.

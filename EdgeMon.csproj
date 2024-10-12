@@ -116,6 +116,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewEdge.resx">
       <DependentUpon>NewEdge.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -218,10 +219,8 @@
     <Content Include="Resources\burger.png" />
     <Content Include="Resources\arrow3.png" />
     <None Include="Resources\Grid_.png" />
-    <None Include="Resources\house-color-icon.png" />
     <None Include="Resources\charging-icon.png" />
     <Content Include="Resources\NewFolder1\charging-icon.png" />
-    <Content Include="Resources\NewFolder1\house-color-icon.png" />
     <Content Include="Resources\NewFolder1\panel-solar-icon.png" />
     <Content Include="Resources\NewFolder1\power-pole-icon.png" />
     <Content Include="Resources\NewFolder1\solar-energy-icon %281%29.png" />

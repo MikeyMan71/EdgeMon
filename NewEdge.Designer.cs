@@ -183,7 +183,7 @@ namespace EdgeMon
             this.house.Image = ((System.Drawing.Image)(resources.GetObject("house.Image")));
             this.house.Location = new System.Drawing.Point(462, 419);
             this.house.Name = "house";
-            this.house.Size = new System.Drawing.Size(96, 96);
+            this.house.Size = new System.Drawing.Size(88, 93);
             this.house.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.house.TabIndex = 6;
             this.house.TabStop = false;
@@ -192,9 +192,9 @@ namespace EdgeMon
             // 
             this.PV_on.Image = global::EdgeMon.Properties.Resources.solar_energy_icon__1_;
             this.PV_on.InitialImage = global::EdgeMon.Properties.Resources.PV;
-            this.PV_on.Location = new System.Drawing.Point(99, 48);
+            this.PV_on.Location = new System.Drawing.Point(99, 63);
             this.PV_on.Name = "PV_on";
-            this.PV_on.Size = new System.Drawing.Size(100, 99);
+            this.PV_on.Size = new System.Drawing.Size(90, 84);
             this.PV_on.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PV_on.TabIndex = 4;
             this.PV_on.TabStop = false;
@@ -202,19 +202,20 @@ namespace EdgeMon
             // PV_off
             // 
             this.PV_off.Image = ((System.Drawing.Image)(resources.GetObject("PV_off.Image")));
-            this.PV_off.Location = new System.Drawing.Point(99, 47);
+            this.PV_off.Location = new System.Drawing.Point(99, 62);
             this.PV_off.Name = "PV_off";
-            this.PV_off.Size = new System.Drawing.Size(100, 99);
+            this.PV_off.Size = new System.Drawing.Size(90, 84);
             this.PV_off.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PV_off.TabIndex = 5;
             this.PV_off.TabStop = false;
+            this.PV_off.Click += new System.EventHandler(this.PV_off_Click);
             // 
             // grid
             // 
             this.grid.Image = ((System.Drawing.Image)(resources.GetObject("grid.Image")));
-            this.grid.Location = new System.Drawing.Point(458, 48);
+            this.grid.Location = new System.Drawing.Point(469, 64);
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(100, 99);
+            this.grid.Size = new System.Drawing.Size(77, 84);
             this.grid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.grid.TabIndex = 7;
             this.grid.TabStop = false;
@@ -408,7 +409,7 @@ namespace EdgeMon
             // lb_batt_pwr
             // 
             this.lb_batt_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_batt_pwr.Location = new System.Drawing.Point(3, 332);
+            this.lb_batt_pwr.Location = new System.Drawing.Point(4, 314);
             this.lb_batt_pwr.Name = "lb_batt_pwr";
             this.lb_batt_pwr.Size = new System.Drawing.Size(123, 58);
             this.lb_batt_pwr.TabIndex = 62;
@@ -490,10 +491,10 @@ namespace EdgeMon
             // 
             this.tb_Inv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tb_Inv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
-            this.tb_Inv.Location = new System.Drawing.Point(246, 128);
+            this.tb_Inv.Location = new System.Drawing.Point(246, 91);
             this.tb_Inv.Multiline = true;
             this.tb_Inv.Name = "tb_Inv";
-            this.tb_Inv.Size = new System.Drawing.Size(172, 77);
+            this.tb_Inv.Size = new System.Drawing.Size(172, 115);
             this.tb_Inv.TabIndex = 70;
             this.tb_Inv.Text = "---";
             // 
@@ -648,18 +649,18 @@ namespace EdgeMon
             this.lb_upd.TabStop = false;
             this.tt.SetToolTip(this.lb_upd, "Update available");
             this.lb_upd.Visible = false;
+            this.lb_upd.Click += new System.EventHandler(this.lb_upd_Click);
             this.lb_upd.MouseEnter += new System.EventHandler(this.lb_upd_MouseEnter);
             // 
             // lb_OptionMenu
             // 
             this.lb_OptionMenu.Image = global::EdgeMon.Properties.Resources.burger;
-            this.lb_OptionMenu.Location = new System.Drawing.Point(685, 13);
+            this.lb_OptionMenu.Location = new System.Drawing.Point(691, 13);
             this.lb_OptionMenu.Name = "lb_OptionMenu";
             this.lb_OptionMenu.Size = new System.Drawing.Size(35, 37);
             this.lb_OptionMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.lb_OptionMenu.TabIndex = 80;
             this.lb_OptionMenu.TabStop = false;
-            this.lb_OptionMenu.Click += new System.EventHandler(this.lb_OptionMenu_Click);
             this.lb_OptionMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_OptionMenu_MouseDown);
             // 
             // AC_VOLTAGE_3

@@ -35,7 +35,6 @@
             this.labelProductName = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelCompanyName = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).BeginInit();
@@ -125,19 +124,10 @@
             this.labelCopyright.TabIndex = 34;
             this.labelCopyright.Text = "Copyright";
             // 
-            // labelCompanyName
-            // 
-            this.labelCompanyName.AutoSize = true;
-            this.labelCompanyName.Location = new System.Drawing.Point(15, 93);
-            this.labelCompanyName.Name = "labelCompanyName";
-            this.labelCompanyName.Size = new System.Drawing.Size(95, 16);
-            this.labelCompanyName.TabIndex = 36;
-            this.labelCompanyName.Text = "labelCompany";
-            // 
             // textBoxDescription
             // 
             this.textBoxDescription.AutoSize = true;
-            this.textBoxDescription.Location = new System.Drawing.Point(15, 146);
+            this.textBoxDescription.Location = new System.Drawing.Point(15, 91);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(37, 16);
             this.textBoxDescription.TabIndex = 37;
@@ -163,7 +153,6 @@
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBoxDescription);
-            this.Controls.Add(this.labelCompanyName);
             this.Controls.Add(this.labelCopyright);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelProductName);
@@ -196,7 +185,6 @@
         private System.Windows.Forms.Label labelProductName;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.Label textBoxDescription;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
