@@ -37,6 +37,7 @@
             this.labelCopyright = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.linkLabel = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -127,7 +128,7 @@
             // textBoxDescription
             // 
             this.textBoxDescription.AutoSize = true;
-            this.textBoxDescription.Location = new System.Drawing.Point(15, 91);
+            this.textBoxDescription.Location = new System.Drawing.Point(15, 112);
             this.textBoxDescription.Name = "textBoxDescription";
             this.textBoxDescription.Size = new System.Drawing.Size(37, 16);
             this.textBoxDescription.TabIndex = 37;
@@ -143,6 +144,17 @@
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
             // 
+            // linkLabel
+            // 
+            this.linkLabel.AutoSize = true;
+            this.linkLabel.Location = new System.Drawing.Point(15, 88);
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.Size = new System.Drawing.Size(61, 16);
+            this.linkLabel.TabIndex = 39;
+            this.linkLabel.TabStop = true;
+            this.linkLabel.Text = "linkLabel";
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
+            // 
             // Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -151,6 +163,7 @@
             this.CancelButton = this.bt_cancel;
             this.ClientSize = new System.Drawing.Size(616, 669);
             this.ControlBox = false;
+            this.Controls.Add(this.linkLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.labelCopyright);
@@ -187,5 +200,6 @@
         private System.Windows.Forms.Label labelCopyright;
         private System.Windows.Forms.Label textBoxDescription;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.LinkLabel linkLabel;
     }
 }

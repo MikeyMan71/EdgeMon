@@ -25,8 +25,8 @@ namespace EdgeMon
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
           //  this.labelCompanyName.Text = AssemblyCompany;
-            this.textBoxDescription.Text = AssemblyDescription;
-            this.textBoxDescription.Text += "\n\nEasyModbus Client Library Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            this.linkLabel.Text = AssemblyDescription;
+            this.textBoxDescription.Text = "EasyModbus Client Library Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.textBoxDescription.Text += "\nCopyright (c) Stefan Rossmann Engineering Solutions";
             this.textBoxDescription.Text += "\nIcons by www.reshot.com";
 
@@ -354,6 +354,12 @@ namespace EdgeMon
         private void ConfigGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show("Error in Row" + e.RowIndex);
+        }
+
+        private void linkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st");
+
         }
     }
 

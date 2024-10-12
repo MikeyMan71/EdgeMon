@@ -88,6 +88,7 @@ namespace EdgeMon
             this.detailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tt = new System.Windows.Forms.ToolTip(this.components);
+            this.Update_check_timer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.battery)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Inverter_PIC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.house)).BeginInit();
@@ -409,9 +410,9 @@ namespace EdgeMon
             // lb_batt_pwr
             // 
             this.lb_batt_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_batt_pwr.Location = new System.Drawing.Point(4, 314);
+            this.lb_batt_pwr.Location = new System.Drawing.Point(4, 301);
             this.lb_batt_pwr.Name = "lb_batt_pwr";
-            this.lb_batt_pwr.Size = new System.Drawing.Size(123, 58);
+            this.lb_batt_pwr.Size = new System.Drawing.Size(123, 97);
             this.lb_batt_pwr.TabIndex = 62;
             this.lb_batt_pwr.Text = "000000";
             this.lb_batt_pwr.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -736,6 +737,12 @@ namespace EdgeMon
             this.tt.UseAnimation = false;
             this.tt.UseFading = false;
             // 
+            // Update_check_timer
+            // 
+            this.Update_check_timer.Enabled = true;
+            this.Update_check_timer.Interval = 900000;
+            this.Update_check_timer.Tick += new System.EventHandler(this.Update_check_timer_Tick);
+            // 
             // NewEdge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -833,5 +840,6 @@ namespace EdgeMon
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolTip tt;
         private System.Windows.Forms.Label lb_version_copyright;
+        private System.Windows.Forms.Timer Update_check_timer;
     }
 }

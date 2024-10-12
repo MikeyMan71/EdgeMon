@@ -886,5 +886,10 @@ namespace EdgeMon
         {
 
         }
+
+        private void Update_check_timer_Tick(object sender, EventArgs e)
+        {
+            lb_upd.Visible = checkForUpdate();
+        }
     }
 }

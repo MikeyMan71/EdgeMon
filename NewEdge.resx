@@ -124,7 +124,7 @@
   <data name="battery.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAADwpJREFUeF7t3UFyG0cShlFfQIyAvdNKR9E5eBLfTMeb+ZMo2hpOiZLNAlDd+V7E
+        vAAADrwBlbxySQAADwpJREFUeF7t3UFyG0cShlFfQIyAvdNKR9E5eBLfTMeb+ZMo2hpOiZLNAlDd+V7E
         t3BINhrgIpOFBvwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -889,7 +889,7 @@
   <data name="PV_off.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wgAADsIBFShKgAAAKF1JREFUeF7t2FFy5LqSbNEe4J3/dM4zmUxPKtdOJRlIJgPA/lgfN+zIE+FkE2X9
+        wQAADsEBuJFr7QAAKF1JREFUeF7t2FFy5LqSbNEe4J3/dM4zmUxPKtdOJRlIJgPA/lgfN+zIE+FkE2X9
         f//995+kif3vf//77y/530vSBxxK6o8u+7/k30vaGw4l9UYX/DOZIWlvOJTUG13wR2SOpH3hUFJfdLGf
         kXmS9oRDSX3RpX5G5knaEw4l9UWX+hmZJ2lPOJTUF13qZ2SepD3hUFJfdKmfkXmS9oRDSX3RpX5G5kna
         Ew4l9UWX+hmZJ2lPOJTUF13qZ2SepD3hUFJfdKmfkXmS9oRDSX3RpX5G5knaEw6lldAl+CX/2xnQHmdk
@@ -1275,6 +1275,9 @@
   </metadata>
   <metadata name="tt.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>120, 17</value>
+  </metadata>
+  <metadata name="Update_check_timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>190, 17</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>111</value>
