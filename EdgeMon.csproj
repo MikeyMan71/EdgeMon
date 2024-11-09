@@ -94,7 +94,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Changelog_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="EdgemonConfig.cs" />
+    <Compile Include="HWData.cs" />
     <Compile Include="Info.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,20 +106,23 @@
       <DependentUpon>Info.cs</DependentUpon>
     </Compile>
     <Compile Include="MAMconfig.cs" />
-    <Compile Include="NewEdge.cs">
+    <Compile Include="MainEdge.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewEdge.Designer.cs">
-      <DependentUpon>NewEdge.cs</DependentUpon>
+    <Compile Include="MainEdge.Designer.cs">
+      <DependentUpon>MainEdge.cs</DependentUpon>
     </Compile>
     <Compile Include="Modbus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Changelog_Form.resx">
+      <DependentUpon>Changelog_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewEdge.resx">
-      <DependentUpon>NewEdge.cs</DependentUpon>
+    <EmbeddedResource Include="MainEdge.resx">
+      <DependentUpon>MainEdge.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -212,7 +219,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="changelog.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Edgemon.ico" />
     <Content Include="ResourcesConfig\error.png" />
@@ -220,6 +227,8 @@
     <Content Include="Resources\arrow3.png" />
     <None Include="Resources\Grid_.png" />
     <None Include="Resources\charging-icon.png" />
+    <Content Include="Resources\Edgemon.ico" />
+    <Content Include="Resources\Edgemon.png" />
     <Content Include="Resources\NewFolder1\charging-icon.png" />
     <Content Include="Resources\NewFolder1\panel-solar-icon.png" />
     <Content Include="Resources\NewFolder1\power-pole-icon.png" />

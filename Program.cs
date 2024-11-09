@@ -16,8 +16,8 @@ namespace EdgeMon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           //  Application.Run(new EdgeMon());
-            Application.Run(new NewEdge());
+             Application.Run(new MainEdge());
+         
         }
     }
 }

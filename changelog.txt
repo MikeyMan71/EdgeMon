@@ -8,4 +8,7 @@ V2.5: Use red and green colors for : green: saves money, red: costs money. Bugfi
 V2.5.1: Always use 2 digits in number display. New parameter "autodetect_battery". If true, overrides battery setting and tries to auto_detect.
 V2.5.2: Threshold for power to/from Grid is +/-10W. 
 V2.7.0: allow local config change if (empty) file "UsePrivateSettings" exist in Edgemon directory. // Save screenshot when errors. // show dialog when starting first without configuration 
+V3.9.0: optimized configuration interface, new user interface, new icons
+V4.0.0: new logo, fast refresh, splashscreen, new "vanilla" mode (set details = 0 to activate), changelog button,
+        multiple bugfixes, no restart after config changes. 
 

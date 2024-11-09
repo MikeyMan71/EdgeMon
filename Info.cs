@@ -157,6 +157,7 @@ namespace EdgeMon
             combobc_DetailLevel.Items.Add(0);
             combobc_DetailLevel.Items.Add(1);
             combobc_DetailLevel.Items.Add(2);
+            combobc_DetailLevel.Items.Add(3);
             combobc_DetailLevel.ValueType = typeof(int);
 
 
@@ -283,8 +284,8 @@ namespace EdgeMon
                 {
                     conf.SetAllConfigData();
                     conf.WriteINI();
-                  
-                   Application.Restart();
+                    this.DialogResult = DialogResult.Abort;
+                   //Application.Restart();
                 }
                
             }
@@ -360,6 +361,14 @@ namespace EdgeMon
         {
             System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st");
 
+        }
+
+        private void bt_cl_Click(object sender, EventArgs e)
+        {
+            TextFileViewer textFileViewer = new TextFileViewer();
+            textFileViewer.Show();
+            textFileViewer.TopMost = true;  
+          
         }
     }
 

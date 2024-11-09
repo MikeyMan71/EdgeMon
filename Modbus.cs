@@ -123,13 +123,13 @@ namespace EdgeMon
 
 
     }
-
+        //0 – Off; 1 – Standby; 2 – Init; 3 – Charge; 4 – Discharge; 5 – Fault; 7 - Idle
         public enum SolarEdgeBatteryStatusFlagEnum
         {
             [Description("OFF")]
             Off = 0,
-            [Description("Standby")]
-            Standby = 10,
+            [Description("?1")]
+            Standby = 1,
             [Description("Init")]
             Init = 2,
             [Description("Charge")]
@@ -139,9 +139,11 @@ namespace EdgeMon
             [Description("Fault")]
             Fault = 5,
             [Description("Idle")]
-            Idle = 7,
-            [Description("Idle_Full")]
             Idle_full = 6,
+            [Description("?7")]
+            Idle = 7,
+            [Description("Standby")]
+            Standby10 = 10,
         }
 
 

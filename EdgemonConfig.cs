@@ -32,9 +32,8 @@ namespace EdgeMon
         public int DetailLevel { get; set; }
 
 
-        public EdgemonConfig(string ver) : base("Edgemon", ver)
+        public EdgemonConfig(string ver) : base("EdgeMon", ver)
         {
-            
             GetAllConfigData();
         }
 

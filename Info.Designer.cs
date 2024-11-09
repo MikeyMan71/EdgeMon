@@ -27,7 +27,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Info));
             this.ConfigGrid = new System.Windows.Forms.DataGridView();
             this.resetbutton = new System.Windows.Forms.Button();
             this.bt_accept = new System.Windows.Forms.Button();
@@ -38,6 +37,7 @@
             this.textBoxDescription = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.bt_cl = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -136,7 +136,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::EdgeMon.Properties.Resources.Edgemon;
             this.pictureBox1.Location = new System.Drawing.Point(364, 9);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(194, 176);
@@ -155,6 +155,17 @@
             this.linkLabel.Text = "linkLabel";
             this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_LinkClicked);
             // 
+            // bt_cl
+            // 
+            this.bt_cl.BackColor = System.Drawing.Color.DarkGray;
+            this.bt_cl.Location = new System.Drawing.Point(270, 41);
+            this.bt_cl.Name = "bt_cl";
+            this.bt_cl.Size = new System.Drawing.Size(94, 26);
+            this.bt_cl.TabIndex = 40;
+            this.bt_cl.Text = "changelog";
+            this.bt_cl.UseVisualStyleBackColor = false;
+            this.bt_cl.Click += new System.EventHandler(this.bt_cl_Click);
+            // 
             // Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -163,6 +174,7 @@
             this.CancelButton = this.bt_cancel;
             this.ClientSize = new System.Drawing.Size(616, 669);
             this.ControlBox = false;
+            this.Controls.Add(this.bt_cl);
             this.Controls.Add(this.linkLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.textBoxDescription);
@@ -201,5 +213,6 @@
         private System.Windows.Forms.Label textBoxDescription;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel;
+        private System.Windows.Forms.Button bt_cl;
     }
 }
