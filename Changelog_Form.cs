@@ -9,10 +9,10 @@ namespace EdgeMon
     {
         private TextBox cl_textbox;
       
-        public TextFileViewer()
+        public TextFileViewer(string textfile)
         {
             InitializeComponent();
-            LoadTextFile("changelog.txt");
+            LoadTextFile(textfile);
         }
         private void LoadTextFile(string filePath)
         {
@@ -22,7 +22,7 @@ namespace EdgeMon
                 cl_textbox.Text = text;
                 cl_textbox.SelectionStart = cl_textbox.TextLength;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                
             }

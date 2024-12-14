@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -20,7 +21,7 @@ namespace EdgeMon
         public  Info()
         {
             InitializeComponent();
-            this.Text = String.Format("Info über {0}", AssemblyTitle);
+            this.Text = String.Format("Info about {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
@@ -154,12 +155,13 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_Darkmode = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
              DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
+           // DataGridViewCheckBoxCell cbc_SubiconLayout = new DataGridViewCheckBoxCell();
             combobc_DetailLevel.Items.Add(0);
             combobc_DetailLevel.Items.Add(1);
             combobc_DetailLevel.Items.Add(2);
             combobc_DetailLevel.Items.Add(3);
             combobc_DetailLevel.ValueType = typeof(int);
-
+            DataGridViewButtonCell bt_dataGridViewButtonCell = new DataGridViewButtonCell();
 
 
             cbc_Battery.Value = conf.battery;
@@ -169,9 +171,10 @@ namespace EdgeMon
             cbc_Darkmode.Value = conf.Darkmode;
             cbc_checkUpdates.Value = conf.checkUpdates;
             combobc_DetailLevel.Value = conf.DetailLevel;
-            
+            //  cbc_SubiconLayout.Value = conf.SubiconLayout;
 
-
+            bt_dataGridViewButtonCell.Value = conf.saveBitmap;
+           
 
             ConfigGrid.Columns.Clear();
             ConfigGrid.Rows.Clear();
@@ -180,7 +183,7 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("TCP", conf.TCP);
 
-            ConfigGrid.Rows.Add("Port", conf.port);
+            ConfigGrid.Rows.Add("Port (0=auto)", conf.port);
 
             ConfigGrid.Rows.Add("Battery");
             ConfigGrid.Rows[2].Cells[1] = cbc_Battery;
@@ -188,6 +191,7 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("Refresh", conf.refresh);
 
             ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
+            ConfigGrid.Rows[4].Cells[1] = bt_dataGridViewButtonCell;
 
             ConfigGrid.Rows.Add("OneShot", conf.OneShot);
             ConfigGrid.Rows[5].Cells[1] = cbc_OneShot;
@@ -211,6 +215,8 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("checkUpdates");
             ConfigGrid.Rows[12].Cells[1] = cbc_checkUpdates;
 
+          //  ConfigGrid.Rows.Add("SubiconLayout");
+          //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
 
         private void bt_accept_Click(object sender, EventArgs e)
@@ -226,6 +232,12 @@ namespace EdgeMon
 
 
                 conf.TCP = ConfigGrid.Rows[0].Cells[1].Value.ToString();
+                if (conf.TCP.Contains("http"))
+                {
+                    conf.TCP = conf.TCP.Replace("http:", "");
+                    conf.TCP = conf.TCP.Replace("\\", "");
+                    conf.TCP = conf.TCP.Replace("/", "");
+                }
 
                 if (int.TryParse(ConfigGrid.Rows[1].Cells[1].Value.ToString(), out res))
                 { conf.port = res; }
@@ -240,6 +252,10 @@ namespace EdgeMon
                 else { ConfigGrid.Rows[3].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 conf.saveBitmap = ConfigGrid.Rows[4].Cells[1].Value.ToString();
+                //if (Directory.Exists(Path.GetDirectoryName(conf.saveBitmap))== false)
+                //{
+                //    conf.saveBitmap = "";
+                //}
 
                 if (bool.TryParse(ConfigGrid.Rows[5].Cells[1].Value.ToString(), out res_bool))
                 { conf.OneShot = res_bool; }
@@ -274,6 +290,9 @@ namespace EdgeMon
                 { conf.checkUpdates = res_bool; }
                 else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
+           //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
+            //    { conf.SubiconLayout = res_bool; }
+           //     else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 //if (!error) changed = true;
 
@@ -365,10 +384,35 @@ namespace EdgeMon
 
         private void bt_cl_Click(object sender, EventArgs e)
         {
-            TextFileViewer textFileViewer = new TextFileViewer();
+            TextFileViewer textFileViewer = new TextFileViewer("changelog.txt");
             textFileViewer.Show();
             textFileViewer.TopMost = true;  
           
+        }
+
+        private void bt_lic_Click(object sender, EventArgs e)
+        {
+            TextFileViewer textFileViewer = new TextFileViewer("licenses.txt");
+            textFileViewer.Show();
+            textFileViewer.TopMost = true;
+        }
+
+        private void ConfigGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (senderGrid.CurrentCell is DataGridViewButtonCell &&
+                e.RowIndex >= 0)
+            {
+                if (saveFileDialog_screenshot.ShowDialog() == DialogResult.OK)
+                {
+                    conf.saveBitmap = saveFileDialog_screenshot.FileName;
+                    FillGrid();
+                    ConfigGrid_CellValueChanged(this, e);
+                }
+                
+
+            }
         }
     }
 

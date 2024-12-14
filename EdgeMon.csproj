@@ -80,6 +80,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -97,6 +98,8 @@
     <Compile Include="Changelog_Form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SunriseSunset.cs" />
+    <Compile Include="Sunriset.cs" />
     <Compile Include="EdgemonConfig.cs" />
     <Compile Include="HWData.cs" />
     <Compile Include="Info.cs">
@@ -218,6 +221,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="licenses.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="changelog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -227,6 +233,10 @@
     <Content Include="Resources\arrow3.png" />
     <None Include="Resources\Grid_.png" />
     <None Include="Resources\charging-icon.png" />
+    <Content Include="Resources\downld.png" />
+    <None Include="Resources\downld1.png" />
+    <None Include="Resources\downld2.png" />
+    <None Include="Resources\dwnld_blue.png" />
     <Content Include="Resources\Edgemon.ico" />
     <Content Include="Resources\Edgemon.png" />
     <Content Include="Resources\NewFolder1\charging-icon.png" />

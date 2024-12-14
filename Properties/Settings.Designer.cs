@@ -34,7 +34,7 @@ namespace EdgeMon.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1502")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int port {
             get {
                 return ((int)(this["port"]));

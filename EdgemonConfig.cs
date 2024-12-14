@@ -31,6 +31,7 @@ namespace EdgeMon
 
         public int DetailLevel { get; set; }
 
+      //  public bool SubiconLayout { get; set; }
 
         public EdgemonConfig(string ver) : base("EdgeMon", ver)
         {
@@ -54,6 +55,7 @@ namespace EdgeMon
             this.DetailLevel = Properties.Settings.Default.detailLevel;
             this.Darkmode = Properties.Settings.Default.Darkmode;
             this.checkUpdates = Properties.Settings.Default.checkUpdates;
+         //   this.SubiconLayout = Properties.Settings.Default.k;
 
         }
 
@@ -72,6 +74,7 @@ namespace EdgeMon
             Set("DetailLevel", this.DetailLevel);
             Set("Darkmode", this.Darkmode);
             Set("checkUpdates", this.checkUpdates);
+         //   Set("SubiconLayout", this.SubiconLayout);
 
         }
 
@@ -99,6 +102,7 @@ namespace EdgeMon
                 this.Darkmode = Get("Darkmode", this.Darkmode);
                 this.checkUpdates = Get("checkUpdates", this.checkUpdates);
                 this.DetailLevel = Get("DetailLevel", this.DetailLevel);
+            //    this.SubiconLayout = Get("SubiconLayout", this.SubiconLayout);
                 WriteINI();
             }
         }

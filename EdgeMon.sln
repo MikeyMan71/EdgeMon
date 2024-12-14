@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeMon", "EdgeMon.csproj",
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EdgemonSetup", "..\EdgemonSetup\EdgemonSetup.vdproj", "{1E415BCF-A593-4ED8-9E7C-E5202FFF7D19}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{5B578197-ED74-484D-97FA-47203BDDBF45}"
+	ProjectSection(SolutionItems) = preProject
+		ToDos.txt = ToDos.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

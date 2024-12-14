@@ -38,6 +38,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.bt_cl = new System.Windows.Forms.Button();
+            this.bt_lic = new System.Windows.Forms.Button();
+            this.saveFileDialog_screenshot = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -57,6 +59,7 @@
             this.ConfigGrid.RowTemplate.Height = 24;
             this.ConfigGrid.Size = new System.Drawing.Size(602, 389);
             this.ConfigGrid.TabIndex = 28;
+            this.ConfigGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellContentClick);
             this.ConfigGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ConfigGrid_CellValidating);
             this.ConfigGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellValueChanged);
             this.ConfigGrid.CurrentCellDirtyStateChanged += new System.EventHandler(this.ConfigGrid_CurrentCellDirtyStateChanged);
@@ -166,6 +169,22 @@
             this.bt_cl.UseVisualStyleBackColor = false;
             this.bt_cl.Click += new System.EventHandler(this.bt_cl_Click);
             // 
+            // bt_lic
+            // 
+            this.bt_lic.BackColor = System.Drawing.Color.DarkGray;
+            this.bt_lic.Location = new System.Drawing.Point(270, 73);
+            this.bt_lic.Name = "bt_lic";
+            this.bt_lic.Size = new System.Drawing.Size(94, 26);
+            this.bt_lic.TabIndex = 41;
+            this.bt_lic.Text = "Licences";
+            this.bt_lic.UseVisualStyleBackColor = false;
+            this.bt_lic.Click += new System.EventHandler(this.bt_lic_Click);
+            // 
+            // saveFileDialog_screenshot
+            // 
+            this.saveFileDialog_screenshot.DefaultExt = "jpg";
+            this.saveFileDialog_screenshot.InitialDirectory = "C:\\tmp";
+            // 
             // Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -174,6 +193,7 @@
             this.CancelButton = this.bt_cancel;
             this.ClientSize = new System.Drawing.Size(616, 669);
             this.ControlBox = false;
+            this.Controls.Add(this.bt_lic);
             this.Controls.Add(this.bt_cl);
             this.Controls.Add(this.linkLabel);
             this.Controls.Add(this.pictureBox1);
@@ -214,5 +234,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.Button bt_cl;
+        private System.Windows.Forms.Button bt_lic;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_screenshot;
     }
 }

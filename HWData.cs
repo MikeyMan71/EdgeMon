@@ -9,8 +9,8 @@ namespace EdgeMon
     internal class HWData
     {
         internal string SOH { get; set; }
-        internal string SOE { get; set; }
-        internal int bat_SOE { get; set; }
+        internal int SOE { get; set; }
+        internal string bat_SOE { get; set; }
         internal string Bat_Status { get; set; }
         internal string T_AV { get; set; }
         internal string batt_pwr { get; set; }
