@@ -41,6 +41,8 @@ namespace EdgeMon
         int errcount = 0;
         string precision = "N1";
         DateTime startdate  = DateTime.Now;
+        DateTime lastdailyupdate = DateTime.Now;
+        TimeSpan checklocation = new TimeSpan(0, 30, 0);
 
         TcpModbus mb;
         Info infobox = new Info();
@@ -103,6 +105,17 @@ namespace EdgeMon
        
             try
             {
+                if ((!sundata.isvalid) && (startdate > DateTime.Now.Subtract(checklocation))) 
+                {
+                    
+
+                    if (sundata.getlocation())
+                    { 
+                        dailyTasks(true);
+                    }
+                
+                }
+
 
                 if (firstrun)
                 {
@@ -208,6 +221,9 @@ namespace EdgeMon
                
             }
           
+
+
+
         }
 
 
@@ -216,7 +232,7 @@ namespace EdgeMon
             neverconnected = true;
             lb_sunrise.Text = "";
             lb_sunset.Text = "";
-            sundata = new SunriseSunset(0, 0, TimeZoneInfo.Local);
+            sundata = new SunriseSunset(pm.loc_latitude, pm.loc_longitude, TimeZoneInfo.Local);
 
             timer2.Stop();
             connected = false;
@@ -237,7 +253,7 @@ namespace EdgeMon
           
             //timer2.Enabled = true;
            timer2.Start();
-
+            startdate = DateTime.Now;
 
         }
 
@@ -527,18 +543,18 @@ namespace EdgeMon
             }
 
             dailyTasks(true);
-            if (show_details && detail_level > 0 && sundata != null && sundata.isvalid)
-            {
-                lb_sunrise.Visible = true;
-                lb_sunset.Visible = true;
-                pic_sunsetrise.Visible = true;
-            }
-            else
-            {
-                lb_sunrise.Visible = false;
-                lb_sunset.Visible = false;
-                pic_sunsetrise.Visible = false;
-            }
+            //if (show_details && detail_level > 0 && sundata != null && sundata.isvalid)
+            //{
+            //    lb_sunrise.Visible = true;
+            //    lb_sunset.Visible = true;
+            //    pic_sunsetrise.Visible = true;
+            //}
+            //else
+            //{
+            //    lb_sunrise.Visible = false;
+            //    lb_sunset.Visible = false;
+            //    pic_sunsetrise.Visible = false;
+            //}
 
 
         }
@@ -709,11 +725,25 @@ namespace EdgeMon
 
         private void dailyTasks(bool force = false)
         {
-            if (force || (DateTime.Now.Date > startdate.Date))
+            if (force || (DateTime.Now.Date > lastdailyupdate.Date))
             {
+                lastdailyupdate = DateTime.Now;
                 lb_sunrise.Text = sundata.getSunrise();
                 lb_sunset.Text = sundata.getSunset();
-                
+
+
+                if (show_details && detail_level > 0 && sundata != null && sundata.isvalid)
+                {
+                    lb_sunrise.Visible = true;
+                    lb_sunset.Visible = true;
+                    pic_sunsetrise.Visible = true;
+                }
+                else
+                {
+                    lb_sunrise.Visible = false;
+                    lb_sunset.Visible = false;
+                    pic_sunsetrise.Visible = false;
+                }
             }
         }
 

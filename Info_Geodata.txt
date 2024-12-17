@@ -1,0 +1,59 @@
+Guckstdu:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Device.Location;
+using System.Threading;
+
+namespace GeoTest
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           ShowStatusUpdates();
+            //GetLocationProperty();
+        }
+
+        static void ShowStatusUpdates()
+        {
+            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher();
+            watcher.Start();
+
+            watcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_StatusChanged);
+
+            Console.WriteLine("Enter any key to quit.");
+            Console.ReadLine();
+            Console.WriteLine("Lat: {0}, Long: {1}", watcher.Position.Location.Latitude, watcher.Position.Location.Longitude);
+            Console.ReadLine();
+        }
+
+        static void watcher_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            switch (e.Status)
+            {
+                case GeoPositionStatus.Initializing:
+                    Console.WriteLine("Working on location fix");
+                    break;
+
+                case GeoPositionStatus.Ready:
+                    Console.WriteLine("Have location");
+                                       break;
+
+                case GeoPositionStatus.NoData:
+                    Console.WriteLine("No data");
+                    break;
+
+                case GeoPositionStatus.Disabled:
+                    Console.WriteLine("Disabled");
+                    break;
+            }
+        }
+    }
+}
+So musse es machen (nach start warten bis "data ready" kommt, dann RETURN drücken und dann nochmal RETURN für Programmende.
+Der Kram läuft also vollständig asynchron, Du brauchst da nicht rumsleepen.
+Und wenn der Status "Disabled" kommt, ist warten zwecklos. Deshalb musste auf jeden Fall noch eine manuelle Eingabe vorsehen. Die Leute können ja "AUTO" reinschreiben, wenn sie Vertrauen in Windows haben...
+MAM

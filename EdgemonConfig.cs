@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,12 +26,14 @@ namespace EdgeMon
         public int MultiShotIntervall { get; set; }
         public bool battery_autodetect { get; set; }
         public int gridflow_threshold { get; set; }
-       public bool showDetails { get; set; }
+        public bool showDetails { get; set; }
         public bool Darkmode { get; set; }
         public bool checkUpdates { get; set; }
 
         public int DetailLevel { get; set; }
 
+        public double loc_longitude { get; set; }
+        public double loc_latitude { get; set; }
       //  public bool SubiconLayout { get; set; }
 
         public EdgemonConfig(string ver) : base("EdgeMon", ver)
@@ -55,6 +58,9 @@ namespace EdgeMon
             this.DetailLevel = Properties.Settings.Default.detailLevel;
             this.Darkmode = Properties.Settings.Default.Darkmode;
             this.checkUpdates = Properties.Settings.Default.checkUpdates;
+            this.loc_latitude = Properties.Settings.Default.loc_latitude;   
+            this.loc_longitude = Properties.Settings.Default.loc_longitude;
+
          //   this.SubiconLayout = Properties.Settings.Default.k;
 
         }
@@ -74,6 +80,12 @@ namespace EdgeMon
             Set("DetailLevel", this.DetailLevel);
             Set("Darkmode", this.Darkmode);
             Set("checkUpdates", this.checkUpdates);
+            Set("loc_latitude", this.loc_latitude);
+            Set("loc_longitude", this.loc_longitude);
+
+           // Set("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture));
+           // Set("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture));
+            
          //   Set("SubiconLayout", this.SubiconLayout);
 
         }
@@ -102,7 +114,24 @@ namespace EdgeMon
                 this.Darkmode = Get("Darkmode", this.Darkmode);
                 this.checkUpdates = Get("checkUpdates", this.checkUpdates);
                 this.DetailLevel = Get("DetailLevel", this.DetailLevel);
-            //    this.SubiconLayout = Get("SubiconLayout", this.SubiconLayout);
+
+
+
+                try
+                {
+                    this.loc_latitude = Get("loc_latitude", this.loc_latitude);
+                    this.loc_longitude = Get("loc_longitude", this.loc_longitude);
+
+                   // this.loc_latitude = double.Parse(Get("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
+                   // this.loc_longitude = double.Parse(Get("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
+                }
+                catch (Exception)
+                {
+                    this.loc_latitude = double.NaN;
+                    this.loc_longitude = double.NaN;
+                }
+          
+                //    this.SubiconLayout = Get("SubiconLayout", this.SubiconLayout);
                 WriteINI();
             }
         }

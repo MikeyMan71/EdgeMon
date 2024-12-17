@@ -12,4 +12,7 @@ V3.9.0: optimized configuration interface, new user interface, new icons
 V4.0.0: new logo, fast refresh, splashscreen, new "vanilla" mode (set details = 0 to activate), changelog button,
         multiple bugfixes, no restart after config changes. 
 V4.1.0: new "update available" icon. Click on new logo to open website. Delayed display of connection error messages. Optical Bugfixes.  
-
+V4.2.0: bugfixes
+V4.3.0: Button to select screenshot file, Senset/sundown in Detailview 1 and above, set post-komma digits to 0, fixed error when config was broken, added "auto" mode for port selection (502 or 1502), 
+        accept if ip is entered with unnecessary leading http. 
+V4.3.1: Bugfix in Sunset/Sunrise Data, allow to manualy set Data iin Config as an alternative to autodetect (autodetect not yet fully working, to be done in 4.4.0)

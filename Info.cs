@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -156,6 +157,8 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
              DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
            // DataGridViewCheckBoxCell cbc_SubiconLayout = new DataGridViewCheckBoxCell();
+            
+            
             combobc_DetailLevel.Items.Add(0);
             combobc_DetailLevel.Items.Add(1);
             combobc_DetailLevel.Items.Add(2);
@@ -172,6 +175,8 @@ namespace EdgeMon
             cbc_checkUpdates.Value = conf.checkUpdates;
             combobc_DetailLevel.Value = conf.DetailLevel;
             //  cbc_SubiconLayout.Value = conf.SubiconLayout;
+
+
 
             bt_dataGridViewButtonCell.Value = conf.saveBitmap;
            
@@ -215,8 +220,13 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("checkUpdates");
             ConfigGrid.Rows[12].Cells[1] = cbc_checkUpdates;
 
-          //  ConfigGrid.Rows.Add("SubiconLayout");
-          //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
+            ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
+            ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
+
+          
+
+            //  ConfigGrid.Rows.Add("SubiconLayout");
+            //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
 
         private void bt_accept_Click(object sender, EventArgs e)
@@ -224,6 +234,7 @@ namespace EdgeMon
             int res;
             bool res_bool;
             bool error = false;
+            double doubleres;
 
             if (changed)
             {
@@ -276,7 +287,7 @@ namespace EdgeMon
 
                 if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
                 { conf.showDetails = res_bool; }
-                else { ConfigGrid.Rows[ 9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+                else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (int.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res))
                 { conf.DetailLevel = res; }
@@ -290,9 +301,24 @@ namespace EdgeMon
                 { conf.checkUpdates = res_bool; }
                 else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-           //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
-            //    { conf.SubiconLayout = res_bool; }
-           //     else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+                if (ConfigGrid.Rows[13].Cells[1].Value == null) { ConfigGrid.Rows[13].Cells[1].Value = double.NaN; }
+
+
+                if (double.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                { conf.loc_latitude = doubleres; }
+                else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (ConfigGrid.Rows[14].Cells[1].Value == null) { ConfigGrid.Rows[14].Cells[1].Value = double.NaN; }
+
+                if (double.TryParse(ConfigGrid.Rows[14].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                { conf.loc_longitude = doubleres; }
+                else { ConfigGrid.Rows[14].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+
+
+                //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
+                //    { conf.SubiconLayout = res_bool; }
+                //     else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 //if (!error) changed = true;
 

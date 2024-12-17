@@ -139,5 +139,23 @@ namespace EdgeMon.Properties {
                 return ((int)(this["detailLevel"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
+        public double loc_latitude {
+            get {
+                return ((double)(this["loc_latitude"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NaN")]
+        public double loc_longitude {
+            get {
+                return ((double)(this["loc_longitude"]));
+            }
+        }
     }
 }

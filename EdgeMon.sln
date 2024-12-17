@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projektmappenelemente", "Projektmappenelemente", "{5B578197-ED74-484D-97FA-47203BDDBF45}"
 	ProjectSection(SolutionItems) = preProject
 		ToDos.txt = ToDos.txt
+		Info_Geodata.txt = Info_Geodata.txt
 	EndProjectSection
 EndProject
 Global

@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Microsoft.Win32;
 /*
  * MAMconfig (c) MAM 2024, can be used freely in any project, unless it is commercial.
  * 
@@ -22,6 +25,17 @@ using System.Linq;
  *  auf seinen Bedarf anpassen.
  *  Hat ein Parameter einen illegalen Wert (Leerstring, oder bei Zahlen keine Ziffer), so wird er auf Default zurückgesetzt.
  *  Tritt ein Parameter in der Datei mehr als einmal auf, so gilt die erste Zeile, alle anderen werden gelöscht.
+ *  
+ *  Versionen:
+ *  1.0: intitiale Veröffentlichung
+ *  1.1: Kommentare für Funktionsparameter/Manual eingefügt. Potentielle Race Condition im Destruktor entfernt. Remove(<NoParameter>) löscht
+ *       nun die komplette Liste mit Clear(). Aufruf des Editors erzwingt Neuschreiben der INI Datei.
+ *  1.2: FindNotepad() hinzugefügt, da Notepad.exe ab W112024H2 nicht mehr im Systemverzeichnis ist, sondern als App ohne PATH Eintrag
+ *  1.3: an ein paar Stellen Array geleert und CommentNumber auf 0 zurückgesetzt.
+ *  1.4: Get/Set für double hinzugefügt. Achtung! die Formate sind "kulturspezifisch", also mit "," als Dezimal"punkt" in Deutschland!!! 15.12.24
+ *  1.5: bei double.Parse noch die Kultur abgeschaltet und eventuelle "," in "." umgewandelt. 16.12.24
+ *
+ *  
  */
 
 namespace MAMconfig
@@ -29,10 +43,10 @@ namespace MAMconfig
     public class Config
     {
         private string Pfad { get; } = "DummyApp";
-        public string Version { get; } = "1.0";
+        public string Version { get; } = "1.1";
         public bool Geaendert { get; set; } = false;
-        private static Dictionary<string, string> IniListe = new Dictionary<string, string>();
-        private static int CommentNumber = 0;
+        private /*static*/ Dictionary<string, string> IniListe = new Dictionary<string, string>();
+        private /*static*/ int CommentNumber = 0;
 
         /// <summary>
         /// zeigt alle Einträge der Liste auf der Console
@@ -142,21 +156,12 @@ namespace MAMconfig
         /// <param name="Appname">Name der Anwendung (Unterverzeichnis von APPDATA)</param>
         /// <param name="version">beliebig, wird nur auf Unterschiede getestet</param>
         /// <param name="File">Dateiname (ohne Suffix, der ist fest .INI)</param>
-        public Config(
-            string Appname,
-
-            string version = "1.0",
-            string File = "config")
+        public Config(string Appname,
+                      string version = "1.0",
+                      string File = "config")
         {
             string APPDATA = Environment.GetEnvironmentVariable("APPDATA");
-
-            string oldversion = "";
-
-            string v = APPDATA + "\\" + Appname;
-            Pfad = v;
-            // V1.1 9.11.24 MAM: die statischen Variablen der Instanz werden explizit zurückgesetzt
-            IniListe.Clear();
-            CommentNumber = 0;
+            Pfad = APPDATA + "\\" + Appname;
 
             /* Wenn Appdata\Programmname noch nicht da ist, den Ordner anlegen */
             if (!Directory.Exists(Pfad))
@@ -167,10 +172,8 @@ namespace MAMconfig
 
             Version = version;
             ReadIniFile(Pfad);
-
-            if (!IniListe.TryGetValue(
-                "version",
-                value: out oldversion))
+            string oldversion = "";
+            if (!IniListe.TryGetValue("version", out oldversion))
             {
                 IniListe.Add("#0000", "# Dies ist die .INI Datei für das Programm " + Appname + "\r\n# die Einträge erfolgen im Format 'Name'='Wert'\r\n#")
 ; IniListe["version"] = version;
@@ -322,6 +325,29 @@ namespace MAMconfig
         }
 
         /// <summary>
+        /// liefert Wert zu einem Key als Floating Point Wert
+        /// Erzeugt Key mit Defaultvalue, wenn Eintrag noch nicht vorhanden ist(update) und markiert zum Neuschreiben bei Programmende
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="defaultValue"></param>
+        /// <param name="comment"></param>
+        /// <returns>Double Wert des Keys</returns>
+        public double Get(string key,
+                        double defaultValue,
+                        string comment = "")
+        {
+            double value;
+            try
+            {
+                string valueStr = Get(key, defaultValue.ToString(), comment);
+                valueStr = valueStr.Replace(",", ".");
+                value = double.Parse(valueStr, CultureInfo.InvariantCulture);
+            }
+            catch { value = defaultValue; }
+
+            return value;
+        }
+        /// <summary>
         /// setzt einen Key auf einen Wert (string)
         /// Wenn noch nicht vorhanden, wird der Key erzeugt und am Ende des Arrays angehängt
         /// </summary>
@@ -353,6 +379,19 @@ namespace MAMconfig
             Set(key, value.ToString());
         }
         /// <summary>
+        /// setzt einen Key auf einen Wert (Floating Point Zahl)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void Set(string key,
+                         double value)
+        {
+            string valueStr = value.ToString();
+            valueStr = valueStr.Replace('.', ',');
+            Set(key, valueStr);
+        }
+
+        /// <summary>
         /// setzt einen Key auf einen Wert (logische Werte)
         /// </summary>
         /// <param name="key"></param>
@@ -375,8 +414,6 @@ namespace MAMconfig
             if (string.IsNullOrEmpty(key))
             {
                 IniListe.Clear();
-                // 1.1 9.11.24 MAM: wenn Liste leer, dann auch statische Variable zurücksetzen
-                CommentNumber = 0;
             }
             else
             {
@@ -390,7 +427,7 @@ namespace MAMconfig
         /// </summary>
         public void EditINI()
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo("notepad.exe");
+            ProcessStartInfo startInfo = new ProcessStartInfo(FindNotepad());
             startInfo.WindowStyle = ProcessWindowStyle.Normal;
 
             startInfo.Arguments = Pfad;
@@ -399,6 +436,24 @@ namespace MAMconfig
             if (Geaendert) { WriteINI(); }
 
             Process.Start(startInfo);
+        }
+        /// <summary>
+        /// Sucht auf neueren Computern die App "notepad.exe", die nun nicht mehr im Systemverzeichnis und somit im Pfad erreichbar ist
+        /// </summary>
+        /// <returns>Vollen Pfad des neuen Notepad.exe oder, auf alten Maschinen, einfach "notepad.exe"</returns>
+        /// 
+        // Böööhse Puuhben bei Microsoft! Nach nur 40 Jahren löschen sie einfach den Editor notepad.exe und packen stattdessen
+        // eine zwielichtige App in einen mystischen Pfad, der nicht in PATH eingetragen ist. 
+        // da müssen wir uns die Kommandozeile selber zusammenbasteln, statt es der Shell zu überlassen
+        // "C:\Program Files\WindowsApps\Microsoft.WindowsNotepad_11.2407.8.0_x64__8wekyb3d8bbwe\Notepad\Notepad.exe"
+        // HKEY_CLASSES_ROOT\AppX1b0e9ytcwx0wcmvkdey0h6af04t1ta3z\Shell\open\command
+        // MAM 15.09.2024
+
+        public string FindNotepad()
+        {
+            string X;
+            X = (string)Registry.GetValue("HKEY_CLASSES_ROOT\\AppX1b0e9ytcwx0wcmvkdey0h6af04t1ta3z\\Shell\\open\\command", "", "notepad.exe");
+            return X;
         }
     }
 
