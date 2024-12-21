@@ -54,7 +54,7 @@ namespace EdgeMon
             this.MultiShotIntervall = Properties.Settings.Default.MultiShotIntervall;
             this.battery_autodetect = Properties.Settings.Default.battery_autodetect;
             this.gridflow_threshold = Properties.Settings.Default.gridflow_threshold;
-            this.showDetails = Properties.Settings.Default.showDetails;
+         //   this.showDetails = Properties.Settings.Default.showDetails;
             this.DetailLevel = Properties.Settings.Default.detailLevel;
             this.Darkmode = Properties.Settings.Default.Darkmode;
             this.checkUpdates = Properties.Settings.Default.checkUpdates;

@@ -37,6 +37,12 @@ namespace EdgeMon
             this.Splashpanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.Splash = new System.Windows.Forms.PictureBox();
+            this.lb_SOE_TXT = new System.Windows.Forms.Label();
+            this.pic_house_no = new System.Windows.Forms.PictureBox();
+            this.pic_grid_no = new System.Windows.Forms.PictureBox();
+            this.pic_bat_no = new System.Windows.Forms.PictureBox();
+            this.pic_pv_no = new System.Windows.Forms.PictureBox();
+            this.pb_xmas = new System.Windows.Forms.PictureBox();
             this.fullPVpanel = new System.Windows.Forms.Panel();
             this.pic_sunsetrise = new System.Windows.Forms.PictureBox();
             this.lb_sunset = new System.Windows.Forms.Label();
@@ -58,7 +64,6 @@ namespace EdgeMon
             this.tb_batManu = new System.Windows.Forms.TextBox();
             this.lb_m_batt_pwr_main = new System.Windows.Forms.Label();
             this.lb_m_batt_pwr = new System.Windows.Forms.Label();
-            this.lb_SOE_TXT = new System.Windows.Forms.Label();
             this.lb_version_copyright = new System.Windows.Forms.Label();
             this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.tb_Inv = new System.Windows.Forms.TextBox();
@@ -94,6 +99,7 @@ namespace EdgeMon
             this.BurgerMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ComboDetailLevel = new System.Windows.Forms.ToolStripComboBox();
             this.detailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.tt = new System.Windows.Forms.ToolTip(this.components);
@@ -101,6 +107,11 @@ namespace EdgeMon
             this.mainpanel.SuspendLayout();
             this.Splashpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splash)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_house_no)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_grid_no)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_no)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_pv_no)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_xmas)).BeginInit();
             this.fullPVpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_sunsetrise)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PV_off)).BeginInit();
@@ -139,6 +150,12 @@ namespace EdgeMon
             this.mainpanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mainpanel.BackColor = System.Drawing.Color.White;
             this.mainpanel.Controls.Add(this.Splashpanel);
+            this.mainpanel.Controls.Add(this.lb_SOE_TXT);
+            this.mainpanel.Controls.Add(this.pic_house_no);
+            this.mainpanel.Controls.Add(this.pic_grid_no);
+            this.mainpanel.Controls.Add(this.pic_bat_no);
+            this.mainpanel.Controls.Add(this.pic_pv_no);
+            this.mainpanel.Controls.Add(this.pb_xmas);
             this.mainpanel.Controls.Add(this.fullPVpanel);
             this.mainpanel.Controls.Add(this.label11);
             this.mainpanel.Controls.Add(this.tb_chargepower);
@@ -155,7 +172,6 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.tb_batManu);
             this.mainpanel.Controls.Add(this.lb_m_batt_pwr_main);
             this.mainpanel.Controls.Add(this.lb_m_batt_pwr);
-            this.mainpanel.Controls.Add(this.lb_SOE_TXT);
             this.mainpanel.Controls.Add(this.lb_version_copyright);
             this.mainpanel.Controls.Add(this.pic_house_to);
             this.mainpanel.Controls.Add(this.tb_Inv);
@@ -230,6 +246,67 @@ namespace EdgeMon
             this.Splash.TabStop = false;
             this.Splash.WaitOnLoad = true;
             // 
+            // lb_SOE_TXT
+            // 
+            this.lb_SOE_TXT.AutoSize = true;
+            this.lb_SOE_TXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_SOE_TXT.Location = new System.Drawing.Point(140, 507);
+            this.lb_SOE_TXT.Name = "lb_SOE_TXT";
+            this.lb_SOE_TXT.Size = new System.Drawing.Size(55, 20);
+            this.lb_SOE_TXT.TabIndex = 153;
+            this.lb_SOE_TXT.Text = "000%";
+            // 
+            // pic_house_no
+            // 
+            this.pic_house_no.Image = global::EdgeMon.Properties.Resources.inactive4;
+            this.pic_house_no.Location = new System.Drawing.Point(459, 337);
+            this.pic_house_no.Name = "pic_house_no";
+            this.pic_house_no.Size = new System.Drawing.Size(90, 116);
+            this.pic_house_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_house_no.TabIndex = 152;
+            this.pic_house_no.TabStop = false;
+            // 
+            // pic_grid_no
+            // 
+            this.pic_grid_no.Image = global::EdgeMon.Properties.Resources.inactive3;
+            this.pic_grid_no.Location = new System.Drawing.Point(457, 200);
+            this.pic_grid_no.Name = "pic_grid_no";
+            this.pic_grid_no.Size = new System.Drawing.Size(93, 122);
+            this.pic_grid_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_grid_no.TabIndex = 151;
+            this.pic_grid_no.TabStop = false;
+            // 
+            // pic_bat_no
+            // 
+            this.pic_bat_no.Image = global::EdgeMon.Properties.Resources.inactive1;
+            this.pic_bat_no.Location = new System.Drawing.Point(156, 337);
+            this.pic_bat_no.Name = "pic_bat_no";
+            this.pic_bat_no.Size = new System.Drawing.Size(98, 116);
+            this.pic_bat_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_bat_no.TabIndex = 150;
+            this.pic_bat_no.TabStop = false;
+            // 
+            // pic_pv_no
+            // 
+            this.pic_pv_no.Image = global::EdgeMon.Properties.Resources.inactive2;
+            this.pic_pv_no.Location = new System.Drawing.Point(154, 200);
+            this.pic_pv_no.Name = "pic_pv_no";
+            this.pic_pv_no.Size = new System.Drawing.Size(100, 121);
+            this.pic_pv_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pic_pv_no.TabIndex = 149;
+            this.pic_pv_no.TabStop = false;
+            // 
+            // pb_xmas
+            // 
+            this.pb_xmas.Location = new System.Drawing.Point(578, 488);
+            this.pb_xmas.Name = "pb_xmas";
+            this.pb_xmas.Size = new System.Drawing.Size(51, 64);
+            this.pb_xmas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_xmas.TabIndex = 148;
+            this.pb_xmas.TabStop = false;
+            this.pb_xmas.Visible = false;
+            this.pb_xmas.Click += new System.EventHandler(this.pb_xmas_Click);
+            // 
             // fullPVpanel
             // 
             this.fullPVpanel.Controls.Add(this.pic_sunsetrise);
@@ -237,7 +314,7 @@ namespace EdgeMon
             this.fullPVpanel.Controls.Add(this.lb_sunrise);
             this.fullPVpanel.Controls.Add(this.PV_off);
             this.fullPVpanel.Controls.Add(this.PV_on);
-            this.fullPVpanel.Location = new System.Drawing.Point(29, 71);
+            this.fullPVpanel.Location = new System.Drawing.Point(29, 79);
             this.fullPVpanel.Name = "fullPVpanel";
             this.fullPVpanel.Size = new System.Drawing.Size(223, 115);
             this.fullPVpanel.TabIndex = 147;
@@ -274,8 +351,9 @@ namespace EdgeMon
             // 
             // PV_off
             // 
+            this.PV_off.BackColor = System.Drawing.Color.Transparent;
             this.PV_off.Image = ((System.Drawing.Image)(resources.GetObject("PV_off.Image")));
-            this.PV_off.Location = new System.Drawing.Point(94, 32);
+            this.PV_off.Location = new System.Drawing.Point(93, 31);
             this.PV_off.Name = "PV_off";
             this.PV_off.Size = new System.Drawing.Size(90, 84);
             this.PV_off.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -410,6 +488,7 @@ namespace EdgeMon
             this.lb_tot_prod.Size = new System.Drawing.Size(192, 15);
             this.lb_tot_prod.TabIndex = 134;
             this.lb_tot_prod.Text = "---";
+            this.lb_tot_prod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_batManu
             // 
@@ -444,16 +523,6 @@ namespace EdgeMon
             this.lb_m_batt_pwr.TabIndex = 122;
             this.lb_m_batt_pwr.Text = "000000";
             this.lb_m_batt_pwr.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lb_SOE_TXT
-            // 
-            this.lb_SOE_TXT.AutoSize = true;
-            this.lb_SOE_TXT.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_SOE_TXT.Location = new System.Drawing.Point(139, 505);
-            this.lb_SOE_TXT.Name = "lb_SOE_TXT";
-            this.lb_SOE_TXT.Size = new System.Drawing.Size(55, 20);
-            this.lb_SOE_TXT.TabIndex = 120;
-            this.lb_SOE_TXT.Text = "000%";
             // 
             // lb_version_copyright
             // 
@@ -628,9 +697,9 @@ namespace EdgeMon
             // pic_grid_to
             // 
             this.pic_grid_to.Image = global::EdgeMon.Properties.Resources.arrow2R;
-            this.pic_grid_to.Location = new System.Drawing.Point(457, 192);
+            this.pic_grid_to.Location = new System.Drawing.Point(457, 199);
             this.pic_grid_to.Name = "pic_grid_to";
-            this.pic_grid_to.Size = new System.Drawing.Size(100, 129);
+            this.pic_grid_to.Size = new System.Drawing.Size(100, 122);
             this.pic_grid_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_grid_to.TabIndex = 113;
             this.pic_grid_to.TabStop = false;
@@ -638,9 +707,9 @@ namespace EdgeMon
             // pic_grid_from
             // 
             this.pic_grid_from.Image = global::EdgeMon.Properties.Resources.arrow2;
-            this.pic_grid_from.Location = new System.Drawing.Point(457, 193);
+            this.pic_grid_from.Location = new System.Drawing.Point(457, 199);
             this.pic_grid_from.Name = "pic_grid_from";
-            this.pic_grid_from.Size = new System.Drawing.Size(83, 129);
+            this.pic_grid_from.Size = new System.Drawing.Size(83, 123);
             this.pic_grid_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_grid_from.TabIndex = 108;
             this.pic_grid_from.TabStop = false;
@@ -648,9 +717,9 @@ namespace EdgeMon
             // pic_PV_from
             // 
             this.pic_PV_from.Image = global::EdgeMon.Properties.Resources.arrow41;
-            this.pic_PV_from.Location = new System.Drawing.Point(155, 192);
+            this.pic_PV_from.Location = new System.Drawing.Point(155, 200);
             this.pic_PV_from.Name = "pic_PV_from";
-            this.pic_PV_from.Size = new System.Drawing.Size(97, 130);
+            this.pic_PV_from.Size = new System.Drawing.Size(97, 122);
             this.pic_PV_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pic_PV_from.TabIndex = 107;
             this.pic_PV_from.TabStop = false;
@@ -658,7 +727,7 @@ namespace EdgeMon
             // grid
             // 
             this.grid.Image = ((System.Drawing.Image)(resources.GetObject("grid.Image")));
-            this.grid.Location = new System.Drawing.Point(491, 102);
+            this.grid.Location = new System.Drawing.Point(495, 110);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(77, 84);
             this.grid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -767,7 +836,7 @@ namespace EdgeMon
             this.lb_OptionMenu.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.lb_OptionMenu.TabIndex = 80;
             this.lb_OptionMenu.TabStop = false;
-            this.lb_OptionMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_OptionMenu_MouseDown);
+            this.lb_OptionMenu.Click += new System.EventHandler(this.lb_OptionMenu_Click);
             // 
             // lb_error
             // 
@@ -808,42 +877,67 @@ namespace EdgeMon
             this.BurgerMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.detailsToolStripMenuItem,
+            this.ComboDetailLevel,
             this.detailsToolStripMenuItem1,
             this.detailsToolStripMenuItem2});
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(170, 108);
-            this.BurgerMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.BurgerMenuStrip_Opening);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(182, 141);
+            this.BurgerMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.BurgerMenuStrip_Closed);
+            this.BurgerMenuStrip.Opened += new System.EventHandler(this.BurgerMenuStrip_Opened);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
-            this.BurgerMenuStrip.VisibleChanged += new System.EventHandler(this.BurgerMenuStrip_VisibleChanged);
+            this.BurgerMenuStrip.Click += new System.EventHandler(this.BurgerMenuStrip_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.toolStripMenuItem1.Text = "Configuration";
+            this.toolStripMenuItem1.ToolTipText = "open configuration window";
             // 
             // detailsToolStripMenuItem
             // 
             this.detailsToolStripMenuItem.Checked = true;
             this.detailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.detailsToolStripMenuItem.Enabled = false;
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.detailsToolStripMenuItem.Text = "Details";
+            this.detailsToolStripMenuItem.ToolTipText = "doggle details";
+            this.detailsToolStripMenuItem.Visible = false;
             this.detailsToolStripMenuItem.Click += new System.EventHandler(this.detailsToolStripMenuItem_Click);
+            // 
+            // ComboDetailLevel
+            // 
+            this.ComboDetailLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboDetailLevel.DropDownWidth = 30;
+            this.ComboDetailLevel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.ComboDetailLevel.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3"});
+            this.ComboDetailLevel.MaxDropDownItems = 4;
+            this.ComboDetailLevel.Name = "ComboDetailLevel";
+            this.ComboDetailLevel.Size = new System.Drawing.Size(121, 29);
+            this.ComboDetailLevel.ToolTipText = "Choose detail level";
+            this.ComboDetailLevel.DropDownClosed += new System.EventHandler(this.ComboDetailLevel_DropDownClosed);
+            this.ComboDetailLevel.SelectedIndexChanged += new System.EventHandler(this.ComboDetailLevel_SelectedIndexChanged);
             // 
             // detailsToolStripMenuItem1
             // 
             this.detailsToolStripMenuItem1.Name = "detailsToolStripMenuItem1";
-            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(169, 26);
+            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.detailsToolStripMenuItem1.Text = "Darkmode";
+            this.detailsToolStripMenuItem1.ToolTipText = "toggle darkmode";
             // 
             // detailsToolStripMenuItem2
             // 
             this.detailsToolStripMenuItem2.Name = "detailsToolStripMenuItem2";
-            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(169, 26);
+            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(181, 26);
             this.detailsToolStripMenuItem2.Text = "Screenshot";
+            this.detailsToolStripMenuItem2.ToolTipText = "make a screenshot";
             // 
             // tt
             // 
@@ -880,6 +974,11 @@ namespace EdgeMon
             this.Splashpanel.ResumeLayout(false);
             this.Splashpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splash)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_house_no)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_grid_no)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_bat_no)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_pv_no)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_xmas)).EndInit();
             this.fullPVpanel.ResumeLayout(false);
             this.fullPVpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_sunsetrise)).EndInit();
@@ -938,7 +1037,6 @@ namespace EdgeMon
         private System.Windows.Forms.TextBox tb_batManu;
         private System.Windows.Forms.Label lb_m_batt_pwr_main;
         private System.Windows.Forms.Label lb_m_batt_pwr;
-        private System.Windows.Forms.Label lb_SOE_TXT;
         private System.Windows.Forms.Label lb_version_copyright;
         private System.Windows.Forms.PictureBox pic_house_to;
         private System.Windows.Forms.TextBox tb_Inv;
@@ -972,5 +1070,12 @@ namespace EdgeMon
         private System.Windows.Forms.Panel fullPVpanel;
         private System.Windows.Forms.Label lb_sunset;
         private System.Windows.Forms.PictureBox pic_sunsetrise;
+        private System.Windows.Forms.PictureBox pb_xmas;
+        private System.Windows.Forms.PictureBox pic_pv_no;
+        private System.Windows.Forms.PictureBox pic_house_no;
+        private System.Windows.Forms.PictureBox pic_grid_no;
+        private System.Windows.Forms.PictureBox pic_bat_no;
+        private System.Windows.Forms.ToolStripComboBox ComboDetailLevel;
+        private System.Windows.Forms.Label lb_SOE_TXT;
     }
 }

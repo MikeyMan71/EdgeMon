@@ -152,7 +152,7 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_Battery = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_OneShot = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_battery_autodetect = new DataGridViewCheckBoxCell();
-            DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
+          //  DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_Darkmode = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
              DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
@@ -170,7 +170,7 @@ namespace EdgeMon
             cbc_Battery.Value = conf.battery;
             cbc_OneShot.Value = conf.OneShot;
             cbc_battery_autodetect.Value = conf.battery_autodetect;
-            cbc_showDetails.Value = conf.showDetails;
+           // cbc_showDetails.Value = conf.showDetails;
             cbc_Darkmode.Value = conf.Darkmode;
             cbc_checkUpdates.Value = conf.checkUpdates;
             combobc_DetailLevel.Value = conf.DetailLevel;
@@ -186,9 +186,10 @@ namespace EdgeMon
             ConfigGrid.Columns.Add("Setting", "Setting");
             ConfigGrid.Columns.Add("Value", "Value");
 
-            ConfigGrid.Rows.Add("TCP", conf.TCP);
-
+            ConfigGrid.Rows.Add("IP", conf.TCP);
+            
             ConfigGrid.Rows.Add("Port (0=auto)", conf.port);
+
 
             ConfigGrid.Rows.Add("Battery");
             ConfigGrid.Rows[2].Cells[1] = cbc_Battery;
@@ -208,23 +209,23 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
 
-            ConfigGrid.Rows.Add("showDetails");
-            ConfigGrid.Rows[9].Cells[1] = cbc_showDetails;
+         // ConfigGrid.Rows.Add("showDetails");
+          
 
             ConfigGrid.Rows.Add("DetailLevel",conf.DetailLevel);
-            ConfigGrid.Rows[10].Cells[1] = combobc_DetailLevel;
+            ConfigGrid.Rows[9].Cells[1] = combobc_DetailLevel;
 
             ConfigGrid.Rows.Add("Darkmode");
-            ConfigGrid.Rows[11].Cells[1] = cbc_Darkmode;
+            ConfigGrid.Rows[10].Cells[1] = cbc_Darkmode;
 
             ConfigGrid.Rows.Add("checkUpdates");
-            ConfigGrid.Rows[12].Cells[1] = cbc_checkUpdates;
+            ConfigGrid.Rows[11].Cells[1] = cbc_checkUpdates;
 
             ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
 
           
-
+      
             //  ConfigGrid.Rows.Add("SubiconLayout");
             //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
@@ -285,34 +286,34 @@ namespace EdgeMon
                 else { ConfigGrid.Rows[8].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
 
-                if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
-                { conf.showDetails = res_bool; }
+              //  if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
+              //  { conf.showDetails = res_bool; }
+              //  else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (int.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res))
+                { conf.DetailLevel = res; }
                 else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (int.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res))
-                { conf.DetailLevel = res; }
+                if (bool.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res_bool))
+                { conf.Darkmode = res_bool; }
                 else { ConfigGrid.Rows[10].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (bool.TryParse(ConfigGrid.Rows[11].Cells[1].Value.ToString(), out res_bool))
-                { conf.Darkmode = res_bool; }
+                { conf.checkUpdates = res_bool; }
                 else { ConfigGrid.Rows[11].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (bool.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString(), out res_bool))
-                { conf.checkUpdates = res_bool; }
+                if (ConfigGrid.Rows[12].Cells[1].Value == null) { ConfigGrid.Rows[12].Cells[1].Value = double.NaN; }
+
+
+                if (double.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                { conf.loc_latitude = doubleres; }
                 else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (ConfigGrid.Rows[13].Cells[1].Value == null) { ConfigGrid.Rows[13].Cells[1].Value = double.NaN; }
 
-
                 if (double.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
-                { conf.loc_latitude = doubleres; }
-                else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
-
-                if (ConfigGrid.Rows[14].Cells[1].Value == null) { ConfigGrid.Rows[14].Cells[1].Value = double.NaN; }
-
-                if (double.TryParse(ConfigGrid.Rows[14].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
                 { conf.loc_longitude = doubleres; }
-                else { ConfigGrid.Rows[14].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+                else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
 
 
@@ -437,6 +438,98 @@ namespace EdgeMon
                     ConfigGrid_CellValueChanged(this, e);
                 }
                 
+
+            }
+        }
+
+        private void ConfigGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            
+                if ((e.ColumnIndex == this.ConfigGrid.Columns[0].Index)
+       && e.Value != null)
+            {
+                DataGridViewCell cell =
+                    this.ConfigGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                switch (cell.RowIndex)
+                {
+                    case 0:
+                    cell.ToolTipText = "Enter IP Address as xxx.xxx.xxx.xxx , or devicename";
+                    break;
+                    case 1:
+                        cell.ToolTipText = "Enter Port number or 0 for autodetection";
+                        break;
+                    case 2:
+                        cell.ToolTipText = "Select if your system has a battery storage";
+                        break;
+                    case 3:
+                        cell.ToolTipText = "Enter refresh rate in Milliseconds";
+
+
+                        break;
+                    case 4:
+                        cell.ToolTipText = "Choose directory and filename for screenshots";
+
+                        break;
+                    case 5:
+                        cell.ToolTipText = "If activated, Edgemon will do a screenshot once and close immedeately";
+
+                        break;
+                    case 6:
+                        cell.ToolTipText = "If active, a screenshot will be done every Nth refresh";
+
+                        break;
+                    case 7:
+                        cell.ToolTipText = "Select for battery autodetect";
+
+                        break;
+                    case 8:
+                        cell.ToolTipText = "Threshold value for grid power. Values above this will be considered valid";
+
+                        break;
+                    case 9:
+                        cell.ToolTipText = "Select default detail level";
+
+                        break;
+                    case 10:
+                        cell.ToolTipText = "Select to activate darkmode as a default mode";
+
+                        break;
+                    case 11:
+                        cell.ToolTipText = "Select to automatically check for EdgeMon updates";
+                        break;
+                    case 12:
+                        cell.ToolTipText = "Enter location latitude. Enter NaN to auto-detect position (must be activated in windows)";
+
+                        break;
+                    case 13:
+                        cell.ToolTipText = "Enter location longitude. Enter NaN to auto-detect position (must be activated in windows)";
+
+                        break;
+
+                        
+
+
+
+
+                      
+    
+            
+             
+              
+              
+             
+              
+            
+              
+
+
+
+                default:
+                        break;
+                }
+                
+
 
             }
         }

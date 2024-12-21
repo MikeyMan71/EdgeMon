@@ -203,6 +203,16 @@ namespace EdgeMon.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CMT {
+            get {
+                object obj = ResourceManager.GetObject("CMT", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap downld {
             get {
                 object obj = ResourceManager.GetObject("downld", resourceCulture);
@@ -296,6 +306,46 @@ namespace EdgeMon.Properties {
         internal static System.Drawing.Bitmap house1 {
             get {
                 object obj = ResourceManager.GetObject("house1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inactive1 {
+            get {
+                object obj = ResourceManager.GetObject("inactive1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inactive2 {
+            get {
+                object obj = ResourceManager.GetObject("inactive2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inactive3 {
+            get {
+                object obj = ResourceManager.GetObject("inactive3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inactive4 {
+            get {
+                object obj = ResourceManager.GetObject("inactive4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

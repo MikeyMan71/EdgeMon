@@ -27,6 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ConfigGrid = new System.Windows.Forms.DataGridView();
             this.resetbutton = new System.Windows.Forms.Button();
             this.bt_accept = new System.Windows.Forms.Button();
@@ -52,7 +54,23 @@
             this.ConfigGrid.AllowUserToResizeColumns = false;
             this.ConfigGrid.AllowUserToResizeRows = false;
             this.ConfigGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ConfigGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.ConfigGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ConfigGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.ConfigGrid.Location = new System.Drawing.Point(3, 191);
             this.ConfigGrid.Name = "ConfigGrid";
             this.ConfigGrid.RowHeadersWidth = 51;
@@ -60,6 +78,7 @@
             this.ConfigGrid.Size = new System.Drawing.Size(602, 389);
             this.ConfigGrid.TabIndex = 28;
             this.ConfigGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellContentClick);
+            this.ConfigGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ConfigGrid_CellFormatting);
             this.ConfigGrid.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.ConfigGrid_CellValidating);
             this.ConfigGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellValueChanged);
             this.ConfigGrid.CurrentCellDirtyStateChanged += new System.EventHandler(this.ConfigGrid_CurrentCellDirtyStateChanged);

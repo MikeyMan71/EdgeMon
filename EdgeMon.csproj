@@ -233,12 +233,17 @@
     <Content Include="Resources\arrow3.png" />
     <None Include="Resources\Grid_.png" />
     <None Include="Resources\charging-icon.png" />
+    <None Include="Resources\CMT.png" />
     <Content Include="Resources\downld.png" />
     <None Include="Resources\downld1.png" />
     <None Include="Resources\downld2.png" />
     <None Include="Resources\dwnld_blue.png" />
     <Content Include="Resources\Edgemon.ico" />
     <Content Include="Resources\Edgemon.png" />
+    <None Include="Resources\inactive2.png" />
+    <None Include="Resources\inactive1.png" />
+    <None Include="Resources\inactive3.png" />
+    <None Include="Resources\inactive4.png" />
     <Content Include="Resources\NewFolder1\charging-icon.png" />
     <Content Include="Resources\NewFolder1\panel-solar-icon.png" />
     <Content Include="Resources\NewFolder1\power-pole-icon.png" />

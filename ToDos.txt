@@ -2,8 +2,8 @@
 (/)Screenshot of simple layout on Website
 (/)Nachkommastellen
 Thresold for solar panel
-Change detail grade on dropdown
+(/)Change detail grade on dropdown
 (/)Respond on broken config
 (/)auto-detect port 502/1502
-make info bubbles on config
+(/)make info bubbles on config
 (/)parse IP config

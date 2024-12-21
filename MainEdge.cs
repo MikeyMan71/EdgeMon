@@ -39,7 +39,7 @@ namespace EdgeMon
         // bool OneShot;// = Properties.Settings.Default.OneShot;
         int MultiShotIntervall;
         int errcount = 0;
-        string precision = "N1";
+        string precision = "N0";
         DateTime startdate  = DateTime.Now;
         DateTime lastdailyupdate = DateTime.Now;
         TimeSpan checklocation = new TimeSpan(0, 30, 0);
@@ -95,7 +95,11 @@ namespace EdgeMon
             def_lb_m_ImpExMeter= lb_m_ImpExMeter.Location;
             def_lb_m_pwr_house= lb_m_pwr_house.Location;
             def_lb_m_pwr_PV = lb_m_pwr_PV.Location;
-            
+
+            ComboDetailLevel.ComboBox.DataSource = new int[] { 0,1,2,3 };
+            ComboDetailLevel.SelectedIndex = pm.DetailLevel;
+
+
 
             restartMe();
         }
@@ -240,7 +244,8 @@ namespace EdgeMon
             if (pm.TCP == "INVERTER") firstrun = true;
 
             MultiShotIntervall = pm.MultiShotIntervall;
-            show_details = pm.showDetails;
+            show_details = true;
+          //  show_details = pm.showDetails;
             detail_level = pm.DetailLevel;
          //   SubiconLayout = pm.SubiconLayout;
          //   timer2.Enabled = false;
@@ -305,7 +310,7 @@ namespace EdgeMon
             timer2.Interval = pm.refresh;
 
             if (pm.Darkmode) darkmode_on(); else darkmode_off();
-            ((ToolStripMenuItem)(BurgerMenuStrip.Items[2])).Checked = pm.Darkmode;
+            ((ToolStripMenuItem)(BurgerMenuStrip.Items[3])).Checked = pm.Darkmode;
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
             statusgraph_dyn();
             Splashpanel.Hide();
@@ -406,19 +411,12 @@ namespace EdgeMon
         private void statusgraph_static()
         {
 
-
             tb_Inv.Clear();
             lb_version_copyright.Text = "V " + infobox.AssemblyVersion.ToString() + " " + infobox.AssemblyCopyright.ToString();
             lb_ac_pwr.Text = "";
             lb_dc_pwr.Text = "";
             MB_Pwr_3.Text = "";
             vanillaview(false);
-            
-            if (show_details && detail_level > 1) { precision = "N0"; }
-            else
-            { precision = "N0"; }
-
-      
 
             if (show_details && detail_level > 2)
             {
@@ -456,23 +454,37 @@ namespace EdgeMon
 
             if (have_battery)
             {
+               lb_T_Av.Hide();
+                lb_SOH.Hide();
+                label11.Hide();
+                label_SOH.Hide();   
 
+                bat_SOE.Show();
+                battery.Show();
+
+               lb_m_batt_pwr.Hide();
+                lb_m_batt_pwr_main.Show();
                 if (show_details & detail_level > 0)
                 {
-                    lb_T_Av.Show();
-                    label11.Show();
-                    label_SOH.Show();
-                    lb_SOH.Show();
-                    tb_chargepower.Hide();
-                    lb_bat_max.Hide();
-                    label9.Hide();
-                    label3.Hide();
+
+
                     lb_bat_stat.Show();
-                    lb_m_batt_pwr.Show();
-                    if (detail_level > 1)
+
+
+                    if (show_details & detail_level > 1)
                     {
+
+                        lb_T_Av.Show();
+                        label11.Show();
                         label_SOH.Show();
+                        lb_SOH.Show();
                         tb_chargepower.Hide();
+                        lb_bat_max.Hide();
+                        label9.Hide();
+                        label3.Hide();
+                        
+                        lb_m_batt_pwr.Show();
+
 
 
                         if (detail_level > 2)
@@ -491,14 +503,16 @@ namespace EdgeMon
                             tb_chargepower.AppendText(" | " + mb.Max_Charge_Peak_Power);
                             lb_bat_max.Text = (mb.Batt_Max_Energy / 1000).ToString() + " kWh";
                         }
+
+
+
                     }
-
-
                 }
 
                 else
                 {
-                    lb_m_batt_pwr.Hide();
+
+
                     lb_bat_stat.Hide();
                     lb_T_Av.Hide();
                     tb_batManu.Hide();
@@ -515,16 +529,17 @@ namespace EdgeMon
             else
             {
                 label_SOH.Hide();
-                bat_SOE.Hide();
+                pic_bat_no.Visible = false;
                 pic_bat_from.Hide();
                 pic_bat_to.Hide();
+                pic_bat_no.Hide();
                 battery.Hide();
-              
+                lb_m_batt_pwr_main.Hide();
                 lb_m_batt_pwr.Hide();
                 lb_bat_max.Hide();
                 lb_bat_stat.Hide();
                 lb_SOH.Hide();
-              //  bat_SOE.Hide();
+                 bat_SOE.Hide();
                 lb_SOE_TXT.Text = "";
                 lb_bat_stat.Text = "";
                 lb_T_Av.Text = "";
@@ -535,7 +550,7 @@ namespace EdgeMon
                 label3.Hide();
                 lb_total.Hide();
             }
-           if (!show_details || detail_level == 0)
+           if (!show_details || detail_level <= 1)
           //  if (pm.SubiconLayout)
             {
                 vanillaview(true);
@@ -592,6 +607,7 @@ namespace EdgeMon
                 hwdata.batt_pwr_main = Instantaneous_Power.ToString(precision) + " W";
                 //if (show_details && detail_level > 0)
                 hwdata.batt_pwr =  (mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString(precision) + " A ");
+            
             }
             hwdata.status = mb.I_Status.ToString();
             hwdata.ac_pwr = I_AC_Power.ToString(precision) + " W";
@@ -620,18 +636,24 @@ namespace EdgeMon
                 lb_m_batt_pwr.Text = hwdata.batt_pwr;
                 lb_m_batt_pwr_main.Text = hwdata.batt_pwr_main;
 
+
                 lb_SOE_TXT.Text = hwdata.bat_SOE;
-                if (show_details && detail_level > 0)
+                if (detail_level > 0)
+                {
+                    if (mb.Bat_Status != null) { lb_bat_stat.Text = hwdata.Bat_Status; }
+                }
+
+               
+                }
+
+                if (show_details && detail_level > 1)
                 {
                     
-                    if (mb.Bat_Status != null) { lb_bat_stat.Text = hwdata.Bat_Status; }
+                    
                     lb_T_Av.Text = hwdata.T_AV;
                     lb_SOH.Text = hwdata.SOH;
 
-                    if ( detail_level > 1)
-                    {
-                        
-                    }
+                
                 }
                 else
                 {
@@ -639,7 +661,15 @@ namespace EdgeMon
 
                 }
                 bat_SOE.Value = hwdata.SOE;
-               
+            if (hwdata.Bat_Status.Contains("Standby"))
+            {
+                bat_SOE.ForeColor = Color.Red;
+                bat_SOE.BackColor = Color.Red;
+            }
+            else
+            {
+                bat_SOE.ForeColor = Color.Green;
+                bat_SOE.BackColor= Color.Green;
             }
 
 
@@ -650,17 +680,13 @@ namespace EdgeMon
             lb_temp.Text = hwdata.temp;
             lb_temp.Focus();
 
-            if (show_details && detail_level > 0)
+            if (show_details && detail_level > 1)
             {
                 lb_ac_pwr.Text = hwdata.ac_pwr;
                 lb_dc_pwr.Text = hwdata.dc_pwr;
                 MB_Pwr_3.Text = hwdata.MB_Pwr3;
 
-
-                if (detail_level > 1)
-                {
-                 
-                }
+              
             }
             else { MB_Pwr_3.Text = ""; }
 
@@ -680,26 +706,26 @@ namespace EdgeMon
 
             if (pwr_PV < 0) pwr_PV = 0;
             lb_m_pwr_PV.Text = pwr_PV.ToString(precision) + " W";
-            if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); pic_PV_from.Show(); }
-            if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); }
+            if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); pic_PV_from.Show(); pic_pv_no.Hide(); }
+            if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); pic_pv_no.Show(); }
           
 
-            if (MTR_I_M_AC_Power < -pm.gridflow_threshold) { pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
+            if (MTR_I_M_AC_Power < -pm.gridflow_threshold) { pic_grid_no.Hide(); pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
-            if (MTR_I_M_AC_Power > pm.gridflow_threshold) { pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
+            if (MTR_I_M_AC_Power > pm.gridflow_threshold) { pic_grid_no.Hide(); pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
-            { pic_grid_to.Hide(); pic_grid_from.Hide(); 
+            { pic_grid_to.Hide(); pic_grid_from.Hide(); pic_grid_no.Show();
                 
                 pic_house_to.Image = Properties.Resources.arrow3_GREEN;
             }
-            if (pwr_house == 0) { pic_house_to.Hide(); } else { pic_house_to.Show(); }
+            if (pwr_house == 0) { pic_house_to.Hide(); pic_house_no.Show(); } else { pic_house_to.Show(); pic_house_no.Hide(); }
             if (have_battery)
             {
-                if (Instantaneous_Power < 0) { pic_bat_to.Hide(); pic_bat_from.Show(); }
+                if (Instantaneous_Power < 0) { pic_bat_to.Hide(); pic_bat_from.Show(); pic_house_no.Hide(); }
                 else
-                if (Instantaneous_Power > 0) { pic_bat_to.Show(); pic_bat_from.Hide(); }
+                if (Instantaneous_Power > 0) { pic_bat_to.Show(); pic_bat_from.Hide(); pic_house_no.Hide(); }
                 else
-                { pic_bat_to.Hide(); pic_bat_from.Hide(); }
+                { pic_bat_to.Hide(); pic_bat_from.Hide(); pic_bat_no.Show(); }
 
                 if (show_details && detail_level > 1)
                 {
@@ -710,7 +736,7 @@ namespace EdgeMon
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
 
-            if (show_details && detail_level > 1)
+            if (show_details && detail_level > 0)
             {
                 lb_tot_prod.Text = hwdata.tot_prod;
             }
@@ -727,13 +753,18 @@ namespace EdgeMon
         {
             if (force || (DateTime.Now.Date > lastdailyupdate.Date))
             {
+                if (DateTime.Now.Month == 12 && DateTime.Now.Day > 20) { pb_xmas.Image = EdgeMon.Properties.Resources.CMT; pb_xmas.Visible = true; }
+                else { pb_xmas.Image = null; pb_xmas.Visible = false; }
+
+
                 lastdailyupdate = DateTime.Now;
-                lb_sunrise.Text = sundata.getSunrise();
-                lb_sunset.Text = sundata.getSunset();
+              
 
 
                 if (show_details && detail_level > 0 && sundata != null && sundata.isvalid)
                 {
+                    lb_sunrise.Text = sundata.getSunrise();
+                    lb_sunset.Text = sundata.getSunset();
                     lb_sunrise.Visible = true;
                     lb_sunset.Visible = true;
                     pic_sunsetrise.Visible = true;
@@ -771,9 +802,10 @@ namespace EdgeMon
                 lb_m_pwr_house.Location = new Point(house.Left, house.Top - 30);
                 lb_m_pwr_PV.TextAlign = ContentAlignment.MiddleCenter;
                 lb_m_pwr_PV.Location = new Point(PV_off.Left+fullPVpanel.Left - (lb_m_pwr_PV.Width- PV_off.Width)/2, fullPVpanel.Bottom);
-               
-                
-                
+                pb_xmas.Location = new Point(pb_xmas.Left, house.Bottom - pb_xmas.Height);
+                lb_bat_stat.Location = new Point(lb_bat_stat.Left, battery.Top + (battery.Height-lb_bat_stat.Height) / 2);
+
+
             }
             else
             {
@@ -795,7 +827,8 @@ namespace EdgeMon
                 lb_m_pwr_house.Location = def_lb_m_pwr_house;
                 lb_m_pwr_PV.Location = def_lb_m_pwr_PV;
                 lb_m_pwr_PV.TextAlign = ContentAlignment.MiddleRight;
-
+                pb_xmas.Location = new Point(pb_xmas.Left, house.Bottom - pb_xmas.Height);
+                lb_bat_stat.Location = new Point(lb_bat_stat.Left, battery.Top + (battery.Height - lb_bat_stat.Height) / 2);
             }
 
             lb_m_batt_pwr.SendToBack();
@@ -950,8 +983,8 @@ namespace EdgeMon
         private void effect_details()
         {
             
-            show_details = !show_details;
-            this.statusgraph_static();
+  //          show_details = !show_details;
+  //          this.statusgraph_static();
         }
 
         private void darkmode_on()
@@ -1110,18 +1143,10 @@ namespace EdgeMon
         }
 
 
-        private void lb_OptionMenu_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                var relativeClickedPosition = e.Location;
-                var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
-                BurgerMenuStrip.Show(screenClickedPosition);
-               
-                //BurgerMenuStrip.Visible = false;
 
-            }
-        }
+
+
+ 
 
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1149,9 +1174,7 @@ namespace EdgeMon
                 if (e.ClickedItem.Text == "Configuration")
                 {
                    DoConfig();  
-
                 }
-
 
                 if (e.ClickedItem.Text == "Details")
                 {
@@ -1170,6 +1193,8 @@ namespace EdgeMon
                     catch { }
                     MessageBox.Show("Screenshot saved in " + pm.saveBitmap);
                 }
+            
+
             }
         }
 
@@ -1196,20 +1221,7 @@ namespace EdgeMon
           //  tt.SetToolTip(lb_upd, "UPDATE AVAILABLE");
         }
 
-        private void BurgerMenuStrip_VisibleChanged(object sender, EventArgs e)
-        {
-          //  if(!BurgerMenuStrip.Visible) {timer2.Start();} else {timer2.Stop();}
-        }
 
-        private void BurgerMenuStrip_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-        private void lb_pwr_PV_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void lb_upd_Click(object sender, EventArgs e)
         {
@@ -1219,10 +1231,8 @@ namespace EdgeMon
 
         }
 
-        private void PV_off_Click(object sender, EventArgs e)
-        {
+    
 
-        }
 
         private void Update_check_timer_Tick(object sender, EventArgs e)
         {
@@ -1243,6 +1253,78 @@ namespace EdgeMon
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pb_xmas_Click(object sender, EventArgs e)
+        {
+            if (DateTime.Now.Month == 12)
+            {
+                MessageBox.Show("Happy Holidays to all EdgeMon users !\nWishing you a sunny " + (DateTime.Now.Year + 1));
+            }
+        }
+
+    
+
+        private void lb_OptionMenu_MouseDown(object sender, MouseEventArgs e)
+        {
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    var relativeClickedPosition = e.Location;
+            //    var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
+            //    BurgerMenuStrip.Show(screenClickedPosition);
+
+            //    //BurgerMenuStrip.Visible = false;
+
+            //}
+        }
+
+        private void lb_OptionMenu_Click(object sender, EventArgs e)
+        {
+           // if (e.Button == MouseButtons.Left)
+            {
+             //   var relativeClickedPosition = e.Location;
+             //   var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
+                BurgerMenuStrip.Show(lb_OptionMenu,0,lb_OptionMenu.Height);
+
+                //BurgerMenuStrip.Visible = false;
+
+            }
+        }
+
+        private void BurgerMenuStrip_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void BurgerMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
+        {
+            timer2.Start();
+        }
+
+        private void BurgerMenuStrip_Opened(object sender, EventArgs e)
+        {
+            timer2.Stop();
+        }
+
+   
+
+        private void ComboDetailLevel_DropDownClosed(object sender, EventArgs e)
+        {
+            BurgerMenuStrip.Close();
+        }
+
+        private void ComboDetailLevel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int res;
+            if (ComboDetailLevel.ComboBox.SelectedItem != null)
+            {
+
+                if (int.TryParse(ComboDetailLevel.ComboBox.SelectedItem.ToString(), out res))
+                {
+                    detail_level= res;
+                    this.statusgraph_static();
+                }
+            }
         }
     }
 }
