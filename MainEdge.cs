@@ -35,7 +35,7 @@ namespace EdgeMon
         //bool retry_battery = false;
         int detail_level = 2;
         bool show_details = true;
-       
+        bool initialized = false;
         // bool OneShot;// = Properties.Settings.Default.OneShot;
         int MultiShotIntervall;
         int errcount = 0;
@@ -314,6 +314,7 @@ namespace EdgeMon
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
             statusgraph_dyn();
             Splashpanel.Hide();
+            initialized = true;
             this.Update();
 
            
@@ -879,9 +880,8 @@ namespace EdgeMon
                 lb_SOE_TXT.SendToBack();
                 battery.SendToBack();
                 bat_SOE.SendToBack();
-                lb_sunset.SendToBack();
-                lb_sunrise.SendToBack();
-
+                PV_on.SendToBack();
+                PV_off.SendToBack();
 
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
                 
@@ -894,8 +894,8 @@ namespace EdgeMon
                 pic_grid_from.SendToBack();
                 lb_m_batt_pwr.SendToBack();
                 pic_Logo_Website.Show();
-                PV_off.SendToBack();
-                PV_on.SendToBack();
+                lb_sunrise.SendToBack();
+                lb_sunset.SendToBack();
                 SaveImage(bmp, fileName);
                 bmp.Dispose();
               
@@ -1315,6 +1315,7 @@ namespace EdgeMon
 
         private void ComboDetailLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (!initialized) return;
             int res;
             if (ComboDetailLevel.ComboBox.SelectedItem != null)
             {
@@ -1322,7 +1323,16 @@ namespace EdgeMon
                 if (int.TryParse(ComboDetailLevel.ComboBox.SelectedItem.ToString(), out res))
                 {
                     detail_level= res;
-                    this.statusgraph_static();
+                    try
+                    {
+                        this.statusgraph_static();
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                    
                 }
             }
         }

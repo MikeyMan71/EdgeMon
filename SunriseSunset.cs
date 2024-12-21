@@ -32,14 +32,16 @@ namespace EdgeMon
 
         internal SunriseSunset(double lat, double lng, TimeZoneInfo timeZoneInfo)
         {
-            geoCoordinateWatcher.Start();
-            geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged);
+         
+           
 
             _lat = lat;
             _lon = lng;
 
             if (Double.IsNaN(lat) || Double.IsNaN(lng))
             {
+                geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged);
+                geoCoordinateWatcher.Start();
                 getlocation();
             }
             else
@@ -60,15 +62,17 @@ namespace EdgeMon
         {
             switch (e.Status)
             {
-                case GeoPositionStatus.Initializing:
-                    _isvalid = false;
-                    break;
+               
 
                 case GeoPositionStatus.Ready:
                     GeoCoordinate geo = geoCoordinateWatcher.Position.Location;
                     _lat = geo.Latitude;
                     _lon = geo.Longitude;
                     _isvalid = true;
+                    break;
+
+                case GeoPositionStatus.Initializing:
+                    _isvalid = false;
                     break;
 
                 case GeoPositionStatus.NoData:

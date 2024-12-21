@@ -269,7 +269,7 @@ namespace EdgeMon
             // pic_grid_no
             // 
             this.pic_grid_no.Image = global::EdgeMon.Properties.Resources.inactive3;
-            this.pic_grid_no.Location = new System.Drawing.Point(457, 200);
+            this.pic_grid_no.Location = new System.Drawing.Point(456, 200);
             this.pic_grid_no.Name = "pic_grid_no";
             this.pic_grid_no.Size = new System.Drawing.Size(93, 122);
             this.pic_grid_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -697,7 +697,7 @@ namespace EdgeMon
             // pic_grid_to
             // 
             this.pic_grid_to.Image = global::EdgeMon.Properties.Resources.arrow2R;
-            this.pic_grid_to.Location = new System.Drawing.Point(457, 199);
+            this.pic_grid_to.Location = new System.Drawing.Point(457, 200);
             this.pic_grid_to.Name = "pic_grid_to";
             this.pic_grid_to.Size = new System.Drawing.Size(100, 122);
             this.pic_grid_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -883,7 +883,7 @@ namespace EdgeMon
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(182, 141);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(177, 141);
             this.BurgerMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.BurgerMenuStrip_Closed);
             this.BurgerMenuStrip.Opened += new System.EventHandler(this.BurgerMenuStrip_Opened);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
@@ -910,8 +910,9 @@ namespace EdgeMon
             // 
             // ComboDetailLevel
             // 
+            this.ComboDetailLevel.AutoToolTip = true;
             this.ComboDetailLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboDetailLevel.DropDownWidth = 30;
+            this.ComboDetailLevel.DropDownWidth = 10;
             this.ComboDetailLevel.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.ComboDetailLevel.Items.AddRange(new object[] {
             "0",
@@ -920,7 +921,7 @@ namespace EdgeMon
             "3"});
             this.ComboDetailLevel.MaxDropDownItems = 4;
             this.ComboDetailLevel.Name = "ComboDetailLevel";
-            this.ComboDetailLevel.Size = new System.Drawing.Size(121, 29);
+            this.ComboDetailLevel.Size = new System.Drawing.Size(75, 29);
             this.ComboDetailLevel.ToolTipText = "Choose detail level";
             this.ComboDetailLevel.DropDownClosed += new System.EventHandler(this.ComboDetailLevel_DropDownClosed);
             this.ComboDetailLevel.SelectedIndexChanged += new System.EventHandler(this.ComboDetailLevel_SelectedIndexChanged);
