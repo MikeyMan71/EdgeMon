@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Device.Location;
 using System.Threading;
+using System.Diagnostics;
+
 
 namespace EdgeMon
 {
@@ -18,8 +20,9 @@ namespace EdgeMon
         double _lon;
         TimeZoneInfo tz;
         bool _isvalid;
-        
-        System.Device.Location.GeoCoordinateWatcher geoCoordinateWatcher = new GeoCoordinateWatcher();
+
+        GeoCoordinateWatcher geoCoordinateWatcher = new GeoCoordinateWatcher();
+
 
         public bool isvalid 
         {
@@ -27,28 +30,29 @@ namespace EdgeMon
         }
 
 
-
-
-
-        internal SunriseSunset(double lat, double lng, TimeZoneInfo timeZoneInfo)
+        public SunriseSunset(double lat, double lng, TimeZoneInfo timeZoneInfo)
         {
-         
-           
-
+            
             _lat = lat;
             _lon = lng;
 
             if (Double.IsNaN(lat) || Double.IsNaN(lng))
             {
-                geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged);
                 geoCoordinateWatcher.Start();
-                getlocation();
+                geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged); 
             }
             else
             { _isvalid = true; }
 
             tz = timeZoneInfo;
 
+        }
+
+        public string checklocation()
+        {
+     
+            return geoCoordinateWatcher.Status.ToString();
+                
         }
 
 
@@ -60,6 +64,8 @@ namespace EdgeMon
 
         private void watcher_statuschanged(object sender, GeoPositionStatusChangedEventArgs e)
         {
+
+            Debug.WriteLine(e.Status);
             switch (e.Status)
             {
                

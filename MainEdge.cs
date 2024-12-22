@@ -18,12 +18,14 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Diagnostics;
 using System.Globalization;
+using System.Device.Location;
 
 namespace EdgeMon
 {
     public partial class MainEdge : Form
     {
-        
+    
+
         // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
         EdgemonConfig pm;
 
@@ -36,6 +38,7 @@ namespace EdgeMon
         int detail_level = 2;
         bool show_details = true;
         bool initialized = false;
+        bool suppress_oneshot = false;
         // bool OneShot;// = Properties.Settings.Default.OneShot;
         int MultiShotIntervall;
         int errcount = 0;
@@ -203,10 +206,11 @@ namespace EdgeMon
                 //
 
                 lb_update.Text = DateTime.Now.ToString();
-                if (connected && pm.OneShot)
+                if (connected && pm.OneShot && !suppress_oneshot)
                 {
                     lb_m_ImpExMeter.BackColor = Color.White;
                     SaveAsBitmap(this.mainpanel, pm.saveBitmap);
+
                     Environment.Exit(0);
                 }
 
@@ -266,6 +270,9 @@ namespace EdgeMon
         private void init() {
 
 
+
+
+
             if (pm.battery_autodetect == true)
             {
                 try
@@ -317,7 +324,7 @@ namespace EdgeMon
             initialized = true;
             this.Update();
 
-           
+    
 
         }
 
@@ -645,7 +652,7 @@ namespace EdgeMon
                 }
 
                
-                }
+             }
 
                 if (show_details && detail_level > 1)
                 {
@@ -662,16 +669,16 @@ namespace EdgeMon
 
                 }
                 bat_SOE.Value = hwdata.SOE;
-            if (hwdata.Bat_Status.Contains("Standby"))
-            {
-                bat_SOE.ForeColor = Color.Red;
-                bat_SOE.BackColor = Color.Red;
-            }
-            else
-            {
-                bat_SOE.ForeColor = Color.Green;
-                bat_SOE.BackColor= Color.Green;
-            }
+            //if (hwdata.Bat_Status.Contains("Standby"))
+            //{
+            //    bat_SOE.ForeColor = Color.Red;
+            //    bat_SOE.BackColor = Color.Red;
+            //}
+            //else
+            //{
+            //    bat_SOE.ForeColor = Color.Green;
+            //    bat_SOE.BackColor= Color.Green;
+            //}
 
 
             lb_m_ImpExMeter.Text = hwdata.ImpExMeter;
@@ -722,9 +729,9 @@ namespace EdgeMon
             if (pwr_house == 0) { pic_house_to.Hide(); pic_house_no.Show(); } else { pic_house_to.Show(); pic_house_no.Hide(); }
             if (have_battery)
             {
-                if (Instantaneous_Power < 0) { pic_bat_to.Hide(); pic_bat_from.Show(); pic_house_no.Hide(); }
+                if (Instantaneous_Power < 0) { pic_bat_to.Hide(); pic_bat_from.Show(); pic_bat_no.Hide(); }
                 else
-                if (Instantaneous_Power > 0) { pic_bat_to.Show(); pic_bat_from.Hide(); pic_house_no.Hide(); }
+                if (Instantaneous_Power > 0) { pic_bat_to.Show(); pic_bat_from.Hide(); pic_bat_no.Hide(); }
                 else
                 { pic_bat_to.Hide(); pic_bat_from.Hide(); pic_bat_no.Show(); }
 
@@ -747,7 +754,7 @@ namespace EdgeMon
    
 
             dailyTasks();
-
+           // sundata.checklocation();
         }
 
         private void dailyTasks(bool force = false)
@@ -1338,6 +1345,14 @@ namespace EdgeMon
                     }
                     
                 }
+            }
+        }
+
+        private void MainEdge_Load(object sender, EventArgs e)
+        {
+            if ((ModifierKeys & Keys.Shift) != 0)
+            {
+                suppress_oneshot = true;    
             }
         }
     }

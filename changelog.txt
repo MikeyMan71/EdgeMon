@@ -20,3 +20,4 @@ V4.4.0: "empty" pipes in graphics, bugfix with batteryicon not showing, detail g
 V4.4.1: bugfix
 V4.4.2: bugfix
 V4.4.3: full redraw of all arrow design, adjusting positions and size
+V4.4.4: bugfix - battery arrow not showing properly. Feature: keep shift down while starting to suppress Oneshot. 
