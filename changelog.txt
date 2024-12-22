@@ -19,3 +19,4 @@ V4.3.1: Bugfix in Sunset/Sunrise Data, allow to manualy set Data iin Config as a
 V4.4.0: "empty" pipes in graphics, bugfix with batteryicon not showing, detail grade select in config window, remove detal_on/off (use detail level instead), (It's not the season for eastereggs, is it?) 
 V4.4.1: bugfix
 V4.4.2: bugfix
+V4.4.3: full redraw of all arrow design, adjusting positions and size

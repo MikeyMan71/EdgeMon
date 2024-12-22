@@ -989,6 +989,9 @@ namespace EdgeMon
 
         private void darkmode_on()
         {
+            Color dark = Color.FromArgb(0,0,0);
+
+
             bool was_off = false;
             if (this.mainpanel.BackColor == Color.White) { was_off = true; }
             foreach (Control ctrl in this.mainpanel.Controls)
@@ -1001,18 +1004,18 @@ namespace EdgeMon
                 }
                 if (ctrl is TextBox)
                 {
-                    ((TextBox)ctrl).BackColor = Color.Black;
+                    ((TextBox)ctrl).BackColor = dark;
                     ((TextBox)ctrl).ForeColor = Color.White;
                 }
             }
             
-            this.mainpanel.BackColor = Color.Black;
+            this.mainpanel.BackColor = dark; 
             //Dirty bug workaround, I have no Idea why I need this... 
-            lb_m_ImpExMeter.BackColor = Color.Black;
+            lb_m_ImpExMeter.BackColor = dark;
             lb_m_ImpExMeter.ForeColor = Color.White;
-            MB_Pwr_3.BackColor = Color.Black;
+            MB_Pwr_3.BackColor = dark;
             MB_Pwr_3.ForeColor = Color.White;
-            tb_Inv.BackColor = Color.Black;
+            tb_Inv.BackColor = dark;
             tb_Inv.ForeColor = Color.White;
 
            lb_update.ForeColor = Color.White;
@@ -1024,15 +1027,16 @@ namespace EdgeMon
                 lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
               //  lb_upd.Image = Transform(lb_upd.Image);
             }
-            this.BackColor = Color.Black;
-            lb_sunrise.BackColor = Color.Black;
+            this.BackColor = dark;
+            lb_sunrise.BackColor = dark;
             lb_sunrise.ForeColor = Color.White;
-            lb_sunset.BackColor = Color.Black;
+            lb_sunset.BackColor = dark;
             lb_sunset.ForeColor = Color.White;
 
         }
         private void darkmode_off() 
         {
+            Color dark = Color.FromArgb(0, 0, 0);
             bool was_off = false; 
             if (this.mainpanel.BackColor == Color.White) { was_off = true; }
 
@@ -1041,25 +1045,25 @@ namespace EdgeMon
                 if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
                 if (ctrl is Label)
                 {
-                    ((Label)ctrl).ForeColor = Color.Black;
+                    ((Label)ctrl).ForeColor = dark;
                     ((Label)ctrl).BackColor = Color.White;
 
                 }
                 if (ctrl is TextBox)
                 {
-                    ((TextBox)ctrl).ForeColor = Color.Black;
+                    ((TextBox)ctrl).ForeColor = dark;
                     ((TextBox)ctrl).BackColor = Color.White;
                 }
             }
             this.mainpanel.BackColor = Color.White;
             lb_m_ImpExMeter.BackColor = Color.White;
-            lb_m_ImpExMeter.ForeColor = Color.Black;
+            lb_m_ImpExMeter.ForeColor = dark;
             MB_Pwr_3.BackColor = Color.White;
-            MB_Pwr_3.ForeColor = Color.Black;
+            MB_Pwr_3.ForeColor = dark;
             tb_Inv.BackColor = Color.White;
-            tb_Inv.ForeColor = Color.Black;
+            tb_Inv.ForeColor = dark;
 
-            lb_update.ForeColor = Color.Black;
+            lb_update.ForeColor = dark;
             if (!was_off)
             {
                 grid.Image = Transform(grid.Image);
@@ -1070,9 +1074,9 @@ namespace EdgeMon
             }
             this.BackColor = Color.White;
             lb_sunrise.BackColor = Color.White;
-            lb_sunrise.ForeColor = Color.Black;
+            lb_sunrise.ForeColor = dark;
             lb_sunset.BackColor = Color.White;
-            lb_sunset.ForeColor = Color.Black;
+            lb_sunset.ForeColor = dark;
         }
 
 
