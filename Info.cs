@@ -472,7 +472,7 @@ namespace EdgeMon
 
                         break;
                     case 5:
-                        cell.ToolTipText = "If activated, Edgemon will do a screenshot once and close immedeately";
+                        cell.ToolTipText = "If activated, Edgemon will do a screenshot once and close immedeately. Hold SHIFT to ignore this setting when starting Edgemon";
 
                         break;
                     case 6:

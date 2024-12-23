@@ -389,7 +389,8 @@ namespace EdgeMon
                 try
                 {
 
-                    WebClient client = new WebClient();
+                    MyWebClient client = new MyWebClient();
+                    //WebClient client = new WebClient(); 
                     Stream stream = client.OpenRead("https://edgemon.helioho.st/version");
                     StreamReader reader = new StreamReader(stream);
                     String content = reader.ReadToEnd();
@@ -469,8 +470,12 @@ namespace EdgeMon
 
                 bat_SOE.Show();
                 battery.Show();
+                label3.Hide();
+                label9.Hide();
+                tb_chargepower.Hide();
+                lb_bat_max.Hide();
 
-               lb_m_batt_pwr.Hide();
+                lb_m_batt_pwr.Hide();
                 lb_m_batt_pwr_main.Show();
                 if (show_details & detail_level > 0)
                 {
@@ -486,10 +491,9 @@ namespace EdgeMon
                         label11.Show();
                         label_SOH.Show();
                         lb_SOH.Show();
-                        tb_chargepower.Hide();
-                        lb_bat_max.Hide();
-                        label9.Hide();
-                        label3.Hide();
+                       // tb_chargepower.Hide();
+                       // lb_bat_max.Hide();
+                       
                         
                         lb_m_batt_pwr.Show();
 
@@ -1355,5 +1359,18 @@ namespace EdgeMon
                 suppress_oneshot = true;    
             }
         }
+    }
+}
+
+
+
+
+class MyWebClient : WebClient
+{
+    protected override WebRequest GetWebRequest(Uri uri)
+    {
+        WebRequest w = base.GetWebRequest(uri);
+        w.Timeout = 5 * 1000;
+        return w;
     }
 }
