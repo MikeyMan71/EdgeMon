@@ -184,7 +184,7 @@
             this.bt_cl.Name = "bt_cl";
             this.bt_cl.Size = new System.Drawing.Size(94, 26);
             this.bt_cl.TabIndex = 40;
-            this.bt_cl.Text = "changelog";
+            this.bt_cl.Text = "Changelog";
             this.bt_cl.UseVisualStyleBackColor = false;
             this.bt_cl.Click += new System.EventHandler(this.bt_cl_Click);
             // 
@@ -195,7 +195,7 @@
             this.bt_lic.Name = "bt_lic";
             this.bt_lic.Size = new System.Drawing.Size(94, 26);
             this.bt_lic.TabIndex = 41;
-            this.bt_lic.Text = "Licences";
+            this.bt_lic.Text = "Licenses";
             this.bt_lic.UseVisualStyleBackColor = false;
             this.bt_lic.Click += new System.EventHandler(this.bt_lic_Click);
             // 

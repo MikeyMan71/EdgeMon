@@ -37,6 +37,8 @@ namespace EdgeMon
             this.Splashpanel = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.Splash = new System.Windows.Forms.PictureBox();
+            this.lb_m_ImpExMeter = new System.Windows.Forms.Label();
+            this.lb_m_batt_pwr = new System.Windows.Forms.Label();
             this.lb_SOE_TXT = new System.Windows.Forms.Label();
             this.pic_pv_no = new System.Windows.Forms.PictureBox();
             this.pic_bat_no = new System.Windows.Forms.PictureBox();
@@ -65,7 +67,6 @@ namespace EdgeMon
             this.lb_tot_prod = new System.Windows.Forms.TextBox();
             this.tb_batManu = new System.Windows.Forms.TextBox();
             this.lb_m_batt_pwr_main = new System.Windows.Forms.Label();
-            this.lb_m_batt_pwr = new System.Windows.Forms.Label();
             this.lb_version_copyright = new System.Windows.Forms.Label();
             this.pic_house_to = new System.Windows.Forms.PictureBox();
             this.tb_Inv = new System.Windows.Forms.TextBox();
@@ -81,7 +82,6 @@ namespace EdgeMon
             this.lb_ac_pwr = new System.Windows.Forms.Label();
             this.lb_dc_pwr = new System.Windows.Forms.Label();
             this.MB_Pwr_3 = new System.Windows.Forms.TextBox();
-            this.lb_m_ImpExMeter = new System.Windows.Forms.TextBox();
             this.pic_grid_to = new System.Windows.Forms.PictureBox();
             this.pic_grid_from = new System.Windows.Forms.PictureBox();
             this.pic_PV_from = new System.Windows.Forms.PictureBox();
@@ -101,11 +101,14 @@ namespace EdgeMon
             this.detailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.detailsToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.ComboDetailLevel = new System.Windows.Forms.ToolStripComboBox();
+            this.ls_detailLevel = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_lvl0 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_lvl1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_lvl2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_lvl3 = new System.Windows.Forms.ToolStripMenuItem();
             this.tt = new System.Windows.Forms.ToolTip(this.components);
             this.Update_check_timer = new System.Windows.Forms.Timer(this.components);
+            this.ComboDetailLevel = new System.Windows.Forms.ToolStripComboBox();
             this.mainpanel.SuspendLayout();
             this.Splashpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Splash)).BeginInit();
@@ -152,6 +155,8 @@ namespace EdgeMon
             this.mainpanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.mainpanel.BackColor = System.Drawing.Color.White;
             this.mainpanel.Controls.Add(this.Splashpanel);
+            this.mainpanel.Controls.Add(this.lb_m_ImpExMeter);
+            this.mainpanel.Controls.Add(this.lb_m_batt_pwr);
             this.mainpanel.Controls.Add(this.lb_SOE_TXT);
             this.mainpanel.Controls.Add(this.pic_pv_no);
             this.mainpanel.Controls.Add(this.pic_bat_no);
@@ -175,7 +180,6 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.lb_tot_prod);
             this.mainpanel.Controls.Add(this.tb_batManu);
             this.mainpanel.Controls.Add(this.lb_m_batt_pwr_main);
-            this.mainpanel.Controls.Add(this.lb_m_batt_pwr);
             this.mainpanel.Controls.Add(this.lb_version_copyright);
             this.mainpanel.Controls.Add(this.pic_house_to);
             this.mainpanel.Controls.Add(this.tb_Inv);
@@ -191,7 +195,6 @@ namespace EdgeMon
             this.mainpanel.Controls.Add(this.lb_ac_pwr);
             this.mainpanel.Controls.Add(this.lb_dc_pwr);
             this.mainpanel.Controls.Add(this.MB_Pwr_3);
-            this.mainpanel.Controls.Add(this.lb_m_ImpExMeter);
             this.mainpanel.Controls.Add(this.pic_grid_to);
             this.mainpanel.Controls.Add(this.pic_grid_from);
             this.mainpanel.Controls.Add(this.pic_PV_from);
@@ -247,6 +250,28 @@ namespace EdgeMon
             this.Splash.TabIndex = 82;
             this.Splash.TabStop = false;
             this.Splash.WaitOnLoad = true;
+            // 
+            // lb_m_ImpExMeter
+            // 
+            this.lb_m_ImpExMeter.AutoSize = true;
+            this.lb_m_ImpExMeter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_m_ImpExMeter.Location = new System.Drawing.Point(547, 257);
+            this.lb_m_ImpExMeter.Name = "lb_m_ImpExMeter";
+            this.lb_m_ImpExMeter.Size = new System.Drawing.Size(55, 16);
+            this.lb_m_ImpExMeter.TabIndex = 159;
+            this.lb_m_ImpExMeter.Text = "000000";
+            this.lb_m_ImpExMeter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lb_m_batt_pwr
+            // 
+            this.lb_m_batt_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_m_batt_pwr.ForeColor = System.Drawing.Color.Black;
+            this.lb_m_batt_pwr.Location = new System.Drawing.Point(45, 382);
+            this.lb_m_batt_pwr.Name = "lb_m_batt_pwr";
+            this.lb_m_batt_pwr.Size = new System.Drawing.Size(123, 55);
+            this.lb_m_batt_pwr.TabIndex = 158;
+            this.lb_m_batt_pwr.Text = "000000";
+            this.lb_m_batt_pwr.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lb_SOE_TXT
             // 
@@ -510,7 +535,6 @@ namespace EdgeMon
             this.lb_tot_prod.Size = new System.Drawing.Size(192, 15);
             this.lb_tot_prod.TabIndex = 134;
             this.lb_tot_prod.Text = "---";
-            this.lb_tot_prod.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_batManu
             // 
@@ -535,16 +559,6 @@ namespace EdgeMon
             this.lb_m_batt_pwr_main.TabIndex = 132;
             this.lb_m_batt_pwr_main.Text = "00000";
             this.lb_m_batt_pwr_main.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lb_m_batt_pwr
-            // 
-            this.lb_m_batt_pwr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_m_batt_pwr.Location = new System.Drawing.Point(45, 382);
-            this.lb_m_batt_pwr.Name = "lb_m_batt_pwr";
-            this.lb_m_batt_pwr.Size = new System.Drawing.Size(123, 55);
-            this.lb_m_batt_pwr.TabIndex = 122;
-            this.lb_m_batt_pwr.Text = "000000";
-            this.lb_m_batt_pwr.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // lb_version_copyright
             // 
@@ -658,16 +672,16 @@ namespace EdgeMon
             // 
             // lb_status
             // 
-            this.lb_status.AutoSize = true;
             this.lb_status.BackColor = System.Drawing.Color.LightPink;
             this.lb_status.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_status.ForeColor = System.Drawing.Color.DimGray;
-            this.lb_status.Location = new System.Drawing.Point(322, 288);
+            this.lb_status.Location = new System.Drawing.Point(299, 287);
             this.lb_status.Name = "lb_status";
-            this.lb_status.Size = new System.Drawing.Size(61, 20);
+            this.lb_status.Size = new System.Drawing.Size(113, 25);
             this.lb_status.TabIndex = 118;
             this.lb_status.Tag = "FIXEDCOLOR";
-            this.lb_status.Text = "NONE";
+            this.lb_status.Text = "SLEEPING";
+            this.lb_status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lb_ac_pwr
             // 
@@ -702,19 +716,6 @@ namespace EdgeMon
             this.MB_Pwr_3.Size = new System.Drawing.Size(194, 15);
             this.MB_Pwr_3.TabIndex = 115;
             this.MB_Pwr_3.Text = "---";
-            // 
-            // lb_m_ImpExMeter
-            // 
-            this.lb_m_ImpExMeter.BackColor = System.Drawing.Color.White;
-            this.lb_m_ImpExMeter.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lb_m_ImpExMeter.Cursor = System.Windows.Forms.Cursors.No;
-            this.lb_m_ImpExMeter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_m_ImpExMeter.ForeColor = System.Drawing.Color.Black;
-            this.lb_m_ImpExMeter.Location = new System.Drawing.Point(550, 260);
-            this.lb_m_ImpExMeter.Name = "lb_m_ImpExMeter";
-            this.lb_m_ImpExMeter.Size = new System.Drawing.Size(154, 15);
-            this.lb_m_ImpExMeter.TabIndex = 114;
-            this.lb_m_ImpExMeter.Text = "---";
             // 
             // pic_grid_to
             // 
@@ -768,15 +769,15 @@ namespace EdgeMon
             // 
             // lb_temp
             // 
-            this.lb_temp.AutoSize = true;
             this.lb_temp.BackColor = System.Drawing.Color.LightPink;
             this.lb_temp.ForeColor = System.Drawing.Color.DimGray;
-            this.lb_temp.Location = new System.Drawing.Point(323, 355);
+            this.lb_temp.Location = new System.Drawing.Point(303, 350);
             this.lb_temp.Name = "lb_temp";
-            this.lb_temp.Size = new System.Drawing.Size(19, 16);
+            this.lb_temp.Size = new System.Drawing.Size(96, 23);
             this.lb_temp.TabIndex = 121;
             this.lb_temp.Tag = "FIXEDCOLOR";
             this.lb_temp.Text = "---";
+            this.lb_temp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Inverter_PIC
             // 
@@ -881,13 +882,11 @@ namespace EdgeMon
             this.detailsToolStripMenuItem,
             this.detailsToolStripMenuItem1,
             this.detailsToolStripMenuItem2,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1,
-            this.ComboDetailLevel});
+            this.ls_detailLevel});
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(177, 167);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(211, 162);
             this.BurgerMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.BurgerMenuStrip_Closed);
             this.BurgerMenuStrip.Opened += new System.EventHandler(this.BurgerMenuStrip_Opened);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
@@ -896,7 +895,7 @@ namespace EdgeMon
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.toolStripMenuItem1.Text = "Configuration";
             this.toolStripMenuItem1.ToolTipText = "open configuration window";
             // 
@@ -906,7 +905,7 @@ namespace EdgeMon
             this.detailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.detailsToolStripMenuItem.Enabled = false;
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
             this.detailsToolStripMenuItem.Text = "Details";
             this.detailsToolStripMenuItem.ToolTipText = "doggle details";
             this.detailsToolStripMenuItem.Visible = false;
@@ -915,32 +914,77 @@ namespace EdgeMon
             // detailsToolStripMenuItem1
             // 
             this.detailsToolStripMenuItem1.Name = "detailsToolStripMenuItem1";
-            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
+            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.detailsToolStripMenuItem1.Text = "Darkmode";
             this.detailsToolStripMenuItem1.ToolTipText = "toggle darkmode";
             // 
             // detailsToolStripMenuItem2
             // 
             this.detailsToolStripMenuItem2.Name = "detailsToolStripMenuItem2";
-            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(176, 26);
+            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(210, 26);
             this.detailsToolStripMenuItem2.Text = "Screenshot";
             this.detailsToolStripMenuItem2.ToolTipText = "make a screenshot";
             // 
-            // toolStripSeparator1
+            // ls_detailLevel
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+            this.ls_detailLevel.CheckOnClick = true;
+            this.ls_detailLevel.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_lvl0,
+            this.ts_lvl1,
+            this.ts_lvl2,
+            this.ts_lvl3});
+            this.ls_detailLevel.Name = "ls_detailLevel";
+            this.ls_detailLevel.Size = new System.Drawing.Size(210, 26);
+            this.ls_detailLevel.Text = "Detail Level";
             // 
-            // toolStripTextBox1
+            // ts_lvl0
             // 
-            this.toolStripTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.toolStripTextBox1.CausesValidation = false;
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripTextBox1.ForeColor = System.Drawing.SystemColors.Menu;
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.ReadOnly = true;
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 18);
-            this.toolStripTextBox1.Text = "Detail Level:";
+            this.ts_lvl0.CheckOnClick = true;
+            this.ts_lvl0.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_lvl0.Name = "ts_lvl0";
+            this.ts_lvl0.Size = new System.Drawing.Size(103, 26);
+            this.ts_lvl0.Text = "0";
+            this.ts_lvl0.Click += new System.EventHandler(this.ts_lvl0_Click);
+            // 
+            // ts_lvl1
+            // 
+            this.ts_lvl1.CheckOnClick = true;
+            this.ts_lvl1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_lvl1.Name = "ts_lvl1";
+            this.ts_lvl1.Size = new System.Drawing.Size(103, 26);
+            this.ts_lvl1.Text = "1";
+            this.ts_lvl1.Click += new System.EventHandler(this.ts_lvl1_Click);
+            // 
+            // ts_lvl2
+            // 
+            this.ts_lvl2.CheckOnClick = true;
+            this.ts_lvl2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_lvl2.Name = "ts_lvl2";
+            this.ts_lvl2.Size = new System.Drawing.Size(103, 26);
+            this.ts_lvl2.Text = "2";
+            this.ts_lvl2.Click += new System.EventHandler(this.ts_lvl2_Click);
+            // 
+            // ts_lvl3
+            // 
+            this.ts_lvl3.CheckOnClick = true;
+            this.ts_lvl3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ts_lvl3.Name = "ts_lvl3";
+            this.ts_lvl3.Size = new System.Drawing.Size(103, 26);
+            this.ts_lvl3.Text = "3";
+            this.ts_lvl3.Click += new System.EventHandler(this.ts_lvl3_Click);
+            // 
+            // tt
+            // 
+            this.tt.BackColor = System.Drawing.Color.White;
+            this.tt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.tt.UseAnimation = false;
+            this.tt.UseFading = false;
+            // 
+            // Update_check_timer
+            // 
+            this.Update_check_timer.Enabled = true;
+            this.Update_check_timer.Interval = 1000;
+            this.Update_check_timer.Tick += new System.EventHandler(this.Update_check_timer_Tick);
             // 
             // ComboDetailLevel
             // 
@@ -959,19 +1003,6 @@ namespace EdgeMon
             this.ComboDetailLevel.ToolTipText = "Choose detail level";
             this.ComboDetailLevel.DropDownClosed += new System.EventHandler(this.ComboDetailLevel_DropDownClosed);
             this.ComboDetailLevel.SelectedIndexChanged += new System.EventHandler(this.ComboDetailLevel_SelectedIndexChanged);
-            // 
-            // tt
-            // 
-            this.tt.BackColor = System.Drawing.Color.White;
-            this.tt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            this.tt.UseAnimation = false;
-            this.tt.UseFading = false;
-            // 
-            // Update_check_timer
-            // 
-            this.Update_check_timer.Enabled = true;
-            this.Update_check_timer.Interval = 1000;
-            this.Update_check_timer.Tick += new System.EventHandler(this.Update_check_timer_Tick);
             // 
             // MainEdge
             // 
@@ -1020,7 +1051,6 @@ namespace EdgeMon
             ((System.ComponentModel.ISupportInitialize)(this.lb_OptionMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Logo_Website)).EndInit();
             this.BurgerMenuStrip.ResumeLayout(false);
-            this.BurgerMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1059,7 +1089,6 @@ namespace EdgeMon
         private System.Windows.Forms.TextBox lb_tot_prod;
         private System.Windows.Forms.TextBox tb_batManu;
         private System.Windows.Forms.Label lb_m_batt_pwr_main;
-        private System.Windows.Forms.Label lb_m_batt_pwr;
         private System.Windows.Forms.Label lb_version_copyright;
         private System.Windows.Forms.PictureBox pic_house_to;
         private System.Windows.Forms.TextBox tb_Inv;
@@ -1075,7 +1104,6 @@ namespace EdgeMon
         private System.Windows.Forms.Label lb_ac_pwr;
         private System.Windows.Forms.Label lb_dc_pwr;
         private System.Windows.Forms.TextBox MB_Pwr_3;
-        private System.Windows.Forms.TextBox lb_m_ImpExMeter;
         private System.Windows.Forms.PictureBox pic_grid_to;
         private System.Windows.Forms.PictureBox pic_grid_from;
         private System.Windows.Forms.PictureBox pic_PV_from;
@@ -1095,12 +1123,17 @@ namespace EdgeMon
         private System.Windows.Forms.PictureBox pic_house_no;
         private System.Windows.Forms.PictureBox pic_grid_no;
         private System.Windows.Forms.PictureBox pic_bat_no;
-        private System.Windows.Forms.ToolStripComboBox ComboDetailLevel;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.PictureBox pic_bat_to;
         private System.Windows.Forms.PictureBox pic_bat_from;
         private System.Windows.Forms.PictureBox pic_pv_no;
         private System.Windows.Forms.Label lb_SOE_TXT;
+        private System.Windows.Forms.Label lb_m_batt_pwr;
+        private System.Windows.Forms.ToolStripComboBox ComboDetailLevel;
+        private System.Windows.Forms.ToolStripMenuItem ls_detailLevel;
+        private System.Windows.Forms.ToolStripMenuItem ts_lvl0;
+        private System.Windows.Forms.ToolStripMenuItem ts_lvl1;
+        private System.Windows.Forms.ToolStripMenuItem ts_lvl2;
+        private System.Windows.Forms.ToolStripMenuItem ts_lvl3;
+        private System.Windows.Forms.Label lb_m_ImpExMeter;
     }
 }

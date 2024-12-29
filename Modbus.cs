@@ -128,8 +128,8 @@ namespace EdgeMon
         {
             [Description("OFF")]
             Off = 0,
-            [Description("?1")]
-            Standby = 1,
+            [Description("Forced Idle")]
+            FrcdIdle = 1,
             [Description("Init")]
             Init = 2,
             [Description("Charge")]
@@ -140,8 +140,12 @@ namespace EdgeMon
             Fault = 5,
             [Description("Idle")]
             Idle_full = 6,
-            [Description("?7")]
-            Idle = 7,
+            [Description("Unknown State 7")]
+            UKS7 = 7,
+            [Description("Unknown State 8")]
+            UKS8 = 8,
+            [Description("Unknown State 9")]
+            UKS9 = 9,
             [Description("Standby")]
             Standby10 = 10,
         }

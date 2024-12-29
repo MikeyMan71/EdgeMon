@@ -70,6 +70,12 @@
   <PropertyGroup>
     <ApplicationIcon>Edgemon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>Michael_Aigle_priv.asc</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EasyModbus, Version=5.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\EasyModbusTCP.5.6.0\lib\net40\EasyModbus.dll</HintPath>
@@ -138,7 +144,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Dr. Michael Aigle_0x2692121D_public.asc" />
+    <None Include="EdgeMonKey.snk" />
     <None Include="EdgeMon_TemporaryKey.pfx" />
+    <None Include="Michael_Aigle_priv.asc" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -221,12 +230,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="licenses.txt">
+    <AdditionalFiles Include="licenses.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="changelog.txt">
+    </AdditionalFiles>
+    <AdditionalFiles Include="changelog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </AdditionalFiles>
     <Content Include="Edgemon.ico" />
     <Content Include="ResourcesConfig\error.png" />
     <Content Include="Resources\burger.png" />

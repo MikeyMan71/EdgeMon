@@ -24,7 +24,7 @@ namespace EdgeMon
 {
     public partial class MainEdge : Form
     {
-    
+
 
         // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
         EdgemonConfig pm;
@@ -43,14 +43,14 @@ namespace EdgeMon
         int MultiShotIntervall;
         int errcount = 0;
         string precision = "N0";
-        DateTime startdate  = DateTime.Now;
+        DateTime startdate = DateTime.Now;
         DateTime lastdailyupdate = DateTime.Now;
         TimeSpan checklocation = new TimeSpan(0, 30, 0);
 
         TcpModbus mb;
         Info infobox = new Info();
         SunriseSunset sundata;
-
+        Color dark = Color.FromArgb(30, 30, 30);
 
         Point def_PV_off;
         Point def_PV_on;
@@ -60,11 +60,11 @@ namespace EdgeMon
         Point def_battery;
         Point def_lb_SOE_TXT;
         Point def_bat_SOE;
-        Point def_lb_m_batt_pwr_main ;
-        Point def_lb_m_ImpExMeter ;
+        Point def_lb_m_batt_pwr_main;
+        Point def_lb_m_ImpExMeter;
         Point def_lb_m_pwr_house;
         Point def_lb_m_pwr_PV;
-        
+
 
 
 
@@ -74,32 +74,38 @@ namespace EdgeMon
 
             if (Process.GetProcessesByName("EdgeMon").Length > 1)
             {
-               MessageBox.Show("There is already an instance of EdgeMon running");
+                MessageBox.Show("There is already an instance of EdgeMon running");
                 Environment.Exit(0);
             }
- 
+
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Thread.CurrentThread.CurrentUICulture.ToString());
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
             Thread.CurrentThread.CurrentUICulture.NumberFormat.NumberGroupSeparator = "";
 
 
             InitializeComponent();
+            maketransparent(lb_status, Inverter_PIC);
+            maketransparent(lb_temp, Inverter_PIC);
+
+
+
+
             this.Splashpanel.Size = this.mainpanel.Size;
             pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
             def_PV_off = PV_off.Location;
-            def_PV_on= PV_on.Location;
+            def_PV_on = PV_on.Location;
             def_fullPVpanel = fullPVpanel.Location;
-            def_grid = grid.Location; 
+            def_grid = grid.Location;
             def_house = house.Location;
             def_battery = battery.Location;
             def_lb_SOE_TXT = lb_SOE_TXT.Location;
             def_bat_SOE = bat_SOE.Location;
-            def_lb_m_batt_pwr_main= lb_m_batt_pwr_main.Location;
-            def_lb_m_ImpExMeter= lb_m_ImpExMeter.Location;
-            def_lb_m_pwr_house= lb_m_pwr_house.Location;
+            def_lb_m_batt_pwr_main = lb_m_batt_pwr_main.Location;
+            def_lb_m_ImpExMeter = lb_m_ImpExMeter.Location;
+            def_lb_m_pwr_house = lb_m_pwr_house.Location;
             def_lb_m_pwr_PV = lb_m_pwr_PV.Location;
 
-            ComboDetailLevel.ComboBox.DataSource = new int[] { 0,1,2,3 };
+            ComboDetailLevel.ComboBox.DataSource = new int[] { 0, 1, 2, 3 };
             ComboDetailLevel.SelectedIndex = pm.DetailLevel;
 
 
@@ -109,18 +115,18 @@ namespace EdgeMon
 
         private void MainTimer_tick(object sender, EventArgs e)
         {
-       
+
             try
             {
-                if ((!sundata.isvalid) && (startdate > DateTime.Now.Subtract(checklocation))) 
+                if ((!sundata.isvalid) && (startdate > DateTime.Now.Subtract(checklocation)))
                 {
-                    
+
 
                     if (sundata.getlocation())
-                    { 
+                    {
                         dailyTasks(true);
                     }
-                
+
                 }
 
 
@@ -156,15 +162,15 @@ namespace EdgeMon
                     }
                     catch (Exception ex)
                     {
-                       // lb_error.ForeColor = Color.DarkRed; 
-                       // lb_error.Text = ex.Message;
-                        
+                        // lb_error.ForeColor = Color.DarkRed; 
+                        // lb_error.Text = ex.Message;
+
                         if (neverconnected)
                         {
                             Splashpanel.Hide();
-                            
+
                         }
-                            errcount++;
+                        errcount++;
                         if (errcount > 5 || pm.port == 0)
                         {
                             errcount = 0;
@@ -180,22 +186,22 @@ namespace EdgeMon
                                 {
                                     case 502:
                                         pm.port = 1502;
-                                     
+
                                         break;
                                     case 1502:
                                         pm.port = 502;
-                                  
+
                                         break;
                                     default:
                                         pm.port = 1502;
-                                    
+
                                         break;
                                 }
                                 pm.SetAllConfigData();
                                 pm.WriteINI();
                             }
                         }
-                 
+
                         return;
                     }
                 }
@@ -226,9 +232,9 @@ namespace EdgeMon
                     lb_error.ForeColor = Color.DarkRed;
                     optionalScreenshot(true);
                 }
-               
+
             }
-          
+
 
 
 
@@ -237,6 +243,11 @@ namespace EdgeMon
 
         public void restartMe()
         {
+            reset_all_detaillevel();
+
+
+
+
             neverconnected = true;
             lb_sunrise.Text = "";
             lb_sunset.Text = "";
@@ -249,19 +260,19 @@ namespace EdgeMon
 
             MultiShotIntervall = pm.MultiShotIntervall;
             show_details = true;
-          //  show_details = pm.showDetails;
+            //  show_details = pm.showDetails;
             detail_level = pm.DetailLevel;
-         //   SubiconLayout = pm.SubiconLayout;
-         //   timer2.Enabled = false;
+            //   SubiconLayout = pm.SubiconLayout;
+            //   timer2.Enabled = false;
             timer2.Interval = 10;
             // lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
             mb = null;
 
 
             Thread.Sleep(100);
-          
+
             //timer2.Enabled = true;
-           timer2.Start();
+            timer2.Start();
             startdate = DateTime.Now;
 
         }
@@ -289,7 +300,7 @@ namespace EdgeMon
             {
                 have_battery = pm.battery;
             }
-   
+
             PV_on.Hide();
             PV_off.Hide();
 
@@ -313,7 +324,7 @@ namespace EdgeMon
                     optionalScreenshot(true);
                 }
             }
-            
+
             timer2.Interval = pm.refresh;
 
             if (pm.Darkmode) darkmode_on(); else darkmode_off();
@@ -324,7 +335,7 @@ namespace EdgeMon
             initialized = true;
             this.Update();
 
-    
+
 
         }
 
@@ -369,12 +380,12 @@ namespace EdgeMon
                 mb = new TcpModbus(pm.TCP, pm.port);
             }
             else //try reconnect. may take awhile...
-            { 
+            {
                 mb.Disconnect();
                 Thread.Sleep(100);
                 mb.Connect(pm.TCP, pm.port);
             }
-        
+
         }
 
 
@@ -420,8 +431,11 @@ namespace EdgeMon
         private void statusgraph_static()
         {
 
+
+
+
             tb_Inv.Clear();
-            lb_version_copyright.Text = "V " + infobox.AssemblyVersion.ToString() + " " + infobox.AssemblyCopyright.ToString();
+            lb_version_copyright.Text = "EdgeMon V " + infobox.AssemblyVersion.ToString() + " " + infobox.AssemblyCopyright.ToString();
             lb_ac_pwr.Text = "";
             lb_dc_pwr.Text = "";
             MB_Pwr_3.Text = "";
@@ -463,10 +477,10 @@ namespace EdgeMon
 
             if (have_battery)
             {
-               lb_T_Av.Hide();
+                lb_T_Av.Hide();
                 lb_SOH.Hide();
                 label11.Hide();
-                label_SOH.Hide();   
+                label_SOH.Hide();
 
                 bat_SOE.Show();
                 battery.Show();
@@ -491,10 +505,10 @@ namespace EdgeMon
                         label11.Show();
                         label_SOH.Show();
                         lb_SOH.Show();
-                       // tb_chargepower.Hide();
-                       // lb_bat_max.Hide();
-                       
-                        
+                        // tb_chargepower.Hide();
+                        // lb_bat_max.Hide();
+
+
                         lb_m_batt_pwr.Show();
 
 
@@ -535,7 +549,7 @@ namespace EdgeMon
                     label_SOH.Hide();
                     label11.Hide();
                 }
-           
+
 
             }
             else
@@ -551,7 +565,7 @@ namespace EdgeMon
                 lb_bat_max.Hide();
                 lb_bat_stat.Hide();
                 lb_SOH.Hide();
-                 bat_SOE.Hide();
+                bat_SOE.Hide();
                 lb_SOE_TXT.Text = "";
                 lb_bat_stat.Text = "";
                 lb_T_Av.Text = "";
@@ -562,8 +576,8 @@ namespace EdgeMon
                 label3.Hide();
                 lb_total.Hide();
             }
-           if (!show_details || detail_level <= 1)
-          //  if (pm.SubiconLayout)
+            if (!show_details || detail_level <= 1)
+            //  if (pm.SubiconLayout)
             {
                 vanillaview(true);
 
@@ -594,10 +608,10 @@ namespace EdgeMon
             ///GATHER DATA
             ///
 
-          
 
 
-            
+
+
             double pwr_house, pwr_PV;
             double I_AC_Power = mb.I_AC_Power;
             double I_DC_Power = mb.I_DC_Power;
@@ -605,21 +619,21 @@ namespace EdgeMon
             double Instantaneous_Power = mb.Instantaneous_Power;
 
             HWData hwdata = new HWData();
-        
+
 
 
             if (have_battery)
             {
                 hwdata.SOH = mb.SOH.ToString(precision) + " %";
-                
+
                 hwdata.bat_SOE = mb.SOE.ToString("N1") + " %";
                 hwdata.SOE = (int)mb.SOE;
                 if (mb.Bat_Status != null) { hwdata.Bat_Status = mb.Bat_Status.ToString(); }
                 hwdata.T_AV = mb.Batt_Average_Temperature.ToString(precision) + "°C";
                 hwdata.batt_pwr_main = Instantaneous_Power.ToString(precision) + " W";
                 //if (show_details && detail_level > 0)
-                hwdata.batt_pwr =  (mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString(precision) + " A ");
-            
+                hwdata.batt_pwr = (mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString(precision) + " A ");
+
             }
             hwdata.status = mb.I_Status.ToString();
             hwdata.ac_pwr = I_AC_Power.ToString(precision) + " W";
@@ -632,7 +646,7 @@ namespace EdgeMon
             pwr_PV = I_DC_Power + Instantaneous_Power;
             if (I_DC_Power < I_AC_Power) { pwr_house = pwr_house - (I_AC_Power - I_DC_Power); } //inverter drawing power from grid
             hwdata.pwr_house = pwr_house.ToString(precision) + " W";
-            hwdata.tot_prod =  "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
+            hwdata.tot_prod = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
 
             hwdata.total = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
 
@@ -655,24 +669,24 @@ namespace EdgeMon
                     if (mb.Bat_Status != null) { lb_bat_stat.Text = hwdata.Bat_Status; }
                 }
 
-               
-             }
 
-                if (show_details && detail_level > 1)
-                {
-                    
-                    
-                    lb_T_Av.Text = hwdata.T_AV;
-                    lb_SOH.Text = hwdata.SOH;
+            }
 
-                
-                }
-                else
-                {
-                    lb_SOH.Text = "";
+            if (show_details && detail_level > 1)
+            {
 
-                }
-                bat_SOE.Value = hwdata.SOE;
+
+                lb_T_Av.Text = hwdata.T_AV;
+                lb_SOH.Text = hwdata.SOH;
+
+
+            }
+            else
+            {
+                lb_SOH.Text = "";
+
+            }
+            bat_SOE.Value = hwdata.SOE;
             //if (hwdata.Bat_Status.Contains("Standby"))
             //{
             //    bat_SOE.ForeColor = Color.Red;
@@ -686,7 +700,7 @@ namespace EdgeMon
 
 
             lb_m_ImpExMeter.Text = hwdata.ImpExMeter;
-            
+
 
             lb_status.Text = hwdata.status;
             lb_temp.Text = hwdata.temp;
@@ -698,7 +712,7 @@ namespace EdgeMon
                 lb_dc_pwr.Text = hwdata.dc_pwr;
                 MB_Pwr_3.Text = hwdata.MB_Pwr3;
 
-              
+
             }
             else { MB_Pwr_3.Text = ""; }
 
@@ -711,8 +725,8 @@ namespace EdgeMon
 
             //AC_CURRENT_3.Text = mb.I_AC_CurrentA.ToString() + " // " + mb.I_AC_CurrentB.ToString() + " // " + mb.I_AC_CurrentC.ToString();
             //AC_VOLTAGE_3.Text = (mb.I_AC_CurrentA*240).ToString() + " // " + (mb.I_AC_CurrentB * 240).ToString() + " // " + (mb.I_AC_CurrentC * 240).ToString();
-         
-           
+
+
 
 
 
@@ -720,14 +734,14 @@ namespace EdgeMon
             lb_m_pwr_PV.Text = pwr_PV.ToString(precision) + " W";
             if (pwr_PV > 0 && PV_on.Visible == false) { PV_off.Hide(); PV_on.Show(); pic_PV_from.Show(); pic_pv_no.Hide(); }
             if (pwr_PV <= 0 && PV_off.Visible == false) { PV_off.Show(); PV_on.Hide(); pic_PV_from.Hide(); pic_pv_no.Show(); }
-          
+
 
             if (MTR_I_M_AC_Power < -pm.gridflow_threshold) { pic_grid_no.Hide(); pic_grid_to.Hide(); pic_grid_from.Show(); pic_house_to.Image = Properties.Resources.arrow3; }
             else
             if (MTR_I_M_AC_Power > pm.gridflow_threshold) { pic_grid_no.Hide(); pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
             { pic_grid_to.Hide(); pic_grid_from.Hide(); pic_grid_no.Show();
-                
+
                 pic_house_to.Image = Properties.Resources.arrow3_GREEN;
             }
             if (pwr_house == 0) { pic_house_to.Hide(); pic_house_no.Show(); } else { pic_house_to.Show(); pic_house_no.Hide(); }
@@ -755,10 +769,10 @@ namespace EdgeMon
             else
             { lb_tot_prod.Text = ""; }
 
-   
+
 
             dailyTasks();
-           // sundata.checklocation();
+            // sundata.checklocation();
         }
 
         private void dailyTasks(bool force = false)
@@ -770,7 +784,7 @@ namespace EdgeMon
 
 
                 lastdailyupdate = DateTime.Now;
-              
+
 
 
                 if (show_details && detail_level > 0 && sundata != null && sundata.isvalid)
@@ -808,14 +822,15 @@ namespace EdgeMon
                 lb_m_ImpExMeter.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
                 lb_m_pwr_house.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
                 lb_m_pwr_PV.Font = new Font("Microsoft Sans Serif", 13, FontStyle.Bold);
-                lb_m_batt_pwr_main.Location = new Point(battery.Left-(lb_m_batt_pwr_main.Width-battery.Width)/2, battery.Top - 32);
+                lb_m_batt_pwr_main.Location = new Point(battery.Left - (lb_m_batt_pwr_main.Width - battery.Width) / 2, battery.Top - 32);
                 lb_m_batt_pwr_main.TextAlign = ContentAlignment.MiddleCenter;
-                lb_m_ImpExMeter.Location = new Point(grid.Left - 10, grid.Bottom);
+                lb_m_ImpExMeter.TextAlign = ContentAlignment.MiddleCenter;
+                lb_m_ImpExMeter.Location = new Point(grid.Left  - (lb_m_ImpExMeter.Width - grid.Width) / 2, grid.Bottom);
                 lb_m_pwr_house.Location = new Point(house.Left, house.Top - 30);
                 lb_m_pwr_PV.TextAlign = ContentAlignment.MiddleCenter;
-                lb_m_pwr_PV.Location = new Point(PV_off.Left+fullPVpanel.Left - (lb_m_pwr_PV.Width- PV_off.Width)/2, fullPVpanel.Bottom);
+                lb_m_pwr_PV.Location = new Point(PV_off.Left + fullPVpanel.Left - (lb_m_pwr_PV.Width - PV_off.Width) / 2, fullPVpanel.Bottom);
                 pb_xmas.Location = new Point(pb_xmas.Left, house.Bottom - pb_xmas.Height);
-                lb_bat_stat.Location = new Point(lb_bat_stat.Left, battery.Top + (battery.Height-lb_bat_stat.Height) / 2);
+                lb_bat_stat.Location = new Point(lb_bat_stat.Left, battery.Top + (battery.Height - lb_bat_stat.Height) / 2);
 
 
             }
@@ -828,8 +843,8 @@ namespace EdgeMon
                 //PV_off.Location = def_PV_off;
                 //PV_on.Location = def_PV_on;
                 fullPVpanel.Location = def_fullPVpanel;
-                grid.Location = def_grid;   
-                house.Location = def_house; 
+                grid.Location = def_grid;
+                house.Location = def_house;
                 battery.Location = def_battery;
                 lb_SOE_TXT.Location = def_lb_SOE_TXT;
                 bat_SOE.Location = def_bat_SOE;
@@ -850,9 +865,9 @@ namespace EdgeMon
 
 
 
-  
 
-        private void optionalScreenshot(bool err=false)
+
+        private void optionalScreenshot(bool err = false)
         {
             if ((connected || err) && MultiShotIntervall != 0)
             {
@@ -869,14 +884,14 @@ namespace EdgeMon
 
 
 
-      
+
 
         private void SaveAsBitmap(Panel form, string fileName)
         {
-          
+
             try
             {
-     
+
                 Graphics g = form.CreateGraphics();
                 Bitmap bmp = new Bitmap(form.Width, form.Height);
                 //reverse order of overlaying controls - this is due to a bug in DrwaToBitmap
@@ -895,12 +910,12 @@ namespace EdgeMon
                 PV_off.SendToBack();
 
                 form.DrawToBitmap(bmp, new Rectangle(0, 0, form.Width, form.Height));
-                
+
                 lb_OptionMenu.Show();
-                lb_version_copyright.Hide();  
+                lb_version_copyright.Hide();
                 //restore order
                 battery.SendToBack();
-               Inverter_PIC.SendToBack();
+                Inverter_PIC.SendToBack();
                 pic_grid_to.SendToBack();
                 pic_grid_from.SendToBack();
                 lb_m_batt_pwr.SendToBack();
@@ -909,29 +924,29 @@ namespace EdgeMon
                 lb_sunset.SendToBack();
                 SaveImage(bmp, fileName);
                 bmp.Dispose();
-              
+
             }
             catch (Exception)
             {
                 //restore order
                 battery.SendToBack();
                 Inverter_PIC.SendToBack();
-         
+
             }
-            
+
         }
-     
-
-      ////  private void label4_Click(object sender, EventArgs e)
-      // // {
-
-      //      infobox.conf = this.pm;
-      //      infobox.ShowDialog();
-      //      this.pm = infobox.conf;
-      //      if (infobox.DialogResult == DialogResult.Abort) { restartMe(); }
 
 
-      //  }
+        ////  private void label4_Click(object sender, EventArgs e)
+        // // {
+
+        //      infobox.conf = this.pm;
+        //      infobox.ShowDialog();
+        //      this.pm = infobox.conf;
+        //      if (infobox.DialogResult == DialogResult.Abort) { restartMe(); }
+
+
+        //  }
 
         // Save the file with the appropriate format.
         public void SaveImage(Image image, string filename)
@@ -970,37 +985,22 @@ namespace EdgeMon
             if (this.FormBorderStyle == FormBorderStyle.None)
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             else
-               this.FormBorderStyle = FormBorderStyle.None;
+                this.FormBorderStyle = FormBorderStyle.None;
         }
 
-        private void lb_set_Click(object sender, EventArgs e)
-        {
-          
-        }
 
-        private void Inverter_PIC_Click(object sender, EventArgs e)
-        {
-        
-
-
-
-
-
-
-        }
-
-      
 
         private void effect_details()
         {
-            
-  //          show_details = !show_details;
-  //          this.statusgraph_static();
+
+            //          show_details = !show_details;
+            //          this.statusgraph_static();
         }
+
 
         private void darkmode_on()
         {
-            Color dark = Color.FromArgb(0,0,0);
+
 
 
             bool was_off = false;
@@ -1010,7 +1010,7 @@ namespace EdgeMon
                 if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
                 if (ctrl is Label)
                 {
-                    ((Label)ctrl).BackColor = Color.Black;
+                    ((Label)ctrl).BackColor = dark;
                     ((Label)ctrl).ForeColor = Color.White;
                 }
                 if (ctrl is TextBox)
@@ -1019,8 +1019,8 @@ namespace EdgeMon
                     ((TextBox)ctrl).ForeColor = Color.White;
                 }
             }
-            
-            this.mainpanel.BackColor = dark; 
+
+            this.mainpanel.BackColor = dark;
             //Dirty bug workaround, I have no Idea why I need this... 
             lb_m_ImpExMeter.BackColor = dark;
             lb_m_ImpExMeter.ForeColor = Color.White;
@@ -1028,15 +1028,16 @@ namespace EdgeMon
             MB_Pwr_3.ForeColor = Color.White;
             tb_Inv.BackColor = dark;
             tb_Inv.ForeColor = Color.White;
+            lb_m_batt_pwr.ForeColor = Color.White;
 
-           lb_update.ForeColor = Color.White;
+            lb_update.ForeColor = Color.White;
             if (was_off)
             {
                 grid.Image = Transform(grid.Image);
                 PV_off.Image = Transform(PV_off.Image);
                 battery.Image = Transform(battery.Image);
                 lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
-              //  lb_upd.Image = Transform(lb_upd.Image);
+                //  lb_upd.Image = Transform(lb_upd.Image);
             }
             this.BackColor = dark;
             lb_sunrise.BackColor = dark;
@@ -1045,13 +1046,13 @@ namespace EdgeMon
             lb_sunset.ForeColor = Color.White;
 
         }
-        private void darkmode_off() 
+        private void darkmode_off()
         {
-            Color dark = Color.FromArgb(0, 0, 0);
-            bool was_off = false; 
+
+            bool was_off = false;
             if (this.mainpanel.BackColor == Color.White) { was_off = true; }
 
-                foreach (Control ctrl in this.mainpanel.Controls)
+            foreach (Control ctrl in this.mainpanel.Controls)
             {
                 if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
                 if (ctrl is Label)
@@ -1073,6 +1074,7 @@ namespace EdgeMon
             MB_Pwr_3.ForeColor = dark;
             tb_Inv.BackColor = Color.White;
             tb_Inv.ForeColor = dark;
+            lb_m_batt_pwr.ForeColor = dark;
 
             lb_update.ForeColor = dark;
             if (!was_off)
@@ -1081,7 +1083,7 @@ namespace EdgeMon
                 PV_off.Image = Transform(PV_off.Image);
                 battery.Image = Transform(battery.Image);
                 lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
-               // lb_upd.Image = Transform(lb_upd.Image);
+                // lb_upd.Image = Transform(lb_upd.Image);
             }
             this.BackColor = Color.White;
             lb_sunrise.BackColor = Color.White;
@@ -1103,7 +1105,7 @@ namespace EdgeMon
             {
                 darkmode_off();
             }
-           
+
         }
 
 
@@ -1124,44 +1126,44 @@ namespace EdgeMon
             }
             //source = pic;
             return pic;
-            
-           // //create a blank bitmap the same size as original
-           // Bitmap newBitmap = new Bitmap(source.Width, source.Height);
 
-           // //get a graphics object from the new image
-           // Graphics g = Graphics.FromImage(newBitmap);
+            // //create a blank bitmap the same size as original
+            // Bitmap newBitmap = new Bitmap(source.Width, source.Height);
 
-           // // create the negative color matrix
-           // ColorMatrix colorMatrix = new ColorMatrix();
-           //  colorMatrix.Matrix00 = colorMatrix.Matrix11 = colorMatrix.Matrix22 = -1f;
-           //  colorMatrix.Matrix33 = colorMatrix.Matrix44 = 1f;
-           //// colorMatrix.Matrix00 = -1;
-           //// colorMatrix.Matrix11 = 1;
-           //// colorMatrix.Matrix22 = 1;
-           //// colorMatrix.Matrix33 = 1;
-           //// colorMatrix.Matrix44 = 1;
+            // //get a graphics object from the new image
+            // Graphics g = Graphics.FromImage(newBitmap);
+
+            // // create the negative color matrix
+            // ColorMatrix colorMatrix = new ColorMatrix();
+            //  colorMatrix.Matrix00 = colorMatrix.Matrix11 = colorMatrix.Matrix22 = -1f;
+            //  colorMatrix.Matrix33 = colorMatrix.Matrix44 = 1f;
+            //// colorMatrix.Matrix00 = -1;
+            //// colorMatrix.Matrix11 = 1;
+            //// colorMatrix.Matrix22 = 1;
+            //// colorMatrix.Matrix33 = 1;
+            //// colorMatrix.Matrix44 = 1;
 
 
 
-           // // create some image attributes
-           // ImageAttributes attributes = new ImageAttributes();
+            // // create some image attributes
+            // ImageAttributes attributes = new ImageAttributes();
 
-           // attributes.SetColorMatrix(colorMatrix);
+            // attributes.SetColorMatrix(colorMatrix);
 
-           // g.DrawImage(source, new Rectangle(0, 0, source.Width, source.Height),
-           //             0, 0, source.Width, source.Height, GraphicsUnit.Pixel, attributes);
+            // g.DrawImage(source, new Rectangle(0, 0, source.Width, source.Height),
+            //             0, 0, source.Width, source.Height, GraphicsUnit.Pixel, attributes);
 
-           // //dispose the Graphics object
-           // g.Dispose();
+            // //dispose the Graphics object
+            // g.Dispose();
 
-           // return newBitmap;
+            // return newBitmap;
         }
 
 
 
 
 
- 
+
 
         private void detailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1170,13 +1172,13 @@ namespace EdgeMon
 
         private void DoConfig()
         {
-          //  timer2.Enabled = false;
+            //  timer2.Enabled = false;
             timer2.Stop();
             infobox.conf = this.pm;
             infobox.ShowDialog();
-         this.pm = infobox.conf;
+            this.pm = infobox.conf;
             if (infobox.DialogResult == DialogResult.Abort) { restartMe(); }
-         
+
             //timer2.Enabled = true;
             timer2.Start();
         }
@@ -1188,7 +1190,7 @@ namespace EdgeMon
             {
                 if (e.ClickedItem.Text == "Configuration")
                 {
-                   DoConfig();  
+                    DoConfig();
                 }
 
                 if (e.ClickedItem.Text == "Details")
@@ -1196,11 +1198,11 @@ namespace EdgeMon
                     effect_details();
                     ((ToolStripMenuItem)(e.ClickedItem)).Checked = !((ToolStripMenuItem)(e.ClickedItem)).Checked;
                 }
-                if (e.ClickedItem.Text== "Darkmode")
+                if (e.ClickedItem.Text == "Darkmode")
                 {
                     effect_darkmode_switch();
                     ((ToolStripMenuItem)(e.ClickedItem)).Checked = !((ToolStripMenuItem)(e.ClickedItem)).Checked;
-                    
+
                 }
                 if (e.ClickedItem.Text == "Screenshot")
                 {
@@ -1208,14 +1210,14 @@ namespace EdgeMon
                     catch { }
                     MessageBox.Show("Screenshot saved in " + pm.saveBitmap);
                 }
-            
+
 
             }
         }
 
         private void NewEdge_Move(object sender, EventArgs e)
         {
-            
+
         }
 
         private void NewEdge_ResizeEnd(object sender, EventArgs e)
@@ -1228,12 +1230,12 @@ namespace EdgeMon
             timer2.Stop();
         }
 
-      
+
 
         private void lb_upd_MouseEnter(object sender, EventArgs e)
         {
-         
-          //  tt.SetToolTip(lb_upd, "UPDATE AVAILABLE");
+
+            //  tt.SetToolTip(lb_upd, "UPDATE AVAILABLE");
         }
 
 
@@ -1241,12 +1243,12 @@ namespace EdgeMon
         private void lb_upd_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st/EdgemonSetup.msi");
-        
+
 
 
         }
 
-    
+
 
 
         private void Update_check_timer_Tick(object sender, EventArgs e)
@@ -1278,7 +1280,7 @@ namespace EdgeMon
             }
         }
 
-    
+
 
         private void lb_OptionMenu_MouseDown(object sender, MouseEventArgs e)
         {
@@ -1295,11 +1297,11 @@ namespace EdgeMon
 
         private void lb_OptionMenu_Click(object sender, EventArgs e)
         {
-           // if (e.Button == MouseButtons.Left)
+            // if (e.Button == MouseButtons.Left)
             {
-             //   var relativeClickedPosition = e.Location;
-             //   var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
-                BurgerMenuStrip.Show(lb_OptionMenu,0,lb_OptionMenu.Height);
+                //   var relativeClickedPosition = e.Location;
+                //   var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
+                BurgerMenuStrip.Show(lb_OptionMenu, 0, lb_OptionMenu.Height);
 
                 //BurgerMenuStrip.Visible = false;
 
@@ -1308,7 +1310,7 @@ namespace EdgeMon
 
         private void BurgerMenuStrip_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void BurgerMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
@@ -1321,8 +1323,15 @@ namespace EdgeMon
             timer2.Stop();
         }
 
-   
 
+        public void maketransparent(Label lb, PictureBox pb)
+        {
+            var pos = lb.Parent.PointToScreen(lb.Location);
+            pos = pb.PointToClient(pos);
+            lb.Parent = pb;
+            lb.Location = pos;
+            lb.BackColor = Color.Transparent;
+        }
         private void ComboDetailLevel_DropDownClosed(object sender, EventArgs e)
         {
             BurgerMenuStrip.Close();
@@ -1337,7 +1346,7 @@ namespace EdgeMon
 
                 if (int.TryParse(ComboDetailLevel.ComboBox.SelectedItem.ToString(), out res))
                 {
-                    detail_level= res;
+                    detail_level = res;
                     try
                     {
                         this.statusgraph_static();
@@ -1347,7 +1356,7 @@ namespace EdgeMon
 
                         throw;
                     }
-                    
+
                 }
             }
         }
@@ -1356,9 +1365,59 @@ namespace EdgeMon
         {
             if ((ModifierKeys & Keys.Shift) != 0)
             {
-                suppress_oneshot = true;    
+                suppress_oneshot = true;
             }
         }
+
+
+
+        private void reset_all_detaillevel()
+        {
+            foreach (ToolStripMenuItem item in ls_detailLevel.DropDownItems)
+            {
+                if (item.Text.Contains(detail_level.ToString()))
+                    { item.Checked = true; }
+                else
+                item.Checked = false;
+            }
+        
+        }
+
+        private void ts_lvl0_Click(object sender, EventArgs e)
+        {
+            detail_level = 0;
+            reset_all_detaillevel();
+           
+           
+            this.statusgraph_static();
+           
+        }
+
+        private void ts_lvl1_Click(object sender, EventArgs e)
+        {
+            detail_level = 1;
+            reset_all_detaillevel();
+            
+            this.statusgraph_static();
+        }
+
+        private void ts_lvl2_Click(object sender, EventArgs e)
+        {
+            detail_level = 2;
+            reset_all_detaillevel();
+
+            this.statusgraph_static();
+        }
+
+        private void ts_lvl3_Click(object sender, EventArgs e)
+        {
+            detail_level = 3;
+            reset_all_detaillevel();
+
+            this.statusgraph_static();
+        }
+
+      
     }
 }
 
