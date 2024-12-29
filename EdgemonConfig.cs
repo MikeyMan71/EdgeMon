@@ -13,6 +13,7 @@ using System.Windows.Forms;
 namespace EdgeMon
 {
 
+
     public class EdgemonConfig : MAMconfig.Config
     {
         //MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
