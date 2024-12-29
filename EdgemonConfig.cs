@@ -19,6 +19,7 @@ namespace EdgeMon
         //MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
 
 
+
         public string TCP { get; set; }
         public int port { get; set; }
         public bool battery { get; set; }
