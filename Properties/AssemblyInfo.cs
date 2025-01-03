@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // Allgemeine Informationen über eine Assembly werden über die folgenden
@@ -8,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EdgeMon")]
 [assembly: AssemblyDescription("https://edgemon.helioho.st/")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("BuffaloSoft")]
+[assembly: AssemblyCompany("MaikiWare")]
 [assembly: AssemblyProduct("EdgeMon")]
 [assembly: AssemblyCopyright("© M. Aigle")]
 [assembly: AssemblyTrademark("")]
@@ -32,5 +31,5 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder Standardwerte für die Build- und Revisionsnummern verwenden,
 // indem Sie "*" wie unten gezeigt eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4.4.7.0")]
-[assembly: AssemblyFileVersion("4.4.7.0")]
+[assembly: AssemblyVersion("4.6.0.0")]
+[assembly: AssemblyFileVersion("4.6.0.0")]

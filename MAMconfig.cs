@@ -1,12 +1,11 @@
 
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using Microsoft.Win32;
 /*
  * MAMconfig (c) MAM 2024, can be used freely in any project, unless it is commercial.
  * 

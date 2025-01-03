@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EdgeMon
+﻿namespace EdgeMon
 {
     internal class HWData
     {
@@ -30,5 +24,5 @@ namespace EdgeMon
 
         public HWData() { }
     }
-}    
-  
+}
+

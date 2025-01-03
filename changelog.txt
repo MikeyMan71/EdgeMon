@@ -24,4 +24,5 @@ V4.4.4: bugfix - battery arrow not showing properly. Feature: keep shift down wh
 V4.4.5: bugfix display error on certain resonlutions
 V4.4.6: design improvements, bugfixes
 V4.4.7: new detail level selector in config menu, modified dark mode design
-V4.4.8: 
+V4.5.0: minor design optimizations
+V4.6.0: default refresh set to 500ms. bugfix with darkmode. 

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Device.Location;
-using System.Threading;
 using System.Diagnostics;
 
 
@@ -24,7 +18,7 @@ namespace EdgeMon
         GeoCoordinateWatcher geoCoordinateWatcher = new GeoCoordinateWatcher();
 
 
-        public bool isvalid 
+        public bool isvalid
         {
             get { return _isvalid; }
         }
@@ -32,14 +26,14 @@ namespace EdgeMon
 
         public SunriseSunset(double lat, double lng, TimeZoneInfo timeZoneInfo)
         {
-            
+
             _lat = lat;
             _lon = lng;
 
             if (Double.IsNaN(lat) || Double.IsNaN(lng))
             {
                 geoCoordinateWatcher.Start();
-                geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged); 
+                geoCoordinateWatcher.StatusChanged += new EventHandler<GeoPositionStatusChangedEventArgs>(watcher_statuschanged);
             }
             else
             { _isvalid = true; }
@@ -50,15 +44,15 @@ namespace EdgeMon
 
         public string checklocation()
         {
-     
+
             return geoCoordinateWatcher.Status.ToString();
-                
+
         }
 
 
         public bool getlocation()
         {
-       
+
             return _isvalid;
         }
 
@@ -68,7 +62,7 @@ namespace EdgeMon
             Debug.WriteLine(e.Status);
             switch (e.Status)
             {
-               
+
 
                 case GeoPositionStatus.Ready:
                     GeoCoordinate geo = geoCoordinateWatcher.Position.Location;
@@ -91,7 +85,7 @@ namespace EdgeMon
             }
         }
 
-        public string getSunrise() 
+        public string getSunrise()
         {
             string res = "??:??";
             Sunriset.SunriseSunset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, _lat, _lon, out tsunrise, out tsunset);
@@ -107,7 +101,7 @@ namespace EdgeMon
 
 
             return res;
-    }
+        }
 
         public string getSunset()
         {
@@ -126,10 +120,10 @@ namespace EdgeMon
         }
 
 
-     
 
 
-        
+
+
 
 
 

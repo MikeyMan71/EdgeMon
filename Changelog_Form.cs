@@ -8,7 +8,7 @@ namespace EdgeMon
     public class TextFileViewer : Form
     {
         private TextBox cl_textbox;
-      
+
         public TextFileViewer(string textfile)
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace EdgeMon
             }
             catch (Exception)
             {
-               
+
             }
         }
 

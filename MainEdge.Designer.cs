@@ -253,14 +253,14 @@ namespace EdgeMon
             // 
             // lb_m_ImpExMeter
             // 
-            this.lb_m_ImpExMeter.AutoSize = true;
+            this.lb_m_ImpExMeter.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lb_m_ImpExMeter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_m_ImpExMeter.Location = new System.Drawing.Point(547, 257);
+            this.lb_m_ImpExMeter.Location = new System.Drawing.Point(547, 256);
             this.lb_m_ImpExMeter.Name = "lb_m_ImpExMeter";
-            this.lb_m_ImpExMeter.Size = new System.Drawing.Size(55, 16);
+            this.lb_m_ImpExMeter.Size = new System.Drawing.Size(136, 32);
             this.lb_m_ImpExMeter.TabIndex = 159;
             this.lb_m_ImpExMeter.Text = "000000";
-            this.lb_m_ImpExMeter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lb_m_ImpExMeter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lb_m_batt_pwr
             // 
@@ -336,7 +336,7 @@ namespace EdgeMon
             // pic_grid_no
             // 
             this.pic_grid_no.Image = global::EdgeMon.Properties.Resources.empty_ro;
-            this.pic_grid_no.Location = new System.Drawing.Point(460, 213);
+            this.pic_grid_no.Location = new System.Drawing.Point(460, 210);
             this.pic_grid_no.Name = "pic_grid_no";
             this.pic_grid_no.Size = new System.Drawing.Size(63, 109);
             this.pic_grid_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -361,7 +361,7 @@ namespace EdgeMon
             this.fullPVpanel.Controls.Add(this.lb_sunrise);
             this.fullPVpanel.Controls.Add(this.PV_off);
             this.fullPVpanel.Controls.Add(this.PV_on);
-            this.fullPVpanel.Location = new System.Drawing.Point(45, 94);
+            this.fullPVpanel.Location = new System.Drawing.Point(45, 92);
             this.fullPVpanel.Name = "fullPVpanel";
             this.fullPVpanel.Size = new System.Drawing.Size(204, 115);
             this.fullPVpanel.TabIndex = 147;
@@ -411,7 +411,7 @@ namespace EdgeMon
             // 
             this.PV_on.Image = global::EdgeMon.Properties.Resources.solar_energy_icon__1_;
             this.PV_on.InitialImage = global::EdgeMon.Properties.Resources.PV;
-            this.PV_on.Location = new System.Drawing.Point(104, 31);
+            this.PV_on.Location = new System.Drawing.Point(103, 29);
             this.PV_on.Name = "PV_on";
             this.PV_on.Size = new System.Drawing.Size(90, 84);
             this.PV_on.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -593,27 +593,26 @@ namespace EdgeMon
             // 
             // lb_m_pwr_PV
             // 
-            this.lb_m_pwr_PV.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lb_m_pwr_PV.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lb_m_pwr_PV.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_m_pwr_PV.ForeColor = System.Drawing.Color.Black;
-            this.lb_m_pwr_PV.Location = new System.Drawing.Point(3, 256);
+            this.lb_m_pwr_PV.Location = new System.Drawing.Point(3, 248);
             this.lb_m_pwr_PV.Name = "lb_m_pwr_PV";
             this.lb_m_pwr_PV.Size = new System.Drawing.Size(165, 32);
             this.lb_m_pwr_PV.TabIndex = 129;
-            this.lb_m_pwr_PV.Text = "00000";
+            this.lb_m_pwr_PV.Text = "000000";
             this.lb_m_pwr_PV.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lb_m_pwr_house
             // 
-            this.lb_m_pwr_house.AutoSize = true;
             this.lb_m_pwr_house.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_m_pwr_house.ForeColor = System.Drawing.Color.Black;
-            this.lb_m_pwr_house.Location = new System.Drawing.Point(547, 360);
+            this.lb_m_pwr_house.Location = new System.Drawing.Point(547, 350);
             this.lb_m_pwr_house.Name = "lb_m_pwr_house";
-            this.lb_m_pwr_house.Size = new System.Drawing.Size(55, 16);
+            this.lb_m_pwr_house.Size = new System.Drawing.Size(199, 32);
             this.lb_m_pwr_house.TabIndex = 128;
             this.lb_m_pwr_house.Text = "000000";
-            this.lb_m_pwr_house.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lb_m_pwr_house.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lb_mtr_sernr
             // 
@@ -711,7 +710,7 @@ namespace EdgeMon
             this.MB_Pwr_3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MB_Pwr_3.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MB_Pwr_3.ForeColor = System.Drawing.Color.Black;
-            this.MB_Pwr_3.Location = new System.Drawing.Point(550, 287);
+            this.MB_Pwr_3.Location = new System.Drawing.Point(552, 287);
             this.MB_Pwr_3.Name = "MB_Pwr_3";
             this.MB_Pwr_3.Size = new System.Drawing.Size(194, 15);
             this.MB_Pwr_3.TabIndex = 115;
@@ -720,7 +719,7 @@ namespace EdgeMon
             // pic_grid_to
             // 
             this.pic_grid_to.Image = global::EdgeMon.Properties.Resources.grn_ro;
-            this.pic_grid_to.Location = new System.Drawing.Point(460, 213);
+            this.pic_grid_to.Location = new System.Drawing.Point(460, 215);
             this.pic_grid_to.Name = "pic_grid_to";
             this.pic_grid_to.Size = new System.Drawing.Size(71, 109);
             this.pic_grid_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -730,7 +729,7 @@ namespace EdgeMon
             // pic_grid_from
             // 
             this.pic_grid_from.Image = global::EdgeMon.Properties.Resources.red_ro_inv;
-            this.pic_grid_from.Location = new System.Drawing.Point(457, 213);
+            this.pic_grid_from.Location = new System.Drawing.Point(460, 217);
             this.pic_grid_from.Name = "pic_grid_from";
             this.pic_grid_from.Size = new System.Drawing.Size(71, 109);
             this.pic_grid_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -750,7 +749,7 @@ namespace EdgeMon
             // grid
             // 
             this.grid.Image = ((System.Drawing.Image)(resources.GetObject("grid.Image")));
-            this.grid.Location = new System.Drawing.Point(473, 125);
+            this.grid.Location = new System.Drawing.Point(476, 121);
             this.grid.Name = "grid";
             this.grid.Size = new System.Drawing.Size(77, 84);
             this.grid.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -760,7 +759,7 @@ namespace EdgeMon
             // house
             // 
             this.house.Image = ((System.Drawing.Image)(resources.GetObject("house.Image")));
-            this.house.Location = new System.Drawing.Point(473, 455);
+            this.house.Location = new System.Drawing.Point(473, 451);
             this.house.Name = "house";
             this.house.Size = new System.Drawing.Size(88, 93);
             this.house.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -886,7 +885,7 @@ namespace EdgeMon
             this.BurgerMenuStrip.Name = "BurgerMenuStrip";
             this.BurgerMenuStrip.ShowCheckMargin = true;
             this.BurgerMenuStrip.ShowImageMargin = false;
-            this.BurgerMenuStrip.Size = new System.Drawing.Size(211, 162);
+            this.BurgerMenuStrip.Size = new System.Drawing.Size(177, 134);
             this.BurgerMenuStrip.Closed += new System.Windows.Forms.ToolStripDropDownClosedEventHandler(this.BurgerMenuStrip_Closed);
             this.BurgerMenuStrip.Opened += new System.EventHandler(this.BurgerMenuStrip_Opened);
             this.BurgerMenuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.BurgerMenuStrip_ItemClicked);
@@ -895,7 +894,7 @@ namespace EdgeMon
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
             this.toolStripMenuItem1.Text = "Configuration";
             this.toolStripMenuItem1.ToolTipText = "open configuration window";
             // 
@@ -905,7 +904,7 @@ namespace EdgeMon
             this.detailsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.detailsToolStripMenuItem.Enabled = false;
             this.detailsToolStripMenuItem.Name = "detailsToolStripMenuItem";
-            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
+            this.detailsToolStripMenuItem.Size = new System.Drawing.Size(176, 26);
             this.detailsToolStripMenuItem.Text = "Details";
             this.detailsToolStripMenuItem.ToolTipText = "doggle details";
             this.detailsToolStripMenuItem.Visible = false;
@@ -914,14 +913,14 @@ namespace EdgeMon
             // detailsToolStripMenuItem1
             // 
             this.detailsToolStripMenuItem1.Name = "detailsToolStripMenuItem1";
-            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.detailsToolStripMenuItem1.Size = new System.Drawing.Size(176, 26);
             this.detailsToolStripMenuItem1.Text = "Darkmode";
             this.detailsToolStripMenuItem1.ToolTipText = "toggle darkmode";
             // 
             // detailsToolStripMenuItem2
             // 
             this.detailsToolStripMenuItem2.Name = "detailsToolStripMenuItem2";
-            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(210, 26);
+            this.detailsToolStripMenuItem2.Size = new System.Drawing.Size(176, 26);
             this.detailsToolStripMenuItem2.Text = "Screenshot";
             this.detailsToolStripMenuItem2.ToolTipText = "make a screenshot";
             // 
@@ -934,7 +933,7 @@ namespace EdgeMon
             this.ts_lvl2,
             this.ts_lvl3});
             this.ls_detailLevel.Name = "ls_detailLevel";
-            this.ls_detailLevel.Size = new System.Drawing.Size(210, 26);
+            this.ls_detailLevel.Size = new System.Drawing.Size(176, 26);
             this.ls_detailLevel.Text = "Detail Level";
             // 
             // ts_lvl0

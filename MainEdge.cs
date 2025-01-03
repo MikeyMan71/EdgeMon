@@ -2,23 +2,14 @@
 
 
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Globalization;
+using System.IO;
+using System.Net;
 using System.Threading;
 using System.Windows.Forms;
-using System.Reflection;
-using System.Drawing.Imaging;
-using System.IO;
-using MAMconfig;
-using System.Net;
-using System.Text;
-using WindowsInstaller;
-using System.Security.Policy;
-using System.Runtime.CompilerServices;
-using System.Xml.Linq;
-using System.Linq;
-using System.Diagnostics;
-using System.Globalization;
-using System.Device.Location;
 
 namespace EdgeMon
 {
@@ -262,6 +253,7 @@ namespace EdgeMon
             show_details = true;
             //  show_details = pm.showDetails;
             detail_level = pm.DetailLevel;
+            reset_all_detaillevel();
             //   SubiconLayout = pm.SubiconLayout;
             //   timer2.Enabled = false;
             timer2.Interval = 10;
@@ -278,7 +270,8 @@ namespace EdgeMon
         }
 
 
-        private void init() {
+        private void init()
+        {
 
 
 
@@ -328,7 +321,7 @@ namespace EdgeMon
             timer2.Interval = pm.refresh;
 
             if (pm.Darkmode) darkmode_on(); else darkmode_off();
-            ((ToolStripMenuItem)(BurgerMenuStrip.Items[3])).Checked = pm.Darkmode;
+            ((ToolStripMenuItem)(BurgerMenuStrip.Items[2])).Checked = pm.Darkmode;
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
             statusgraph_dyn();
             Splashpanel.Hide();
@@ -740,7 +733,8 @@ namespace EdgeMon
             else
             if (MTR_I_M_AC_Power > pm.gridflow_threshold) { pic_grid_no.Hide(); pic_grid_to.Show(); pic_grid_from.Hide(); pic_house_to.Image = Properties.Resources.arrow3_GREEN; }
             else
-            { pic_grid_to.Hide(); pic_grid_from.Hide(); pic_grid_no.Show();
+            {
+                pic_grid_to.Hide(); pic_grid_from.Hide(); pic_grid_no.Show();
 
                 pic_house_to.Image = Properties.Resources.arrow3_GREEN;
             }
@@ -825,10 +819,11 @@ namespace EdgeMon
                 lb_m_batt_pwr_main.Location = new Point(battery.Left - (lb_m_batt_pwr_main.Width - battery.Width) / 2, battery.Top - 32);
                 lb_m_batt_pwr_main.TextAlign = ContentAlignment.MiddleCenter;
                 lb_m_ImpExMeter.TextAlign = ContentAlignment.MiddleCenter;
-                lb_m_ImpExMeter.Location = new Point(grid.Left  - (lb_m_ImpExMeter.Width - grid.Width) / 2, grid.Bottom);
-                lb_m_pwr_house.Location = new Point(house.Left, house.Top - 30);
+                lb_m_ImpExMeter.Location = new Point(grid.Left - (lb_m_ImpExMeter.Width - grid.Width) / 2, grid.Bottom + 5);
+                lb_m_pwr_house.TextAlign = ContentAlignment.MiddleCenter;
+                lb_m_pwr_house.Location = new Point(house.Left - (lb_m_pwr_house.Width - house.Width) / 2, lb_m_batt_pwr_main.Top);
                 lb_m_pwr_PV.TextAlign = ContentAlignment.MiddleCenter;
-                lb_m_pwr_PV.Location = new Point(PV_off.Left + fullPVpanel.Left - (lb_m_pwr_PV.Width - PV_off.Width) / 2, fullPVpanel.Bottom);
+                lb_m_pwr_PV.Location = new Point(PV_off.Left + fullPVpanel.Left - (lb_m_pwr_PV.Width - PV_off.Width) / 2, lb_m_ImpExMeter.Top);
                 pb_xmas.Location = new Point(pb_xmas.Left, house.Bottom - pb_xmas.Height);
                 lb_bat_stat.Location = new Point(lb_bat_stat.Left, battery.Top + (battery.Height - lb_bat_stat.Height) / 2);
 
@@ -848,6 +843,12 @@ namespace EdgeMon
                 battery.Location = def_battery;
                 lb_SOE_TXT.Location = def_lb_SOE_TXT;
                 bat_SOE.Location = def_bat_SOE;
+                lb_m_pwr_PV.TextAlign = ContentAlignment.MiddleRight;
+                lb_m_batt_pwr_main.TextAlign = ContentAlignment.MiddleRight;
+                lb_m_ImpExMeter.TextAlign = ContentAlignment.MiddleLeft;
+                lb_m_pwr_house.TextAlign = ContentAlignment.MiddleLeft;
+
+
                 lb_m_batt_pwr_main.Location = def_lb_m_batt_pwr_main;
                 lb_m_batt_pwr_main.TextAlign = ContentAlignment.MiddleRight;
                 lb_m_ImpExMeter.Location = def_lb_m_ImpExMeter;
@@ -1376,28 +1377,28 @@ namespace EdgeMon
             foreach (ToolStripMenuItem item in ls_detailLevel.DropDownItems)
             {
                 if (item.Text.Contains(detail_level.ToString()))
-                    { item.Checked = true; }
+                { item.Checked = true; }
                 else
-                item.Checked = false;
+                    item.Checked = false;
             }
-        
+
         }
 
         private void ts_lvl0_Click(object sender, EventArgs e)
         {
             detail_level = 0;
             reset_all_detaillevel();
-           
-           
+
+
             this.statusgraph_static();
-           
+
         }
 
         private void ts_lvl1_Click(object sender, EventArgs e)
         {
             detail_level = 1;
             reset_all_detaillevel();
-            
+
             this.statusgraph_static();
         }
 
@@ -1417,7 +1418,7 @@ namespace EdgeMon
             this.statusgraph_static();
         }
 
-      
+
     }
 }
 

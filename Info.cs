@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EdgeMon
@@ -16,17 +9,17 @@ namespace EdgeMon
     {
         bool changed = false;
 
-       public EdgemonConfig conf { get; set; }
+        public EdgemonConfig conf { get; set; }
 
 
-        public  Info()
+        public Info()
         {
             InitializeComponent();
             this.Text = String.Format("Info about {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
             this.labelCopyright.Text = AssemblyCopyright + " (credits to MAM)";
-          //  this.labelCompanyName.Text = AssemblyCompany;
+            //  this.labelCompanyName.Text = AssemblyCompany;
             this.linkLabel.Text = AssemblyDescription;
             this.textBoxDescription.Text = "EasyModbus Client Library Version: " + Assembly.GetExecutingAssembly().GetName().Version.ToString();
             this.textBoxDescription.Text += "\nCopyright (c) Stefan Rossmann Engineering Solutions";
@@ -131,18 +124,18 @@ namespace EdgeMon
         //    this.Close();
         //}
 
-   
+
 
 
 
         private void Info_Shown(object sender, EventArgs e)
         {
-           
+
             FillGrid();
 
         }
 
-     
+
 
         /// <summary>
         /// GRID SETTINGS
@@ -152,13 +145,13 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_Battery = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_OneShot = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_battery_autodetect = new DataGridViewCheckBoxCell();
-          //  DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
+            //  DataGridViewCheckBoxCell cbc_showDetails = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_Darkmode = new DataGridViewCheckBoxCell();
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
-             DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
-           // DataGridViewCheckBoxCell cbc_SubiconLayout = new DataGridViewCheckBoxCell();
-            
-            
+            DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
+            // DataGridViewCheckBoxCell cbc_SubiconLayout = new DataGridViewCheckBoxCell();
+
+
             combobc_DetailLevel.Items.Add(0);
             combobc_DetailLevel.Items.Add(1);
             combobc_DetailLevel.Items.Add(2);
@@ -170,7 +163,7 @@ namespace EdgeMon
             cbc_Battery.Value = conf.battery;
             cbc_OneShot.Value = conf.OneShot;
             cbc_battery_autodetect.Value = conf.battery_autodetect;
-           // cbc_showDetails.Value = conf.showDetails;
+            // cbc_showDetails.Value = conf.showDetails;
             cbc_Darkmode.Value = conf.Darkmode;
             cbc_checkUpdates.Value = conf.checkUpdates;
             combobc_DetailLevel.Value = conf.DetailLevel;
@@ -179,7 +172,7 @@ namespace EdgeMon
 
 
             bt_dataGridViewButtonCell.Value = conf.saveBitmap;
-           
+
 
             ConfigGrid.Columns.Clear();
             ConfigGrid.Rows.Clear();
@@ -187,7 +180,7 @@ namespace EdgeMon
             ConfigGrid.Columns.Add("Value", "Value");
 
             ConfigGrid.Rows.Add("IP", conf.TCP);
-            
+
             ConfigGrid.Rows.Add("Port (0=auto)", conf.port);
 
 
@@ -209,10 +202,10 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
 
-         // ConfigGrid.Rows.Add("showDetails");
-          
+            // ConfigGrid.Rows.Add("showDetails");
 
-            ConfigGrid.Rows.Add("DetailLevel",conf.DetailLevel);
+
+            ConfigGrid.Rows.Add("DetailLevel", conf.DetailLevel);
             ConfigGrid.Rows[9].Cells[1] = combobc_DetailLevel;
 
             ConfigGrid.Rows.Add("Darkmode");
@@ -224,8 +217,8 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
 
-          
-      
+
+
             //  ConfigGrid.Rows.Add("SubiconLayout");
             //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
@@ -286,9 +279,9 @@ namespace EdgeMon
                 else { ConfigGrid.Rows[8].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
 
-              //  if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
-              //  { conf.showDetails = res_bool; }
-              //  else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+                //  if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
+                //  { conf.showDetails = res_bool; }
+                //  else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (int.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res))
                 { conf.DetailLevel = res; }
@@ -305,13 +298,13 @@ namespace EdgeMon
                 if (ConfigGrid.Rows[12].Cells[1].Value == null) { ConfigGrid.Rows[12].Cells[1].Value = double.NaN; }
 
 
-                if (double.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                if (double.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
                 { conf.loc_latitude = doubleres; }
                 else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (ConfigGrid.Rows[13].Cells[1].Value == null) { ConfigGrid.Rows[13].Cells[1].Value = double.NaN; }
 
-                if (double.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString().Replace(',','.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                if (double.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
                 { conf.loc_longitude = doubleres; }
                 else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
@@ -331,9 +324,9 @@ namespace EdgeMon
                     conf.SetAllConfigData();
                     conf.WriteINI();
                     this.DialogResult = DialogResult.Abort;
-                   //Application.Restart();
+                    //Application.Restart();
                 }
-               
+
             }
             this.Close();
         }
@@ -370,7 +363,7 @@ namespace EdgeMon
 
         private void ConfigGrid_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-           
+
         }
 
         private void ConfigGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -386,16 +379,16 @@ namespace EdgeMon
 
         private void Info_VisibleChanged(object sender, EventArgs e)
         {
-            if (this.Visible) {this.TopMost = true;}  else {this.TopMost = false;}
+            if (this.Visible) { this.TopMost = true; } else { this.TopMost = false; }
         }
 
         private void ConfigGrid_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
-            
-            
-                bt_accept.Text = "ACCEPT+CLOSE";
-                changed = true;
-            
+
+
+            bt_accept.Text = "ACCEPT+CLOSE";
+            changed = true;
+
         }
 
         private void ConfigGrid_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -413,8 +406,8 @@ namespace EdgeMon
         {
             TextFileViewer textFileViewer = new TextFileViewer("changelog.txt");
             textFileViewer.Show();
-            textFileViewer.TopMost = true;  
-          
+            textFileViewer.TopMost = true;
+
         }
 
         private void bt_lic_Click(object sender, EventArgs e)
@@ -437,16 +430,16 @@ namespace EdgeMon
                     FillGrid();
                     ConfigGrid_CellValueChanged(this, e);
                 }
-                
+
 
             }
         }
 
         private void ConfigGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            
-                if ((e.ColumnIndex == this.ConfigGrid.Columns[0].Index)
-       && e.Value != null)
+
+            if ((e.ColumnIndex == this.ConfigGrid.Columns[0].Index)
+   && e.Value != null)
             {
                 DataGridViewCell cell =
                     this.ConfigGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
@@ -454,8 +447,8 @@ namespace EdgeMon
                 switch (cell.RowIndex)
                 {
                     case 0:
-                    cell.ToolTipText = "Enter IP Address as xxx.xxx.xxx.xxx , or devicename";
-                    break;
+                        cell.ToolTipText = "Enter IP Address as xxx.xxx.xxx.xxx , or devicename";
+                        break;
                     case 1:
                         cell.ToolTipText = "Enter Port number or 0 for autodetection";
                         break;
@@ -507,28 +500,28 @@ namespace EdgeMon
 
                         break;
 
-                        
 
 
 
 
-                      
-    
-            
-             
-              
-              
-             
-              
-            
-              
 
 
 
-                default:
+
+
+
+
+
+
+
+
+
+
+
+                    default:
                         break;
                 }
-                
+
 
 
             }

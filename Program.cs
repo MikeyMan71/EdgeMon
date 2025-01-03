@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EdgeMon
@@ -16,8 +13,8 @@ namespace EdgeMon
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-             Application.Run(new MainEdge());
-         
+            Application.Run(new MainEdge());
+
         }
     }
 }

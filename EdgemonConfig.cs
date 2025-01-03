@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 
 
@@ -35,7 +27,7 @@ namespace EdgeMon
 
         public double loc_longitude { get; set; }
         public double loc_latitude { get; set; }
-      //  public bool SubiconLayout { get; set; }
+        //  public bool SubiconLayout { get; set; }
 
         public EdgemonConfig(string ver) : base("EdgeMon", ver)
         {
@@ -55,14 +47,14 @@ namespace EdgeMon
             this.MultiShotIntervall = Properties.Settings.Default.MultiShotIntervall;
             this.battery_autodetect = Properties.Settings.Default.battery_autodetect;
             this.gridflow_threshold = Properties.Settings.Default.gridflow_threshold;
-         //   this.showDetails = Properties.Settings.Default.showDetails;
+            //   this.showDetails = Properties.Settings.Default.showDetails;
             this.DetailLevel = Properties.Settings.Default.detailLevel;
             this.Darkmode = Properties.Settings.Default.Darkmode;
             this.checkUpdates = Properties.Settings.Default.checkUpdates;
-            this.loc_latitude = Properties.Settings.Default.loc_latitude;   
+            this.loc_latitude = Properties.Settings.Default.loc_latitude;
             this.loc_longitude = Properties.Settings.Default.loc_longitude;
 
-         //   this.SubiconLayout = Properties.Settings.Default.k;
+            //   this.SubiconLayout = Properties.Settings.Default.k;
 
         }
 
@@ -84,23 +76,23 @@ namespace EdgeMon
             Set("loc_latitude", this.loc_latitude);
             Set("loc_longitude", this.loc_longitude);
 
-           // Set("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture));
-           // Set("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture));
-            
-         //   Set("SubiconLayout", this.SubiconLayout);
+            // Set("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture));
+            // Set("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture));
+
+            //   Set("SubiconLayout", this.SubiconLayout);
 
         }
 
 
-            /// <summary>
-            /// Handle all config data form ini files
-            /// </summary>
-            public void GetAllConfigData()
-            {
+        /// <summary>
+        /// Handle all config data form ini files
+        /// </summary>
+        public void GetAllConfigData()
+        {
             GetConfigFromXML();
 
 
-           
+
             {
                 this.TCP = Get("TCP", this.TCP);
                 this.port = Get("port", this.port);
@@ -111,7 +103,7 @@ namespace EdgeMon
                 this.MultiShotIntervall = Get("MultiShotIntervall", this.MultiShotIntervall);
                 this.battery_autodetect = Get("battery_autodetect", this.battery_autodetect);
                 this.gridflow_threshold = Get("gridflow_threshold", this.gridflow_threshold);
-                this.showDetails = Get("showDetails",this.showDetails);
+                this.showDetails = Get("showDetails", this.showDetails);
                 this.Darkmode = Get("Darkmode", this.Darkmode);
                 this.checkUpdates = Get("checkUpdates", this.checkUpdates);
                 this.DetailLevel = Get("DetailLevel", this.DetailLevel);
@@ -123,15 +115,15 @@ namespace EdgeMon
                     this.loc_latitude = Get("loc_latitude", this.loc_latitude);
                     this.loc_longitude = Get("loc_longitude", this.loc_longitude);
 
-                   // this.loc_latitude = double.Parse(Get("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
-                   // this.loc_longitude = double.Parse(Get("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
+                    // this.loc_latitude = double.Parse(Get("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
+                    // this.loc_longitude = double.Parse(Get("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture)),CultureInfo.InvariantCulture);
                 }
                 catch (Exception)
                 {
                     this.loc_latitude = double.NaN;
                     this.loc_longitude = double.NaN;
                 }
-          
+
                 //    this.SubiconLayout = Get("SubiconLayout", this.SubiconLayout);
                 WriteINI();
             }
@@ -139,14 +131,14 @@ namespace EdgeMon
 
         public void VanillaEditINI()
         {
-        
+
             // wenn Änderungen anstehen, erstmal wegschreiben, damit der Benutzer den aktuellen Stand zu Gesicht
             // bekommt. MAM 03.03.2024
-           // if (Geaendert) { WriteINI(); }
+            // if (Geaendert) { WriteINI(); }
             //Config cf = new Config(this);
-           
-           
-            
+
+
+
             //cf.FillGrid();
 
             //DialogResult dr = cf.ShowDialog();
