@@ -26,3 +26,4 @@ V4.4.6: design improvements, bugfixes
 V4.4.7: new detail level selector in config menu, modified dark mode design
 V4.5.0: minor design optimizations
 V4.6.0: default refresh set to 500ms. bugfix with darkmode. 
+V4.8.0: graphics alignment

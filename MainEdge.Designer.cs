@@ -336,7 +336,7 @@ namespace EdgeMon
             // pic_grid_no
             // 
             this.pic_grid_no.Image = global::EdgeMon.Properties.Resources.empty_ro;
-            this.pic_grid_no.Location = new System.Drawing.Point(460, 210);
+            this.pic_grid_no.Location = new System.Drawing.Point(460, 213);
             this.pic_grid_no.Name = "pic_grid_no";
             this.pic_grid_no.Size = new System.Drawing.Size(63, 109);
             this.pic_grid_no.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -719,7 +719,7 @@ namespace EdgeMon
             // pic_grid_to
             // 
             this.pic_grid_to.Image = global::EdgeMon.Properties.Resources.grn_ro;
-            this.pic_grid_to.Location = new System.Drawing.Point(460, 215);
+            this.pic_grid_to.Location = new System.Drawing.Point(460, 213);
             this.pic_grid_to.Name = "pic_grid_to";
             this.pic_grid_to.Size = new System.Drawing.Size(71, 109);
             this.pic_grid_to.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -729,7 +729,7 @@ namespace EdgeMon
             // pic_grid_from
             // 
             this.pic_grid_from.Image = global::EdgeMon.Properties.Resources.red_ro_inv;
-            this.pic_grid_from.Location = new System.Drawing.Point(460, 217);
+            this.pic_grid_from.Location = new System.Drawing.Point(456, 216);
             this.pic_grid_from.Name = "pic_grid_from";
             this.pic_grid_from.Size = new System.Drawing.Size(71, 109);
             this.pic_grid_from.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
