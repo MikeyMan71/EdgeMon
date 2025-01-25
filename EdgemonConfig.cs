@@ -28,6 +28,7 @@ namespace EdgeMon
         public double loc_longitude { get; set; }
         public double loc_latitude { get; set; }
         //  public bool SubiconLayout { get; set; }
+        public double total_add { get; set; }
 
         public EdgemonConfig(string ver) : base("EdgeMon", ver)
         {
@@ -53,7 +54,7 @@ namespace EdgeMon
             this.checkUpdates = Properties.Settings.Default.checkUpdates;
             this.loc_latitude = Properties.Settings.Default.loc_latitude;
             this.loc_longitude = Properties.Settings.Default.loc_longitude;
-
+            this.total_add = Properties.Settings.Default.total_add; 
             //   this.SubiconLayout = Properties.Settings.Default.k;
 
         }
@@ -75,7 +76,7 @@ namespace EdgeMon
             Set("checkUpdates", this.checkUpdates);
             Set("loc_latitude", this.loc_latitude);
             Set("loc_longitude", this.loc_longitude);
-
+            Set("total_add", this.total_add);
             // Set("loc_latitude", this.loc_latitude.ToString(CultureInfo.InvariantCulture));
             // Set("loc_longitude", this.loc_longitude.ToString(CultureInfo.InvariantCulture));
 
@@ -107,7 +108,7 @@ namespace EdgeMon
                 this.Darkmode = Get("Darkmode", this.Darkmode);
                 this.checkUpdates = Get("checkUpdates", this.checkUpdates);
                 this.DetailLevel = Get("DetailLevel", this.DetailLevel);
-
+                this.total_add = Get("total_add", this.total_add);
 
 
                 try

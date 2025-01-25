@@ -71,11 +71,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.ConfigGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ConfigGrid.Location = new System.Drawing.Point(3, 191);
+            this.ConfigGrid.Location = new System.Drawing.Point(2, 155);
+            this.ConfigGrid.Margin = new System.Windows.Forms.Padding(2);
             this.ConfigGrid.Name = "ConfigGrid";
             this.ConfigGrid.RowHeadersWidth = 51;
             this.ConfigGrid.RowTemplate.Height = 24;
-            this.ConfigGrid.Size = new System.Drawing.Size(602, 389);
+            this.ConfigGrid.Size = new System.Drawing.Size(452, 316);
             this.ConfigGrid.TabIndex = 28;
             this.ConfigGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ConfigGrid_CellContentClick);
             this.ConfigGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.ConfigGrid_CellFormatting);
@@ -86,9 +87,10 @@
             // 
             // resetbutton
             // 
-            this.resetbutton.Location = new System.Drawing.Point(270, 622);
+            this.resetbutton.Location = new System.Drawing.Point(202, 505);
+            this.resetbutton.Margin = new System.Windows.Forms.Padding(2);
             this.resetbutton.Name = "resetbutton";
-            this.resetbutton.Size = new System.Drawing.Size(175, 32);
+            this.resetbutton.Size = new System.Drawing.Size(131, 26);
             this.resetbutton.TabIndex = 29;
             this.resetbutton.Text = "RESET SETTINGS";
             this.resetbutton.UseVisualStyleBackColor = true;
@@ -97,9 +99,10 @@
             // bt_accept
             // 
             this.bt_accept.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_accept.Location = new System.Drawing.Point(133, 622);
+            this.bt_accept.Location = new System.Drawing.Point(100, 505);
+            this.bt_accept.Margin = new System.Windows.Forms.Padding(2);
             this.bt_accept.Name = "bt_accept";
-            this.bt_accept.Size = new System.Drawing.Size(131, 32);
+            this.bt_accept.Size = new System.Drawing.Size(98, 26);
             this.bt_accept.TabIndex = 31;
             this.bt_accept.Text = "CLOSE";
             this.bt_accept.UseVisualStyleBackColor = true;
@@ -108,9 +111,10 @@
             // bt_cancel
             // 
             this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_cancel.Location = new System.Drawing.Point(15, 622);
+            this.bt_cancel.Location = new System.Drawing.Point(11, 505);
+            this.bt_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.Size = new System.Drawing.Size(112, 32);
+            this.bt_cancel.Size = new System.Drawing.Size(84, 26);
             this.bt_cancel.TabIndex = 30;
             this.bt_cancel.Text = "CANCEL";
             this.bt_cancel.UseVisualStyleBackColor = true;
@@ -119,11 +123,11 @@
             // labelProductName
             // 
             this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(12, 11);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(8, 0, 4, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 21);
+            this.labelProductName.Location = new System.Drawing.Point(9, 9);
+            this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(592, 21);
+            this.labelProductName.Size = new System.Drawing.Size(444, 17);
             this.labelProductName.TabIndex = 32;
             this.labelProductName.Text = "EdgeMon";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -131,9 +135,10 @@
             // labelVersion
             // 
             this.labelVersion.AutoSize = true;
-            this.labelVersion.Location = new System.Drawing.Point(12, 41);
+            this.labelVersion.Location = new System.Drawing.Point(9, 33);
+            this.labelVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(67, 16);
+            this.labelVersion.Size = new System.Drawing.Size(55, 13);
             this.labelVersion.TabIndex = 33;
             this.labelVersion.Text = "VERSION";
             this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
@@ -141,27 +146,30 @@
             // labelCopyright
             // 
             this.labelCopyright.AutoSize = true;
-            this.labelCopyright.Location = new System.Drawing.Point(12, 66);
+            this.labelCopyright.Location = new System.Drawing.Point(9, 54);
+            this.labelCopyright.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(64, 16);
+            this.labelCopyright.Size = new System.Drawing.Size(51, 13);
             this.labelCopyright.TabIndex = 34;
             this.labelCopyright.Text = "Copyright";
             // 
             // textBoxDescription
             // 
             this.textBoxDescription.AutoSize = true;
-            this.textBoxDescription.Location = new System.Drawing.Point(15, 112);
+            this.textBoxDescription.Location = new System.Drawing.Point(11, 91);
+            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(37, 16);
+            this.textBoxDescription.Size = new System.Drawing.Size(30, 13);
             this.textBoxDescription.TabIndex = 37;
             this.textBoxDescription.Text = "desc";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::EdgeMon.Properties.Resources.Edgemon;
-            this.pictureBox1.Location = new System.Drawing.Point(364, 9);
+            this.pictureBox1.Location = new System.Drawing.Point(273, 7);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(194, 176);
+            this.pictureBox1.Size = new System.Drawing.Size(146, 143);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 38;
             this.pictureBox1.TabStop = false;
@@ -169,9 +177,10 @@
             // linkLabel
             // 
             this.linkLabel.AutoSize = true;
-            this.linkLabel.Location = new System.Drawing.Point(15, 88);
+            this.linkLabel.Location = new System.Drawing.Point(11, 72);
+            this.linkLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.linkLabel.Name = "linkLabel";
-            this.linkLabel.Size = new System.Drawing.Size(61, 16);
+            this.linkLabel.Size = new System.Drawing.Size(49, 13);
             this.linkLabel.TabIndex = 39;
             this.linkLabel.TabStop = true;
             this.linkLabel.Text = "linkLabel";
@@ -180,9 +189,10 @@
             // bt_cl
             // 
             this.bt_cl.BackColor = System.Drawing.Color.DarkGray;
-            this.bt_cl.Location = new System.Drawing.Point(270, 41);
+            this.bt_cl.Location = new System.Drawing.Point(202, 33);
+            this.bt_cl.Margin = new System.Windows.Forms.Padding(2);
             this.bt_cl.Name = "bt_cl";
-            this.bt_cl.Size = new System.Drawing.Size(94, 26);
+            this.bt_cl.Size = new System.Drawing.Size(70, 21);
             this.bt_cl.TabIndex = 40;
             this.bt_cl.Text = "Changelog";
             this.bt_cl.UseVisualStyleBackColor = false;
@@ -191,9 +201,10 @@
             // bt_lic
             // 
             this.bt_lic.BackColor = System.Drawing.Color.DarkGray;
-            this.bt_lic.Location = new System.Drawing.Point(270, 73);
+            this.bt_lic.Location = new System.Drawing.Point(202, 59);
+            this.bt_lic.Margin = new System.Windows.Forms.Padding(2);
             this.bt_lic.Name = "bt_lic";
-            this.bt_lic.Size = new System.Drawing.Size(94, 26);
+            this.bt_lic.Size = new System.Drawing.Size(70, 21);
             this.bt_lic.TabIndex = 41;
             this.bt_lic.Text = "Licenses";
             this.bt_lic.UseVisualStyleBackColor = false;
@@ -206,11 +217,11 @@
             // 
             // Info
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.CancelButton = this.bt_cancel;
-            this.ClientSize = new System.Drawing.Size(616, 669);
+            this.ClientSize = new System.Drawing.Size(462, 544);
             this.ControlBox = false;
             this.Controls.Add(this.bt_lic);
             this.Controls.Add(this.bt_cl);
@@ -224,11 +235,10 @@
             this.Controls.Add(this.bt_accept);
             this.Controls.Add(this.bt_cancel);
             this.Controls.Add(this.ConfigGrid);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Info";
-            this.Padding = new System.Windows.Forms.Padding(12, 11, 12, 11);
+            this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Info";

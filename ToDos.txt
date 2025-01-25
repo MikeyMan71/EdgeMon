@@ -7,3 +7,4 @@ Thresold for solar panel
 (/)auto-detect port 502/1502
 (/)make info bubbles on config
 (/)parse IP config
+allow offset for total use

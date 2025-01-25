@@ -20,6 +20,7 @@
         internal string total { get; set; }
         internal string tot_prod { get; set; }
 
+        internal string tot_prod_overall {get;set;}
 
 
         public HWData() { }

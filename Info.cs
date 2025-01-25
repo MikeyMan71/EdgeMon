@@ -216,7 +216,7 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
-
+            ConfigGrid.Rows.Add("total_add (MWh)", conf.total_add.ToString(CultureInfo.InvariantCulture));
 
 
             //  ConfigGrid.Rows.Add("SubiconLayout");
@@ -308,7 +308,9 @@ namespace EdgeMon
                 { conf.loc_longitude = doubleres; }
                 else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-
+                if (double.TryParse(ConfigGrid.Rows[14].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                { conf.total_add = doubleres; }
+                else { ConfigGrid.Rows[14].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
                 //    { conf.SubiconLayout = res_bool; }
@@ -499,23 +501,9 @@ namespace EdgeMon
                         cell.ToolTipText = "Enter location longitude. Enter NaN to auto-detect position (must be activated in windows)";
 
                         break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    case 14:
+                        cell.ToolTipText = "Offset in MWh to be added to total produced energy - to be used if your system had an inverter change";
+                        break;
 
 
                     default:

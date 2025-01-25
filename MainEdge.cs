@@ -642,7 +642,8 @@ namespace EdgeMon
             pwr_PV = I_DC_Power + Instantaneous_Power;
             if (I_DC_Power < I_AC_Power) { pwr_house = pwr_house - (I_AC_Power - I_DC_Power); } //inverter drawing power from grid
             hwdata.pwr_house = pwr_house.ToString(precision) + " W";
-            hwdata.tot_prod = "Tot.Prod: " + (mb.I_AC_Energy_WH / 1000000).ToString("f2") + " MWh\r\n";
+            hwdata.tot_prod = "Tot. Prod:\t" + (mb.I_AC_Energy_WH / 1000000).ToString("####.000") + " MWh";
+            hwdata.tot_prod_overall = " Alltime:\t" + (mb.I_AC_Energy_WH / 1000000 + pm.total_add).ToString("####.000") + " MWh";
 
             hwdata.total = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
 
@@ -759,7 +760,14 @@ namespace EdgeMon
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
 
-            if (show_details && detail_level > 0)
+          
+            if (show_details && detail_level > 1 && pm.total_add != 0)
+            {
+                
+                lb_tot_prod.Text = hwdata.tot_prod + Environment.NewLine + hwdata.tot_prod_overall;
+                
+            }
+            else if (show_details && detail_level > 0)
             {
                 lb_tot_prod.Text = hwdata.tot_prod;
             }
@@ -1217,6 +1225,7 @@ namespace EdgeMon
 
 
             }
+            timer2.Start();
         }
 
         private void NewEdge_Move(object sender, EventArgs e)
@@ -1319,7 +1328,7 @@ namespace EdgeMon
 
         private void BurgerMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            timer2.Start();
+            
         }
 
         private void BurgerMenuStrip_Opened(object sender, EventArgs e)
@@ -1389,24 +1398,28 @@ namespace EdgeMon
 
         private void ts_lvl0_Click(object sender, EventArgs e)
         {
+            timer2.Start();
             detail_level = 0;
             reset_all_detaillevel();
 
 
             this.statusgraph_static();
-
+            timer2.Start();
         }
 
         private void ts_lvl1_Click(object sender, EventArgs e)
         {
+            timer2.Start();
             detail_level = 1;
             reset_all_detaillevel();
 
             this.statusgraph_static();
+            
         }
 
         private void ts_lvl2_Click(object sender, EventArgs e)
         {
+            timer2.Start();
             detail_level = 2;
             reset_all_detaillevel();
 
@@ -1415,6 +1428,7 @@ namespace EdgeMon
 
         private void ts_lvl3_Click(object sender, EventArgs e)
         {
+            timer2.Start();
             detail_level = 3;
             reset_all_detaillevel();
 

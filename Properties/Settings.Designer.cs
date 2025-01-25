@@ -148,5 +148,14 @@ namespace EdgeMon.Properties {
                 return ((double)(this["loc_longitude"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double total_add {
+            get {
+                return ((double)(this["total_add"]));
+            }
+        }
     }
 }
