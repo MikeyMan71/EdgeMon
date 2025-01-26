@@ -1,7 +1,7 @@
 ﻿
 
 
-#define MSSTORE
+
 
 using System;
 using System.Diagnostics;
@@ -388,7 +388,7 @@ namespace EdgeMon
         {
             if (Update_check_timer.Interval < 100000) Update_check_timer.Interval = 9000000;
 
-#if msstore
+            //#if MSSTORE
             if (pm.checkUpdates)
             {
                 bool res = false;
@@ -417,7 +417,7 @@ namespace EdgeMon
                     return res;
                 }
             }
-#endif
+//#endif
             return false;
         }
 
