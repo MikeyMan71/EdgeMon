@@ -35,6 +35,7 @@ namespace EdgeMon
             this.label1 = new System.Windows.Forms.Label();
             this.mainpanel = new System.Windows.Forms.Panel();
             this.Splashpanel = new System.Windows.Forms.Panel();
+            this.lb_sp_connecting = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Splash = new System.Windows.Forms.PictureBox();
             this.lb_m_ImpExMeter = new System.Windows.Forms.Label();
@@ -221,13 +222,25 @@ namespace EdgeMon
             // 
             // Splashpanel
             // 
+            this.Splashpanel.Controls.Add(this.lb_sp_connecting);
             this.Splashpanel.Controls.Add(this.label2);
             this.Splashpanel.Controls.Add(this.Splash);
             this.Splashpanel.Location = new System.Drawing.Point(2, 0);
             this.Splashpanel.Margin = new System.Windows.Forms.Padding(2);
             this.Splashpanel.Name = "Splashpanel";
-            this.Splashpanel.Size = new System.Drawing.Size(44, 41);
+            this.Splashpanel.Size = new System.Drawing.Size(530, 488);
             this.Splashpanel.TabIndex = 83;
+            // 
+            // lb_sp_connecting
+            // 
+            this.lb_sp_connecting.AutoSize = true;
+            this.lb_sp_connecting.Font = new System.Drawing.Font("Yu Gothic", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_sp_connecting.Location = new System.Drawing.Point(174, 58);
+            this.lb_sp_connecting.Name = "lb_sp_connecting";
+            this.lb_sp_connecting.Size = new System.Drawing.Size(239, 45);
+            this.lb_sp_connecting.TabIndex = 84;
+            this.lb_sp_connecting.Text = "connecting...";
+            this.lb_sp_connecting.Visible = false;
             // 
             // label2
             // 
@@ -713,9 +726,9 @@ namespace EdgeMon
             this.lb_bat_stat.Location = new System.Drawing.Point(194, 380);
             this.lb_bat_stat.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_bat_stat.Name = "lb_bat_stat";
-            this.lb_bat_stat.Size = new System.Drawing.Size(87, 17);
+            this.lb_bat_stat.Size = new System.Drawing.Size(98, 17);
             this.lb_bat_stat.TabIndex = 119;
-            this.lb_bat_stat.Text = "Bat_Status";
+            this.lb_bat_stat.Text = "__________";
             // 
             // lb_status
             // 
@@ -728,7 +741,7 @@ namespace EdgeMon
             this.lb_status.Size = new System.Drawing.Size(85, 20);
             this.lb_status.TabIndex = 118;
             this.lb_status.Tag = "FIXEDCOLOR";
-            this.lb_status.Text = "SLEEPING";
+            this.lb_status.Text = "--------";
             this.lb_status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lb_ac_pwr
@@ -1201,5 +1214,6 @@ namespace EdgeMon
         private System.Windows.Forms.ToolStripMenuItem ts_lvl2;
         private System.Windows.Forms.ToolStripMenuItem ts_lvl3;
         private System.Windows.Forms.Label lb_m_ImpExMeter;
+        private System.Windows.Forms.Label lb_sp_connecting;
     }
 }

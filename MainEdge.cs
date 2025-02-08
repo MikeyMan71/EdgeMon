@@ -149,19 +149,29 @@ namespace EdgeMon
                         Application.DoEvents();
                         ConnectToModbus();
                         connected = true;
+                       
                         neverconnected = false;
                         init();
-
+                        Splashpanel.Hide();
+                        Splashpanel.Tag = null;
                     }
                     catch (Exception ex)
                     {
-                        // lb_error.ForeColor = Color.DarkRed; 
-                        // lb_error.Text = ex.Message;
+                         lb_error.ForeColor = Color.DarkRed; 
+                         lb_error.Text = ex.Message;
 
-                        if (neverconnected)
+                        if (neverconnected && Splashpanel.Visible)
                         {
-                            Splashpanel.Hide();
+                            if (Splashpanel.Tag == null || !Splashpanel.Tag.ToString().Contains("small"))
+                            {
+                                foreach (Control c in Splashpanel.Controls) { c.Location = new Point(c.Location.X, c.Location.Y - 40); }
 
+                                Splashpanel.Location = new Point(Splashpanel.Location.X, Splashpanel.Location.Y + 40);
+                                Splashpanel.Size = new Size(this.Width, this.Height - 40);
+                                lb_sp_connecting.Visible = true;
+                                Splashpanel.Tag = "small";
+                                
+                            }
                         }
                         errcount++;
                         if (errcount > 5 || pm.port == 0)
@@ -179,29 +189,34 @@ namespace EdgeMon
                                 {
                                     case 502:
                                         pm.port = 1502;
-
+                                        pm.SetAllConfigData();
+                                        pm.WriteINI();
                                         break;
                                     case 1502:
                                         pm.port = 502;
-
+                                        pm.SetAllConfigData();
+                                        pm.WriteINI();
                                         break;
                                     default:
-                                        pm.port = 1502;
-
-                                        break;
+                                        if (pm.port != 1502)
+                                        {
+                                            pm.port = 1502;
+                                            pm.SetAllConfigData();
+                                            pm.WriteINI();
+                                        }
+                                            break;
                                 }
-                                pm.SetAllConfigData();
-                                pm.WriteINI();
+                                
                             }
                         }
 
-                        return;
+                       // return;
                     }
                 }
 
                 //Main Update processes
 
-                do_update();
+                if (connected) do_update();
                 //
 
                 lb_update.Text = DateTime.Now.ToString();
@@ -340,7 +355,7 @@ namespace EdgeMon
             try
             {
 
-
+                
                 //Update dynamic values
                 statusgraph_dyn();
                 lb_error.Text = "OK";
