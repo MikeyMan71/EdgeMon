@@ -29,3 +29,4 @@ V4.6.0: default refresh set to 500ms. bugfix with darkmode.
 V4.8.0: graphics alignment
 V4.9.0: simplified installer. Added a feature to enter an "additional total power value". This allows to add an offset in case you got a new inverter. Detaillevel >1 will show total production of current inverter as well as total system production (current + offset).
 V5.0.0: When Edgemon starts and is unable to connect to an inverter, a splash screen "connecting..." appears - the access to the config menu remains availiable, to allow appropriate IP settings. 
+V5.0.1: update checker now running in separate background task to avoid timeout issues

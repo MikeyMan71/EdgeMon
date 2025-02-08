@@ -10,14 +10,18 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Security.Policy;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EdgeMon
 {
     public partial class MainEdge : Form
     {
-
+        MyWebClient client = new MyWebClient();
+        
 
         // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
         EdgemonConfig pm;
@@ -36,6 +40,7 @@ namespace EdgeMon
         int MultiShotIntervall;
         int errcount = 0;
         string precision = "N0";
+        bool hasupdate = false;
         DateTime startdate = DateTime.Now;
         DateTime lastdailyupdate = DateTime.Now;
         TimeSpan checklocation = new TimeSpan(0, 30, 0);
@@ -229,7 +234,7 @@ namespace EdgeMon
                 }
 
                 optionalScreenshot();
-
+                lb_upd.Visible = hasupdate;
             }
             catch (Exception ex)
             {
@@ -399,41 +404,40 @@ namespace EdgeMon
         }
 
 
-        private bool checkForUpdate()
+        private void checkForUpdate()
         {
+
+            //HttpClient client = new HttpClient();
             if (Update_check_timer.Interval < 100000) Update_check_timer.Interval = 9000000;
 
             //#if MSSTORE
             if (pm.checkUpdates)
             {
-                bool res = false;
+
+
+                Task.Run(() =>
+                {
+                   
                 try
                 {
-
-                    MyWebClient client = new MyWebClient();
-                    //WebClient client = new WebClient(); 
-                    Stream stream = client.OpenRead("https://edgemon.helioho.st/version");
-                    StreamReader reader = new StreamReader(stream);
-                    String content = reader.ReadToEnd();
+                   //client.GetStringAsync("https://edgemon.helioho.st/version");
+                    String content = client.DownloadString("https://edgemon.helioho.st/version");
                     Version Ver_running = infobox.AssemblyVersion;
                     Version Ver_server = new Version(content);
                     if (Ver_server.CompareTo(Ver_running) > 0)
                     {
-
-
-                        res = true;
+                            hasupdate = true;
                     }
 
-
-                    return res;
                 }
                 catch
                 {
-                    return res;
+                   hasupdate=false; 
                 }
+                });
             }
-//#endif
-            return false;
+            //#endif
+           
         }
 
         /// <summary>
@@ -1281,7 +1285,7 @@ namespace EdgeMon
 
         private void Update_check_timer_Tick(object sender, EventArgs e)
         {
-            lb_upd.Visible = checkForUpdate();
+             checkForUpdate();
         }
 
         private void mainpanel_Paint(object sender, PaintEventArgs e)
@@ -1457,12 +1461,12 @@ namespace EdgeMon
 
 
 
-class MyWebClient : WebClient
+class MyWebClient : System.Net.WebClient
 {
     protected override WebRequest GetWebRequest(Uri uri)
     {
         WebRequest w = base.GetWebRequest(uri);
-        w.Timeout = 5 * 1000;
+        //w.Timeout = 5 * 1000;
         return w;
     }
 }

@@ -228,7 +228,7 @@ namespace EdgeMon
             this.Splashpanel.Location = new System.Drawing.Point(2, 0);
             this.Splashpanel.Margin = new System.Windows.Forms.Padding(2);
             this.Splashpanel.Name = "Splashpanel";
-            this.Splashpanel.Size = new System.Drawing.Size(530, 488);
+            this.Splashpanel.Size = new System.Drawing.Size(124, 110);
             this.Splashpanel.TabIndex = 83;
             // 
             // lb_sp_connecting
