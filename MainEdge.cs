@@ -3,28 +3,34 @@
 
 
 
+#define DEBUG
+
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace EdgeMon
 {
     public partial class MainEdge : Form
     {
         MyWebClient client = new MyWebClient();
-        
+
 
         // MAMconfig.Config edgeconfig = new MAMconfig.Config("EdgeMon");
         EdgemonConfig pm;
+
+        Debugfile dbg;
 
         //    public static bool UsePrivateSettings = false;
         bool connected = false;
@@ -63,12 +69,12 @@ namespace EdgeMon
         Point def_lb_m_pwr_house;
         Point def_lb_m_pwr_PV;
 
-
+        int ec = 1;
+        string es = "";
 
 
         public MainEdge()
         {
-
 
             if (Process.GetProcessesByName("EdgeMon").Length > 1)
             {
@@ -85,11 +91,29 @@ namespace EdgeMon
             maketransparent(lb_status, Inverter_PIC);
             maketransparent(lb_temp, Inverter_PIC);
 
+            foreach (Control item in mainpanel.Controls)
+            {
+                if (item is TextBox)
+                {
+                    ((TextBox)item).Click += new EventHandler(tb_Inv_Enter);
+                
+                }
 
+
+            }
 
 
             this.Splashpanel.Size = this.mainpanel.Size;
             pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
+            if (pm.debug)
+            {
+                dbg = new Debugfile("Edgemon");
+                dbg.add(DateTime.Now.ToString());
+                dbg.add(pm.Version);
+               
+            }
+
+
             def_PV_off = PV_off.Location;
             def_PV_on = PV_on.Location;
             def_fullPVpanel = fullPVpanel.Location;
@@ -152,9 +176,10 @@ namespace EdgeMon
                     try
                     {
                         Application.DoEvents();
+                        timer2.Stop();
                         ConnectToModbus();
+                        timer2.Start();
                         connected = true;
-                       
                         neverconnected = false;
                         init();
                         Splashpanel.Hide();
@@ -162,8 +187,25 @@ namespace EdgeMon
                     }
                     catch (Exception ex)
                     {
-                         lb_error.ForeColor = Color.DarkRed; 
-                         lb_error.Text = ex.Message;
+                        if (pm.debug)
+                        {
+                            if (connected && !initialized)
+                            {
+                                // Get stack trace for the exception with source file information
+                                var st = new StackTrace(ex, true);
+                                // Get the top stack frame
+                                var frame = st.GetFrame(0);
+                                // Get the line number from the stack frame
+                                var line = frame.GetFileLineNumber();
+                                //timer2.Stop();
+
+                                dbg.add("Unexpected Error: " + ex.ToString() + " in line " + line.ToString() + "\n" + "Errorcode+String: " + ec.ToString() + " " + es);
+                                //                         Environment.Exit(0);
+                            }
+
+                        }
+                        lb_error.ForeColor = Color.DarkRed;
+                        lb_error.Text = ex.Message;
 
                         if (neverconnected && Splashpanel.Visible)
                         {
@@ -175,9 +217,14 @@ namespace EdgeMon
                                 Splashpanel.Size = new Size(this.Width, this.Height - 40);
                                 lb_sp_connecting.Visible = true;
                                 Splashpanel.Tag = "small";
-                                
+
                             }
                         }
+                        else
+                        {
+                        
+                        }
+
                         errcount++;
                         if (errcount > 5 || pm.port == 0)
                         {
@@ -209,13 +256,13 @@ namespace EdgeMon
                                             pm.SetAllConfigData();
                                             pm.WriteINI();
                                         }
-                                            break;
+                                        break;
                                 }
-                                
+
                             }
                         }
 
-                       // return;
+                        // return;
                     }
                 }
 
@@ -278,8 +325,13 @@ namespace EdgeMon
             reset_all_detaillevel();
             //   SubiconLayout = pm.SubiconLayout;
             //   timer2.Enabled = false;
-            timer2.Interval = 10;
+            timer2.Interval = 20;
             // lb_about.Text = infobox.AssemblyCopyright + " V." + infobox.AssemblyVersion;
+
+            if (mb != null) {
+                var rest = mb.receiveData;
+                mb.Disconnect();
+                 }
             mb = null;
 
 
@@ -296,7 +348,7 @@ namespace EdgeMon
         {
 
 
-
+             //mb.LogFileFilename = dbg.Pfad + "\\" + "modbuslog.txt";
 
 
             if (pm.battery_autodetect == true)
@@ -319,18 +371,41 @@ namespace EdgeMon
             PV_on.Hide();
             PV_off.Hide();
 
+if (pm.debug)            ec = ec >> 1;
+
+
+
+
             try
             {
+                
 
                 //STATIC GRAPH
                 statusgraph_static();
                 //
+                if (pm.debug) {
+                    ec = ec >> 1;
+                    es = tb_Inv.Text + " XXX " + lb_mtr_model.Text + " XXX ";
+                }
 
                 lb_error.Text = "OK";
                 lb_error.ForeColor = Color.DarkGreen;
             }
             catch (Exception ex)
             {
+if (pm.debug)
+                { 
+                // Get stack trace for the exception with source file information
+                var st = new StackTrace(ex, true);
+                // Get the top stack frame
+                var frame = st.GetFrame(0);
+                // Get the line number from the stack frame
+                var line = frame.GetFileLineNumber();
+
+                es += "statusgraph_static error: Line " + line.ToString();
+}
+
+
                 if (ex is IndexOutOfRangeException) { }
                 else
                 {
@@ -339,14 +414,22 @@ namespace EdgeMon
                     optionalScreenshot(true);
                 }
             }
-
+            
             timer2.Interval = pm.refresh;
 
+          
+            statusgraph_dyn();
+      
+
+if (pm.debug)            ec = ec>>1;
+
+
+            Splashpanel.Hide();
+
             if (pm.Darkmode) darkmode_on(); else darkmode_off();
+
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[2])).Checked = pm.Darkmode;
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
-            statusgraph_dyn();
-            Splashpanel.Hide();
             initialized = true;
             this.Update();
 
@@ -360,7 +443,7 @@ namespace EdgeMon
             try
             {
 
-                
+
                 //Update dynamic values
                 statusgraph_dyn();
                 lb_error.Text = "OK";
@@ -390,12 +473,14 @@ namespace EdgeMon
 
         private void ConnectToModbus()
         {
+            
             if (mb == null)
             {
                 mb = new TcpModbus(pm.TCP, pm.port);
             }
             else //try reconnect. may take awhile...
             {
+                var rest = mb.receiveData;
                 mb.Disconnect();
                 Thread.Sleep(100);
                 mb.Connect(pm.TCP, pm.port);
@@ -417,27 +502,27 @@ namespace EdgeMon
 
                 Task.Run(() =>
                 {
-                   
-                try
-                {
-                   //client.GetStringAsync("https://edgemon.helioho.st/version");
-                    String content = client.DownloadString("https://edgemon.helioho.st/version");
-                    Version Ver_running = infobox.AssemblyVersion;
-                    Version Ver_server = new Version(content);
-                    if (Ver_server.CompareTo(Ver_running) > 0)
-                    {
-                            hasupdate = true;
-                    }
 
-                }
-                catch
-                {
-                   hasupdate=false; 
-                }
+                    try
+                    {
+                        //client.GetStringAsync("https://edgemon.helioho.st/version");
+                        String content = client.DownloadString("https://edgemon.helioho.st/version");
+                        Version Ver_running = infobox.AssemblyVersion;
+                        Version Ver_server = new Version(content);
+                        if (Ver_server.CompareTo(Ver_running) > 0)
+                        {
+                            hasupdate = true;
+                        }
+
+                    }
+                    catch
+                    {
+                        hasupdate = false;
+                    }
                 });
             }
             //#endif
-           
+
         }
 
         /// <summary>
@@ -445,8 +530,62 @@ namespace EdgeMon
         /// </summary>
         private void statusgraph_static()
         {
+            
+           // var debgread = mb.C_Manufacturer;
+           // debgread += mb.C_Manufacturer;
 
-
+            if (pm.debug)
+            {
+               // dbg.add("DEBGREAD: "+debgread);
+                string dbgread = "NULL";
+                try
+                {
+                    dbgread = mb.C_Manufacturer;
+                    dbg.add("C_Manufacturer: " + dbgread);
+                }
+                catch (Exception)
+                {
+                    dbg.add("ERR: C_Manufacturer: "+dbgread);
+                }
+                try
+                {
+                    dbgread = mb.MTR_C_Manufacturer;
+                    dbg.add("MTR_C_Manufacturer: " + dbgread);
+                }
+                catch (Exception)
+                {
+                    dbg.add("ERR: MTR_C_Manufacturer: " + dbgread);
+                }
+                try
+                {
+                    dbgread = mb.C_Version.ToString();
+                    dbg.add("C_Version: " + dbgread);
+                }
+                catch (Exception)
+                {
+                    dbg.add("ERR: C_Version: " + dbgread);
+                }
+                try
+                {
+                    dbgread = mb.C_Device_Address.ToString();
+                    dbg.add("C_Device_Address: " + dbgread);
+                }
+                catch (Exception)
+                {
+                    dbg.add("ERR: C_Device_Address: " + dbgread);
+                }
+                try
+                {
+                    dbgread = mb.C_SunSpec_DID.ToString();
+                    dbg.add("C_SunSpec_DID: " + dbgread);
+                }
+                catch (Exception)
+                {
+                    dbg.add("ERR: C_SunSpec_DID: " + dbgread);
+                }
+            
+            
+            }
 
 
             tb_Inv.Clear();
@@ -464,8 +603,8 @@ namespace EdgeMon
                 lb_mtr_sernr.Show();
                 lb_mtr_opt.Show();
                 lb_mtr_ver.Show();
-
-                tb_Inv.AppendText(mb.MTR_C_Manufacturer);
+               // var rest = mb.receiveData;
+                tb_Inv.AppendText(mb.C_Manufacturer);
                 tb_Inv.AppendText("\r\n" + mb.C_Model);
                 tb_Inv.AppendText("\r\n" + mb.C_SerialNumber);
                 tb_Inv.AppendText("\r\nSunspec:" + mb.C_SunSpec_DID);
@@ -476,6 +615,7 @@ namespace EdgeMon
                 lb_mtr_sernr.Text = mb.MTR_C_SerNumber;
                 lb_mtr_opt.Text = mb.MTR_C_Option;
                 lb_mtr_ver.Text = mb.MTR_C_Version;
+              
             }
             else
             {
@@ -548,6 +688,7 @@ namespace EdgeMon
 
 
                     }
+                   
                 }
 
                 else
@@ -611,7 +752,7 @@ namespace EdgeMon
             //    lb_sunset.Visible = false;
             //    pic_sunsetrise.Visible = false;
             //}
-
+            if (pm.debug) { dbg.add("Static Data  section End Reached"); }
 
         }
 
@@ -624,7 +765,7 @@ namespace EdgeMon
             ///
 
 
-
+            
 
 
             double pwr_house, pwr_PV;
@@ -632,10 +773,13 @@ namespace EdgeMon
             double I_DC_Power = mb.I_DC_Power;
             double MTR_I_M_AC_Power = mb.MTR_I_M_AC_Power;
             double Instantaneous_Power = mb.Instantaneous_Power;
+            double MTR_I_M_AC_Power_A =  mb.MTR_I_M_AC_Power_A;
+            double MTR_I_M_AC_Power_B = mb.MTR_I_M_AC_Power_B;
+            double MTR_I_M_AC_Power_C =  mb.MTR_I_M_AC_Power_C;
 
             HWData hwdata = new HWData();
 
-
+          
 
             if (have_battery)
             {
@@ -650,12 +794,23 @@ namespace EdgeMon
                 hwdata.batt_pwr = (mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString(precision) + " A ");
 
             }
-            hwdata.status = mb.I_Status.ToString();
+            if (mb.I_Status != null)
+            {  
+                hwdata.status = mb.I_Status.ToString();   
+            }
+            else {
+                if (pm.debug) { dbg.add("InverterStatus NULL ERROR"); }
+                hwdata.status = "ERROR";
+                throw new Exception("INVERTER STATUS READ ERROR");
+            }
             hwdata.ac_pwr = I_AC_Power.ToString(precision) + " W";
             hwdata.dc_pwr = I_DC_Power.ToString(precision) + " W";
             hwdata.temp = mb.I_Temp_Sink.ToString(precision) + "°C";
             hwdata.ImpExMeter = MTR_I_M_AC_Power.ToString(precision) + " W";
-            hwdata.MB_Pwr3 = mb.MTR_I_M_AC_Power_A.ToString() + " W" + " // " + mb.MTR_I_M_AC_Power_B.ToString() + " W" + " // " + mb.MTR_I_M_AC_Power_C.ToString() + " W";
+
+            hwdata.MB_Pwr3 = string.Format("{0:####0}",MTR_I_M_AC_Power_A) + " W" + " | " + string.Format("{0:####0}",MTR_I_M_AC_Power_B) + " W"     + " | " + string.Format("{0:####0}", MTR_I_M_AC_Power_C) + " W";
+         // hwdata.MB_Pwr3 ="-12345 W|-12345 W "+timer2.Interval.ToString();
+           // Thread.Sleep(3000);
 
             pwr_house = I_AC_Power - MTR_I_M_AC_Power;
             pwr_PV = I_DC_Power + Instantaneous_Power;
@@ -667,7 +822,7 @@ namespace EdgeMon
             hwdata.total = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
 
 
-
+            
 
             ///
             /// START DISPLAY
@@ -779,12 +934,12 @@ namespace EdgeMon
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Continues_Power);
             //tb_chargepower.AppendText("\r\n" + mb.Max_Discharge_Peak_Power);
 
-          
+
             if (show_details && detail_level > 1 && pm.total_add != 0)
             {
-                
+
                 lb_tot_prod.Text = hwdata.tot_prod + Environment.NewLine + hwdata.tot_prod_overall;
-                
+
             }
             else if (show_details && detail_level > 0)
             {
@@ -793,6 +948,7 @@ namespace EdgeMon
             else
             { lb_tot_prod.Text = ""; }
 
+           // throw new Exception("TESTFEHLER");
 
 
             dailyTasks();
@@ -1013,13 +1169,17 @@ namespace EdgeMon
 
         private void NewEdge_MouseClick(object sender, MouseEventArgs e)
         {
+            Toggle_Border();
+        }
+
+
+        private void Toggle_Border()
+        {
             if (this.FormBorderStyle == FormBorderStyle.None)
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             else
                 this.FormBorderStyle = FormBorderStyle.None;
         }
-
-
 
         private void effect_details()
         {
@@ -1031,51 +1191,51 @@ namespace EdgeMon
 
         private void darkmode_on()
         {
-
-
-
-            bool was_off = false;
-            if (this.mainpanel.BackColor == Color.White) { was_off = true; }
-            foreach (Control ctrl in this.mainpanel.Controls)
+            if (!Splashpanel.Visible)
             {
-                if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
-                if (ctrl is Label)
+
+                bool was_off = false;
+                if (this.mainpanel.BackColor == Color.White) { was_off = true; }
+                foreach (Control ctrl in this.mainpanel.Controls)
                 {
-                    ((Label)ctrl).BackColor = dark;
-                    ((Label)ctrl).ForeColor = Color.White;
+                    if (ctrl.Tag != null && ctrl.Tag.ToString() == "FIXEDCOLOR") break;
+                    if (ctrl is Label)
+                    {
+                        ((Label)ctrl).BackColor = dark;
+                        ((Label)ctrl).ForeColor = Color.White;
+                    }
+                    if (ctrl is TextBox)
+                    {
+                        ((TextBox)ctrl).BackColor = dark;
+                        ((TextBox)ctrl).ForeColor = Color.White;
+                    }
                 }
-                if (ctrl is TextBox)
+
+                this.mainpanel.BackColor = dark;
+                //Dirty bug workaround, I have no Idea why I need this... 
+                lb_m_ImpExMeter.BackColor = dark;
+                lb_m_ImpExMeter.ForeColor = Color.White;
+                MB_Pwr_3.BackColor = dark;
+                MB_Pwr_3.ForeColor = Color.White;
+                tb_Inv.BackColor = dark;
+                tb_Inv.ForeColor = Color.White;
+                lb_m_batt_pwr.ForeColor = Color.White;
+
+                lb_update.ForeColor = Color.White;
+                if (was_off)
                 {
-                    ((TextBox)ctrl).BackColor = dark;
-                    ((TextBox)ctrl).ForeColor = Color.White;
+                    grid.Image = Transform(grid.Image);
+                    PV_off.Image = Transform(PV_off.Image);
+                    battery.Image = Transform(battery.Image);
+                    lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
+                    //  lb_upd.Image = Transform(lb_upd.Image);
                 }
+                this.BackColor = dark;
+                lb_sunrise.BackColor = dark;
+                lb_sunrise.ForeColor = Color.White;
+                lb_sunset.BackColor = dark;
+                lb_sunset.ForeColor = Color.White;
             }
-
-            this.mainpanel.BackColor = dark;
-            //Dirty bug workaround, I have no Idea why I need this... 
-            lb_m_ImpExMeter.BackColor = dark;
-            lb_m_ImpExMeter.ForeColor = Color.White;
-            MB_Pwr_3.BackColor = dark;
-            MB_Pwr_3.ForeColor = Color.White;
-            tb_Inv.BackColor = dark;
-            tb_Inv.ForeColor = Color.White;
-            lb_m_batt_pwr.ForeColor = Color.White;
-
-            lb_update.ForeColor = Color.White;
-            if (was_off)
-            {
-                grid.Image = Transform(grid.Image);
-                PV_off.Image = Transform(PV_off.Image);
-                battery.Image = Transform(battery.Image);
-                lb_OptionMenu.Image = Transform(lb_OptionMenu.Image);
-                //  lb_upd.Image = Transform(lb_upd.Image);
-            }
-            this.BackColor = dark;
-            lb_sunrise.BackColor = dark;
-            lb_sunrise.ForeColor = Color.White;
-            lb_sunset.BackColor = dark;
-            lb_sunset.ForeColor = Color.White;
-
         }
         private void darkmode_off()
         {
@@ -1285,7 +1445,7 @@ namespace EdgeMon
 
         private void Update_check_timer_Tick(object sender, EventArgs e)
         {
-             checkForUpdate();
+            checkForUpdate();
         }
 
         private void mainpanel_Paint(object sender, PaintEventArgs e)
@@ -1347,7 +1507,7 @@ namespace EdgeMon
 
         private void BurgerMenuStrip_Closed(object sender, ToolStripDropDownClosedEventArgs e)
         {
-            
+
         }
 
         private void BurgerMenuStrip_Opened(object sender, EventArgs e)
@@ -1433,7 +1593,7 @@ namespace EdgeMon
             reset_all_detaillevel();
 
             this.statusgraph_static();
-            
+
         }
 
         private void ts_lvl2_Click(object sender, EventArgs e)
@@ -1454,9 +1614,31 @@ namespace EdgeMon
             this.statusgraph_static();
         }
 
+        private void tb_Inv_Enter(object sender, EventArgs e)
+        {
 
+            Toggle_Border();
+           (sender as TextBox).Enabled = false;
+           (sender as TextBox).Enabled = true;
+
+        }
+
+        private void MainEdge_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            timer2.Stop();
+            try
+            {
+                mb.Disconnect();
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
-}
+    }
+    
+
 
 
 

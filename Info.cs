@@ -150,7 +150,7 @@ namespace EdgeMon
             DataGridViewCheckBoxCell cbc_checkUpdates = new DataGridViewCheckBoxCell();
             DataGridViewComboBoxCell combobc_DetailLevel = new DataGridViewComboBoxCell();
             // DataGridViewCheckBoxCell cbc_SubiconLayout = new DataGridViewCheckBoxCell();
-
+            DataGridViewCheckBoxCell cbc_debug = new DataGridViewCheckBoxCell();
 
             combobc_DetailLevel.Items.Add(0);
             combobc_DetailLevel.Items.Add(1);
@@ -168,7 +168,7 @@ namespace EdgeMon
             cbc_checkUpdates.Value = conf.checkUpdates;
             combobc_DetailLevel.Value = conf.DetailLevel;
             //  cbc_SubiconLayout.Value = conf.SubiconLayout;
-
+            cbc_debug.Value = conf.debug;
 
 
             bt_dataGridViewButtonCell.Value = conf.saveBitmap;
@@ -217,8 +217,9 @@ namespace EdgeMon
             ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("total_add (MWh)", conf.total_add.ToString(CultureInfo.InvariantCulture));
-
-
+            ConfigGrid.Rows.Add("debug");
+            ConfigGrid.Rows[15].Cells[1] = cbc_debug;
+            ConfigGrid.Rows[15].Visible = false;
             //  ConfigGrid.Rows.Add("SubiconLayout");
             //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
@@ -311,6 +312,11 @@ namespace EdgeMon
                 if (double.TryParse(ConfigGrid.Rows[14].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
                 { conf.total_add = doubleres; }
                 else { ConfigGrid.Rows[14].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+
+                if (bool.TryParse(ConfigGrid.Rows[15].Cells[1].Value.ToString(), out res_bool))
+                { conf.debug = res_bool; }
+                else { ConfigGrid.Rows[15].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
                 //    { conf.SubiconLayout = res_bool; }
@@ -504,7 +510,9 @@ namespace EdgeMon
                     case 14:
                         cell.ToolTipText = "Offset in MWh to be added to total produced energy - to be used if your system had an inverter change";
                         break;
-
+                    case 15:
+                        cell.ToolTipText = "Write a debug file to %appdata%\\Edgemon";
+                        break;
 
                     default:
                         break;

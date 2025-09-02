@@ -48,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>CAAF7836351656DFF4698D961B792F6128BD3A3D</ManifestCertificateThumbprint>
@@ -105,6 +106,7 @@
     <Compile Include="Changelog_Form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Debugfile.cs" />
     <Compile Include="SunriseSunset.cs" />
     <Compile Include="Sunriset.cs" />
     <Compile Include="EdgemonConfig.cs" />

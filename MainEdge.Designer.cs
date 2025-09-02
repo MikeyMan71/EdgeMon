@@ -635,6 +635,7 @@ namespace EdgeMon
             // tb_Inv
             // 
             this.tb_Inv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tb_Inv.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.tb_Inv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
             this.tb_Inv.Location = new System.Drawing.Point(202, 106);
             this.tb_Inv.Margin = new System.Windows.Forms.Padding(2);
@@ -1096,6 +1097,7 @@ namespace EdgeMon
             this.Name = "MainEdge";
             this.Text = "EdgeMon";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainEdge_FormClosing);
             this.Load += new System.EventHandler(this.MainEdge_Load);
             this.ResizeBegin += new System.EventHandler(this.NewEdge_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.NewEdge_ResizeEnd);
