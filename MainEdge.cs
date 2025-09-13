@@ -72,6 +72,7 @@ namespace EdgeMon
         int ec = 1;
         string es = "";
 
+        HWData hwdata = new HWData();
 
         public MainEdge()
         {
@@ -275,7 +276,7 @@ namespace EdgeMon
                 if (connected && pm.OneShot && !suppress_oneshot)
                 {
                     lb_m_ImpExMeter.BackColor = Color.White;
-                    SaveAsBitmap(this.mainpanel, pm.saveBitmap);
+                    SaveBitmapAndData(this.mainpanel, pm.saveBitmap);
 
                     Environment.Exit(0);
                 }
@@ -423,17 +424,19 @@ if (pm.debug)
 
 if (pm.debug)            ec = ec>>1;
 
-
+            if (pm.Darkmode) darkmode_on(true); else darkmode_off();
             Splashpanel.Hide();
+            this.Update();
+            
 
-            if (pm.Darkmode) darkmode_on(); else darkmode_off();
+           // if (pm.Darkmode) darkmode_on(); else darkmode_off();
 
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[2])).Checked = pm.Darkmode;
             ((ToolStripMenuItem)(BurgerMenuStrip.Items[1])).Checked = pm.showDetails;
             initialized = true;
             this.Update();
 
-
+          
 
         }
 
@@ -777,7 +780,7 @@ if (pm.debug)            ec = ec>>1;
             double MTR_I_M_AC_Power_B = mb.MTR_I_M_AC_Power_B;
             double MTR_I_M_AC_Power_C =  mb.MTR_I_M_AC_Power_C;
 
-            HWData hwdata = new HWData();
+            
 
           
 
@@ -807,7 +810,7 @@ if (pm.debug)            ec = ec>>1;
             hwdata.dc_pwr = I_DC_Power.ToString(precision) + " W";
             hwdata.temp = mb.I_Temp_Sink.ToString(precision) + "°C";
             hwdata.ImpExMeter = MTR_I_M_AC_Power.ToString(precision) + " W";
-
+            
             hwdata.MB_Pwr3 = string.Format("{0:####0}",MTR_I_M_AC_Power_A) + " W" + " | " + string.Format("{0:####0}",MTR_I_M_AC_Power_B) + " W"     + " | " + string.Format("{0:####0}", MTR_I_M_AC_Power_C) + " W";
          // hwdata.MB_Pwr3 ="-12345 W|-12345 W "+timer2.Interval.ToString();
            // Thread.Sleep(3000);
@@ -818,9 +821,9 @@ if (pm.debug)            ec = ec>>1;
             hwdata.pwr_house = pwr_house.ToString(precision) + " W";
             hwdata.tot_prod = "Tot. Prod:\t" + (mb.I_AC_Energy_WH / 1000000).ToString("####.000") + " MWh";
             hwdata.tot_prod_overall = " Alltime:\t" + (mb.I_AC_Energy_WH / 1000000 + pm.total_add).ToString("####.000") + " MWh";
-
+            hwdata.pwr_PV = pwr_PV.ToString(precision);
             hwdata.total = "TotEx: " + mb.Lifetime_Export_Energy_Counter.ToString() + " Wh\r\nTotIm: " + mb.Lifetime_Import_Energy_Counter.ToString() + " Wh";
-
+            
 
             
 
@@ -1056,13 +1059,14 @@ if (pm.debug)            ec = ec>>1;
 
         private void optionalScreenshot(bool err = false)
         {
+            if (String.IsNullOrEmpty(pm.saveBitmap)) { return; }
             if ((connected || err) && MultiShotIntervall != 0)
             {
                 MultiShotIntervall--;
                 if (MultiShotIntervall == 0)
                 {
                     MultiShotIntervall = pm.MultiShotIntervall;
-                    SaveAsBitmap(this.mainpanel, pm.saveBitmap);
+                    SaveBitmapAndData(this.mainpanel, pm.saveBitmap);
                 }
             }
         }
@@ -1073,11 +1077,33 @@ if (pm.debug)            ec = ec>>1;
 
 
 
-        private void SaveAsBitmap(Panel form, string fileName)
+        private void SaveBitmapAndData(Panel form, string fileName)
         {
+            try
+            {
+                //Save Data
+                string[] outdata = new string[6];
+
+                outdata[0] = "Total_Production[MWh]" + ";" + hwdata.tot_prod_overall.Split(new char[] { '\t', ' ' })[2].Trim().Replace(',', '.'); 
+                outdata[1] = "PV_Power[W]" + ";" + hwdata.pwr_PV.Split(' ')[0].Replace(',', '.'); ;
+                outdata[2] = "Grid_Power[W]" + ";" + hwdata.ImpExMeter.Split(' ')[0].Replace(',', '.'); ;
+                outdata[3] = "House_Power[W]" + ";" + hwdata.pwr_house.Split(' ')[0].Replace(',', '.'); ;
+                outdata[4] = "Battery_Power[W]" + ";" + hwdata.batt_pwr_main.Split(' ')[0].Replace(',', '.'); ;
+                outdata[5] = "Battery_SOE[%]" + ";" + hwdata.bat_SOE.Split(' ')[0].Replace(',','.');
+                
+
+                File.WriteAllLines(pm.saveData, outdata);
+                //
+            }
+            catch { }
+
 
             try
             {
+               
+
+
+              
 
                 Graphics g = form.CreateGraphics();
                 Bitmap bmp = new Bitmap(form.Width, form.Height);
@@ -1189,9 +1215,9 @@ if (pm.debug)            ec = ec>>1;
         }
 
 
-        private void darkmode_on()
+        private void darkmode_on(bool force = false)
         {
-            if (!Splashpanel.Visible)
+            if (!Splashpanel.Visible || force)
             {
 
                 bool was_off = false;
@@ -1397,7 +1423,7 @@ if (pm.debug)            ec = ec>>1;
                 }
                 if (e.ClickedItem.Text == "Screenshot")
                 {
-                    try { SaveAsBitmap(this.mainpanel, pm.saveBitmap); }
+                    try { SaveBitmapAndData(this.mainpanel, pm.saveBitmap); }
                     catch { }
                     MessageBox.Show("Screenshot saved in " + pm.saveBitmap);
                 }

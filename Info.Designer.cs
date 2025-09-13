@@ -42,6 +42,7 @@
             this.bt_cl = new System.Windows.Forms.Button();
             this.bt_lic = new System.Windows.Forms.Button();
             this.saveFileDialog_screenshot = new System.Windows.Forms.SaveFileDialog();
+            this.saveFileDialog_data = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.ConfigGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -215,6 +216,11 @@
             this.saveFileDialog_screenshot.DefaultExt = "jpg";
             this.saveFileDialog_screenshot.InitialDirectory = "C:\\tmp";
             // 
+            // saveFileDialog_data
+            // 
+            this.saveFileDialog_data.DefaultExt = "txt";
+            this.saveFileDialog_data.InitialDirectory = "C:\\tmp";
+            // 
             // Info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,5 +271,6 @@
         private System.Windows.Forms.Button bt_cl;
         private System.Windows.Forms.Button bt_lic;
         private System.Windows.Forms.SaveFileDialog saveFileDialog_screenshot;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_data;
     }
 }

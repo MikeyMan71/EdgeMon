@@ -157,8 +157,8 @@ namespace EdgeMon
             combobc_DetailLevel.Items.Add(2);
             combobc_DetailLevel.Items.Add(3);
             combobc_DetailLevel.ValueType = typeof(int);
-            DataGridViewButtonCell bt_dataGridViewButtonCell = new DataGridViewButtonCell();
-
+            DataGridViewButtonCell bt_dataGridViewButtonCellBitmap = new DataGridViewButtonCell();
+            DataGridViewButtonCell bt_dataGridViewButtonCellData = new DataGridViewButtonCell();
 
             cbc_Battery.Value = conf.battery;
             cbc_OneShot.Value = conf.OneShot;
@@ -171,17 +171,17 @@ namespace EdgeMon
             cbc_debug.Value = conf.debug;
 
 
-            bt_dataGridViewButtonCell.Value = conf.saveBitmap;
-
+            bt_dataGridViewButtonCellBitmap.Value = conf.saveBitmap;
+            bt_dataGridViewButtonCellData.Value = conf.saveData;
 
             ConfigGrid.Columns.Clear();
             ConfigGrid.Rows.Clear();
             ConfigGrid.Columns.Add("Setting", "Setting");
             ConfigGrid.Columns.Add("Value", "Value");
 
-            ConfigGrid.Rows.Add("IP", conf.TCP);
+            ConfigGrid.Rows.Add("IP", conf.TCP);//0
 
-            ConfigGrid.Rows.Add("Port (0=auto)", conf.port);
+            ConfigGrid.Rows.Add("Port (0=auto)", conf.port);//1
 
 
             ConfigGrid.Rows.Add("Battery");
@@ -189,16 +189,19 @@ namespace EdgeMon
 
             ConfigGrid.Rows.Add("Refresh", conf.refresh);
 
+            ConfigGrid.Rows.Add("saveData", conf.saveData);
+            ConfigGrid.Rows[4].Cells[1] = bt_dataGridViewButtonCellData;
+
             ConfigGrid.Rows.Add("saveBitmap", conf.saveBitmap);
-            ConfigGrid.Rows[4].Cells[1] = bt_dataGridViewButtonCell;
+            ConfigGrid.Rows[5].Cells[1] = bt_dataGridViewButtonCellBitmap;
 
             ConfigGrid.Rows.Add("OneShot", conf.OneShot);
-            ConfigGrid.Rows[5].Cells[1] = cbc_OneShot;
+            ConfigGrid.Rows[6].Cells[1] = cbc_OneShot;
 
             ConfigGrid.Rows.Add("MultiShotIntervall", conf.MultiShotIntervall);
 
             ConfigGrid.Rows.Add("battery_autodetect");
-            ConfigGrid.Rows[7].Cells[1] = cbc_battery_autodetect;
+            ConfigGrid.Rows[8].Cells[1] = cbc_battery_autodetect;
 
             ConfigGrid.Rows.Add("gridflow_threshold", conf.gridflow_threshold);
 
@@ -206,20 +209,20 @@ namespace EdgeMon
 
 
             ConfigGrid.Rows.Add("DetailLevel", conf.DetailLevel);
-            ConfigGrid.Rows[9].Cells[1] = combobc_DetailLevel;
+            ConfigGrid.Rows[10].Cells[1] = combobc_DetailLevel;
 
             ConfigGrid.Rows.Add("Darkmode");
-            ConfigGrid.Rows[10].Cells[1] = cbc_Darkmode;
+            ConfigGrid.Rows[11].Cells[1] = cbc_Darkmode;
 
             ConfigGrid.Rows.Add("checkUpdates");
-            ConfigGrid.Rows[11].Cells[1] = cbc_checkUpdates;
+            ConfigGrid.Rows[12].Cells[1] = cbc_checkUpdates;
 
             ConfigGrid.Rows.Add("loc_latitude", conf.loc_latitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("loc_longitude", conf.loc_longitude.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("total_add (MWh)", conf.total_add.ToString(CultureInfo.InvariantCulture));
             ConfigGrid.Rows.Add("debug");
-            ConfigGrid.Rows[15].Cells[1] = cbc_debug;
-            ConfigGrid.Rows[15].Visible = false;
+            ConfigGrid.Rows[16].Cells[1] = cbc_debug;
+            ConfigGrid.Rows[16].Visible = false;
             //  ConfigGrid.Rows.Add("SubiconLayout");
             //  ConfigGrid.Rows[13].Cells[1] = cbc_SubiconLayout;
         }
@@ -257,66 +260,73 @@ namespace EdgeMon
                 { conf.refresh = res; }
                 else { ConfigGrid.Rows[3].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                conf.saveBitmap = ConfigGrid.Rows[4].Cells[1].Value.ToString();
+                conf.saveData = ConfigGrid.Rows[4].Cells[1].Value.ToString();
+
+                conf.saveBitmap = ConfigGrid.Rows[5].Cells[1].Value.ToString();
                 //if (Directory.Exists(Path.GetDirectoryName(conf.saveBitmap))== false)
                 //{
                 //    conf.saveBitmap = "";
                 //}
 
-                if (bool.TryParse(ConfigGrid.Rows[5].Cells[1].Value.ToString(), out res_bool))
+                
+
+
+                if (bool.TryParse(ConfigGrid.Rows[6].Cells[1].Value.ToString(), out res_bool))
                 { conf.OneShot = res_bool; }
                 else { ConfigGrid.Rows[5].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (int.TryParse(ConfigGrid.Rows[6].Cells[1].Value.ToString(), out res))
+                
+                
+                if (int.TryParse(ConfigGrid.Rows[7].Cells[1].Value.ToString(), out res))
                 { conf.MultiShotIntervall = res; }
-                else { ConfigGrid.Rows[6].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
-
-                if (bool.TryParse(ConfigGrid.Rows[7].Cells[1].Value.ToString(), out res_bool))
-                { conf.battery_autodetect = res_bool; }
                 else { ConfigGrid.Rows[7].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (int.TryParse(ConfigGrid.Rows[8].Cells[1].Value.ToString(), out res))
-                { conf.gridflow_threshold = res; }
+                if (bool.TryParse(ConfigGrid.Rows[8].Cells[1].Value.ToString(), out res_bool))
+                { conf.battery_autodetect = res_bool; }
                 else { ConfigGrid.Rows[8].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+                if (int.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res))
+                { conf.gridflow_threshold = res; }
+                else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
 
                 //  if (bool.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res_bool))
                 //  { conf.showDetails = res_bool; }
                 //  else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (int.TryParse(ConfigGrid.Rows[9].Cells[1].Value.ToString(), out res))
+                if (int.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res))
                 { conf.DetailLevel = res; }
-                else { ConfigGrid.Rows[9].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
-
-                if (bool.TryParse(ConfigGrid.Rows[10].Cells[1].Value.ToString(), out res_bool))
-                { conf.Darkmode = res_bool; }
                 else { ConfigGrid.Rows[10].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 if (bool.TryParse(ConfigGrid.Rows[11].Cells[1].Value.ToString(), out res_bool))
-                { conf.checkUpdates = res_bool; }
+                { conf.Darkmode = res_bool; }
                 else { ConfigGrid.Rows[11].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (ConfigGrid.Rows[12].Cells[1].Value == null) { ConfigGrid.Rows[12].Cells[1].Value = double.NaN; }
-
-
-                if (double.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
-                { conf.loc_latitude = doubleres; }
+                if (bool.TryParse(ConfigGrid.Rows[12].Cells[1].Value.ToString(), out res_bool))
+                { conf.checkUpdates = res_bool; }
                 else { ConfigGrid.Rows[12].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-                if (ConfigGrid.Rows[13].Cells[1].Value == null) { ConfigGrid.Rows[13].Cells[1].Value = double.NaN; }
+                if (ConfigGrid.Rows[13].Cells[1].Value == null) { ConfigGrid.Rows[12].Cells[1].Value = double.NaN; }
+
 
                 if (double.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
-                { conf.loc_longitude = doubleres; }
+                { conf.loc_latitude = doubleres; }
                 else { ConfigGrid.Rows[13].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
+                if (ConfigGrid.Rows[14].Cells[1].Value == null) { ConfigGrid.Rows[13].Cells[1].Value = double.NaN; }
+
                 if (double.TryParse(ConfigGrid.Rows[14].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
-                { conf.total_add = doubleres; }
+                { conf.loc_longitude = doubleres; }
                 else { ConfigGrid.Rows[14].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
-
-                if (bool.TryParse(ConfigGrid.Rows[15].Cells[1].Value.ToString(), out res_bool))
-                { conf.debug = res_bool; }
+                if (double.TryParse(ConfigGrid.Rows[15].Cells[1].Value.ToString().Replace(',', '.'), System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out doubleres))
+                { conf.total_add = doubleres; }
                 else { ConfigGrid.Rows[15].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
+
+
+                if (bool.TryParse(ConfigGrid.Rows[16].Cells[1].Value.ToString(), out res_bool))
+                { conf.debug = res_bool; }
+                else { ConfigGrid.Rows[16].Cells[1].ErrorText = "FORMAT ERROR"; error = true; }
 
                 //     if (bool.TryParse(ConfigGrid.Rows[13].Cells[1].Value.ToString(), out res_bool))
                 //    { conf.SubiconLayout = res_bool; }
@@ -430,17 +440,35 @@ namespace EdgeMon
             var senderGrid = (DataGridView)sender;
 
             if (senderGrid.CurrentCell is DataGridViewButtonCell &&
-                e.RowIndex >= 0)
+                e.RowIndex == 5)
             {
                 if (saveFileDialog_screenshot.ShowDialog() == DialogResult.OK)
                 {
-                    conf.saveBitmap = saveFileDialog_screenshot.FileName;
+                   
+                        conf.saveBitmap = saveFileDialog_screenshot.FileName;
+                 
                     FillGrid();
                     ConfigGrid_CellValueChanged(this, e);
                 }
 
 
             }
+
+            if (senderGrid.CurrentCell is DataGridViewButtonCell &&
+               e.RowIndex == 4)
+            {
+                if (saveFileDialog_data.ShowDialog() == DialogResult.OK)
+                {
+                 
+                        conf.saveData = saveFileDialog_data.FileName;
+              
+                    FillGrid();
+                    ConfigGrid_CellValueChanged(this, e);
+                }
+
+
+            }
+
         }
 
         private void ConfigGrid_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -465,52 +493,53 @@ namespace EdgeMon
                         break;
                     case 3:
                         cell.ToolTipText = "Enter refresh rate in Milliseconds";
-
-
                         break;
                     case 4:
+                        cell.ToolTipText = "Choose directory and filename for data";
+                        break;
+                    case 5:
                         cell.ToolTipText = "Choose directory and filename for screenshots";
 
                         break;
-                    case 5:
+                    case 6:
                         cell.ToolTipText = "If activated, Edgemon will do a screenshot once and close immedeately. Hold SHIFT to ignore this setting when starting Edgemon";
 
                         break;
-                    case 6:
+                    case 7:
                         cell.ToolTipText = "If active, a screenshot will be done every Nth refresh";
 
                         break;
-                    case 7:
+                    case 8:
                         cell.ToolTipText = "Select for battery autodetect";
 
                         break;
-                    case 8:
+                    case 9:
                         cell.ToolTipText = "Threshold value for grid power. Values above this will be considered valid";
 
                         break;
-                    case 9:
+                    case 10:
                         cell.ToolTipText = "Select default detail level";
 
                         break;
-                    case 10:
+                    case 11:
                         cell.ToolTipText = "Select to activate darkmode as a default mode";
 
                         break;
-                    case 11:
+                    case 12:
                         cell.ToolTipText = "Select to automatically check for EdgeMon updates";
                         break;
-                    case 12:
+                    case 13:
                         cell.ToolTipText = "Enter location latitude. Enter NaN to auto-detect position (must be activated in windows)";
 
                         break;
-                    case 13:
+                    case 14:
                         cell.ToolTipText = "Enter location longitude. Enter NaN to auto-detect position (must be activated in windows)";
 
                         break;
-                    case 14:
+                    case 15:
                         cell.ToolTipText = "Offset in MWh to be added to total produced energy - to be used if your system had an inverter change";
                         break;
-                    case 15:
+                    case 16:
                         cell.ToolTipText = "Write a debug file to %appdata%\\Edgemon";
                         break;
 
@@ -522,7 +551,20 @@ namespace EdgeMon
 
             }
         }
+
+        private void saveFileDialog_data_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+         
+        }
+
+        private void saveFileDialog_screenshot_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+       
+        }
     }
+    }
+    
 
 
 
@@ -533,5 +575,5 @@ namespace EdgeMon
 
 
 
-}
+
 

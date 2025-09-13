@@ -15,6 +15,7 @@ namespace EdgeMon
         public bool battery { get; set; }
         public int refresh { get; set; }
         public string saveBitmap { get; set; }
+        public string saveData { get; set; }
         public bool OneShot { get; set; }
         public int MultiShotIntervall { get; set; }
         public bool battery_autodetect { get; set; }
@@ -46,6 +47,7 @@ namespace EdgeMon
             this.battery = Properties.Settings.Default.battery;
             this.refresh = Properties.Settings.Default.refresh;
             this.saveBitmap = Properties.Settings.Default.saveBitmap;
+            this.saveBitmap = Properties.Settings.Default.saveData;
             this.OneShot = Properties.Settings.Default.OneShot;
             this.MultiShotIntervall = Properties.Settings.Default.MultiShotIntervall;
             this.battery_autodetect = Properties.Settings.Default.battery_autodetect;
@@ -69,6 +71,7 @@ namespace EdgeMon
             Set("battery", this.battery);
             Set("refresh", this.refresh);
             Set("saveBitmap", this.saveBitmap);
+            Set("saveData", this.saveData);
             Set("OneShot", this.OneShot);
             Set("MultiShotIntervall", this.MultiShotIntervall);
             Set("battery_autodetect", this.battery_autodetect);
@@ -114,7 +117,7 @@ namespace EdgeMon
                 this.DetailLevel = Get("DetailLevel", this.DetailLevel);
                 this.total_add = Get("total_add", this.total_add);
                 this.debug = Get("debug", this.debug);
-
+                this.saveData = Get("saveData", this.saveData);
                 try
                 {
                     this.loc_latitude = Get("loc_latitude", this.loc_latitude);

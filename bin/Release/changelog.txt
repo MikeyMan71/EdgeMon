@@ -32,4 +32,5 @@ V5.0.0: When Edgemon starts and is unable to connect to an inverter, a splash sc
 V5.0.1: update checker now running in separate background task to avoid timeout issues
 V5.1.0: implemented some debugging features. Currently, debug mode can only be activated via manual change in config.ini - debug mode is not fully testet and may lead to unexpected behavior. 
 Use only if asked so by support. 
-
+V5.3.0: grid power of 3 phases stripped it accuracy to a reasonable level
+V5.4.0: in addtion to a screenshot, a text file will be saved containing the basic data. Minor graphics fixes.

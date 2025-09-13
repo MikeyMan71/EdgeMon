@@ -50,5 +50,8 @@
     <Setting Name="debug" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="saveData" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\\tmp\\EdgeMonData.txt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
