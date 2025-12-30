@@ -225,7 +225,7 @@ namespace EdgeMon
             this.Splashpanel.Controls.Add(this.lb_sp_connecting);
             this.Splashpanel.Controls.Add(this.label2);
             this.Splashpanel.Controls.Add(this.Splash);
-            this.Splashpanel.Location = new System.Drawing.Point(2, 0);
+            this.Splashpanel.Location = new System.Drawing.Point(0, 2);
             this.Splashpanel.Margin = new System.Windows.Forms.Padding(2);
             this.Splashpanel.Name = "Splashpanel";
             this.Splashpanel.Size = new System.Drawing.Size(124, 110);

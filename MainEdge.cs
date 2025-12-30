@@ -33,6 +33,7 @@ namespace EdgeMon
         Debugfile dbg;
 
         //    public static bool UsePrivateSettings = false;
+        bool Suppress_Mainthread = false;
         bool connected = false;
         bool have_battery = false;
         bool firstrun = false;
@@ -45,6 +46,7 @@ namespace EdgeMon
         // bool OneShot;// = Properties.Settings.Default.OneShot;
         int MultiShotIntervall;
         int errcount = 0;
+        int retrycount = 0;
         string precision = "N0";
         bool hasupdate = false;
         DateTime startdate = DateTime.Now;
@@ -138,7 +140,12 @@ namespace EdgeMon
 
         private void MainTimer_tick(object sender, EventArgs e)
         {
-
+            if (Suppress_Mainthread)
+            {
+                
+               
+                return;
+            }
             try
             {
                 if ((!sundata.isvalid) && (startdate > DateTime.Now.Subtract(checklocation)))
@@ -176,7 +183,7 @@ namespace EdgeMon
                 {
                     try
                     {
-                        Application.DoEvents();
+                 //       Application.DoEvents();
                         timer2.Stop();
                         ConnectToModbus();
                         timer2.Start();
@@ -251,18 +258,19 @@ namespace EdgeMon
                                         pm.WriteINI();
                                         break;
                                     default:
-                                        if (pm.port != 1502)
+                               /*         if (pm.port != 1502)
                                         {
                                             pm.port = 1502;
                                             pm.SetAllConfigData();
                                             pm.WriteINI();
-                                        }
+                                        }*/
                                         break;
                                 }
 
                             }
                         }
 
+                        timer2.Start();
                         // return;
                     }
                 }
@@ -474,19 +482,55 @@ if (pm.debug)            ec = ec>>1;
             }
         }
 
-        private void ConnectToModbus()
+        private async Task ConnectToModbus()
         {
+          
             
             if (mb == null)
             {
+                
                 mb = new TcpModbus(pm.TCP, pm.port);
+                
             }
             else //try reconnect. may take awhile...
             {
-                var rest = mb.receiveData;
-                mb.Disconnect();
-                Thread.Sleep(100);
-                mb.Connect(pm.TCP, pm.port);
+                retrycount++;
+                if (retrycount > 5)
+                {
+                    retrycount = 0;
+                    var restdata = mb.receiveData;
+                    mb.Disconnect();
+                    mb = null;
+
+                    lb_error.ForeColor = Color.Orange;
+                   lb_error.Text = "Retry in 3min";
+                    Suppress_Mainthread = true;
+                    this.Refresh();
+
+                 
+
+                    for (int i = 3*60; i  >0; i--)
+                    {
+                        lb_error.Text = "Retry in " + i.ToString() + " sec";
+                        lb_update.Text = DateTime.Now.ToString();
+                        Thread.Sleep(1000);
+                        this.Refresh();
+                        Application.DoEvents();
+                    }
+
+                    Suppress_Mainthread = false;
+                   
+
+                    mb = new TcpModbus(pm.TCP, pm.port);
+                }
+                else
+                {
+                    var rest = mb.receiveData;
+                    mb.Disconnect();
+                    Thread.Sleep(100);
+                    mb.Connect(pm.TCP, pm.port);
+                }
+
             }
 
         }
@@ -797,9 +841,15 @@ if (pm.debug)            ec = ec>>1;
                 hwdata.batt_pwr = (mb.Instantaneous_Voltage.ToString("N0") + " V \n\r" + mb.Instantaneous_Current.ToString(precision) + " A ");
 
             }
+
+         
             if (mb.I_Status != null)
-            {  
-                hwdata.status = mb.I_Status.ToString();   
+            {
+                Thread.Sleep(1000);
+                if (mb.I_Status != null)
+                {
+                    hwdata.status = mb.I_Status.ToString();
+                }
             }
             else {
                 if (pm.debug) { dbg.add("InverterStatus NULL ERROR"); }
