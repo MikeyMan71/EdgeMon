@@ -35,3 +35,4 @@ Use only if asked so by support.
 V5.3.0: grid power of 3 phases stripped it accuracy to a reasonable level
 V5.4.0: in addtion to a screenshot, a text file will be saved containing the basic data. Minor graphics fixes.
 V5.5.0: Added a 3 minute delay after several unsuccessfull reconnect tries. This seems to be the time required until modbus has recovered.
+V5.6.0: Do screenshots (if configured) during 3 sec reconnect phase

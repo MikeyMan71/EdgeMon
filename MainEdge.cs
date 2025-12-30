@@ -516,6 +516,9 @@ if (pm.debug)            ec = ec>>1;
                         Thread.Sleep(1000);
                         this.Refresh();
                         Application.DoEvents();
+                       
+                        optionalScreenshot(true);
+                    
                     }
 
                     Suppress_Mainthread = false;
