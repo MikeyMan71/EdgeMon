@@ -7,7 +7,7 @@
     <ProjectGuid>{13723106-FC96-4C0F-A8D1-4551F8B53236}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>EdgeMon</RootNamespace>
-    <AssemblyName>EdgeMon</AssemblyName>
+    <AssemblyName>PV_Monitor_Software</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -147,6 +147,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Manual.pdf" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

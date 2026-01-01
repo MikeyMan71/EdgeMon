@@ -81,7 +81,7 @@ namespace EdgeMon
 
             if (Process.GetProcessesByName("EdgeMon").Length > 1)
             {
-                MessageBox.Show("There is already an instance of EdgeMon running");
+                MessageBox.Show("There is already an instance of this Softwrae running");
                 Environment.Exit(0);
             }
 
@@ -110,7 +110,7 @@ namespace EdgeMon
             pm = new EdgemonConfig(infobox.AssemblyVersion.ToString());
             if (pm.debug)
             {
-                dbg = new Debugfile("Edgemon");
+                dbg = new Debugfile("PV_Monitoring_Software");
                 dbg.add(DateTime.Now.ToString());
                 dbg.add(pm.Version);
                
@@ -324,7 +324,7 @@ namespace EdgeMon
 
             timer2.Stop();
             connected = false;
-            this.Text = "EdgeMon " + infobox.AssemblyVersion.ToString();
+            this.Text = "" + infobox.AssemblyVersion.ToString();
             if (pm.TCP == "INVERTER") firstrun = true;
 
             MultiShotIntervall = pm.MultiShotIntervall;
@@ -555,7 +555,7 @@ if (pm.debug)            ec = ec>>1;
 
                     try
                     {
-                        //client.GetStringAsync("https://edgemon.helioho.st/version");
+                       
                         String content = client.DownloadString("https://edgemon.helioho.st/version");
                         Version Ver_running = infobox.AssemblyVersion;
                         Version Ver_server = new Version(content);
@@ -1513,7 +1513,7 @@ if (pm.debug)            ec = ec>>1;
 
         private void lb_upd_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st/EdgemonSetup.msi");
+            System.Diagnostics.Process.Start(System.Environment.GetEnvironmentVariable("COMSPEC"), "/C " + "start " + "https://edgemon.helioho.st/PVSWSETUP.msi");
 
 
 

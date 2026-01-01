@@ -36,7 +36,6 @@ namespace EdgeMon
             this.mainpanel = new System.Windows.Forms.Panel();
             this.Splashpanel = new System.Windows.Forms.Panel();
             this.lb_sp_connecting = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.Splash = new System.Windows.Forms.PictureBox();
             this.lb_m_ImpExMeter = new System.Windows.Forms.Label();
             this.lb_m_batt_pwr = new System.Windows.Forms.Label();
@@ -223,12 +222,11 @@ namespace EdgeMon
             // Splashpanel
             // 
             this.Splashpanel.Controls.Add(this.lb_sp_connecting);
-            this.Splashpanel.Controls.Add(this.label2);
             this.Splashpanel.Controls.Add(this.Splash);
             this.Splashpanel.Location = new System.Drawing.Point(0, 2);
             this.Splashpanel.Margin = new System.Windows.Forms.Padding(2);
             this.Splashpanel.Name = "Splashpanel";
-            this.Splashpanel.Size = new System.Drawing.Size(124, 110);
+            this.Splashpanel.Size = new System.Drawing.Size(126, 106);
             this.Splashpanel.TabIndex = 83;
             // 
             // lb_sp_connecting
@@ -241,19 +239,6 @@ namespace EdgeMon
             this.lb_sp_connecting.TabIndex = 84;
             this.lb_sp_connecting.Text = "connecting...";
             this.lb_sp_connecting.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Eras Bold ITC", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DarkRed;
-            this.label2.Location = new System.Drawing.Point(122, 409);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(341, 75);
-            this.label2.TabIndex = 83;
-            this.label2.Text = "EdgeMon";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Splash
             // 
@@ -1095,7 +1080,6 @@ namespace EdgeMon
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainEdge";
-            this.Text = "EdgeMon";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainEdge_FormClosing);
             this.Load += new System.EventHandler(this.MainEdge_Load);
@@ -1150,7 +1134,6 @@ namespace EdgeMon
         private System.Windows.Forms.Timer Update_check_timer;
         private System.Windows.Forms.PictureBox Splash;
         private System.Windows.Forms.Panel Splashpanel;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox lb_upd;
         private System.Windows.Forms.PictureBox lb_OptionMenu;
         private System.Windows.Forms.Label lb_error;

@@ -61,7 +61,7 @@ namespace EdgeMon.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\EdgeMonShot.jpg")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\PVMonitorShot.jpg")]
         public string saveBitmap {
             get {
                 return ((string)(this["saveBitmap"]));
@@ -169,7 +169,7 @@ namespace EdgeMon.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\EdgeMonData.txt")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\tmp\\\\PVMonitorShotData.txt")]
         public string saveData {
             get {
                 return ((string)(this["saveData"]));

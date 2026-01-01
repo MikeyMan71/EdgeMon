@@ -562,6 +562,11 @@ namespace EdgeMon
 
        
         }
+
+        private void labelProductName_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }
     
